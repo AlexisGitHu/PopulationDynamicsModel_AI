@@ -23,7 +23,7 @@ class Agent(mesa.Agent):
         enemies = [agent for agent in cellmates if type(agent.specie) in self.preys]
         if len(enemies) > 1:
             other_agent = self.random.choice(enemies)
-            #self.model.killed.append(other_agent)
+            self.model.killed.append(other_agent)
             self.energy = 100
     
     def reproduce(self):
@@ -38,7 +38,7 @@ class Agent(mesa.Agent):
         if self.energy > 0:
             self.move()
             self.eat()
-
+            # print("Hola")
             self.specie.choice()
         else:
             self.model.grid.remove_agent(self)
