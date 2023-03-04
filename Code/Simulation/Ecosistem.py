@@ -16,9 +16,9 @@ class Ecosistem(mesa.Model):
         # Create agents
         for i in range(self.num_agents):
             if i%2==0:
-                a = Agents. Agent(i, self, agentA, [Agents.IntelligentAgentB], "N","red")
+                a = Agents. Agent(i, self, agentA, [Agents.IntelligentAgentB], "N","red","lobo.png")
             else:
-                a = Agents. Agent(i, self, agentB, [], "N", "green")
+                a = Agents. Agent(i, self, agentB, [], "N", "green","conejo.png")
             self.schedule.add(a)
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
@@ -28,9 +28,10 @@ class Ecosistem(mesa.Model):
     
 
     def step(self):
+        print("[")
         self.schedule.step()
+        print("]")
         for x in self.killed:
-            print(x.unique_id)
             try:
                 self.grid.remove_agent(x)
                 self.schedule.remove(x)
