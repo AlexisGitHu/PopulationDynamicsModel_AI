@@ -13,7 +13,7 @@ from flask import jsonify
 app = Flask(__name__)
 
 datos = {}
-datosMesa = []
+datosMesa = {}
 
 def lectura_datos(process, id):
     global datos
@@ -38,11 +38,12 @@ def lectura_datos(process, id):
             datos[id] = [json.loads(linea_limpia)]
 
 
-def lectura_datos_mesa(process):
-    global datos
+def lectura_datos_mesa(process, id):
+    global datosMesa
     # Validar que el id es válido para no meter basura por si acaso
 
-    while True:   # Could be more pythonic with := in Python3.8+
+    while True:   # Could be more pythonic with := in Python3.8+        
+        
         line = process.stdout.readline()
         # line2 = process.stdout.read().splitlines()
         if not line and process.poll() is not None:
@@ -50,8 +51,20 @@ def lectura_datos_mesa(process):
         
         linea_sucia = line.decode('latin-1')
         linea_limpia = linea_sucia.replace("\r\n", "").replace("\\\"", "\'")
-        if linea_limpia != "":
-            datosMesa.append(linea_limpia)
+
+        if "Interface starting at" in linea_limpia:
+            continue
+
+        if not linea_limpia:
+            break
+        
+        ## Quitamos la última coma del último elemento para poder parsear el string a json con json.loads
+        linea_limpia = linea_limpia[::-1].replace(",","",1)[::-1]
+
+        try:
+            datosMesa[id].append(json.loads(linea_limpia))
+        except:
+            datosMesa[id] = [json.loads(linea_limpia)]
 
 
 @app.route('/modelo/<iter>/<id>')
@@ -90,10 +103,10 @@ def run_command(iter, id):
     return "Entrenando modelo"
 
 
-@app.route("/ejecuta/mesa")
-def ejecuta_mesa():
+@app.route("/ejecuta/mesa/<id>")
+def ejecuta_mesa(id):
         # global process
-    command = ['python', 'C:\\Users\\David\\Desktop\\Github\\PopulationDynamicsModel_AI\\Code\\Simulation\\main.py']
+    command = ['python', '-u', 'C:\\Users\\David\\Desktop\\Github\\PopulationDynamicsModel_AI\\Code\\Simulation\\main.py']
     # command = ['python', 'Mesa_trial.py']
 
     # """Run a command while printing the live output"""
@@ -103,7 +116,7 @@ def ejecuta_mesa():
         stderr=subprocess.STDOUT
     )
     
-    thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process])
+    thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, id])
     
     thread.start()
 
@@ -111,10 +124,16 @@ def ejecuta_mesa():
     return "Entrenando modelo"
 
 
-@app.route("/muestra/mesa")
-def muestra_mesa():
-    return json.dumps(datosMesa)
+@app.route("/muestra/mesa/<id>")
+def muestra_mesa(id):
+    if id in datosMesa:
+        datos_nuevos = datosMesa[id]
+        datosMesa[id] = []
+    else:
+        datos_nuevos = []
 
+    return jsonify(datos_nuevos)
+    
 
 
 @app.route("/inicio/<iter>/<id>")
@@ -148,8 +167,9 @@ def f_datos_nuevos(id):
         datos[id] = []
     else:
         datos_nuevos = []
-    return jsonify(datos_nuevos)
 
+    return jsonify(datos_nuevos)
+    
 
 @app.route("/", defaults={"id":None})
 @app.route("/<id>")
