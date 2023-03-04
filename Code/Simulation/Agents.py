@@ -51,8 +51,8 @@ class Agent(mesa.Agent):
                 "Position":tuple(self.pos),
                 "Direction": self.direction,
                 "Sprite":self.sprite,
-                "Alive":alive}
-        print(json.dumps(log))
+                "Alive":str(alive)}
+        print(json.dumps(log), end=", ")
 
 class IntelligentAgentA():
     def choice(self):
