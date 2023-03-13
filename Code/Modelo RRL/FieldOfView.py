@@ -1,6 +1,6 @@
 import operator
 
-# Field of View
+# Field of View, se pasa por parametros (posición actual del agente, casilla adyacente hacia la que está mirando, distancia de visión)
 def fov(pos, dire, dist):
     fov = []
     dif = tuple(map(operator.sub, dire, pos))
