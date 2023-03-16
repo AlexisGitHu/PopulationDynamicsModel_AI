@@ -28,9 +28,9 @@ class Ecosistem(mesa.Model):
     
 
     def step(self):
-        print('{"Step": '+ str(self.schedule.steps) + ', "info":[', end="")
+        #print('{"Step": '+ str(self.schedule.steps) + ', "info":[', end="")
         self.schedule.step()
-        print("]}")
+        #print("]}")
         for x in self.killed:
             try:
                 self.grid.remove_agent(x)
@@ -38,3 +38,5 @@ class Ecosistem(mesa.Model):
             except: 
                 pass
         self.killed = []
+    
+    
