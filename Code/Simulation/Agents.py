@@ -1,7 +1,7 @@
 import mesa
 import random
 import json
-
+import operator 
 class Agent(mesa.Agent):
     def __init__(self, unique_id, model, specie, preys, predators, direction, color, sprite):
         super().__init__(unique_id, model)
@@ -23,14 +23,37 @@ class Agent(mesa.Agent):
 
         evaluation = (p*(1-e/100)**2-d(e/100)**2)/t
 
-
+        return evaluation
 
 
     def percieve(self):
-        pass
+        cells_number=9
+        features=[]
+        relative_positions={0:(-1,1),1:(0,1),2:(1,1),3:(-1,0),4:(0,0),5:(1,0),6:(-1,-1),7:(0,-1),8:(1,-1)}
+        for i in range(cells_number):
+            pos_to_evaluate=tuple(map(operator.add, self.pos, relative_positions[i]))
+            features[i]=self.individual_cell_evaluation(*pos_to_evaluate)
+        return features ##devuelve posiciones absolutas
 
-    def get_vision(self):
-        pass
+    def get_vision(self,pos,dire,dist):
+        fov = []
+        dif = tuple(map(operator.sub, dire, pos))
+
+        rev = dif[::-1]
+        for i in range(dist):
+            pos = tuple(map(operator.add, pos, dif))
+            fov.append(pos)
+            if dif[0] == 0 or dif[1] == 0:
+                for j in range(1, i + 1):
+                    y = tuple([k * j for k in rev])
+                    fov.append(tuple(map(operator.sub, pos, y)))
+                    fov.append(tuple(map(operator.add, pos, y)))
+            else:
+                for j in reversed(range(1, i + 1)):
+                    fov.append((pos[0] - dif[0] * j, pos[1]))
+                    fov.append((pos[0], pos[1] - dif[1] * j))
+
+        return fov
 
 
     def move(self):

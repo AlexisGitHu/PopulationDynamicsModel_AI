@@ -39,6 +39,8 @@ class Prey :
             self.compute_how_many_func=compute_how_many_func
             self.perceive_func=perceive_func
             self.cells_evaluation_func=cells_evaluation_func
+            self.perceive_features=[]
+            self.relative_positions={0:(-1,1),1:(0,1),2:(1,1),3:(-1,0),4:(0,0),5:(1,0),6:(-1,-1),7:(0,-1),8:(1,-1)}
             self.q = 0
             self.s = 0
         
@@ -51,18 +53,6 @@ class Prey :
         ## Visión del agente - Trabajo de Álvaro, maldito sea
         def compute_how_many(self,matrix):
             return self.compute_how_many_func(matrix)  
-        ## Percibir del agente en función de su visión - Trabajo de Álvaro, maldito sea
-        def perceive(self,x,y,matrix): 
-            """
-            Returns the features for a position (x,y) as a matrix conditioned by the method compute_how_many
-            """
-            return self.perceive_func(x,y,matrix)
-
-        def Cells_Evaluation(self,matrix):
-            """
-            Evaluate the neighbooring cells
-            """
-            return self.cells_evaluation_func(matrix)
 
         def Change_Position(self, matrix):
             """
@@ -71,35 +61,36 @@ class Prey :
             r = np.random.rand()
 
             if r < 1 - self.epsilon:
-                score = self.Cells_Evaluation(matrix)
-                best_score_index = np.argmax(score[2, :])  # select the line with the best score
-                x_new = score[0, best_score_index]
-                y_new = score[1, best_score_index]
-                self.q = score[2, best_score_index]
+                wanted_score = np.max(np.array(self.perceive_features))
+                x_move,y_move = self.relative_positions[self.perceive_features.index(wanted_score)]
+                self.s = wanted_score
             else:
-                x_new = (self.x_position + np.random.randint(-1, 2) )%matrix.xDim
-                y_new = (self.y_position + np.random.randint(-1, 2) )%matrix.yDim
-                features = self.perceive(x_new, y_new, matrix)
-                self.q = np.dot(features, self.weights)
-            new_position = np.array([x_new, y_new])
+                x_move = (self.x_position + np.random.randint(-1, 2) )
+                y_move = (self.y_position + np.random.randint(-1, 2) )
+                self.s = np.dot(self.perceive_features, self.weights)
+            new_position = np.array([x_move, y_move])
             return new_position
 
         def Change_Sight(self,matrix):
             r = np.random.rand()
+
             if r < 1 - self.epsilon:
-                score = self.Cells_Evaluation(matrix)
-                lowest_score_index = np.argmin(score[2,:])
-                x_new = score[0, lowest_score_index]
-                y_new = score[1, lowest_score_index]
-                self.s = score[2, lowest_score_index]
+                wanted_score = np.max(np.array(self.perceive_features))
+                x_move,y_move = self.relative_positions[self.perceive_features.index(wanted_score)]
+                self.s = wanted_score
             else:
-                x_new = (self.x_position + np.random.randint(-1, 2) )%matrix.xDim
-                y_new = (self.y_position + np.random.randint(-1, 2) )%matrix.yDim
-                features = self.perceive(x_new, y_new, matrix)
-                self.s = np.dot(features, self.weights)
-            new_sight = np.array([x_new, y_new])
-            return new_sight
-            
+                x_move = (self.x_position + np.random.randint(-1, 2) )
+                y_move = (self.y_position + np.random.randint(-1, 2) )
+                self.s = np.dot(self.perceive_features, self.weights)
+            new_position = np.array([x_move, y_move])
+            return new_position
+        
+        def make_choice(self,features):
+            self.perceive_features=features
+            new_position=self.Change_Position(features)
+            new_sight=self.Change_Sight(features)
+            return  new_position,new_sight ##devuelve posiciones relativas
+         
         def Aging(self, i):
             self.age += 1
             self.epsilon = 1 / i
@@ -122,7 +113,7 @@ class Prey :
             how_many = self.compute_how_many(matrix)
             x = self.x_position
             y = self.y_position
-            features = self.perceive(x,y,matrix)
+            features = self.perceive_features
             feature_wanted = features[0]
             opponent = feature_wanted
             same = how_many[2][4]>0
@@ -244,40 +235,43 @@ class Predator:
             """
             return self.cells_evaluation_func(matrix)
  
-        def Change_Position(self,matrix):
+        def Change_Position(self, matrix):
             """
             Perform action (i.e. movement) of the agent depending on its evaluations
-            """            
-            r=np.random.rand()
- 
+            """
+            r = np.random.rand()
+
             if r < 1 - self.epsilon:
-                score = self.Cells_Evaluation(matrix)
-                best_score_index = np.argmax(score[2,:]) #select the line with the best score
-                x_new = score[0, best_score_index]
-                y_new = score[1, best_score_index]
-                self.q = score[2, best_score_index]
-            else :
-                x_new = (self.x_position + np.random.randint(-1, 2) )%matrix.xDim
-                y_new = (self.y_position + np.random.randint(-1, 2) )%matrix.yDim
-                features = self.perceive(x_new, y_new, matrix)
-                self.q = np.dot(features, self.weights)
-            new_position = np.array([x_new, y_new])
+                wanted_score = np.max(np.array(self.perceive_features))
+                x_move,y_move = self.relative_positions[self.perceive_features.index(wanted_score)]
+                self.s = wanted_score
+            else:
+                x_move = (self.x_position + np.random.randint(-1, 2) )
+                y_move = (self.y_position + np.random.randint(-1, 2) )
+                self.s = np.dot(self.perceive_features, self.weights)
+            new_position = np.array([x_move, y_move])
             return new_position
+
         def Change_Sight(self,matrix):
             r = np.random.rand()
+
             if r < 1 - self.epsilon:
-                score = self.Cells_Evaluation(matrix)
-                best_score_index = np.argmax(score[2,:])
-                x_new = score[0, best_score_index]
-                y_new = score[1, best_score_index]
-                self.s = score[2, best_score_index]
+                wanted_score = np.max(np.array(self.perceive_features))
+                x_move,y_move = self.relative_positions[self.perceive_features.index(wanted_score)]
+                self.s = wanted_score
             else:
-                x_new = (self.x_position + np.random.randint(-1, 2) )%matrix.xDim
-                y_new = (self.y_position + np.random.randint(-1, 2) )%matrix.yDim
-                features = self.perceive(x_new, y_new, matrix)
-                self.s = np.dot(features, self.weights)
-            new_sight = np.array([x_new, y_new])
-            return new_sight
+                x_move = (self.x_position + np.random.randint(-1, 2) )
+                y_move = (self.y_position + np.random.randint(-1, 2) )
+                self.s = np.dot(self.perceive_features, self.weights)
+            new_position = np.array([x_move, y_move])
+            return new_position
+        
+        def make_choice(self,features):
+            self.perceive_features=features
+            new_position=self.Change_Position(features)
+            new_sight=self.Change_Sight(features)
+            return  new_position,new_sight
+        
         def Aging(self, i):
  
             self.age +=1
