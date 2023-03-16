@@ -1,0 +1,6427 @@
+[
+  {
+    "Step": 0, 
+    "info": [
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 63, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 91, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 73, 
+        "Position": [
+          2, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 10, 
+        "Position": [
+          7, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 42, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 39, 
+        "Position": [
+          1, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 59, 
+        "Position": [
+          1, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 99, 
+        "Position": [
+          9, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 85, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 90, 
+        "Position": [
+          0, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 11, 
+        "Position": [
+          0, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 44, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 25, 
+        "Position": [
+          1, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 67, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 77, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 36, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 48, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 47, 
+        "Position": [
+          6, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 66, 
+        "Position": [
+          6, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 88, 
+        "Position": [
+          0, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 83, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 9, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 40, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 32, 
+        "Position": [
+          1, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 62, 
+        "Position": [
+          0, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 18, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 87, 
+        "Position": [
+          9, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 20, 
+        "Position": [
+          5, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 53, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 24, 
+        "Position": [
+          2, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 57, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 41, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 43, 
+        "Position": [
+          3, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 15, 
+        "Position": [
+          5, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 19, 
+        "Position": [
+          6, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 92, 
+        "Position": [
+          8, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 4, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 30, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 28, 
+        "Position": [
+          9, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 80, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 51, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 68, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 54, 
+        "Position": [
+          5, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 38, 
+        "Position": [
+          3, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 17, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 69, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 95, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 52, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 89, 
+        "Position": [
+          2, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 84, 
+        "Position": [
+          9, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 49, 
+        "Position": [
+          7, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 8, 
+        "Position": [
+          5, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 74, 
+        "Position": [
+          1, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 93, 
+        "Position": [
+          0, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 45, 
+        "Position": [
+          8, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 71, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 86, 
+        "Position": [
+          5, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 27, 
+        "Position": [
+          6, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 70, 
+        "Position": [
+          7, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 55, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 34, 
+        "Position": [
+          6, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 12, 
+        "Position": [
+          8, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 14, 
+        "Position": [
+          8, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 33, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 65, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 56, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 3, 
+        "Position": [
+          1, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 13, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 79, 
+        "Position": [
+          0, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 22, 
+        "Position": [
+          7, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 50, 
+        "Position": [
+          4, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 26, 
+        "Position": [
+          0, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 0, 
+        "Position": [
+          6, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 21, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 94, 
+        "Position": [
+          8, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 29, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 23, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 97, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 6, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 5, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 61, 
+        "Position": [
+          9, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 82, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 35, 
+        "Position": [
+          3, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 76, 
+        "Position": [
+          3, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 58, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 75, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 60, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 81, 
+        "Position": [
+          7, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 98, 
+        "Position": [
+          6, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 72, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 31, 
+        "Position": [
+          1, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 1, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 2, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 16, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 78, 
+        "Position": [
+          9, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 37, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 46, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 7, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 64, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 96, 
+        "Position": [
+          9, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }
+    ]
+  }, 
+  {
+    "Step": 1, 
+    "info": [
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 83, 
+        "Position": [
+          7, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 11, 
+        "Position": [
+          1, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 24, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 33, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 51, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 38, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 98, 
+        "Position": [
+          5, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 59, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 28, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 20, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 64, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 92, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 16, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 96, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 72, 
+        "Position": [
+          9, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 42, 
+        "Position": [
+          5, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 69, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 36, 
+        "Position": [
+          3, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 56, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 74, 
+        "Position": [
+          2, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 99, 
+        "Position": [
+          0, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 54, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 68, 
+        "Position": [
+          4, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 81, 
+        "Position": [
+          6, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 84, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 91, 
+        "Position": [
+          0, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 44, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 5, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 70, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 49, 
+        "Position": [
+          7, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 37, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 95, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 97, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 6, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 34, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 4, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 45, 
+        "Position": [
+          9, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 79, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 30, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 25, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 50, 
+        "Position": [
+          3, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 94, 
+        "Position": [
+          8, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 52, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 75, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 23, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 15, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 10, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 88, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 31, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 13, 
+        "Position": [
+          7, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 48, 
+        "Position": [
+          1, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 62, 
+        "Position": [
+          1, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 89, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 93, 
+        "Position": [
+          9, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 1, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 47, 
+        "Position": [
+          5, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 40, 
+        "Position": [
+          0, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 90, 
+        "Position": [
+          1, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 60, 
+        "Position": [
+          6, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 66, 
+        "Position": [
+          6, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 85, 
+        "Position": [
+          3, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 22, 
+        "Position": [
+          7, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 39, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 3, 
+        "Position": [
+          0, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 27, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 32, 
+        "Position": [
+          1, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 77, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 58, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 80, 
+        "Position": [
+          7, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 29, 
+        "Position": [
+          8, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 0, 
+        "Position": [
+          7, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 21, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 35, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 53, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 67, 
+        "Position": [
+          1, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 9, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 57, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 12, 
+        "Position": [
+          8, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 2, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 14, 
+        "Position": [
+          9, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 46, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 82, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 73, 
+        "Position": [
+          1, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 78, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 26, 
+        "Position": [
+          9, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 71, 
+        "Position": [
+          6, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 65, 
+        "Position": [
+          2, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 7, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 18, 
+        "Position": [
+          9, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 8, 
+        "Position": [
+          6, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 55, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 86, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 76, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 87, 
+        "Position": [
+          0, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 41, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }
+    ]
+  }, 
+  {
+    "Step": 2, 
+    "info": [
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 2, 
+        "Position": [
+          2, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 81, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 13, 
+        "Position": [
+          6, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 30, 
+        "Position": [
+          1, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 37, 
+        "Position": [
+          2, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 71, 
+        "Position": [
+          5, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 55, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 73, 
+        "Position": [
+          0, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 89, 
+        "Position": [
+          0, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 70, 
+        "Position": [
+          8, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 53, 
+        "Position": [
+          3, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 39, 
+        "Position": [
+          1, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 77, 
+        "Position": [
+          6, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 8, 
+        "Position": [
+          6, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 18, 
+        "Position": [
+          8, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 92, 
+        "Position": [
+          8, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 82, 
+        "Position": [
+          5, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 31, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 1, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 20, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 68, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 60, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 56, 
+        "Position": [
+          5, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 57, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 29, 
+        "Position": [
+          7, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 5, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 86, 
+        "Position": [
+          6, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 64, 
+        "Position": [
+          9, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 42, 
+        "Position": [
+          5, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 76, 
+        "Position": [
+          3, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 44, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 51, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 74, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 52, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 72, 
+        "Position": [
+          9, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 65, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 12, 
+        "Position": [
+          9, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 58, 
+        "Position": [
+          2, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 85, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 50, 
+        "Position": [
+          4, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 80, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 69, 
+        "Position": [
+          8, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 99, 
+        "Position": [
+          1, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 0, 
+        "Position": [
+          8, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 24, 
+        "Position": [
+          0, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 54, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 28, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 34, 
+        "Position": [
+          4, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 7, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 98, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 10, 
+        "Position": [
+          7, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 88, 
+        "Position": [
+          8, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 36, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 40, 
+        "Position": [
+          1, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 59, 
+        "Position": [
+          1, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 46, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 25, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 94, 
+        "Position": [
+          7, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 78, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 41, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 6, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 11, 
+        "Position": [
+          2, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 67, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 32, 
+        "Position": [
+          0, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 95, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 38, 
+        "Position": [
+          2, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 23, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 48, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 4, 
+        "Position": [
+          0, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 93, 
+        "Position": [
+          0, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 96, 
+        "Position": [
+          0, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 3, 
+        "Position": [
+          1, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 21, 
+        "Position": [
+          2, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 66, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 22, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 87, 
+        "Position": [
+          0, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 9, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 84, 
+        "Position": [
+          0, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 45, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 14, 
+        "Position": [
+          0, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 75, 
+        "Position": [
+          6, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 16, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 15, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 26, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 49, 
+        "Position": [
+          7, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 47, 
+        "Position": [
+          6, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 62, 
+        "Position": [
+          1, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 91, 
+        "Position": [
+          0, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 79, 
+        "Position": [
+          9, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 83, 
+        "Position": [
+          8, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 90, 
+        "Position": [
+          1, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }
+    ]
+  }, 
+  {
+    "Step": 3, 
+    "info": [
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 48, 
+        "Position": [
+          1, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 79, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 5, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 94, 
+        "Position": [
+          8, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 12, 
+        "Position": [
+          0, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 89, 
+        "Position": [
+          1, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 38, 
+        "Position": [
+          2, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 93, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 24, 
+        "Position": [
+          1, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 69, 
+        "Position": [
+          9, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 66, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 14, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 4, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 15, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 75, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 56, 
+        "Position": [
+          6, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 87, 
+        "Position": [
+          0, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 98, 
+        "Position": [
+          5, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 40, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 51, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 65, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 96, 
+        "Position": [
+          1, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 11, 
+        "Position": [
+          3, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 85, 
+        "Position": [
+          3, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 2, 
+        "Position": [
+          1, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 99, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 59, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 31, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 22, 
+        "Position": [
+          5, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 8, 
+        "Position": [
+          7, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 83, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 34, 
+        "Position": [
+          5, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 70, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 9, 
+        "Position": [
+          2, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 82, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 62, 
+        "Position": [
+          2, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 41, 
+        "Position": [
+          5, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 54, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 80, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 20, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 37, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 28, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 36, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 74, 
+        "Position": [
+          2, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 91, 
+        "Position": [
+          1, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 29, 
+        "Position": [
+          7, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 1, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 32, 
+        "Position": [
+          1, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 16, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 55, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 44, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 72, 
+        "Position": [
+          0, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 77, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 23, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 68, 
+        "Position": [
+          2, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 86, 
+        "Position": [
+          5, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 26, 
+        "Position": [
+          0, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 30, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 84, 
+        "Position": [
+          9, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 71, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 73, 
+        "Position": [
+          9, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 92, 
+        "Position": [
+          7, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 25, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 52, 
+        "Position": [
+          2, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 90, 
+        "Position": [
+          2, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 67, 
+        "Position": [
+          3, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 64, 
+        "Position": [
+          0, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 42, 
+        "Position": [
+          6, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 49, 
+        "Position": [
+          8, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 0, 
+        "Position": [
+          8, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 60, 
+        "Position": [
+          8, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 6, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 47, 
+        "Position": [
+          7, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 53, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 58, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 39, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 18, 
+        "Position": [
+          7, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 3, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 10, 
+        "Position": [
+          6, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 50, 
+        "Position": [
+          5, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 7, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 88, 
+        "Position": [
+          8, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 95, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 45, 
+        "Position": [
+          9, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 81, 
+        "Position": [
+          5, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 78, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 13, 
+        "Position": [
+          5, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 76, 
+        "Position": [
+          3, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 57, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 21, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 46, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }
+    ]
+  }, 
+  {
+    "Step": 4, 
+    "info": [
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 31, 
+        "Position": [
+          9, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 96, 
+        "Position": [
+          0, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 72, 
+        "Position": [
+          1, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 30, 
+        "Position": [
+          1, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 8, 
+        "Position": [
+          8, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 77, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 4, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 49, 
+        "Position": [
+          9, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 6, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 3, 
+        "Position": [
+          9, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 20, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 71, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 41, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 1, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 64, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 26, 
+        "Position": [
+          1, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 60, 
+        "Position": [
+          9, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 65, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 46, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 82, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 13, 
+        "Position": [
+          6, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 95, 
+        "Position": [
+          0, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 84, 
+        "Position": [
+          8, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 93, 
+        "Position": [
+          2, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 87, 
+        "Position": [
+          0, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 38, 
+        "Position": [
+          1, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 21, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 86, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 37, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 36, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 67, 
+        "Position": [
+          4, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 51, 
+        "Position": [
+          5, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 42, 
+        "Position": [
+          5, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 24, 
+        "Position": [
+          2, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 78, 
+        "Position": [
+          7, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 92, 
+        "Position": [
+          6, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 70, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 22, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 75, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 94, 
+        "Position": [
+          8, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 52, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 28, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 18, 
+        "Position": [
+          8, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 29, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 0, 
+        "Position": [
+          7, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 79, 
+        "Position": [
+          9, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 99, 
+        "Position": [
+          2, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 57, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 50, 
+        "Position": [
+          5, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 85, 
+        "Position": [
+          4, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 47, 
+        "Position": [
+          6, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 32, 
+        "Position": [
+          2, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 83, 
+        "Position": [
+          6, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 15, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 44, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 89, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 80, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 34, 
+        "Position": [
+          6, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 23, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 7, 
+        "Position": [
+          4, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 59, 
+        "Position": [
+          2, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 54, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 69, 
+        "Position": [
+          0, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 76, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 10, 
+        "Position": [
+          7, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 62, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 11, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 53, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 16, 
+        "Position": [
+          5, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 68, 
+        "Position": [
+          1, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 66, 
+        "Position": [
+          7, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 58, 
+        "Position": [
+          2, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 25, 
+        "Position": [
+          1, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 91, 
+        "Position": [
+          1, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 56, 
+        "Position": [
+          5, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 5, 
+        "Position": [
+          8, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 90, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 74, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 98, 
+        "Position": [
+          4, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 48, 
+        "Position": [
+          0, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 2, 
+        "Position": [
+          1, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 88, 
+        "Position": [
+          7, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 55, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 40, 
+        "Position": [
+          1, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 14, 
+        "Position": [
+          8, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 81, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 12, 
+        "Position": [
+          0, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 73, 
+        "Position": [
+          9, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 39, 
+        "Position": [
+          3, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 45, 
+        "Position": [
+          0, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }
+    ]
+  }, 
+  {
+    "Step": 5, 
+    "info": [
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 62, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 38, 
+        "Position": [
+          2, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 88, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 70, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 14, 
+        "Position": [
+          7, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 28, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 84, 
+        "Position": [
+          7, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 25, 
+        "Position": [
+          1, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 92, 
+        "Position": [
+          5, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 86, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 39, 
+        "Position": [
+          3, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 96, 
+        "Position": [
+          1, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 68, 
+        "Position": [
+          0, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 64, 
+        "Position": [
+          8, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 7, 
+        "Position": [
+          5, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 0, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 45, 
+        "Position": [
+          0, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 13, 
+        "Position": [
+          7, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 93, 
+        "Position": [
+          1, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 60, 
+        "Position": [
+          8, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 52, 
+        "Position": [
+          3, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 16, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 12, 
+        "Position": [
+          1, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 85, 
+        "Position": [
+          5, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 15, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 32, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 82, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 87, 
+        "Position": [
+          0, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 83, 
+        "Position": [
+          7, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 42, 
+        "Position": [
+          6, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 11, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 18, 
+        "Position": [
+          9, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 22, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 36, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 20, 
+        "Position": [
+          2, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 49, 
+        "Position": [
+          0, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 65, 
+        "Position": [
+          5, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 23, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 89, 
+        "Position": [
+          2, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 59, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 66, 
+        "Position": [
+          6, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 72, 
+        "Position": [
+          0, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 79, 
+        "Position": [
+          0, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 81, 
+        "Position": [
+          5, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 34, 
+        "Position": [
+          5, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 5, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 98, 
+        "Position": [
+          4, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 48, 
+        "Position": [
+          1, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 74, 
+        "Position": [
+          3, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 29, 
+        "Position": [
+          7, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 8, 
+        "Position": [
+          8, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 56, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 6, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 47, 
+        "Position": [
+          6, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 78, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 1, 
+        "Position": [
+          8, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 30, 
+        "Position": [
+          0, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 46, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 4, 
+        "Position": [
+          3, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 71, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 44, 
+        "Position": [
+          9, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 37, 
+        "Position": [
+          3, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 99, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 67, 
+        "Position": [
+          3, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 90, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 69, 
+        "Position": [
+          0, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 58, 
+        "Position": [
+          2, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 91, 
+        "Position": [
+          0, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 50, 
+        "Position": [
+          4, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 76, 
+        "Position": [
+          2, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 10, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 75, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 80, 
+        "Position": [
+          6, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 57, 
+        "Position": [
+          6, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 51, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 77, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 41, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 40, 
+        "Position": [
+          1, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 94, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 26, 
+        "Position": [
+          0, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 2, 
+        "Position": [
+          0, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 54, 
+        "Position": [
+          4, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 31, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 73, 
+        "Position": [
+          0, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 53, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 24, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 3, 
+        "Position": [
+          0, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }
+    ]
+  }, 
+  {
+    "Step": 6, 
+    "info": [
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 70, 
+        "Position": [
+          7, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 71, 
+        "Position": [
+          8, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 90, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 4, 
+        "Position": [
+          2, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 64, 
+        "Position": [
+          9, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 92, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 89, 
+        "Position": [
+          3, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 31, 
+        "Position": [
+          9, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 78, 
+        "Position": [
+          8, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 7, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 54, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 51, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 47, 
+        "Position": [
+          5, 
+          6
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 72, 
+        "Position": [
+          9, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 83, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 6, 
+        "Position": [
+          6, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 41, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 96, 
+        "Position": [
+          0, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 87, 
+        "Position": [
+          0, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 40, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 0, 
+        "Position": [
+          8, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 80, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 29, 
+        "Position": [
+          7, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 28, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 53, 
+        "Position": [
+          5, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 2, 
+        "Position": [
+          9, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 88, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 11, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 5, 
+        "Position": [
+          8, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 59, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 94, 
+        "Position": [
+          7, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 74, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 14, 
+        "Position": [
+          8, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 44, 
+        "Position": [
+          9, 
+          7
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 93, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 58, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 26, 
+        "Position": [
+          9, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 85, 
+        "Position": [
+          6, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 91, 
+        "Position": [
+          1, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 34, 
+        "Position": [
+          6, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 13, 
+        "Position": [
+          8, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 69, 
+        "Position": [
+          1, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 73, 
+        "Position": [
+          1, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 76, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 52, 
+        "Position": [
+          4, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 66, 
+        "Position": [
+          6, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 48, 
+        "Position": [
+          0, 
+          9
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 77, 
+        "Position": [
+          6, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 25, 
+        "Position": [
+          1, 
+          1
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 38, 
+        "Position": [
+          3, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 68, 
+        "Position": [
+          9, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 56, 
+        "Position": [
+          5, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 86, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 84, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 45, 
+        "Position": [
+          1, 
+          4
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 36, 
+        "Position": [
+          4, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 8, 
+        "Position": [
+          8, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 39, 
+        "Position": [
+          2, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 10, 
+        "Position": [
+          7, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 99, 
+        "Position": [
+          4, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 16, 
+        "Position": [
+          6, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 32, 
+        "Position": [
+          2, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 18, 
+        "Position": [
+          0, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 37, 
+        "Position": [
+          3, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 20, 
+        "Position": [
+          3, 
+          4
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 60, 
+        "Position": [
+          8, 
+          0
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 46, 
+        "Position": [
+          5, 
+          5
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 57, 
+        "Position": [
+          7, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 62, 
+        "Position": [
+          3, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 1, 
+        "Position": [
+          7, 
+          0
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 50, 
+        "Position": [
+          3, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 49, 
+        "Position": [
+          9, 
+          7
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 75, 
+        "Position": [
+          0, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 65, 
+        "Position": [
+          4, 
+          8
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 79, 
+        "Position": [
+          9, 
+          5
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 24, 
+        "Position": [
+          4, 
+          6
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 42, 
+        "Position": [
+          7, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 15, 
+        "Position": [
+          4, 
+          3
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 12, 
+        "Position": [
+          1, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 22, 
+        "Position": [
+          6, 
+          1
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 67, 
+        "Position": [
+          3, 
+          9
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 98, 
+        "Position": [
+          3, 
+          8
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 3, 
+        "Position": [
+          0, 
+          2
+        ], 
+        "Sprite": "conejo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 82, 
+        "Position": [
+          3, 
+          3
+        ], 
+        "Sprite": "lobo.png"
+      }, 
+      {
+        "Alive": "True", 
+        "Direction": "N", 
+        "ID": 30, 
+        "Position": [
+          1, 
+          2
+        ], 
+        "Sprite": "lobo.png"
+      }
+    ]
+  }
+]
