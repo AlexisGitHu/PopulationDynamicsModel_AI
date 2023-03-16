@@ -116,7 +116,7 @@ def run_command(iter, id):
 @app.route("/ejecuta/mesa/<id>")
 def ejecuta_mesa(id):
         # global process
-    command = ['python', '-u', 'C:\\Users\\David\\Desktop\\Github\\PopulationDynamicsModel_AI\\Code\\Simulation\\main.py']
+    command = ['python', '-u', '..\\Simulation\\main.py']
     # command = ['python', 'Mesa_trial.py']
 
     # """Run a command while printing the live output"""
