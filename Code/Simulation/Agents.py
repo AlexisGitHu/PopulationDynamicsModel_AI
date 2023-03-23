@@ -67,11 +67,12 @@ class Agent(mesa.Agent):
     def eat(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         enemies = [agent for agent in cellmates if type(agent.specie) in self.preys]
-        if len(enemies) > 1:
+        if len(enemies) >= 1:
             other_agent = self.random.choice(enemies)
             self.model.killed.append(other_agent)
             self.energy = 100
     
+    # TODO
     def reproduce(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         allies = [agent for agent in cellmates if agent.specie == self.specie]
@@ -79,6 +80,7 @@ class Agent(mesa.Agent):
             other_agent = self.random.choice(allies)
             self.model.mating.append((self,other_agent))
             self.energy -= 50
+
 
     def step(self):
         alive = True
@@ -97,7 +99,7 @@ class Agent(mesa.Agent):
                 "Direction": self.direction,
                 "Sprite":self.sprite,
                 "Alive":str(alive)}
-        #print(json.dumps(log), end=", ")
+        print(json.dumps(log), end=", ")
 
 class IntelligentAgentA():
     def choice(self):
