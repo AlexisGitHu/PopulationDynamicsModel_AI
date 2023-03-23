@@ -54,24 +54,10 @@ class Prey :
         def compute_how_many(self,matrix):
             return self.compute_how_many_func(matrix)  
 
-        def Change_Position(self, matrix):
-            """
-            Perform action (i.e. movement) of the agent depending on its evaluations
-            """
-            r = np.random.rand()
-
-            if r < 1 - self.epsilon:
-                wanted_score = np.max(np.array(self.perceive_features))
-                x_move,y_move = self.relative_positions[self.perceive_features.index(wanted_score)]
-                self.s = wanted_score
-            else:
-                x_move = (self.x_position + np.random.randint(-1, 2) )
-                y_move = (self.y_position + np.random.randint(-1, 2) )
-                self.s = np.dot(self.perceive_features, self.weights)
-            new_position = np.array([x_move, y_move])
-            return new_position
-
-        def Change_Sight(self,matrix):
+        ## Input: Nothing
+        ## Output: return the new relative positions of movement
+        ## Description: Calculates the best relative position to move according to the perceive function
+        def Change_Position(self):
             r = np.random.rand()
 
             if r < 1 - self.epsilon:
@@ -85,11 +71,30 @@ class Prey :
             new_position = np.array([x_move, y_move])
             return new_position
         
+        ## Input: Nothing
+        ## Output: return the new relative position of sight
+        ## Description: Calculates the best relative position to move agent's vision according to the perceive function
+        def Change_Sight(self):
+            r = np.random.rand()
+            if r < 1 - self.epsilon:
+                wanted_score = np.max(np.array(self.perceive_features))
+                x_move,y_move = self.relative_positions[self.perceive_features.index(wanted_score)]
+                self.s = wanted_score
+            else:
+                x_move = (self.x_position + np.random.randint(-1, 2) )
+                y_move = (self.y_position + np.random.randint(-1, 2) )
+                self.s = np.dot(self.perceive_features, self.weights)
+            new_position = np.array([x_move, y_move])
+            return new_position
+        
+        ## Input: Array of weights of the agent's perceive function
+        ## Output: Returns a tuple of the new relative positions of agent's sight and location.
+        ## Description: Brain of the agent, calls agents different actions evaluation function and returns feedback.
         def make_choice(self,features):
             self.perceive_features=features
             new_position=self.Change_Position(features)
             new_sight=self.Change_Sight(features)
-            return  new_position,new_sight ##devuelve posiciones relativas
+            return  new_position,new_sight
          
         def Aging(self, i):
             self.age += 1
@@ -102,7 +107,7 @@ class Prey :
             return
  
 #---------------------------Learning part-------------------------------#
-        def Get_Reward(self,matrix): 
+        def Get_Reward(self): 
             """
             opponent :number of the other species type within the agent’s Moore
             neighborhood normalized by the number of total
@@ -110,14 +115,12 @@ class Prey :
             same = {0, 1} for if the opponent is on the same location
             """
             type_animal = self.ptype
-            how_many = self.compute_how_many(matrix)
-            x = self.x_position
-            y = self.y_position
+            #how_many = self.compute_how_many(matrix)
             features = self.perceive_features
             feature_wanted = features[0]
             opponent = feature_wanted
-            same = how_many[2][4]>0
-            reward = opponent*type_animal + 2*same*type_animal
+            #same = how_many[2][4]>0
+            reward = opponent*type_animal + 2*type_animal
  
             return reward
         ## Este features es el ya cambiado en función de la visión, no el features sin modificar
@@ -213,32 +216,33 @@ class Predator:
             self.compute_how_many_func=compute_how_many_func
             self.perceive_func=perceive_func
             self.cells_evaluation_func=cells_evaluation_func
+            self.relative_positions={0:(-1,1),1:(0,1),2:(1,1),3:(-1,0),4:(0,0),5:(1,0),6:(-1,-1),7:(0,-1),8:(1,-1)}
             self.q = 0
             self.s = 0
 
-        def compute_how_many(self,matrix):
-            """
-            Computes how many of what type of agent or objetct are in the nearby cells
-            """
-            return self.compute_how_many_func(matrix)    
+        # def compute_how_many(self,matrix):
+        #     """
+        #     Computes how many of what type of agent or objetct are in the nearby cells
+        #     """
+        #     return self.compute_how_many_func(matrix)    
  
-        def perceive(self,x,y,matrix): 
-            """
-            Returns the features for a position (x,y) as a matrix decided by the method compute_how_many
-            """
-            return self.perceive_func(x,y,matrix)
+        # def perceive(self,x,y,matrix): 
+        #     """
+        #     Returns the features for a position (x,y) as a matrix decided by the method compute_how_many
+        #     """
+        #     return self.perceive_func(x,y,matrix)
            
  
-        def Cells_Evaluation(self,matrix):
-            """
-            Evaluate the neighbooring cells
-            """
-            return self.cells_evaluation_func(matrix)
+        # def Cells_Evaluation(self,matrix):
+        #     """
+        #     Evaluate the neighbooring cells
+        #     """
+        #     return self.cells_evaluation_func(matrix)
  
+        ## Input: Nothing
+        ## Output: return the new relative positions of movement
+        ## Description: Calculates the best relative position to move according to the perceive function
         def Change_Position(self, matrix):
-            """
-            Perform action (i.e. movement) of the agent depending on its evaluations
-            """
             r = np.random.rand()
 
             if r < 1 - self.epsilon:
@@ -252,6 +256,9 @@ class Predator:
             new_position = np.array([x_move, y_move])
             return new_position
 
+        ## Input: Nothing
+        ## Output: return the new relative position of sight
+        ## Description: Calculates the best relative position to move agent's vision according to the perceive function
         def Change_Sight(self,matrix):
             r = np.random.rand()
 
@@ -266,6 +273,9 @@ class Predator:
             new_position = np.array([x_move, y_move])
             return new_position
         
+        ## Input: Array of weights of the agent's perceive function
+        ## Output: Returns a tuple of the new relative positions of agent's sight and location.
+        ## Description: Brain of the agent, calls agents different actions evaluation function and returns feedback.
         def make_choice(self,features):
             self.perceive_features=features
             new_position=self.Change_Position(features)
@@ -292,14 +302,12 @@ class Predator:
             same = {0, 1} for if the opponent is on the same location
             """
             type_animal = self.ptype
-            how_many = self.compute_how_many(matrix)
-            x = self.x_position
-            y = self.y_position
-            features = self.perceive(x,y,matrix)
+            #how_many = self.compute_how_many(matrix)
+            features = self.perceive_features
             feature_wanted = features[0]
             opponent = feature_wanted
-            same = how_many[1][4]>0
-            reward = opponent*type_animal + 2*same*type_animal
+            #same = how_many[1][4]>0
+            reward = opponent*type_animal + 2*type_animal
             return reward
  
         def Get_QFunction(self,features):
