@@ -7,11 +7,13 @@ from queue import Queue
 import json
 import re
 from flask import jsonify
+from flask_cors import CORS, cross_origin
 
 # loop = asyncio.get_event_loop()
 # db = SQLAlchemy()
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database/prueba.db"
 app.config['SECRET_KEY'] = '37utopisdr jt ñçã3q0r9irjqwasdaADFSADF3q0r9irjqw'
@@ -38,6 +40,8 @@ app.register_blueprint(modulo_bbdd)
 # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database/prueba.db"
 
 # app.config['SECRET_KEY'] = '37utopisdr jt ñçã3q0r9irjqwasdaADFSADF3q0r9irjqw'
+
+
 
 
 datos = {}
@@ -131,6 +135,8 @@ def run_command(iter, id):
     return "Entrenando modelo"
 
 
+
+@cross_origin()
 @app.route("/ejecuta/mesa/<id>")
 def ejecuta_mesa(id):
         # global process
