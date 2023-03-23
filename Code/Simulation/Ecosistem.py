@@ -16,9 +16,9 @@ class Ecosistem(mesa.Model):
         # Create agents
         for i in range(self.num_agents):
             if i%2==0:
-                a = Agents. Agent(i, self, agentA, [Agents.IntelligentAgentB], "N","red","lobo.png")
+                a = Agents. Agent(i, self, agentA, [Agents.IntelligentAgentB],[], "N","red","lobo.png")
             else:
-                a = Agents. Agent(i, self, agentB, [], "N", "green","conejo.png")
+                a = Agents. Agent(i, self, agentB, [],[], "N", "green","conejo.png")
             self.schedule.add(a)
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
