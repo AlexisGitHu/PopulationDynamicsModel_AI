@@ -85,10 +85,10 @@ class Agent(mesa.Agent):
     def step(self):
         alive = True
         if self.energy > 0:
-            self.specie.choice()
+            #self.specie.choice()
             self.move()
             self.eat()
-            self.percieve()
+            #self.percieve()
             
         else:
             self.model.grid.remove_agent(self)
