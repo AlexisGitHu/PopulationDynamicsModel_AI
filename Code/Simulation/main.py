@@ -1,5 +1,7 @@
 import mesa
 from Ecosistem import Ecosistem
+
+
 def agent_portrayal(agent):
     portrayal = {
         "Shape": "circle",
