@@ -7,10 +7,10 @@ window.onload = function() {
     
     var width1 = 50,
         height1 = 50,
-        x = [],
-        y = [],
-        x1 = [],
-        y1 = [];
+        x = [12,234,234,12,3,4,2,21,34,4,1,312,54,23,2,1],
+        y = [354,645,34,67,563,423,7,6545,63,47,56,34,456,234,67,233],
+        x1 = [354,645,34,67,563,423,7,6545,63,47,56,34,456,234,67,233],
+        y1 = [12,234,234,12,3,4,2,21,34,4,1,312,54,23,2,1];
 
     let inicio_ajax = document.getElementById("inicio_ajax");
     console.log(inicio_ajax);
@@ -72,10 +72,18 @@ window.onload = function() {
     function ajaxCall() {
         var request = $.ajax({
             type: 'GET',
-            url: 'http://localhost:5000/devolver',
+            url: 'http://localhost:5000/muestra/mesa/1',
             success: function(data) {
-
-                console.log(data.length);
+                for(var i =0;i<data[0].info.length;i++){
+                    if(data[0].info[i].Sprite == "lobo.png"){
+                        eval('var lobo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
+                    }else if(data[0].info[i].Sprite == "conejo.png"){
+                        eval('var conejo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
+                    }
+                }
+                console.log(data[0].info[0].Position[0]);
+                visualizar(lobo0,conejo1,lobo2,data.length);
+                /*console.log(data.length);
                 for(var j=0;j<data.length;j++){
 
                     //HACER QUE DIFERENCIE ENTRE UN STEP Y EL SIGUIENTE PARA MOVER A OTRO SITIO
@@ -94,7 +102,7 @@ window.onload = function() {
                     console.log(lobos);
                     console.log(conejos);
                     crear(lobos,contLobo,conejos,contConejo);
-                }
+                }*/
             }
         })
     }
@@ -102,8 +110,55 @@ window.onload = function() {
     Raster.prototype.rescale = function(width, height) {
         this.scale(width / this.width, height / this.height);
     };
-    
-   
+    function visualizar(lobo0,conejo1,lobo2,longitud){
+        view.draw();
+
+        var destination = new Point(x[0],y[0]);
+
+        var destination1 = new Point(x1[0],y1[0]);
+        
+        let inicio = document.getElementById("inicio");
+        let fin = document.getElementById("fin");
+        var animating = false;
+        inicio.onclick = iniciar; 
+        fin.onclick = finalizar; 
+        function iniciar(evento,) {
+            animating = true;
+            console.log(animating);
+        }
+        function finalizar(evento) {
+            animating = false;
+            console.log(animating);
+        }
+        
+        view.onFrame = function(event){
+            if(animating){
+                //REVISAR QUE EL MOVIMIENTO QUE ESTÁ HACIENDO ES CORRECTO
+                var vector
+                var vector1
+                for (var i =0;i < longitud;i++){
+                    vector = destination.subtract(lobo0.position);
+                    lobo0.position = lobo0.position.add(vector.divide(longitud*40));
+                    lobo0.content = Math.round(vector.length);
+
+                    vector1 = destination1.subtract(conejo1.position);
+                    conejo1.position = conejo1.position.add(vector1.divide(longitud*40));
+                    conejo1.content = Math.round(vector1.length);
+                    
+                    if (vector.length < lobos.length) {
+                        
+                        destination = new Point(x[i],y[i]);
+                    }
+                    if (vector1.length < conejos.length) {
+                    
+                        destination1 = new Point(x1[i],y1[i]);
+                    }
+                }
+            }
+        };
+    }
+
+   /*
     function crear(dataL,contL,dataC,contC){
         for(var i = 0; i < contL; i++) {
             eval('var lobo' + dataL[i].id + '= new Raster({ source: "'+ dataL[i].Sprite +'", position: view.center});');
@@ -166,7 +221,7 @@ window.onload = function() {
 
     }
 
-
+*/
 
    /*
     const prueba = d3.json("http://localhost:5000/prueba/2",

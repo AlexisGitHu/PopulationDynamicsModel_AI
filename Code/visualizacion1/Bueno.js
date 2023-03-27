@@ -70,9 +70,9 @@ window.onload = function() {
     function ajaxCall() {
         var request = $.ajax({
             type: 'GET',
-            url: 'http://localhost:5000/devolver',
+            url: 'http://localhost:5000/muestra/mesa/1',
             success: function(data) {
-
+                /*
                 console.log(data.length);
                 for(var j=0;j<data.length;j++){
 
@@ -92,7 +92,7 @@ window.onload = function() {
                     console.log(lobos);
                     console.log(conejos);
                     crear(lobos,contLobo,conejos,contConejo);
-                }
+                }*/
             }
         })
     }
