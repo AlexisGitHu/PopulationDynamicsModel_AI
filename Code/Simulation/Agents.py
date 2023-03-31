@@ -37,14 +37,17 @@ class Agent(mesa.Agent):
         self.sprite = sprite
 
     def individual_cell_evaluation(self, x, y):
-        content = self.model.grid.get_cell_list_contents([(x, y)])
-        t = len(content)
-        p = len([agent for agent in content if type(agent.specie) in self.preys])
-        d = len([agent for agent in content if type(agent.specie) in self.predators])
+        content = self.model.grid.get_cell_list_contents((x, y))
+        try:
+            t = len(content)
+            p = len([agent for agent in content if type(agent.specie) in self.preys])
+            d = len([agent for agent in content if type(agent.specie) in self.predators])
 
-        e = self.energy
+            e = self.energy
+            evaluation = (p * (1 - e / 100) ** 2 - d*(e / 100) ** 2) / t
 
-        evaluation = (p * (1 - e / 100) ** 2 - d(e / 100) ** 2) / t
+        except ZeroDivisionError as zd:
+            evaluation = 0
 
         return evaluation
 
@@ -55,8 +58,9 @@ class Agent(mesa.Agent):
                               7: (0, -1), 8: (1, -1)}
         for i in range(cells_number):
             pos_to_evaluate = tuple(map(operator.add, self.pos, relative_positions[i]))
-            features[i] = self.individual_cell_evaluation(*pos_to_evaluate)
-        return features  ##devuelve posiciones absolutas
+            pos_to_evaluate = map(lambda x: x%10, pos_to_evaluate)
+            features.append(self.individual_cell_evaluation(*pos_to_evaluate))
+        return features  
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(
@@ -89,7 +93,7 @@ class Agent(mesa.Agent):
             # self.specie.choice()
             self.move()
             self.eat()
-            # self.perceive()
+            self.perceive()
 
         else:
             self.model.grid.remove_agent(self)
