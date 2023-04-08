@@ -2,6 +2,39 @@ from Grid import Grid
 from ExtractInfo import ExtractInfo
 import argparse
 import random
+import os
+import pickle
+
+def model_save(folder, grid, WeightsInfo):
+    cur_path = os.path.dirname(__file__)
+    new_path_weights = os.path.relpath('./'+folder+'/qtable.pickle', cur_path)
+    new_path_grid = os.path.relpath('./'+folder+'/grid.pickle', cur_path)
+    os.makedirs(os.path.dirname(new_path_weights), exist_ok=True)
+
+    with open(new_path_weights, "wb") as f:
+        pickle.dump(WeightsInfo, f)
+    with open(new_path_grid, "wb") as f:
+        pickle.dump(grid, f)
+
+def model_load(folder):
+    cur_path = os.path.dirname(__file__)
+    new_path_weights = os.path.relpath('./'+folder+'/qtable.pickle', cur_path)
+    new_path_grid = os.path.relpath('./'+folder+'/grid.pickle', cur_path)
+    os.makedirs(os.path.dirname(new_path_weights), exist_ok=True)
+
+    with open(new_path_weights, "rb") as f:
+        WeightsInfo = pickle.load(f)
+    with open(new_path_grid, "rb") as f:
+        grid = pickle.load(f)
+
+    return grid, WeightsInfo
+
+
+# model_save(folder="savin_state", grid=grid, WeightsInfo=WeightsInfo)
+
+# grid, WeightsInfo = model_load(folder="savin_state")
+
+
 
 
 if __name__ == '__main__':
