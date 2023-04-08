@@ -121,7 +121,7 @@ class Agent(mesa.Agent):
             self.move(features)
             self.eat()
             #self.reproduce()
-            reward = self.specie.get_reward(features) # Mover al entorno para distinguir entre especies?
+            reward = self.specie.get_reward(features,self.energy) # Mover al entorno para distinguir entre especies?
             self.specie.feedback(self.pos, features, reward)
         else:
             # self.model.killed.append(self)
@@ -180,8 +180,10 @@ class IntelligentBehaviour():
         r = np.random.rand()
 
         if r < 1 - self.epsilon:
-            wanted_score = int(np.max(np.array(perceive_features)))
-            x_move,y_move = self.relative_positions[perceive_features.index(wanted_score)]
+            list_weights=self._convert_list_weights((x_position,y_position))
+            wanted_scores_array=(np.multiply(np.array(perceive_features),list_weights)).tolist()
+            wanted_score = int(np.max(wanted_scores_array))
+            x_move,y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
             x_move,y_move = x_move+x_position,y_move+y_position
             self.s = wanted_score
         else:
@@ -205,8 +207,10 @@ class IntelligentBehaviour():
         '''
         r = np.random.rand()
         if r < 1 - self.epsilon:
-            wanted_score = int(np.max(np.array(perceive_features)))
-            x_move,y_move = self.relative_positions[perceive_features.index(wanted_score)]
+            list_weights=self._convert_list_weights((x_position,y_position))
+            wanted_scores_array=(np.multiply(np.array(perceive_features),list_weights)).tolist()
+            wanted_score = int(np.max(wanted_scores_array))
+            x_move,y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
             self.s = wanted_score
         else:
             x_move = (x_position + np.random.randint(-1, 2) )
@@ -230,12 +234,14 @@ class IntelligentBehaviour():
         new_sight=self._change_sight(*pos, features)
         return  new_position,new_sight
 
-    def get_reward(self,features): 
+    def get_reward(self,features,energy): 
         """
         Función de recompensa. Todavía por definir. El comportamiento es temporal.
         Return: 
             -float valor de la función de recompensa
         """
+        # num_specie = []
+        # reward = x*num_specie+y*energy
         feature_wanted = features[0]
         opponent = feature_wanted
         reward = opponent*self.type_animal + 2*self.type_animal
