@@ -13,9 +13,9 @@ def agent_portrayal(agent):
     return portrayal
 
 
-grid = mesa.visualization.CanvasGrid(agent_portrayal, 10, 10, 500, 500)
+grid = mesa.visualization.CanvasGrid(agent_portrayal, 20, 20, 500, 500)
 server = mesa.visualization.ModularServer(
-    Ecosistem, [grid], "Ecosistem", {"N": 10, "width": 10, "height": 10}
+    Ecosistem, [grid], "Ecosistem", {"N": 20, "width": 20, "height": 20}
 )
 server.port = 8524  # The default
 server.verbose = False
