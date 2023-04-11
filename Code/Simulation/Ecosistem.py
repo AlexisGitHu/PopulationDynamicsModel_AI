@@ -9,7 +9,6 @@ learning_rate = 0.05
 class Ecosistem(mesa.Model):
     """A model with some number of agents."""
     learning_rate = 0.05
-    agentList = []  # list of agents. It will contain the id, position and agent type (0 = prey, 1= predator)
 
     def __init__(self, N, width, height):
         # type_animal, grid, exploration_rate, discount_factor, learning_rate,s,q
@@ -25,27 +24,35 @@ class Ecosistem(mesa.Model):
         self.reproduce = []
         self.agent_id = 0
 
+        self.agentList = []
+
         # Create agents
         for i in range(self.num_agents):
             if i % 2 == 0:
-                a = Agents.Agent(i, self, self.predator_behaviour, [self.prey_behaviour], [], "N", "red", "lobo.png", 0)
+                agent_type = 0
+                a = Agents.Agent(self.agent_id, self, self.predator_behaviour, [self.prey_behaviour], [], "N", "red",
+                                 "lobo.png", 100, agent_type)
             else:
-                a = Agents.Agent(i, self, self.prey_behaviour, [], [self.predator_behaviour], "N", "green", "conejo.png", 1)
+                agent_type = 1
+                a = Agents.Agent(self.agent_id, self, self.prey_behaviour, [], [self.predator_behaviour], "N", "green",
+                                 "conejo.png", 100, agent_type)
             self.schedule.add(a)
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             self.grid.place_agent(a, (x, y))
+            self.agentList.append([self.agent_id, (x, y), agent_type])
             a.direction = [x + 1, y]
             self.agent_id += 1
 
         for i in range(int(self.num_agents / 4)):
             a = Agents.Agent(self.agent_id, self, self.grass_behaviour, [], [self.prey_behaviour], [], "grey",
-                             "cesped.png", 2)
+                             "cesped.png", 20, 2)
             self.schedule.add(a)
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             self.grid.place_agent(a, (x, y))
+            self.agentList.append([self.agent_id, (x, y), 2])
             self.agent_id += 1
 
     def step(self):
@@ -53,32 +60,22 @@ class Ecosistem(mesa.Model):
         self.schedule.step()
         print("]}\n")
 
-        if random.randint(0, 4) == 1:
-            a = Agents.Agent(self.agent_id, self, self.grass_behaviour, [], [self.prey_behaviour], [], "grey",
-                             "cesped.png", 2)
-
-            self.schedule.add(a)
-            x = self.random.randrange(self.grid.width)
-            y = self.random.randrange(self.grid.height)
-            self.grid.place_agent(a, (x, y))
-            self.agent_id += 1
+        self.createGrass()
 
         for x in self.reproduce:
             if x[0] == 0:
                 a = Agents.Agent(self.agent_id, self, self.predator_behaviour, [self.prey_behaviour], [], [], "red",
-                                 "lobo.png", 0)
-
-                self.schedule.add(a)
-                self.grid.place_agent(a, (x[1][0], x[1][1]))
-                self.agent_id += 1
+                                 "lobo.png", 100, 0)
             else:
                 a = Agents.Agent(self.agent_id, self, self.prey_behaviour, [self.grass_behaviour],
                                  [self.predator_behaviour], [], "green",
-                                 "conejo.png", 1)
+                                 "conejo.png", 100, 1)
 
-                self.schedule.add(a)
-                self.grid.place_agent(a, (x[1][0], x[1][1]))
-                self.agent_id += 1
+            self.schedule.add(a)
+            self.grid.place_agent(a, (x[1][0], x[1][1]))
+            self.agentList.append([self.agent_id, (x[1][0], x[1][1]), x[0]])
+            self.agent_id += 1
+
         self.reproduce = []
 
         for x in self.killed:
@@ -88,3 +85,26 @@ class Ecosistem(mesa.Model):
             except:
                 pass
         self.killed = []
+
+    def createGrass(self):
+        preyAgents = [x for x in self.agentList if x[2] == 1]
+        grassAgents = [x for x in self.agentList if x[2] == 2]
+
+        if len(preyAgents) > len(grassAgents):
+            while grassAgents:
+                randomGrass = random.choice(grassAgents)
+                grassAgents.remove(randomGrass)
+
+                neighbors = self.grid.get_neighborhood(randomGrass[1], False)
+
+                while neighbors:
+                    cell = random.choice(neighbors)
+                    neighbors.remove(cell)
+                    if not self.grid.get_cell_list_contents(cell):
+                        a = Agents.Agent(self.agent_id, self, self.grass_behaviour, [], [self.prey_behaviour], [],
+                                         "grey", "cesped.png", 20, 2)
+                        self.schedule.add(a)
+                        self.grid.place_agent(a, cell)
+                        self.agentList.append([self.agent_id, cell, 2])
+                        self.agent_id += 1
+                        return
