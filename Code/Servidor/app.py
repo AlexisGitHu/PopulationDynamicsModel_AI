@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, make_response
 import os
 import subprocess
 import asyncio
@@ -88,10 +88,11 @@ def lectura_datos_mesa(process, id):
             continue
 
         if not linea_limpia:
-            break
+            continue
         
         ## Quitamos la última coma del último elemento para poder parsear el string a json con json.loads
         linea_limpia = linea_limpia[::-1].replace(",","",1)[::-1]
+        # print(linea_limpia)
 
         try:
             datosMesa[id].append(json.loads(linea_limpia))
@@ -193,6 +194,51 @@ def prueba_json(id):
         return jsonify(datos[id])
     else:
         return jsonify([])
+
+@app.route("/get_graph_data")
+def get_graph_data():
+    datos_nuevos = None
+    # print(datosMesa)
+    if "1" in datosMesa:
+        datos_nuevos = datosMesa["1"]
+        datos["1"] = []
+    else:
+        datos_nuevos = []
+    
+
+    step = 0
+    cont_lobos = 0
+    cont_conejos = 0
+    steps = []
+    contadores = []
+
+    for i in datos_nuevos:
+        step = i["Step"]
+        info = i["info"]
+
+        steps.append(step)
+
+        for j in info:
+            if "lobo.png" in j.values():
+                cont_lobos += 1
+            elif "conejo.png" in j.values():
+                cont_conejos += 1
+        
+        contadores.append((cont_lobos, cont_conejos))
+        cont_lobos = 0
+        cont_conejos = 0
+
+    datos_validos = [steps, contadores]
+
+    response = make_response(json.dumps(datos_validos))
+
+    response.content_type = "application/json"
+
+    return response
+
+@app.route("/graph_data")
+def graph_data():
+    return render_template('grafica.html')
 
 @app.route("/datos_nuevos/<id>")
 def f_datos_nuevos(id):
