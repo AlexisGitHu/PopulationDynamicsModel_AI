@@ -366,34 +366,13 @@ class IntelligentBehaviour():
 
 
 class DumbBehaviour():
-    def __init__(self, type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q):
+    def __init__(self):
         '''
         Clase que modela el comportamiento inteligente de una especie mendiante aprendizaje por refuerzo.
-
         Params:
-            -type_animal::int Atributo temporal por compatibilidad con la version anterior
-            -grid::tuple(int,int) Dimensiones del entorno en el que actuan los agentes
-            -exploration_rate::float Probabilidad de elegir una acción aún no explorada. Valores entre [0,1]
-            -discount_factor:: ???
-            -learning_rate::float Tasa de aprendizaje
-            -s:: ???
-            -q:: ???
-        Raises:
-            -ValueError: la probabilidad de exploración debe estar contenida en el intervalo [0,1]
         '''
+        pass
 
-        if exploration_rate < 0 or exploration_rate > 1:
-            raise ValueError("La probabilidad de exploración debe estar contenida en el intervalo [0,1]")
-
-        self.type_animal = type_animal
-        self.epsilon = exploration_rate
-        self.weight_matrix = [[0 for i in range(grid[0])] for j in range(grid[1])]  # Posible mejora de arquitectura
-        self.s = s
-        self.q = q
-        self.discount_factor = discount_factor
-        self.learning_rate = learning_rate
-        self.relative_positions = {0: (-1, 1), 1: (0, 1), 2: (1, 1), 3: (-1, 0), 4: (0, 0), 5: (1, 0), 6: (-1, -1),
-                                   7: (0, -1), 8: (1, -1)}
 
     def make_choice(self, features, pos):
         '''
