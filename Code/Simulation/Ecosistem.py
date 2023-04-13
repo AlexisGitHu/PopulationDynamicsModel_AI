@@ -34,7 +34,7 @@ class Ecosistem(mesa.Model):
                                  "lobo.png", 100, agent_type)
             else:
                 agent_type = 1
-                a = Agents.Agent(self.agent_id, self, self.prey_behaviour, [], [self.predator_behaviour], "N", "green",
+                a = Agents.Agent(self.agent_id, self, self.prey_behaviour, [self.grass_behaviour], [self.predator_behaviour], "N", "green",
                                  "conejo.png", 100, agent_type)
             self.schedule.add(a)
             # Add the agent to a random grid cell
