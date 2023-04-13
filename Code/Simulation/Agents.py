@@ -249,30 +249,39 @@ class IntelligentBehaviour():
         coeff_modifier_near_ally=0
         coeff_modifier_energy=0
 
+        num_allies=0
+        num_enemies=0
+        num_grass=0
+
         cellmates=model.grid.get_cell_list_contents([pos])
         prey_type=-1
         predator_type=1
-        num_total_preys=len([1 for agent in model.agentList if agent[2] == 0])
-        num_total_predators=len([1 for agent in model.agentList if agent[2] == 1])
-        num_allies = len([agent for agent in cellmates if agent.specie.type_animal == self.type_animal])
-        num_enemies= len([agent for agent in cellmates if agent.specie.type_animal != self.type_animal])
+        num_total_species=[]
+        agent_types=[]
+        for agent in model.agent_collection:
+            num_total_species.append(len(model.agent_collection[agent]))
+            agent_types.append(agent)
+
+        num_allies = len([0 for agent in cellmates if agent.specie == self])
+        num_enemies= len([0 for agent in cellmates if agent.specie == agent_types[1]])
+
         if self.type_animal==prey_type:
             if(num_enemies>0):
-                coeff_modifier_near_enemy=-num_enemies/num_total_predators
+                coeff_modifier_near_enemy=-num_enemies/num_total_species[1]
             else:
                 coeff_modifier_near_enemy=1
 
             if(num_allies>0):
-                coeff_modifier_near_ally=num_allies/num_total_preys * 0.3
+                coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
             else:
                 coeff_modifier_near_ally=-0.3
         elif self.type_animal==predator_type:
             if(num_enemies>0):
-                coeff_modifier_near_enemy=num_enemies/num_total_preys
+                coeff_modifier_near_enemy=num_enemies/num_total_species[0]
             else:
                 coeff_modifier_near_enemy=-1
             if(num_allies>0):
-                coeff_modifier_near_ally=num_allies/num_total_preys * 0.3
+                coeff_modifier_near_ally=num_allies/num_total_species[1] * 0.3
             else:
                 coeff_modifier_near_ally=-0.3
         
