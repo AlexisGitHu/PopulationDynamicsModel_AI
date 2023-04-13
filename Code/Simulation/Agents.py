@@ -84,10 +84,9 @@ class Agent(mesa.Agent):
             -features::float[][] matriz de riesgos
         '''
         new_position, new_sight = self.specie.make_choice(features, self.pos)
-
-        self.energy -= 1
-
-        self.model.grid.move_agent(self, new_position)
+        if new_position != self.pos:
+            self.energy -= 1
+            self.model.grid.move_agent(self, new_position)
 
     def eat(self):
         '''
@@ -408,7 +407,7 @@ class DumbBehaviour():
             -tuple(int,int) próxima visión (?)
         '''
 
-        return self.pos,None
+        return pos,None
 
     def get_reward(self, energy,model,pos,preys,predators):
         """
