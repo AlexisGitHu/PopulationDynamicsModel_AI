@@ -124,7 +124,7 @@ class Agent(mesa.Agent):
             self.move(features)
             self.eat()
             self.reproduce()
-            reward = self.specie.get_reward(features, self.energy)  # Mover al entorno para distinguir entre especies?
+            reward = self.specie.get_reward( self.energy,self.model,self.pos,self.preys,self.predators)  # Mover al entorno para distinguir entre especies?
             self.specie.feedback(self.pos, features, reward)
         else:
             self.model.killed.append(self)
@@ -184,8 +184,8 @@ class IntelligentBehaviour():
 
         if r < 1 - self.epsilon:
             list_weights = self._convert_list_weights((x_position, y_position))
-            wanted_scores_array = (np.multiply(np.array(perceive_features), list_weights)).tolist()
-            wanted_score = int(np.max(wanted_scores_array))
+            wanted_scores_array = list_weights #(np.multiply(np.array(perceive_features), list_weights)).tolist()
+            wanted_score = np.max(wanted_scores_array)
             x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
             x_move, y_move = x_move + x_position, y_move + y_position
             self.s = wanted_score
@@ -211,8 +211,8 @@ class IntelligentBehaviour():
         r = np.random.rand()
         if r < 1 - self.epsilon:
             list_weights = self._convert_list_weights((x_position, y_position))
-            wanted_scores_array = (np.multiply(np.array(perceive_features), list_weights)).tolist()
-            wanted_score = int(np.max(wanted_scores_array))
+            wanted_scores_array = list_weights 
+            wanted_score = np.max(wanted_scores_array)
             x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
             self.s = wanted_score
         else:
@@ -237,7 +237,7 @@ class IntelligentBehaviour():
         new_sight = self._change_sight(*pos, features)
         return new_position, new_sight
 
-    def get_reward(self, features, energy):
+    def get_reward(self, energy,model,pos,preys,predators):
         """
         Función de recompensa. Todavía por definir. El comportamiento es temporal.
         Return: 
@@ -245,9 +245,50 @@ class IntelligentBehaviour():
         """
         # num_specie = []
         # reward = x*num_specie+y*energy
-        feature_wanted = features[0]
-        opponent = feature_wanted
-        reward = opponent * self.type_animal + 2 * self.type_animal
+        #preyAgents=[x for x in self.agentList if x[2] == 1]
+
+        coeff_modifier_near_enemy=0
+        coeff_modifier_near_ally=0
+        coeff_modifier_energy=0
+
+        cellmates=model.grid.get_cell_list_contents([pos])
+        prey_type=-1
+        predator_type=1
+        num_total_preys=len([1 for agent in model.agentList if agent[2] == 0])
+        num_total_predators=len([1 for agent in model.agentList if agent[2] == 1])
+        num_allies = len([agent for agent in cellmates if agent.specie.type_animal == self.type_animal])
+        num_enemies= len([agent for agent in cellmates if agent.specie.type_animal != self.type_animal])
+        if self.type_animal==prey_type:
+            if(num_enemies>0):
+                coeff_modifier_near_enemy=-num_enemies/num_total_predators
+            else:
+                coeff_modifier_near_enemy=1
+
+            if(num_allies>0):
+                coeff_modifier_near_ally=num_allies/num_total_preys * 0.3
+            else:
+                coeff_modifier_near_ally=-0.3
+        elif self.type_animal==predator_type:
+            if(num_enemies>0):
+                coeff_modifier_near_enemy=num_enemies/num_total_preys
+            else:
+                coeff_modifier_near_enemy=-1
+            if(num_allies>0):
+                coeff_modifier_near_ally=num_allies/num_total_preys * 0.3
+            else:
+                coeff_modifier_near_ally=-0.3
+        
+        if(energy < 50):
+            if(energy < 20):
+                coeff_modifier_energy=-3*energy/100
+            else:
+                coeff_modifier_energy=-energy/100
+        else:
+            coeff_modifier_energy=energy/100
+
+
+        
+        reward = (coeff_modifier_near_ally+coeff_modifier_near_enemy+coeff_modifier_energy)/3
 
         return reward
 
@@ -424,17 +465,60 @@ class DumbBehaviour():
 
         return None, None
 
-    def get_reward(self, features, energy):
+    def get_reward(self, energy,model,pos,preys,predators):
         """
         Función de recompensa. Todavía por definir. El comportamiento es temporal.
-        Return:
+        Return: 
             -float valor de la función de recompensa
         """
         # num_specie = []
         # reward = x*num_specie+y*energy
-        feature_wanted = features[0]
-        opponent = feature_wanted
-        reward = opponent * self.type_animal + 2 * self.type_animal
+        #preyAgents=[x for x in self.agentList if x[2] == 1]
+
+        coeff_modifier_near_enemy=0
+        coeff_modifier_near_ally=0
+        coeff_modifier_energy=0
+
+        cellmates=model.grid.get_cell_list_contents([pos])
+        prey_type=-1
+        predator_type=1
+        num_total_preys=len([1 for agent in model.agentList if agent[2] == 0])
+        num_total_predators=len([1 for agent in model.agentList if agent[2] == 1])
+        print(num_total_preys)
+        print(num_total_predators)
+        num_allies = len([agent for agent in cellmates if agent.specie.type_animal == self.type_animal])
+        num_enemies= len([agent for agent in cellmates if agent.specie.type_animal != self.type_animal])
+        if self.type_animal==prey_type:
+            if(num_enemies>0):
+                coeff_modifier_near_enemy=-num_enemies/num_total_predators
+            else:
+                coeff_modifier_near_enemy=1
+
+            if(num_allies>0):
+                coeff_modifier_near_ally=num_allies/num_total_preys * 0.3
+            else:
+                coeff_modifier_near_ally=-0.3
+        elif self.type_animal==predator_type:
+            if(num_enemies>0):
+                coeff_modifier_near_enemy=num_enemies/num_total_preys
+            else:
+                coeff_modifier_near_enemy=-1
+            if(num_allies>0):
+                coeff_modifier_near_ally=num_allies/num_total_preys * 0.3
+            else:
+                coeff_modifier_near_ally=-0.3
+        
+        if(energy < 50):
+            if(energy < 20):
+                coeff_modifier_energy=-3*energy/100
+            else:
+                coeff_modifier_energy=-energy/100
+        else:
+            coeff_modifier_energy=energy/100
+
+
+        
+        reward = (coeff_modifier_near_ally+coeff_modifier_near_enemy+coeff_modifier_energy)/3
 
         return reward
 
