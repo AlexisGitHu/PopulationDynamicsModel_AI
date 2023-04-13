@@ -75,21 +75,21 @@ class Ecosistem(mesa.Model):
 
         self.createGrass()
 
-        for x in self.reproduce:
-            if x[0] == 0:
-                a = Agents.Agent(self.next_agent_id, self, self.predator_behaviour, [self.prey_behaviour], [], [], "red",
-                                 "lobo.png", 100, 0)
-            else:
-                a = Agents.Agent(self.next_agent_id, self, self.prey_behaviour, [self.grass_behaviour],
-                                 [self.predator_behaviour], [], "green",
-                                 "conejo.png", 100, 1)
+        # for x in self.reproduce:
+        #     if x[0] == 0:
+        #         a = Agents.Agent(self.next_agent_id, self, self.predator_behaviour, [self.prey_behaviour], [], [], "red",
+        #                          "lobo.png", 100, 0)
+        #     else:
+        #         a = Agents.Agent(self.next_agent_id, self, self.prey_behaviour, [self.grass_behaviour],
+        #                          [self.predator_behaviour], [], "green",
+        #                          "conejo.png", 100, 1)
 
-            self.schedule.add(a)
-            self.grid.place_agent(a, (x[1][0], x[1][1]))
-            self.agentList.append([self.next_agent_id, (x[1][0], x[1][1]), x[0]])
-            self.next_agent_id += 1
+        #     self.schedule.add(a)
+        #     self.grid.place_agent(a, (x[1][0], x[1][1]))
+        #     self.agentList.append([self.next_agent_id, (x[1][0], x[1][1]), x[0]])
+        #     self.next_agent_id += 1
 
-        self.reproduce = []
+        # self.reproduce = []
 
         for x in self.killed:
             try:

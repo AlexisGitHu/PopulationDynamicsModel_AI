@@ -122,7 +122,7 @@ class Agent(mesa.Agent):
             self.move(features)
             self.eat()
             self.reproduce()
-            reward = self.specie.get_reward( self.energy,self.model,self.pos,self.preys,self.predators)  # Mover al entorno para distinguir entre especies?
+            reward = self.specie.get_reward( self.energy,self.model,self.pos,self.predators)  # Mover al entorno para distinguir entre especies?
             self.specie.feedback(self.pos, features, reward)
         else:
             self.model.killed.append(self)
@@ -235,7 +235,7 @@ class IntelligentBehaviour():
         new_sight = self._change_sight(*pos, features)
         return new_position, new_sight
 
-    def get_reward(self, energy,model,pos,preys,predators):
+    def get_reward(self, energy,model,pos,predators):
         """
         Función de recompensa. Todavía por definir. El comportamiento es temporal.
         Return: 
@@ -257,13 +257,11 @@ class IntelligentBehaviour():
         prey_type=-1
         predator_type=1
         num_total_species=[]
-        agent_types=[]
         for agent in model.agent_collection:
             num_total_species.append(len(model.agent_collection[agent]))
-            agent_types.append(agent)
 
         num_allies = len([0 for agent in cellmates if agent.specie == self])
-        num_enemies= len([0 for agent in cellmates if agent.specie == agent_types[1]])
+        num_enemies= len([0 for agent in cellmates if agent.specie == predators])
 
         if self.type_animal==prey_type:
             if(num_enemies>0):
@@ -397,7 +395,7 @@ class DumbBehaviour():
 
         return pos,None
 
-    def get_reward(self, energy,model,pos,preys,predators):
+    def get_reward(self, energy,model,pos,predators):
         """
         Función de recompensa. Todavía por definir. El comportamiento es temporal.
         Return: 
