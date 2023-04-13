@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, current_app, flash
+from flask import Blueprint, current_app, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 # from sqlalchemy.orm import relationship
@@ -103,3 +103,8 @@ def modulo_bbdd_create_user():
     prueba = create_user()
 
     return prueba
+
+@modulo_bbdd.route('/modulo_bbdd/template')
+def modulo_bbdd_template():
+
+    return render_template("index.html")

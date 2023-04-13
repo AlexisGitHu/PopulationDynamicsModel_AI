@@ -21,8 +21,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 with app.app_context():
     from Servidor.modulo_bbdd.modulo_bbdd import *
+    from Servidor.modulo_login.modulo_login import *
 
 app.register_blueprint(modulo_bbdd)
+app.register_blueprint(modulo_login)
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}?auth_plugin=mysql_native_password".format(
