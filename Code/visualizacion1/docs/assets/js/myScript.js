@@ -69,40 +69,230 @@ window.onload = function() {
     var conejos = [];
     var contLobo=0;
     var contConejo=0;
+    var id = [];
+    var lista = [];
+    var dict = {};
+    var vector
     function ajaxCall() {
         var request = $.ajax({
             type: 'GET',
-            url: 'http://localhost:5000/muestra/mesa/1',
+            url: 'http://localhost:5000/visualizar',
             success: function(data) {
-                for(var i =0;i<data[0].info.length;i++){
-                    if(data[0].info[i].Sprite == "lobo.png"){
-                        eval('var lobo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
-                    }else if(data[0].info[i].Sprite == "conejo.png"){
-                        eval('var conejo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
+                var j = 0;
+                for(var i=0;i<data[j].info.length;i++){
+                    console.log(data[j].info[i].ID);
+                    if(data[j].info[i].Sprite == "lobo.png"){
+                        var animal = "lobo";
+                    }else if(data[j].info[i].Sprite == "conejo.png"){
+                        var animal = "conejo";
+                    }
+                    if(!id.includes(data[j].info[i].ID)){
+                        console.log("crea animal nuevo");
+                        destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                        eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center});');                                
+                        dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
+                        id.push(data[j].info[i].ID);
                     }
                 }
-                console.log(data[0].info[0].Position[0]);
-                visualizar(lobo0,conejo1,lobo2,data.length);
-                /*console.log(data.length);
-                for(var j=0;j<data.length;j++){
+                console.log(dict);
+                let inicio = document.getElementById("inicio");
+                inicio.onclick = iniciar;
+                function iniciar(evento,) {
+                    j++;
+                    console.log("iniciar" + j);
 
-                    //HACER QUE DIFERENCIE ENTRE UN STEP Y EL SIGUIENTE PARA MOVER A OTRO SITIO
                     for(var i=0;i<data[j].info.length;i++){
+                        console.log(data[j].info[i].ID);
                         if(data[j].info[i].Sprite == "lobo.png"){
-                            console.log("entra lobo");
-                            lobos.push(data[0].info[i]);
-                            contLobo++;
+                            var animal = "lobo";
                         }else if(data[j].info[i].Sprite == "conejo.png"){
-                            console.log("entra conejo");
-                            conejos.push(data[0].info[i]);
-                            contConejo++;
+                            var animal = "conejo";
+                        }
+                        if(!id.includes(data[j].info[i].ID)){
+                            console.log("crea animal nuevo");
+                            destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                            eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center});');                                
+                            dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
+                            id.push(data[j].info[i].ID);
                         }
                     }
+                    var destination;
+                    
+                    /*
+                    for(var i=0;i<data[j].info.length;i++){
+                        console.log(data[j].info[i].ID);
+                        if(data[j].info[i].Sprite == "lobo.png"){
+                            var animal = "lobo";
+                        }else if(data[j].info[i].Sprite == "conejo.png"){
+                            var animal = "conejo";
+                        }
+                        if(!id.includes(data[j].info[i].ID)){
+                            console.log("crea animal nuevo");
+                            destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                            eval('var ' + animal + data[j].info[i].ID + '= [new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center}),'+destination+'];');                                
+                            prueba = 7;
+                            id.push(data[j].info[i].ID);
+                        }
+                    }*/
+                    view.onFrame = function(event){
+                        //for(var j=0;j<=5;j++){
+                        
+                        for(var i=0;i<data[j].info.length;i++){
+                            console.log(data[j].info[i].ID);
+                            if(data[j].info[i].Sprite == "lobo.png"){
+                                var animal = "lobo";
+                            }else if(data[j].info[i].Sprite == "conejo.png"){
+                                var animal = "conejo";
+                            }
+                            
+                            if(id.includes(data[j].info[i].ID)){ 
+                                destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                                console.log("mueve posicion");
+                                //eval(''+animal + data[j].info[i].ID+'')[0].position = destination;
+                                vector = destination.subtract(dict[animal + data[j].info[i].ID].position);
+                                dict[animal + data[j].info[i].ID].position = dict[animal + data[j].info[i].ID].position.add(vector.divide(5*40));
+                                dict[animal + data[j].info[i].ID].content = Math.round(vector.length);
+                                
+                                /*eval(animal + data[j].info[i].ID)[1] = destination;
+                                console.log("ya existe");
+                                vector = eval(animal + data[j].info[i].ID)[1].subtract(eval(animal + data[j].info[i].ID)[0].position);
+                                eval(animal + data[j].info[i].ID)[0].position = eval(animal + data[j].info[i].ID)[0].position.add(vector.divide(5*40));
+                                eval(animal + data[j].info[i].ID)[0].content = Math.round(vector.length);*/
+                                /*if(data[j].info[i].Sprite == "lobo.png"){
+                                    var destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                                    eval('lobo' + data[j].info[i].ID)[1] = destination;
+                                    console.log("ya existe");
+                                    vector = eval('lobo' + data[j].info[i].ID)[1].subtract(eval('lobo' + data[j].info[i].ID)[0].position);
+                                    eval('lobo' + data[j].info[i].ID)[0].position = eval('lobo' + data[j].info[i].ID)[0].position.add(vector.divide(5*40));
+                                    eval('lobo' + data[j].info[i].ID)[0].content = Math.round(vector.length);
+                                    //vector = destination.subtract(eval('lobo' + data[j].info[i].ID).position);
+                                    //eval('lobo' + data[j].info[i].ID).position = eval('lobo' + data[j].info[i].ID).position.add(vector.divide(data[j].info.length*40));
+                                } else if(data[j].info[i].Sprite == "conejo.png"){
+                                    var destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                                    eval('conejo' + data[j].info[i].ID)[1] = destination;
+                                    console.log("ya existe");
+                                    //vector = destination.subtract(eval('conejo' + data[j].info[i].ID).position);
+                                    //eval('conejo' + data[j].info[i].ID).position = eval('conejo' + data[j].info[i].ID).position.add(vector.divide(data[j].info.length*40));
+                                    //eval('conejo' + data[j].info[i].ID).content = Math.round(vector.length);
+                                }*/  
+                            }/*else{
+                                console.log("crea animal nuevo");
+                                destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                                eval('var ' + animal + data[j].info[i].ID + '= [new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center}),'+destination+'];');                                
+                                prueba = 7;*/
+                                //eval('var '+ String(animal + data[j].info[i].ID) + '=3;' );
+                                //var temp = (eval(''+animal + data[j].info[i].ID+''))[1];
+                                //console.log(temp.subtract(4));
+                                //vector = destination.subtract((eval(''+animal + data[j].info[i].ID+''))[0].position);
+                                //vector = (eval(''+animal + data[j].info[i].ID+''))[1].subtract((eval(''+animal + data[j].info[i].ID+''))[0].position);
+                                //eval(animal + data[j].info[i].ID)[0].position = eval(animal + data[j].info[i].ID)[0].position.add(vector.divide(5*40));
+                                //eval(animal + data[j].info[i].ID)[0].content = Math.round(vector.length);
+                                /*if(data[j].info[i].Sprite == "lobo.png"){
+                                    var destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                                    eval('var lobo' + data[j].info[i].ID + '= [new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center}),'+destination+'];');                                
+                                    console.log("prueba");
+                                    console.log(lobo0[1]);
+                                    vector = eval('lobo' + data[j].info[i].ID)[1].subtract(eval('lobo' + data[j].info[i].ID)[0].position);
+                                    eval('lobo' + data[j].info[i].ID)[0].position = eval('lobo' + data[j].info[i].ID)[0].position.add(vector.divide(5*40));
+                                    eval('lobo' + data[j].info[i].ID)[0].content = Math.round(vector.length);
+                                    //vector = destination.subtract(eval('lobo' + data[j].info[i].ID).position);
+                                    //eval('lobo' + data[j].info[i].ID).position = eval('lobo' + data[j].info[i].ID).position.add(vector.divide(data[j].info.length*40));
+                                    //eval('lobo' + data[j].info[i].ID).content = Math.round(vector.length);
+                                }else if(data[j].info[i].Sprite == "conejo.png"){
+                                    var destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
+                                    eval('var conejo' + data[j].info[i].ID + '= [new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center}),'+destination+'];');
+                                    
+                                    console.log(destination);
+                                    //vector = destination.subtract(eval('conejo' + data[j].info[i].ID).position);
+                                    //eval('conejo' + data[j].info[i].ID).position = eval('conejo' + data[j].info[i].ID).position.add(vector.divide(data[j].info.length*40));
+                                    //eval('conejo' + data[j].info[i].ID).content = Math.round(vector.length);
+                                }*/
+                                
+                            
+                            
 
-                    console.log(lobos);
-                    console.log(conejos);
-                    crear(lobos,contLobo,conejos,contConejo);
-                }*/
+                           
+                           console.log("acaba un info");
+                           /*view.onFrame = function(event){
+                                for(var i=0;i<id.length;i++){
+                                    
+                                    if(id[i] % 2 == 0){
+                                        console.log(id[i]);
+                                        vector = eval('lobo' + id[i])[1].subtract(eval('lobo' + id[i])[0].position);
+                                        eval('lobo' + id[i])[0].position = eval('lobo' + id[i])[0].position.add(vector.divide(5*40));
+                                        eval('lobo' + id[i])[0].content = Math.round(vector.length);
+                                    }
+                                    if(id[i] % 2 != 0){
+                                        console.log(id[i]);
+                                        vector = eval('conejo' + id[i])[1].subtract(eval('conejo' + id[i])[0].position);
+                                        eval('conejo' + id[i])[0].position = eval('conejo' + id[i])[0].position.add(vector.divide(5*40));
+                                        eval('conejo' + id[i])[0].content = Math.round(vector.length);
+                                    }
+                                }
+
+                                //view.onFrame = null;
+    */
+                        }
+                            
+                    };
+                           
+                    //}
+                        console.log(id);
+                        /*
+                            var vector
+                            var vector1
+                            for (var i =0;i < longitud;i++){
+                                vector = destination.subtract(lobo0.position);
+                                lobo0.position = lobo0.position.add(vector.divide(longitud*40));
+                                lobo0.content = Math.round(vector.length);
+
+                                vector1 = destination1.subtract(conejo1.position);
+                                conejo1.position = conejo1.position.add(vector1.divide(longitud*40));
+                                conejo1.content = Math.round(vector1.length);
+                                
+                                if (vector.length < lobos.length) {
+                                    
+                                    destination = new Point(x[i],y[i]);
+                                }
+                                if (vector1.length < conejos.length) {
+                                
+                                    destination1 = new Point(x1[i],y1[i]);
+                                }
+                            }*/
+                        
+                        
+                        /*
+                        for(var i =0;i<data[0].info.length;i++){
+                            if(data[0].info[i].Sprite == "lobo.png"){
+                                eval('var lobo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
+                            }else if(data[0].info[i].Sprite == "conejo.png"){
+                                eval('var conejo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
+                            }
+                        }
+                        console.log(data[0].info[0].Position[0]);
+                        visualizar(lobo0,conejo1,lobo2,data.length);
+                        console.log(data.length);
+                        for(var j=0;j<data.length;j++){
+
+                            //HACER QUE DIFERENCIE ENTRE UN STEP Y EL SIGUIENTE PARA MOVER A OTRO SITIO
+                            for(var i=0;i<data[j].info.length;i++){
+                                if(data[j].info[i].Sprite == "lobo.png"){
+                                    console.log("entra lobo");
+                                    lobos.push(data[0].info[i]);
+                                    contLobo++;
+                                }else if(data[j].info[i].Sprite == "conejo.png"){
+                                    console.log("entra conejo");
+                                    conejos.push(data[0].info[i]);
+                                    contConejo++;
+                                }
+                            }
+
+                            console.log(lobos);
+                            console.log(conejos);
+                            crear(lobos,contLobo,conejos,contConejo);
+                        }*/
+                    //};
+                }
             }
         })
     }
