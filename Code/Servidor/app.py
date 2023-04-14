@@ -8,12 +8,14 @@ import json
 import re
 from flask import jsonify
 from flask_cors import CORS, cross_origin
+from flask_bootstrap import Bootstrap
 
 # loop = asyncio.get_event_loop()
 # db = SQLAlchemy()
 
 app = Flask(__name__)
 CORS(app)
+bootstrap = Bootstrap(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database/prueba.db"
 app.config['SECRET_KEY'] = '37utopisdr jt ñçã3q0r9irjqwasdaADFSADF3q0r9irjqw'

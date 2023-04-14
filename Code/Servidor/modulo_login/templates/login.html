@@ -1,0 +1,25 @@
+
+{% if form %}
+    {% import "bootstrap/wtf.html" as wtf %}
+{% endif %}
+
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+
+   {% if form %}
+   <form method = "POST" action="{{ url_for('modulo_login.login') }}">
+    <p>
+       {{ form.csrf_token }}
+       {{ wtf.form_field(form.username_or_email) }}
+       {{ wtf.form_field(form.password) }}
+       {{ wtf.form_field(form.remember) }}
+       <button class="btn btn-lg btn-primary btn-block" type="submit"> Search </button>
+   
+    </p>
+    </form>
+    {% endif %}
+
+
+{% endblock %}

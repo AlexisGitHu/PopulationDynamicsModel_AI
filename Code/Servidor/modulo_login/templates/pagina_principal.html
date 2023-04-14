@@ -1,0 +1,9 @@
+{% block content %}
+    <div class="container">
+        <h1>pagina principal</h1>
+    </div>
+    <form action="{{ url_for('modulo_bbdd.mostrar_user') }}">
+        <button class="btn btn-lg btn-primary btn-block" type="submit"> USER </button>
+    </form>
+
+{% endblock %}
