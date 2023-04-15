@@ -31,7 +31,7 @@ class Agent(mesa.Agent):
     def __init__(self, unique_id, model, specie, preys, predators, direction, color, sprite, energy, isBasic = False):
         super().__init__(unique_id, model)
         self.max_energy = energy
-        self.energy = energy/5
+        self.energy = energy/2
         self.specie = specie
         self.preys = preys
         self.predators = predators
@@ -124,8 +124,8 @@ class Agent(mesa.Agent):
                 self.move(features)
                 self.eat()
                 self.reproduce()
-                # reward = self.model.give_reward(self)
-                reward = self.specie.get_reward( self.energy,self.model,self.pos,self.predators)  # Mover al entorno para distinguir entre especies?
+                reward = self.model.give_reward(self)
+                #reward = self.model.get_reward(self)  # Mover al entorno para distinguir entre especies?
                 self.specie.feedback(self.pos, features, reward)
             else:
                 self.model.killed.append(self)
@@ -239,67 +239,67 @@ class IntelligentBehaviour():
         return new_position#, new_sight
     
 
-    def get_reward(self, energy,model,pos,predators):
-        """
-        Función de recompensa. Todavía por definir. El comportamiento es temporal.
-        Return: 
-            -float valor de la función de recompensa
-        """
-        # num_specie = []
-        # reward = x*num_specie+y*energy
-        #preyAgents=[x for x in self.agentList if x[2] == 1]
+    # def get_reward(self, energy,model,pos,predators):
+    #     """
+    #     Función de recompensa. Todavía por definir. El comportamiento es temporal.
+    #     Return: 
+    #         -float valor de la función de recompensa
+    #     """
+    #     # num_specie = []
+    #     # reward = x*num_specie+y*energy
+    #     #preyAgents=[x for x in self.agentList if x[2] == 1]
 
-        coeff_modifier_near_enemy=0
-        coeff_modifier_near_ally=0
-        coeff_modifier_energy=0
+    #     coeff_modifier_near_enemy=0
+    #     coeff_modifier_near_ally=0
+    #     coeff_modifier_energy=0
 
-        num_allies=0
-        num_enemies=0
-        num_grass=0
+    #     num_allies=0
+    #     num_enemies=0
+    #     num_grass=0
 
-        cellmates=model.grid.get_cell_list_contents([pos])
-        prey_type=-1
-        predator_type=1
-        num_total_species=[]
-        for agent in model.agent_collection:
-            num_total_species.append(len(model.agent_collection[agent]))
+    #     cellmates=model.grid.get_cell_list_contents([pos])
+    #     prey_type=-1
+    #     predator_type=1
+    #     num_total_species=[]
+    #     for agent in model.agent_collection:
+    #         num_total_species.append(len(model.agent_collection[agent]))
 
-        num_allies = len([0 for agent in cellmates if agent.specie == self])
-        num_enemies= len([0 for agent in cellmates if agent.specie == predators])
+    #     num_allies = len([0 for agent in cellmates if agent.specie == self])
+    #     num_enemies= len([0 for agent in cellmates if agent.specie == predators])
 
-        if self.type_animal==prey_type:
-            if(num_enemies>0):
-                coeff_modifier_near_enemy=-num_enemies/num_total_species[1]
-            else:
-                coeff_modifier_near_enemy=1
+    #     if self.type_animal==prey_type:
+    #         if(num_enemies>0):
+    #             coeff_modifier_near_enemy=-num_enemies/num_total_species[1]
+    #         else:
+    #             coeff_modifier_near_enemy=1
 
-            if(num_allies>0):
-                coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
-            else:
-                coeff_modifier_near_ally=-0.3
-        elif self.type_animal==predator_type:
-            if(num_enemies>0):
-                coeff_modifier_near_enemy=num_enemies/num_total_species[0]
-            else:
-                coeff_modifier_near_enemy=-1
-            if(num_allies>0):
-                coeff_modifier_near_ally=num_allies/num_total_species[1] * 0.3
-            else:
-                coeff_modifier_near_ally=-0.3
+    #         if(num_allies>0):
+    #             coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
+    #         else:
+    #             coeff_modifier_near_ally=-0.3
+    #     elif self.type_animal==predator_type:
+    #         if(num_enemies>0):
+    #             coeff_modifier_near_enemy=num_enemies/num_total_species[0]
+    #         else:
+    #             coeff_modifier_near_enemy=-1
+    #         if(num_allies>0):
+    #             coeff_modifier_near_ally=num_allies/num_total_species[1] * 0.3
+    #         else:
+    #             coeff_modifier_near_ally=-0.3
         
-        if(energy < 50):
-            if(energy < 20):
-                coeff_modifier_energy=-3*energy/100
-            else:
-                coeff_modifier_energy=-energy/100
-        else:
-            coeff_modifier_energy=energy/100
+    #     if(energy < 50):
+    #         if(energy < 20):
+    #             coeff_modifier_energy=-3*energy/100
+    #         else:
+    #             coeff_modifier_energy=-energy/100
+    #     else:
+    #         coeff_modifier_energy=energy/100
 
 
         
-        reward = (coeff_modifier_near_ally+coeff_modifier_near_enemy+coeff_modifier_energy)/3
+    #     reward = (coeff_modifier_near_ally+coeff_modifier_near_enemy+coeff_modifier_energy)/3
 
-        return reward
+    #     return reward
 
     def feedback(self, pos, features, reward):
         '''
@@ -340,8 +340,8 @@ class IntelligentBehaviour():
         # TODO Documentar
         # con la coordenadas que voy a pasarle, necesito coger la submatriz de self.weights
         # hacer producto escalar entre features y self.weights.
-        height = len(self.weight_matrix)
-        width = len(self.weight_matrix[0])
+        # height = len(self.weight_matrix)
+        # width = len(self.weight_matrix[0])
         learning_rate = self.learning_rate
         discount_factor = self.discount_factor
 
@@ -354,16 +354,16 @@ class IntelligentBehaviour():
         # Update the weights:
         Q_prime_max = max(Q_prime)
         for i in range(0, len(list_weights)):
-            if i < 3:
-                c = 9 / (height * width)
-            else:
-                c = 1 / 9
+            # if i < 3:
+            #     c = 9 / (height * width)
+            # else:
+            #     c = 1 / 9
 
             w = list_weights[i]
             f = features[i]
-            f = np.exp(-0.5 * (f - c) ** 2)
+            # f = np.exp(-0.5 * (f - c) ** 2)
 
-            list_weights[i] = w + learning_rate * (reward + discount_factor * Q_prime_max - self.q) * f
+            list_weights[i] = w + learning_rate * (reward + discount_factor * Q_prime_max - w) 
 
         return list_weights
 

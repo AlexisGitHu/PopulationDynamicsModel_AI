@@ -9,7 +9,7 @@ learning_rate = 0.05
 
 class Ecosistem(mesa.Model):
     """A model with some number of agents."""
-    learning_rate = 0.05
+    learning_rate = 0.1
 
     def __init__(self, agent_dict, size, basic_food_info, verbose = False):
         # type_animal, grid, exploration_rate, discount_factor, learning_rate,s,q
@@ -24,7 +24,7 @@ class Ecosistem(mesa.Model):
         self.mating = []
         self.reproduce = []
         self.next_agent_id = 0
-
+        self.agent_dict=agent_dict
         self.agentList = []
 
         for agent in agent_dict:
@@ -49,7 +49,13 @@ class Ecosistem(mesa.Model):
             except:
                 pass
         self.killed = []
-        self._create_basic_food()
+        for agent in self.agent_dict:
+            if len(self.agent_collection[agent])==0:
+                for i in range(self.agent_dict[agent]["amount"]):
+                    self._copyAgent(self.agent_dict[agent]["basic_object"])
+
+        if not len(self.agent_collection[self.basic_food_info["agent"]])> 5:
+            self._create_basic_food()
     
     def _copyAgent(self,agent, pos = None):
         new_agent = Agents.Agent(self.next_agent_id, self, agent.specie, agent.preys, agent.predators,
@@ -96,7 +102,59 @@ class Ecosistem(mesa.Model):
             self._copyAgent(agent, new_pos)
     
     def give_reward(self,agent):
-        return len(self.agent_collection[agent.specie])+agent.energy
+        epsilon=0.1
+        reward=0
+        if not isinstance(agent.specie,Agents.DumbBehaviour):    
+            coeff_modifier_near_enemy=0
+            coeff_modifier_near_ally=0
+            coeff_modifier_energy=0
+
+            num_allies=0
+            num_enemies=0
+            num_grass=0
+
+            cellmates=self.grid.get_cell_list_contents([agent.pos])
+            prey_type=1
+            predator_type=0
+            num_total_species=[]
+            for agents in self.agent_collection:
+                num_total_species.append(len(self.agent_collection[agents]))
+            
+            num_allies = len([0 for agents in cellmates if agents == agent])
+            num_enemies= len([0 for agents in cellmates if agents != agent])
+            for num_specie in num_total_species:
+                if num_specie==0:
+                    num_specie=epsilon
+            if agent.specie.type_animal==prey_type:
+                if(num_enemies>0):
+                    
+                    coeff_modifier_near_enemy=-num_enemies/num_total_species[1]
+                else:
+                    coeff_modifier_near_enemy=1
+
+                if(num_allies>0):
+                    coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
+                else:
+                    coeff_modifier_near_ally=-0.3
+            elif agent.specie.type_animal==predator_type:
+                if(num_enemies>0):
+                    coeff_modifier_near_enemy=num_enemies/num_total_species[0]
+                else:
+                    coeff_modifier_near_enemy=-1
+                if(num_allies>0):
+                    coeff_modifier_near_ally=num_allies/num_total_species[1] * 0.3
+                else:
+                    coeff_modifier_near_ally=-0.3
+            
+            if(agent.energy < agent.max_energy):
+                if(agent.energy< 20):
+                    coeff_modifier_energy=-4*agent.energy/100
+                else:
+                    coeff_modifier_energy=-agent.energy/100
+            else:
+                coeff_modifier_energy=agent.energy/100
+            reward = (coeff_modifier_near_ally+coeff_modifier_near_enemy+coeff_modifier_energy)/3
+        return reward
 
 
     

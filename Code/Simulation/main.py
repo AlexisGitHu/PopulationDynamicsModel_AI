@@ -7,24 +7,24 @@ def agent_portrayal(agent):
         "Shape": "circle",
         "Filled": "true",
         "Layer":0,
-        "text":str(agent.sprite)+" " +str(agent.energy),
+        "text":", ener:" +str(agent.energy),
         "Color": agent.color,
         "r": 1,
     }
     return portrayal
 
 SIZE = 10
-LEARNING_RATE = 0.05
-
+LEARNING_RATE = 0.1
+DISCOUNT_FACTOR=0.9
 NUMBER_OF_PREYS = 5
-NUMBER_OF_PREDATORS = 5
+NUMBER_OF_PREDATORS = 4
 NUMBER_OF_GRASS = 5
 
 BASIC_FOOD_REGEN = 1
 BASIC_FOOD_CLUSTER_PROB = 0.85
 
-prey_behaviour = Agents.IntelligentBehaviour(1, (SIZE, SIZE), 0.08, 1, LEARNING_RATE, 0, 0)
-predator_behaviour = Agents.IntelligentBehaviour(0, (SIZE, SIZE), 0.08, 1, LEARNING_RATE, 0, 0)
+prey_behaviour = Agents.IntelligentBehaviour(1, (SIZE, SIZE), 0.08, DISCOUNT_FACTOR, LEARNING_RATE, 0, 0)
+predator_behaviour = Agents.IntelligentBehaviour(0, (SIZE, SIZE), 0.08, DISCOUNT_FACTOR, LEARNING_RATE, 0, 0)
 grass_behaviour = Agents.DumbBehaviour()
 
 basic_predator_agent = Agents.Agent(None, None, predator_behaviour, [prey_behaviour], [], "N", "red","lobo.png", 100)
