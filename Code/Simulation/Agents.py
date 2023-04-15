@@ -72,7 +72,7 @@ class Agent(mesa.Agent):
                               7: (0, -1), 8: (1, -1)}
         for i in range(cells_number):
             pos_to_evaluate = tuple(map(operator.add, self.pos, relative_positions[i]))
-            pos_to_evaluate = map(lambda x: x % 10, pos_to_evaluate)
+            pos_to_evaluate = map(lambda x: x % self.model.size, pos_to_evaluate)
             features.append(self.individual_cell_evaluation(*pos_to_evaluate))
         return features
 
@@ -84,9 +84,8 @@ class Agent(mesa.Agent):
             -features::float[][] matriz de riesgos
         '''
         new_position, new_sight = self.specie.make_choice(features, self.pos)
-        if new_position != self.pos:
-            self.energy -= 1
-            self.model.grid.move_agent(self, new_position)
+        self.energy -= 2
+        self.model.grid.move_agent(self, new_position)
 
     def eat(self):
         '''
@@ -107,7 +106,7 @@ class Agent(mesa.Agent):
             other_agent = self.random.choice(allies)
             self.model.mating.append((self, other_agent))
             self.energy -= 50
-            self.model.reproduce.append([self.type, self.pos])
+            self.model.reproduce.append(self)
 
     def step(self):
         '''
@@ -155,7 +154,7 @@ class IntelligentBehaviour():
 
         if exploration_rate < 0 or exploration_rate > 1:
             raise ValueError("La probabilidad de exploración debe estar contenida en el intervalo [0,1]")
-
+        self.grid = grid
         self.type_animal = type_animal
         self.epsilon = exploration_rate
         self.weight_matrix = [[0 for i in range(grid[0])] for j in range(grid[1])]  # Posible mejora de arquitectura
@@ -323,7 +322,7 @@ class IntelligentBehaviour():
                               7: (0, -1), 8: (1, -1)}
         for i in range(cells_number):
             pos_to_evaluate = tuple(map(operator.add, pos, relative_positions[i]))
-            pos_to_evaluate = map(lambda x: x % 10, pos_to_evaluate)
+            pos_to_evaluate = map(lambda x: x % self.grid[0], pos_to_evaluate)
             lista_pos.append(list(pos_to_evaluate))
         self.pos_matriz_pesos = lista_pos
 

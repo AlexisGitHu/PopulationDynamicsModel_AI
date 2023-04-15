@@ -7,26 +7,29 @@ def agent_portrayal(agent):
         "Shape": "circle",
         "Filled": "true",
         "Layer": 0,
+        "text":str(agent.sprite),
         "Color": agent.color,
         "r": 1,
     }
     return portrayal
 
-WIDTH = 20
-HEIGHT=20
+SIZE = 20
 LEARNING_RATE = 0.05
 
 NUMBER_OF_PREYS = 5
 NUMBER_OF_PREDATORS = 5
 NUMBER_OF_GRASS = 5
 
-prey_behaviour = Agents.IntelligentBehaviour(1, (WIDTH, HEIGHT), 0.08, 1, LEARNING_RATE, 0, 0)
-predator_behaviour = Agents.IntelligentBehaviour(0, (WIDTH, HEIGHT), 0.08, 1, LEARNING_RATE, 0, 0)
+BASIC_FOOD_REGEN = 5
+BASIC_FOOD_CLUSTER_PROB = 0.85
+
+prey_behaviour = Agents.IntelligentBehaviour(1, (SIZE, SIZE), 0.08, 1, LEARNING_RATE, 0, 0)
+predator_behaviour = Agents.IntelligentBehaviour(0, (SIZE, SIZE), 0.08, 1, LEARNING_RATE, 0, 0)
 grass_behaviour = Agents.DumbBehaviour()
 
 basic_predator_agent = Agents.Agent(None, None, predator_behaviour, [prey_behaviour], [], "N", "red","lobo.png", 100, 0)
 basic_prey_agent = Agents.Agent(None, None, prey_behaviour, [grass_behaviour], [predator_behaviour], "N", "green", "conejo.png", 100, 1)
-basic_grass_agent =  Agents.Agent(None, None, grass_behaviour, [], [prey_behaviour], [], "grey","cesped.png", 20, 2)
+basic_grass_agent =  Agents.Agent(None, None, grass_behaviour, [], [prey_behaviour], [], "grey","cesped.png", 200, 2)
 
 agent_dict = {
     prey_behaviour:{"amount":NUMBER_OF_PREYS, "basic_object":basic_prey_agent},
@@ -34,14 +37,24 @@ agent_dict = {
     grass_behaviour:{"amount":NUMBER_OF_GRASS, "basic_object":basic_grass_agent}
 }
 
-grid = mesa.visualization.CanvasGrid(agent_portrayal, WIDTH, HEIGHT, 500, 500)
+basic_food_info = {
+    "agent":grass_behaviour,
+    "regen":BASIC_FOOD_REGEN,
+    "cluster_prob":BASIC_FOOD_CLUSTER_PROB
+}
+
+
+############################# VISUALIZACIÓN CON EL SERVIDOR DE MESA#############################
+grid = mesa.visualization.CanvasGrid(agent_portrayal, SIZE, SIZE, 500, 500)
 server = mesa.visualization.ModularServer(
-    Ecosistem, [grid], "Ecosistem", {"agent_dict":agent_dict, "width": WIDTH, "height": HEIGHT}
+    Ecosistem, [grid], "Ecosistem", {"agent_dict":agent_dict, "size": SIZE,"basic_food_info":basic_food_info}
 )
-server.port = 8524  # The default
+server.port = 8527  # The default
 server.verbose = False
 server.launch()
 
-# model = Ecosistem(agent_dict, WIDTH, HEIGHT)
+
+############################ SERVIDOR PROPIO #########################
+# model = Ecosistem(agent_dict, SIZE, basic_food_info)
 # for i in range(70):
 #     model.step()
