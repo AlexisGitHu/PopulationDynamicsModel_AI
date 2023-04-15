@@ -11,10 +11,11 @@ class Ecosistem(mesa.Model):
     """A model with some number of agents."""
     learning_rate = 0.05
 
-    def __init__(self, agent_dict, size, basic_food_info):
+    def __init__(self, agent_dict, size, basic_food_info, verbose = False):
         # type_animal, grid, exploration_rate, discount_factor, learning_rate,s,q
 
         self.size = size
+        self.verbose = verbose
         self.agent_collection = {}
         self.basic_food_info = basic_food_info
         self.grid = mesa.space.MultiGrid(size, size, True)
@@ -32,9 +33,9 @@ class Ecosistem(mesa.Model):
                 self._copyAgent(agent_dict[agent]["basic_object"])
 
     def step(self):
-        print('{"Step": ' + str(self.schedule.steps) + ', "info":[', end="")
+        if self.verbose: print('{"Step": ' + str(self.schedule.steps) + ', "info":[', end="")
         self.schedule.step()
-        print("]}\n")
+        if self.verbose: print("]}\n")
 
         for parent in self.reproduce:
             self._copyAgent(parent, pos = parent.pos)
@@ -42,16 +43,17 @@ class Ecosistem(mesa.Model):
 
         for dead_agent in self.killed:
             try:
+                self.agent_collection[dead_agent.specie].remove(dead_agent)
                 self.grid.remove_agent(dead_agent)
                 self.schedule.remove(dead_agent)
             except:
                 pass
         self.killed = []
-        self.create_basic_food()
+        self._create_basic_food()
     
     def _copyAgent(self,agent, pos = None):
         new_agent = Agents.Agent(self.next_agent_id, self, agent.specie, agent.preys, agent.predators,
-                                  agent.direction, agent.color, agent.sprite, agent.energy, agent.type)
+                                  agent.direction, agent.color, agent.sprite, agent.max_energy, isBasic = agent.isBasic)
         self.agent_collection[agent.specie].append(new_agent)
         self.schedule.add(new_agent)
         if not pos:
@@ -82,7 +84,7 @@ class Ecosistem(mesa.Model):
     #                 self.next_agent_id += 1
     #                 return
                 
-    def create_basic_food(self):
+    def _create_basic_food(self):
         for i in range(self.basic_food_info["regen"]):
             agent = random.choice(self.agent_collection[self.basic_food_info["agent"]])
             new_pos = None
@@ -92,6 +94,9 @@ class Ecosistem(mesa.Model):
                 except:
                     pass
             self._copyAgent(agent, new_pos)
+    
+    def give_reward(self,agent):
+        return len(self.agent_collection[agent.specie])+agent.energy
 
 
     

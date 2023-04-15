@@ -12,32 +12,33 @@ def get_vision(pos, dire, dist):
     rev = dif[::-1]
     for i in range(dist):
         pos = tuple(map(operator.add, pos, dif))
-        fov.append(pos)
+        fov.append((pos,i))
         if dif[0] == 0 or dif[1] == 0:
             for j in range(1, i + 1):
                 y = tuple([k * j for k in rev])
-                fov.append(tuple(map(operator.sub, pos, y)))
-                fov.append(tuple(map(operator.add, pos, y)))
+                fov.append((tuple(map(operator.sub, pos, y)),i))
+                fov.append((tuple(map(operator.add, pos, y)),i))
         else:
             for j in reversed(range(1, i + 1)):
-                fov.append((pos[0] - dif[0] * j, pos[1]))
-                fov.append((pos[0], pos[1] - dif[1] * j))
+                fov.append(((pos[0] - dif[0] * j, pos[1]),i))
+                fov.append(((pos[0], pos[1] - dif[1] * j),i))
 
     return fov
 
 
 class Agent(mesa.Agent):
 
-    def __init__(self, unique_id, model, specie, preys, predators, direction, color, sprite, energy, agent_type):
+    def __init__(self, unique_id, model, specie, preys, predators, direction, color, sprite, energy, isBasic = False):
         super().__init__(unique_id, model)
-        self.energy = energy
+        self.max_energy = energy
+        self.energy = energy/5
         self.specie = specie
         self.preys = preys
         self.predators = predators
         self.direction = direction
         self.color = color
         self.sprite = sprite
-        self.type = agent_type
+        self.isBasic = isBasic
         self.pos_matriz_pesos = []
 
     def individual_cell_evaluation(self, x, y):
@@ -83,7 +84,8 @@ class Agent(mesa.Agent):
         Params:
             -features::float[][] matriz de riesgos
         '''
-        new_position, new_sight = self.specie.make_choice(features, self.pos)
+        new_position = self.specie.make_choice(features, self.pos)
+        self.direction = (new_position[0]-self.pos[0], new_position[1]-self.pos[1])
         self.energy -= 2
         self.model.grid.move_agent(self, new_position)
 
@@ -96,13 +98,13 @@ class Agent(mesa.Agent):
         if len(enemies) >= 1:
             other_agent = self.random.choice(enemies)
             self.model.killed.append(other_agent)
-            self.energy = 100
+            self.energy = self.max_energy
 
     # TODO
     def reproduce(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         allies = [agent for agent in cellmates if agent.specie == self.specie]
-        if len(allies) > 1 and self.energy > 50:
+        if  self.energy > 50: #and len(allies) > 1:
             other_agent = self.random.choice(allies)
             self.model.mating.append((self, other_agent))
             self.energy -= 50
@@ -116,23 +118,25 @@ class Agent(mesa.Agent):
         Imprime un log con el estado del agente tras hacer sus acciones.
         '''
         alive = True
-        if self.energy > 0:
-            features = self.perceive()
-            self.move(features)
-            self.eat()
-            self.reproduce()
-            reward = self.specie.get_reward( self.energy,self.model,self.pos,self.predators)  # Mover al entorno para distinguir entre especies?
-            self.specie.feedback(self.pos, features, reward)
-        else:
-            self.model.killed.append(self)
-            alive = False
+        if not self.isBasic:
+            if self.energy > 0:
+                features = self.perceive()
+                self.move(features)
+                self.eat()
+                self.reproduce()
+                # reward = self.model.give_reward(self)
+                reward = self.specie.get_reward( self.energy,self.model,self.pos,self.predators)  # Mover al entorno para distinguir entre especies?
+                self.specie.feedback(self.pos, features, reward)
+            else:
+                self.model.killed.append(self)
+                alive = False
 
         log = {"ID": int(self.unique_id),
                "Position": tuple(self.pos),
                "Direction": self.direction,
                "Sprite": self.sprite,
                "Alive": str(alive)}
-        print(json.dumps(log), end=", ")
+        if self.model.verbose: print(json.dumps(log), end=", ")
 
 
 class IntelligentBehaviour():
@@ -193,31 +197,31 @@ class IntelligentBehaviour():
         new_position = (x_move, y_move)
         return new_position
 
-    def _change_sight(self, x_position, y_position, perceive_features):
-        # TODO Esta función tiene el mismo comportamiento que _change_position
-        '''
-        Elige la dirección de visión del proximo movimiento. Realiza una nueva acción aleatoria con probabilidad
-        exploration_rate (self.epsilon). 
+    # def _change_sight(self, x_position, y_position, perceive_features):
+    #     # TODO Esta función tiene el mismo comportamiento que _change_position
+    #     '''
+    #     Elige la dirección de visión del proximo movimiento. Realiza una nueva acción aleatoria con probabilidad
+    #     exploration_rate (self.epsilon). 
         
-        Params:
-            -x_position::int coordenada horizontal absoluta del agente
-            -x_position::int coordenada vertical absoluta del agente
-        Return: 
-            -tuple(int,int) próximo movimiento
-        '''
-        r = np.random.rand()
-        if r < 1 - self.epsilon:
-            list_weights = self._convert_list_weights((x_position, y_position))
-            wanted_scores_array = list_weights 
-            wanted_score = np.max(wanted_scores_array)
-            x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
-            self.s = wanted_score
-        else:
-            x_move = (x_position + np.random.randint(-1, 2))
-            y_move = (y_position + np.random.randint(-1, 2))
-            # self.s = np.dot(self.perceive_features, self.weights)
-        new_position = (x_move, y_move)
-        return new_position
+    #     Params:
+    #         -x_position::int coordenada horizontal absoluta del agente
+    #         -x_position::int coordenada vertical absoluta del agente
+    #     Return: 
+    #         -tuple(int,int) próximo movimiento
+    #     '''
+    #     r = np.random.rand()
+    #     if r < 1 - self.epsilon:
+    #         list_weights = self._convert_list_weights((x_position, y_position))
+    #         wanted_scores_array = list_weights 
+    #         wanted_score = np.max(wanted_scores_array)
+    #         x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
+    #         self.s = wanted_score
+    #     else:
+    #         x_move = (x_position + np.random.randint(-1, 2))
+    #         y_move = (y_position + np.random.randint(-1, 2))
+    #         # self.s = np.dot(self.perceive_features, self.weights)
+    #     new_position = (x_move, y_move)
+    #     return new_position
 
     def make_choice(self, features, pos):
         '''
@@ -231,8 +235,9 @@ class IntelligentBehaviour():
             -tuple(int,int) próxima visión (?)
         '''
         new_position = self._change_position(*pos, features)
-        new_sight = self._change_sight(*pos, features)
-        return new_position, new_sight
+        # new_sight = self._change_sight(*pos, features)
+        return new_position#, new_sight
+    
 
     def get_reward(self, energy,model,pos,predators):
         """
@@ -392,7 +397,7 @@ class DumbBehaviour():
             -tuple(int,int) próxima visión (?)
         '''
 
-        return pos,None
+        return pos#,None
 
     def get_reward(self, energy,model,pos,predators):
         """
