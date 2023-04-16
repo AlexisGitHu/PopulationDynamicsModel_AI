@@ -92,7 +92,8 @@ def lectura_datos_mesa(process, id):
 
         if "Interface starting at" in linea_limpia:
             continue
-
+        if "WARNING" in linea_limpia:
+            continue
         if not linea_limpia:
             continue
         
