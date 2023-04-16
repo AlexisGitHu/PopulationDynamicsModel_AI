@@ -128,10 +128,15 @@ $(document).ready(function() {
         chart: {
             renderTo: 'fig02',
             events: {
-                load: requestData
+                load: requestData,
             },
             type: "line",
             animation: false,
+            zoomType: 'x',
+            panning: {
+                enabled: true
+            },
+            panKey: 'shift',
         },
         plotOptions: {
             series: {
@@ -142,6 +147,7 @@ $(document).ready(function() {
                         this.setVisible(!this.visible);
                     },
                 },
+                // showInNavigator: true,
             }
         },
         title: {

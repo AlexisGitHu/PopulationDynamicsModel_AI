@@ -228,6 +228,9 @@ def data_loktavolterra(x_init):
     # alpha = 0.0015
     # rz = 2
     # beta = 0.015
+
+    # Si se quiere ampliar el periodo (la frecuencia de las puntas del teorico) dividir entre numeros más grandes, si se quiere más frecuencia multiplicar o dividir entre menos (/2, /3)
+
     rl = 1.2/8
     alpha = 0.25/8
     rz = 2/8
