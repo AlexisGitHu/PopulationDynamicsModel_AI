@@ -209,62 +209,69 @@ from scipy.integrate import solve_ivp
 
 periodicity = 0
 sol_lv = None
+lim_theoretical_step = 200
+
 
 def lotkavolterra(t, x, rl, alpha, rz, beta):
     return np.array([rl*x[0] - alpha*x[0]*x[1], -rz*x[1] + beta*x[0]*x[1]])
 
-def data_loktavolterra():
-    from scipy.signal import argrelextrema
+def data_loktavolterra(x_init):
+    # from scipy.signal import argrelextrema
     global periodicity
     global sol_lv
 
-    t_span = (0, 40)
+    t_span = (lim_theoretical_step-200, lim_theoretical_step)
     t_eval = np.linspace(t_span[0], t_span[1], 1000)
-    x_init = (100, 80)
-    rl = 0.1
-    alpha = 0.0015
-    rz = 2
-    beta = 0.015
+    # x_init = (5, 5)
+    # rl = 0.1
+    # alpha = 0.0015
+    # rz = 2
+    # beta = 0.015
+    rl = 1.2/8
+    alpha = 0.25/8
+    rz = 2/8
+    beta = 0.5/8
+
     sol_lv = solve_ivp(lotkavolterra, t_span, x_init, args=(rl, alpha, rz, beta), t_eval=t_eval)
 
 
-    # Find the indices of all maxima in the 'liebres' component
-    maxima_idx = argrelextrema(sol_lv.y[0], np.greater)[0]
-    t_maxima_conejos = sol_lv.t[maxima_idx]
-    # Find the indices of all minima in the 'liebres' component
-    minima_idx = argrelextrema(sol_lv.y[0], np.less)[0]
-    t_minima_conejos = sol_lv.t[minima_idx]
+    # # Find the indices of all maxima in the 'liebres' component
+    # maxima_idx = argrelextrema(sol_lv.y[0], np.greater)[0]
+    # t_maxima_conejos = sol_lv.t[maxima_idx]
+    # # Find the indices of all minima in the 'liebres' component
+    # minima_idx = argrelextrema(sol_lv.y[0], np.less)[0]
+    # t_minima_conejos = sol_lv.t[minima_idx]
 
     # print(f"The 'liebres' component reaches its maxima at t = {t_maxima_conejos} and its minima at t = {t_minima_conejos}.")
 
-    # Find the indices of all maxima in the 'zorros' component
-    maxima_idx = argrelextrema(sol_lv.y[1], np.greater)[0]
-    t_maxima_lobos = sol_lv.t[maxima_idx]
-    # Find the indices of all minima in the 'zorros' component
-    minima_idx = argrelextrema(sol_lv.y[1], np.less)[0]
-    t_minima_lobos = sol_lv.t[minima_idx]
+    # # Find the indices of all maxima in the 'zorros' component
+    # maxima_idx = argrelextrema(sol_lv.y[1], np.greater)[0]
+    # t_maxima_lobos = sol_lv.t[maxima_idx]
+    # # Find the indices of all minima in the 'zorros' component
+    # minima_idx = argrelextrema(sol_lv.y[1], np.less)[0]
+    # t_minima_lobos = sol_lv.t[minima_idx]
 
     # print(f"The 'zorros' component reaches its maxima at t = {t_maxima_lobos} and its minima at t = {t_minima_lobos}.")
 
-    periodic_maxima_conejos = t_maxima_conejos[1]-t_maxima_conejos[0]
-    # print(periodic_maxima_conejos)
-    periodic_minima_conejos = t_minima_conejos[1]-t_minima_conejos[0]
-    # print(periodic_minima_conejos)
+    # periodic_maxima_conejos = t_maxima_conejos[1]-t_maxima_conejos[0]
+    # # print(periodic_maxima_conejos)
+    # periodic_minima_conejos = t_minima_conejos[1]-t_minima_conejos[0]
+    # # print(periodic_minima_conejos)
 
-    periodic_maxima_lobos = t_maxima_lobos[1]-t_maxima_lobos[0]
-    # print(periodic_maxima_lobos)
-    periodic_minima_lobos = t_minima_lobos[1]-t_minima_lobos[0]
-    # print(periodic_minima_lobos)
+    # periodic_maxima_lobos = t_maxima_lobos[1]-t_maxima_lobos[0]
+    # # print(periodic_maxima_lobos)
+    # periodic_minima_lobos = t_minima_lobos[1]-t_minima_lobos[0]
+    # # print(periodic_minima_lobos)
 
-    conditions = [abs(periodic_maxima_conejos - periodic_maxima_lobos) < 0.001, 
-                  abs(periodic_maxima_conejos - periodic_minima_lobos) < 0.001,
-                  abs(periodic_minima_conejos - periodic_minima_lobos) < 0.001,
-                  abs(periodic_minima_conejos - periodic_maxima_lobos) < 0.001]
+    # conditions = [abs(periodic_maxima_conejos - periodic_maxima_lobos) < 0.001, 
+    #               abs(periodic_maxima_conejos - periodic_minima_lobos) < 0.001,
+    #               abs(periodic_minima_conejos - periodic_minima_lobos) < 0.001,
+    #               abs(periodic_minima_conejos - periodic_maxima_lobos) < 0.001]
     
-    if conditions.index(True) < 2:
-        periodicity = round(periodic_maxima_conejos,4)
-    else:
-        periodicity = round(periodic_minima_conejos,4)
+    # if conditions.index(True) < 2:
+    #     periodicity = round(periodic_maxima_conejos,4)
+    # else:
+    #     periodicity = round(periodic_minima_conejos,4)
     
 
 
@@ -272,17 +279,23 @@ def data_loktavolterra():
 
 
 # Initialize the data of loktavolterra equations
-data_loktavolterra()
+x_init = (5,5)
+data_loktavolterra(x_init)
 
-
+import math
 def get_loktavolterra_data(steps):
+    global lim_theoretical_step
+
     # steps = []
     contadores = []
 
     for step in steps:
         # Get the indices of the element in 't_eval' closest to t=step
-        while step > 40:
-            step -= periodicity
+        if step >= lim_theoretical_step:
+            lim_theoretical_step += 200
+            x_init_nuevo = (sol_lv.y[0][-1], sol_lv.y[1][-1])
+            data_loktavolterra(x_init_nuevo)
+            # step -= periodicity
 
         t_idx = np.argmin(np.abs(sol_lv.t - step))
 
@@ -290,7 +303,7 @@ def get_loktavolterra_data(steps):
         conejos = sol_lv.y[0][t_idx]
         lobos = sol_lv.y[1][t_idx]
         
-        contadores.append((round(lobos), round(conejos)))
+        contadores.append((math.ceil(lobos), math.ceil(conejos)))
 
     return contadores
 

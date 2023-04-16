@@ -33,9 +33,9 @@ class Ecosistem(mesa.Model):
                 self._copyAgent(agent_dict[agent]["basic_object"])
 
     def step(self):
-        if self.verbose: print('{"Step": ' + str(self.schedule.steps) + ', "info":[', end="")
+        print('{"Step": ' + str(self.schedule.steps) + ', "info":[', end="")
         self.schedule.step()
-        if self.verbose: print("]}\n")
+        print("]}\n")
 
         for parent in self.reproduce:
             self._copyAgent(parent, pos = parent.pos)

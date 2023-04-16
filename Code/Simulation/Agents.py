@@ -136,7 +136,7 @@ class Agent(mesa.Agent):
                "Direction": self.direction,
                "Sprite": self.sprite,
                "Alive": str(alive)}
-        if self.model.verbose: print(json.dumps(log), end=", ")
+        print(json.dumps(log), end=", ")
 
 
 class IntelligentBehaviour():
