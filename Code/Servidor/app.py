@@ -10,6 +10,8 @@ from flask import jsonify
 from flask_cors import CORS, cross_origin
 from flask_bootstrap import Bootstrap
 
+
+import mpld3
 # loop = asyncio.get_event_loop()
 # db = SQLAlchemy()
 
@@ -199,13 +201,107 @@ def prueba_json(id):
     else:
         return jsonify([])
 
+
+# Imports
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+periodicity = 0
+sol_lv = None
+
+def lotkavolterra(t, x, rl, alpha, rz, beta):
+    return np.array([rl*x[0] - alpha*x[0]*x[1], -rz*x[1] + beta*x[0]*x[1]])
+
+def data_loktavolterra():
+    from scipy.signal import argrelextrema
+    global periodicity
+    global sol_lv
+
+    t_span = (0, 40)
+    t_eval = np.linspace(t_span[0], t_span[1], 1000)
+    x_init = (100, 80)
+    rl = 0.1
+    alpha = 0.0015
+    rz = 2
+    beta = 0.015
+    sol_lv = solve_ivp(lotkavolterra, t_span, x_init, args=(rl, alpha, rz, beta), t_eval=t_eval)
+
+
+    # Find the indices of all maxima in the 'liebres' component
+    maxima_idx = argrelextrema(sol_lv.y[0], np.greater)[0]
+    t_maxima_conejos = sol_lv.t[maxima_idx]
+    # Find the indices of all minima in the 'liebres' component
+    minima_idx = argrelextrema(sol_lv.y[0], np.less)[0]
+    t_minima_conejos = sol_lv.t[minima_idx]
+
+    # print(f"The 'liebres' component reaches its maxima at t = {t_maxima_conejos} and its minima at t = {t_minima_conejos}.")
+
+    # Find the indices of all maxima in the 'zorros' component
+    maxima_idx = argrelextrema(sol_lv.y[1], np.greater)[0]
+    t_maxima_lobos = sol_lv.t[maxima_idx]
+    # Find the indices of all minima in the 'zorros' component
+    minima_idx = argrelextrema(sol_lv.y[1], np.less)[0]
+    t_minima_lobos = sol_lv.t[minima_idx]
+
+    # print(f"The 'zorros' component reaches its maxima at t = {t_maxima_lobos} and its minima at t = {t_minima_lobos}.")
+
+    periodic_maxima_conejos = t_maxima_conejos[1]-t_maxima_conejos[0]
+    # print(periodic_maxima_conejos)
+    periodic_minima_conejos = t_minima_conejos[1]-t_minima_conejos[0]
+    # print(periodic_minima_conejos)
+
+    periodic_maxima_lobos = t_maxima_lobos[1]-t_maxima_lobos[0]
+    # print(periodic_maxima_lobos)
+    periodic_minima_lobos = t_minima_lobos[1]-t_minima_lobos[0]
+    # print(periodic_minima_lobos)
+
+    conditions = [abs(periodic_maxima_conejos - periodic_maxima_lobos) < 0.001, 
+                  abs(periodic_maxima_conejos - periodic_minima_lobos) < 0.001,
+                  abs(periodic_minima_conejos - periodic_minima_lobos) < 0.001,
+                  abs(periodic_minima_conejos - periodic_maxima_lobos) < 0.001]
+    
+    if conditions.index(True) < 2:
+        periodicity = round(periodic_maxima_conejos,4)
+    else:
+        periodicity = round(periodic_minima_conejos,4)
+    
+
+
+###################### https://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats ##########################
+
+
+# Initialize the data of loktavolterra equations
+data_loktavolterra()
+
+
+def get_loktavolterra_data(steps):
+    # steps = []
+    contadores = []
+
+    for step in steps:
+        # Get the indices of the element in 't_eval' closest to t=step
+        while step > 40:
+            step -= periodicity
+
+        t_idx = np.argmin(np.abs(sol_lv.t - step))
+
+        # Get the values of 'conejos' and 'lobos' at t=step
+        conejos = sol_lv.y[0][t_idx]
+        lobos = sol_lv.y[1][t_idx]
+        
+        contadores.append((round(lobos), round(conejos)))
+
+    return contadores
+
 @app.route("/get_graph_data")
 def get_graph_data():
     datos_nuevos = None
+    datos_validos = []
     # print(datosMesa)
     if "1" in datosMesa:
         datos_nuevos = datosMesa["1"]
-        datos["1"] = []
+        datosMesa["1"] = []
     else:
         datos_nuevos = []
     
@@ -231,17 +327,64 @@ def get_graph_data():
         contadores.append((cont_lobos, cont_conejos))
         cont_lobos = 0
         cont_conejos = 0
+    
 
-    datos_validos = [steps, contadores]
+    if len(steps) > 0:
+        theorical_data = get_loktavolterra_data(steps)
+        datos_validos = [steps, contadores, theorical_data]
+
+
+
 
     response = make_response(json.dumps(datos_validos))
 
     response.content_type = "application/json"
+    print(datos_validos)
 
     return response
 
+
+import numpy as np
+import matplotlib.pyplot as plt
+from mpld3 import plugins
+import pandas as pd
+
 @app.route("/graph_data")
 def graph_data():
+    # np.random.seed(9615)
+
+    # # generate df
+    # N = 100
+    # df = pd.DataFrame((.1 * (np.random.random((N, 5)) - .5)).cumsum(0),
+    #                 columns=['a', 'b', 'c', 'd', 'e'],)
+
+    # # plot line + confidence interval
+    # fig, ax = plt.subplots()
+    # ax.grid(True, alpha=0.3)
+
+    # for key, val in df.iteritems():
+    #     l, = ax.plot(val.index, val.values, label=key)
+    #     ax.fill_between(val.index,
+    #                     val.values, val.values,
+    #                     color=l.get_color(), alpha=.4)
+
+    # # define interactive legend
+
+    # handles, labels = ax.get_legend_handles_labels() # return lines and labels
+    # interactive_legend = plugins.InteractiveLegendPlugin(zip(handles,
+    #                                                         ax.collections),
+    #                                                     labels,
+    #                                                     start_visible=True)
+    # plugins.connect(fig, interactive_legend)
+
+    # ax.set_xlabel('x')
+    # ax.set_ylabel('y')
+    # ax.set_title('Interactive legend', size=20)
+
+
+    # # json01 = json.dumps(mpld3.fig_to_dict(fig))
+    # html_graph = mpld3.fig_to_html(fig)
+    # return render_template('grafica.html', json1=html_graph, graph= [html_graph])
     return render_template('grafica.html')
 
 @app.route("/datos_nuevos/<id>")

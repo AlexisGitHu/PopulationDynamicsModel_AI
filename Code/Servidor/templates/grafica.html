@@ -28,10 +28,15 @@
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
+    <!-- <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script> -->
+    <!-- <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script> -->
+
+
     <script src="/static/highchart.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
     <!-- <style>
         #container {
         position: relative;
@@ -76,7 +81,22 @@
       <!-- Example row of columns -->
       <!-- <div class="row"> -->
 
-          <div class="container-fluid" id="data-container"></div>
+        <div class="container-fluid" id="data-container"></div>
+        <button onclick="add_data()">Add data</button>
+        <div id="fig01">
+            {{json1|safe}}
+        </div>
+        <div id="fig02"></div>
+        <div id="fig03"></div>
+          {#  <!-- <script type="text/javascript">#}
+          {#      var json1 = "{{ json1 }}";#}
+          {#      console.log(json1);#}
+          {#      // var json02 = { <snip JSON code> };#}
+          {#      // var json03 = { <snip JSON code> };#}
+          {#      mpld3.draw_figure("{{ json1['id'] }}", "{{ json1['json']|safe }}");#}
+          {#      // mpld3.draw_figure("fig02", json02);#}
+          {#      // mpld3.draw_figure("fig03", json03);#}
+          {#  </script> -->#}
           <!-- <div id="graph" /> -->
         </div>
     </div>
