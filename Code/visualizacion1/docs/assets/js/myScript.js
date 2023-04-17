@@ -64,6 +64,8 @@ window.onload = function() {
         });
 
     }*/
+    
+    
     var j,k,l;
     var lobos = [];
     var conejos = [];
@@ -72,48 +74,61 @@ window.onload = function() {
     var id = [];
     var lista = [];
     var dict = {};
-    var vector
+    var vector;
+    var velocidad;
+    let cambiar_velocidad = document.getElementById("cambiar_velocidad");
+    cambiar_velocidad.onclick = cambiar;
+    function cambiar(evento,) {
+        velocidad = document.getElementById("velocidad").value;
+    };
     function ajaxCall() {
         var request = $.ajax({
             type: 'GET',
             url: 'http://localhost:5000/visualizar',
             success: function(data) {
+                console.log(velocidad);
                 var j = 0;
                 for(var i=0;i<data[j].info.length;i++){
-                    console.log(data[j].info[i].ID);
                     if(data[j].info[i].Sprite == "lobo.png"){
                         var animal = "lobo";
                     }else if(data[j].info[i].Sprite == "conejo.png"){
                         var animal = "conejo";
+                    }else if(data[j].info[i].Sprite == "hierva.png"){
+                        var animal = "hierva";
                     }
                     if(!id.includes(data[j].info[i].ID)){
-                        console.log("crea animal nuevo");
                         destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
                         eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center});');                                
                         dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
                         id.push(data[j].info[i].ID);
+                        console.log(animal + data[j].info[i].ID);
                     }
                 }
-                console.log(dict);
                 let inicio = document.getElementById("inicio");
                 inicio.onclick = iniciar;
                 function iniciar(evento,) {
                     j++;
-                    console.log("iniciar" + j);
-
+                    console.log("step" + j);
                     for(var i=0;i<data[j].info.length;i++){
-                        console.log(data[j].info[i].ID);
                         if(data[j].info[i].Sprite == "lobo.png"){
                             var animal = "lobo";
                         }else if(data[j].info[i].Sprite == "conejo.png"){
                             var animal = "conejo";
+                        }else if(data[j].info[i].Sprite == "hierva.png"){
+                            var animal = "hierva";
                         }
                         if(!id.includes(data[j].info[i].ID)){
-                            console.log("crea animal nuevo");
                             destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
                             eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: view.center});');                                
                             dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
                             id.push(data[j].info[i].ID);
+                            console.log(animal + data[j].info[i].ID);
+                        }else{
+                            console.log(animal + data[j].info[i].ID + "" + data[j].info[i].Alive);
+                            if(data[j].info[i].Alive == "False"){
+                                console.log("muere" + animal + data[j].info[i].ID);
+                                eval(animal + data[j].info[i].ID).visible = false;
+                            }
                         }
                     }
                     var destination;
@@ -138,19 +153,19 @@ window.onload = function() {
                         //for(var j=0;j<=5;j++){
                         
                         for(var i=0;i<data[j].info.length;i++){
-                            console.log(data[j].info[i].ID);
                             if(data[j].info[i].Sprite == "lobo.png"){
                                 var animal = "lobo";
                             }else if(data[j].info[i].Sprite == "conejo.png"){
                                 var animal = "conejo";
+                            }else if(data[j].info[i].Sprite == "hierva.png"){
+                                var animal = "hierva";
                             }
                             
                             if(id.includes(data[j].info[i].ID)){ 
                                 destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
-                                console.log("mueve posicion");
                                 //eval(''+animal + data[j].info[i].ID+'')[0].position = destination;
                                 vector = destination.subtract(dict[animal + data[j].info[i].ID].position);
-                                dict[animal + data[j].info[i].ID].position = dict[animal + data[j].info[i].ID].position.add(vector.divide(5*40));
+                                dict[animal + data[j].info[i].ID].position = dict[animal + data[j].info[i].ID].position.add(vector.divide(velocidad));
                                 dict[animal + data[j].info[i].ID].content = Math.round(vector.length);
                                 
                                 /*eval(animal + data[j].info[i].ID)[1] = destination;
@@ -212,7 +227,7 @@ window.onload = function() {
                             
 
                            
-                           console.log("acaba un info");
+                           //console.log("acaba un info");
                            /*view.onFrame = function(event){
                                 for(var i=0;i<id.length;i++){
                                     
@@ -237,7 +252,6 @@ window.onload = function() {
                     };
                            
                     //}
-                        console.log(id);
                         /*
                             var vector
                             var vector1
@@ -261,36 +275,7 @@ window.onload = function() {
                             }*/
                         
                         
-                        /*
-                        for(var i =0;i<data[0].info.length;i++){
-                            if(data[0].info[i].Sprite == "lobo.png"){
-                                eval('var lobo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
-                            }else if(data[0].info[i].Sprite == "conejo.png"){
-                                eval('var conejo' + data[0].info[i].ID + '= new Raster({ source: "'+ data[0].info[i].Sprite +'", position: view.center});');
-                            }
-                        }
-                        console.log(data[0].info[0].Position[0]);
-                        visualizar(lobo0,conejo1,lobo2,data.length);
-                        console.log(data.length);
-                        for(var j=0;j<data.length;j++){
-
-                            //HACER QUE DIFERENCIE ENTRE UN STEP Y EL SIGUIENTE PARA MOVER A OTRO SITIO
-                            for(var i=0;i<data[j].info.length;i++){
-                                if(data[j].info[i].Sprite == "lobo.png"){
-                                    console.log("entra lobo");
-                                    lobos.push(data[0].info[i]);
-                                    contLobo++;
-                                }else if(data[j].info[i].Sprite == "conejo.png"){
-                                    console.log("entra conejo");
-                                    conejos.push(data[0].info[i]);
-                                    contConejo++;
-                                }
-                            }
-
-                            console.log(lobos);
-                            console.log(conejos);
-                            crear(lobos,contLobo,conejos,contConejo);
-                        }*/
+                        
                     //};
                 }
             }
@@ -300,198 +285,6 @@ window.onload = function() {
     Raster.prototype.rescale = function(width, height) {
         this.scale(width / this.width, height / this.height);
     };
-    function visualizar(lobo0,conejo1,lobo2,longitud){
-        view.draw();
 
-        var destination = new Point(x[0],y[0]);
-
-        var destination1 = new Point(x1[0],y1[0]);
-        
-        let inicio = document.getElementById("inicio");
-        let fin = document.getElementById("fin");
-        var animating = false;
-        inicio.onclick = iniciar; 
-        fin.onclick = finalizar; 
-        function iniciar(evento,) {
-            animating = true;
-            console.log(animating);
-        }
-        function finalizar(evento) {
-            animating = false;
-            console.log(animating);
-        }
-        
-        view.onFrame = function(event){
-            if(animating){
-                //REVISAR QUE EL MOVIMIENTO QUE ESTÁ HACIENDO ES CORRECTO
-                var vector
-                var vector1
-                for (var i =0;i < longitud;i++){
-                    vector = destination.subtract(lobo0.position);
-                    lobo0.position = lobo0.position.add(vector.divide(longitud*40));
-                    lobo0.content = Math.round(vector.length);
-
-                    vector1 = destination1.subtract(conejo1.position);
-                    conejo1.position = conejo1.position.add(vector1.divide(longitud*40));
-                    conejo1.content = Math.round(vector1.length);
-                    
-                    if (vector.length < lobos.length) {
-                        
-                        destination = new Point(x[i],y[i]);
-                    }
-                    if (vector1.length < conejos.length) {
-                    
-                        destination1 = new Point(x1[i],y1[i]);
-                    }
-                }
-            }
-        };
-    }
-
-   /*
-    function crear(dataL,contL,dataC,contC){
-        for(var i = 0; i < contL; i++) {
-            eval('var lobo' + dataL[i].id + '= new Raster({ source: "'+ dataL[i].Sprite +'", position: view.center});');
-        }
-        console.log("lobo");
-        console.log(lobo4);
-        for(var i = 0; i < contC; i++) {
-            eval('var conejo' + dataC[i].id + '= new Raster({ source: "'+ dataC[i].Sprite +'", position: view.center});');
-        }
-        console.log("conejo");
-
-        view.draw();
-
-        var destination = new Point(x[0],y[0]);
-
-        var destination1 = new Point(x1[0],y1[0]);
-        
-        let inicio = document.getElementById("inicio");
-        let fin = document.getElementById("fin");
-        var animating = false;
-        inicio.onclick = iniciar; 
-        fin.onclick = finalizar; 
-        function iniciar(evento,) {
-            animating = true;
-            lobo4.visible = true;
-            console.log(animating);
-        }
-        function finalizar(evento) {
-            animating = false;
-            console.log(animating);
-            lobo4.visible = false;
-            console.log(lobos);
-        }
-        
-        view.onFrame = function(event){
-            if(animating){
-                //REVISAR QUE EL MOVIMIENTO QUE ESTÁ HACIENDO ES CORRECTO
-                var vector
-                var vector1
-                for (var i =0;i < lobos.length;i++){
-                    vector = destination.subtract(lobo4.position);
-                    lobo4.position = lobo4.position.add(vector.divide(lobos.length*40));
-                    lobo4.content = Math.round(vector.length);
-
-                    vector1 = destination1.subtract(conejo1.position);
-                    conejo1.position = conejo1.position.add(vector1.divide(conejos.length*40));
-                    conejo2.content = Math.round(vector1.length);
-                    
-                    if (vector.length < lobos.length) {
-                    
-                        destination = new Point(lobos[i].Position[0],lobos[i].Position[1]);
-                    }
-                    if (vector1.length < conejos.length) {
-                    
-                        destination1 = new Point(conejos[i].Position[0],conejos[i].Position[1]);
-                    }
-                }
-            }
-        };
-
-    }
-
-*/
-
-   /*
-    const prueba = d3.json("http://localhost:5000/prueba/2",
-        function(data){
-            for (var i =0;i < data.length;i++){
-                x.push(data[i].coord_x)
-                y.push(data[i].coord_y)
-            }
-            console.log(x)
-            console.log(y)
-
-
-           
-            Raster.prototype.rescale = function(width, height) {
-                this.scale(width / this.width, height / this.height);
-            };
-                
-            var data_URL = "image.png";
-            var data_URL_1 = "persona.png";
-
-            var path = new Raster({
-                source: data_URL,
-                position: view.center
-            });
-
-            var path1 = new Raster({
-                source: data_URL_1,
-                position: view.center
-            });
-
-            view.draw();
-
-            path.rescale(100,100);
-
-            var destination = new Point(x[0],y[0]);
-
-            var destination1 = new Point(x[1],y[1]);
-            
-            let inicio = document.getElementById("inicio");
-            let fin = document.getElementById("fin");
-            var animating = false;
-            inicio.onclick = iniciar; 
-            fin.onclick = finalizar; 
-            function iniciar(evento) {
-                animating = true;
-                console.log(animating);
-            }
-            function finalizar(evento) {
-                animating = false;
-                console.log(animating);
-            }
-            
-            view.onFrame = function(event){
-                if(animating){
-                    var vector
-                    var vector1
-                    for (var i =0;i < x.length;i++){
-                        vector = destination.subtract(path.position);
-                        path.position = path.position.add(vector.divide(x.length*40));
-                        path.content = Math.round(vector.length);
-
-                        vector1 = destination1.subtract(path1.position);
-                        path1.position = path1.position.add(vector1.divide(x.length*40));
-                        path1.content = Math.round(vector1.length);
-                        
-                        if (vector.length < x.length) {
-                        
-                            destination = new Point(x[i],y[i]);
-                        }
-                        if (vector1.length < x.length) {
-                        
-                            destination1 = new Point(x[i],y[i]);
-                        }
-                    }
-                }
-            };
-            
-
-        }
-    )*/
-
-    // view.draw();
+   
 }
