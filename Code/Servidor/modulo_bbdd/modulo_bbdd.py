@@ -76,9 +76,9 @@ def create_user():
     try:
         new_user = User (
             # username=form.username.data,
-            username="SUUUUUUUU",
+            username="SUUUUUUUUUUUUUUUUU",
             # email = form.email.data,
-            email = "suuuu@gmail.com",
+            email = "nide@gmail.com",
             # password = password_hashed,
             password = "password_hashed",
             # userhash = userhash,
@@ -111,7 +111,7 @@ def modulo_bbdd_template():
 
 @modulo_bbdd.route('/mostrar_user')
 def mostrar_user():
-    user = User.query.filter(User.email=="suuuu@gmail.com").first()  
+    user = User.query.filter(User.email=="nide@gmail.com").first()  
     #,username = user.username, password = user. esto iria en la linea 59
     #user = None #borrar al descomentar la query
     if user:

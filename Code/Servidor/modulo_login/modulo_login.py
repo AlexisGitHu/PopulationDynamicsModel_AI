@@ -59,6 +59,21 @@ def pagina_principal():
 
     return render_template("pagina_principal.html")
 
+@modulo_login.route('/pagina_claudia')
+def pagina_claudia():
+    # if request.method == "POST":
+    #     return redirect(url_for("modulo_bbdd.mostrar_user"))
+
+    return render_template("pagina_claudia.html")
+
+@modulo_login.route('/mostrar_parametrizacion', methods = ["GET", "POST"])
+def mostrar_parametrizacion():
+    # if request.method == "POST":
+
+        #return redirect(url_for("modulo_bbdd.mostrar_user"))
+
+    return render_template("mostrar_parametrizacion.html")
+
 
 # @modulo_login.route('/mostrar_user')
 # def mostrar_user():
