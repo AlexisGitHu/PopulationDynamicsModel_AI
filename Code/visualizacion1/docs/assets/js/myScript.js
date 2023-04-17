@@ -165,7 +165,7 @@ window.onload = function() {
                                 destination = new Point(data[j].info[i].Position[0],data[j].info[i].Position[1]);
                                 //eval(''+animal + data[j].info[i].ID+'')[0].position = destination;
                                 vector = destination.subtract(dict[animal + data[j].info[i].ID].position);
-                                dict[animal + data[j].info[i].ID].position = dict[animal + data[j].info[i].ID].position.add(vector.divide(velocidad));
+                                dict[animal + data[j].info[i].ID].position = dict[animal + data[j].info[i].ID].position.add(vector.normalize()); //vector.divide(velocidad)
                                 dict[animal + data[j].info[i].ID].content = Math.round(vector.length);
                                 
                                 /*eval(animal + data[j].info[i].ID)[1] = destination;
