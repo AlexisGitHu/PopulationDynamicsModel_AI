@@ -125,6 +125,7 @@ $(document).ready(function() {
     // chart = new Dygraph($("#data-container"), data);
 
     chart = new Highcharts.Chart({
+        // Definimos el estilo de grafica que será y de donde se cogen los datos
         chart: {
             renderTo: 'fig02',
             events: {
@@ -138,6 +139,7 @@ $(document).ready(function() {
             },
             panKey: 'shift',
         },
+        // Configuramos los plotOtions para mostrar checkboxes en la leyenda
         plotOptions: {
             series: {
                 showCheckbox: true,
@@ -150,14 +152,17 @@ $(document).ready(function() {
                 // showInNavigator: true,
             }
         },
+        // Definimos el titulo del gráfico
         title: {
-            text: 'Live random data'
+            text: 'Live data'
         },
+        // Definimos el estilo del eje x
         xAxis: {
             type: 'linear',
             allowDecimals: false,
             min: 0
         },
+        // Definimos el estilo del eje y
         yAxis: {
             minPadding: 0.2,
             maxPadding: 0.2,
@@ -166,6 +171,7 @@ $(document).ready(function() {
                 margin: 80
             }
         },
+        // Definimos cómo queremos la leyenda
         legend: {
             layout: 'vertical',
             align: 'right',
@@ -186,10 +192,12 @@ $(document).ready(function() {
         //     //     color: '#444'
         //     //  }
         },
+        // Definimos que queremos un ToolTip para ver los distintos valores que toman las graficas en cierto punto
         tooltip: {
             crosshairs: [true, true],
             shared: true
         },
+        // Definimos las series distintas que vamos a tener
         series: [
         {
             // marker: {
