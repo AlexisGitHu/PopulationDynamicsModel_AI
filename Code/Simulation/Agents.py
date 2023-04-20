@@ -104,7 +104,7 @@ class Agent(mesa.Agent):
     def reproduce(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         allies = [agent for agent in cellmates if agent.specie == self.specie]
-        if  self.energy > 50: #and len(allies) > 1:
+        if  self.energy > 70: #and len(allies) > 1:
             other_agent = self.random.choice(allies)
             self.model.mating.append((self, other_agent))
             self.energy -= 50
@@ -139,6 +139,8 @@ class Agent(mesa.Agent):
         print(json.dumps(log), end=", ")
 
 
+        
+
 class IntelligentBehaviour():
     def __init__(self, type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q):
         '''
@@ -168,8 +170,8 @@ class IntelligentBehaviour():
         self.learning_rate = learning_rate
         self.relative_positions = {0: (-1, 1), 1: (0, 1), 2: (1, 1), 3: (-1, 0), 4: (0, 0), 5: (1, 0), 6: (-1, -1),
                                    7: (0, -1), 8: (1, -1)}
-
-    def _change_position(self, x_position, y_position, perceive_features):
+    ##private method
+    def __change_position(self, x_position, y_position, perceive_features):
         '''
         Elige la posición del próximo movimiento. Realiza una nueva acción aleatoria con probabilidad
         exploration_rate (self.epsilon). 
@@ -184,7 +186,7 @@ class IntelligentBehaviour():
         r = np.random.rand()
 
         if r < 1 - self.epsilon:
-            list_weights = self._convert_list_weights((x_position, y_position))
+            list_weights = self.__convert_list_weights((x_position, y_position))
             wanted_scores_array = list_weights #(np.multiply(np.array(perceive_features), list_weights)).tolist()
             wanted_score = np.max(wanted_scores_array)
             x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
@@ -211,7 +213,7 @@ class IntelligentBehaviour():
     #     '''
     #     r = np.random.rand()
     #     if r < 1 - self.epsilon:
-    #         list_weights = self._convert_list_weights((x_position, y_position))
+    #         list_weights = self.__convert_list_weights((x_position, y_position))
     #         wanted_scores_array = list_weights 
     #         wanted_score = np.max(wanted_scores_array)
     #         x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
@@ -234,72 +236,11 @@ class IntelligentBehaviour():
             -tuple(int,int) próximo movimiento
             -tuple(int,int) próxima visión (?)
         '''
-        new_position = self._change_position(*pos, features)
+        new_position = self.__change_position(*pos, features)
         # new_sight = self._change_sight(*pos, features)
         return new_position#, new_sight
     
 
-    # def get_reward(self, energy,model,pos,predators):
-    #     """
-    #     Función de recompensa. Todavía por definir. El comportamiento es temporal.
-    #     Return: 
-    #         -float valor de la función de recompensa
-    #     """
-    #     # num_specie = []
-    #     # reward = x*num_specie+y*energy
-    #     #preyAgents=[x for x in self.agentList if x[2] == 1]
-
-    #     coeff_modifier_near_enemy=0
-    #     coeff_modifier_near_ally=0
-    #     coeff_modifier_energy=0
-
-    #     num_allies=0
-    #     num_enemies=0
-    #     num_grass=0
-
-    #     cellmates=model.grid.get_cell_list_contents([pos])
-    #     prey_type=-1
-    #     predator_type=1
-    #     num_total_species=[]
-    #     for agent in model.agent_collection:
-    #         num_total_species.append(len(model.agent_collection[agent]))
-
-    #     num_allies = len([0 for agent in cellmates if agent.specie == self])
-    #     num_enemies= len([0 for agent in cellmates if agent.specie == predators])
-
-    #     if self.type_animal==prey_type:
-    #         if(num_enemies>0):
-    #             coeff_modifier_near_enemy=-num_enemies/num_total_species[1]
-    #         else:
-    #             coeff_modifier_near_enemy=1
-
-    #         if(num_allies>0):
-    #             coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
-    #         else:
-    #             coeff_modifier_near_ally=-0.3
-    #     elif self.type_animal==predator_type:
-    #         if(num_enemies>0):
-    #             coeff_modifier_near_enemy=num_enemies/num_total_species[0]
-    #         else:
-    #             coeff_modifier_near_enemy=-1
-    #         if(num_allies>0):
-    #             coeff_modifier_near_ally=num_allies/num_total_species[1] * 0.3
-    #         else:
-    #             coeff_modifier_near_ally=-0.3
-        
-    #     if(energy < 50):
-    #         if(energy < 20):
-    #             coeff_modifier_energy=-3*energy/100
-    #         else:
-    #             coeff_modifier_energy=-energy/100
-    #     else:
-    #         coeff_modifier_energy=energy/100
-
-
-        
-    #     reward = (coeff_modifier_near_ally+coeff_modifier_near_enemy+coeff_modifier_energy)/3
-
-    #     return reward
 
     def feedback(self, pos, features, reward):
         '''
@@ -310,15 +251,15 @@ class IntelligentBehaviour():
             -features::float[][] matriz de riesgos
             -reward::float valor de la recompensa asociada a la ultima acción
         '''
-        list_weights = self._convert_list_weights(pos)
-        new_list_weights = self._update_weight(reward, list_weights, features)
+        list_weights = self.__convert_list_weights(pos)
+        new_list_weights = self.__update_weight(reward, list_weights, features)
 
         contador = 0
         for i, j in self.pos_matriz_pesos:
             self.weight_matrix[i][j] = new_list_weights[contador]
             contador += 1
 
-    def _convert_list_weights(self, pos):
+    def __convert_list_weights(self, pos):
         # TODO Documentar
         cells_number = 9
         lista_pos = []
@@ -335,8 +276,9 @@ class IntelligentBehaviour():
             lista_weights.append(self.weight_matrix[i][j])
 
         return lista_weights
-
-    def _update_weight(self, reward, list_weights, features):
+    
+    #Private method
+    def __update_weight(self, reward, list_weights, features):
         # TODO Documentar
         # con la coordenadas que voy a pasarle, necesito coger la submatriz de self.weights
         # hacer producto escalar entre features y self.weights.
@@ -349,7 +291,7 @@ class IntelligentBehaviour():
         Q_prime = []
 
         # features = self.perceive_features
-        Q_prime.append(self._get_QFunction(features, list_weights))
+        Q_prime.append(self.__get_QFunction(features, list_weights))
 
         # Update the weights:
         Q_prime_max = max(Q_prime)
@@ -367,7 +309,8 @@ class IntelligentBehaviour():
 
         return list_weights
 
-    def _get_QFunction(self, features, weights):
+    #Private Method
+    def __get_QFunction(self, features, weights):
         # TODO Documentar
         Q = 0
         for i in range(len(weights)):
@@ -375,6 +318,60 @@ class IntelligentBehaviour():
 
         return Q
 
+    def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
+        if(num_near_predators>0):
+            coeff_modifier_near_predator=-num_near_predators/num_total_species[1]
+        else:
+            coeff_modifier_near_predator=1
+
+        if(num_near_preys>0):
+            coef_modifier_near_prey=num_near_preys/num_total_species[0]
+        else:
+            coef_modifier_near_prey=-1
+        
+        if(num_allies>0):
+            coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
+        else:
+            coeff_modifier_near_ally=-0.3
+
+        actual_energy=agent.energy
+        if(actual_energy < agent.max_energy):
+            if(actual_energy < 20):
+                coeff_modifier_energy=-4*actual_energy/100
+            else:
+                coeff_modifier_energy=-actual_energy/100
+        else:
+            coeff_modifier_energy=actual_energy/100
+
+        reward = (coeff_modifier_near_ally+coeff_modifier_near_predator+coef_modifier_near_prey+coeff_modifier_energy)/4
+
+        return reward
+
+class WolfBehaviour(IntelligentBehaviour):
+    def __init__(self, type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q):
+        super().__init__(type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q)
+
+    def feedback(self, pos, features, reward):
+        super().feedback(pos, features, reward)
+
+    def make_choice(self, features, pos):
+        return super().make_choice(features, pos)    
+
+    def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
+        return super().get_reward(num_allies,num_near_preys,num_near_predators,num_total_species,agent)
+
+class SheepBehaviour(IntelligentBehaviour):
+    def __init__(self, type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q):
+        super().__init__(type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q)
+
+    def feedback(self, pos, features, reward):
+        super().feedback(pos, features, reward)
+
+    def make_choice(self, features, pos):
+        return super().make_choice(features, pos)    
+
+    def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
+        return super().get_reward(num_allies,num_near_preys,num_near_predators,num_total_species,agent)
 
 class DumbBehaviour():
     def __init__(self):
@@ -399,7 +396,7 @@ class DumbBehaviour():
 
         return pos#,None
 
-    def get_reward(self, energy,model,pos,predators):
+    def get_reward(num_allies,num_near_preys,num_near_predators,total_species,energy,max_energy):
         """
         Función de recompensa. Todavía por definir. El comportamiento es temporal.
         Return: 

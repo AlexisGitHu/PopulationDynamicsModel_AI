@@ -102,58 +102,24 @@ class Ecosistem(mesa.Model):
             self._copyAgent(agent, new_pos)
     
     def give_reward(self,agent):
-        epsilon=0.1
-        reward=0
-        if not isinstance(agent.specie,Agents.DumbBehaviour):    
-            coeff_modifier_near_enemy=0
-            coeff_modifier_near_ally=0
-            coeff_modifier_energy=0
+        '''
+        Función de recompensa del modelo. El modelo otorga la recompensa a los agentes.
 
-            num_allies=0
-            num_enemies=0
-            num_grass=0
+        Params:
+            -agent::Agents.Agent() objeto agente 
+        '''
+        cellmates=self.grid.get_cell_list_contents([agent.pos])
+        num_total_species=[]
+        for agents in self.agent_collection:
+            num_total_species.append(len(self.agent_collection[agents]))
+        
+        num_near_preys = len([0 for agents in cellmates if agents.specie in agent.preys])
+        num_near_predators = len([0 for agents in cellmates if agents.specie in agent.predators])
+        num_near_allies=len([0 for agents in cellmates if agents.specie==agent.specie])
 
-            cellmates=self.grid.get_cell_list_contents([agent.pos])
-            prey_type=1
-            predator_type=0
-            num_total_species=[]
-            for agents in self.agent_collection:
-                num_total_species.append(len(self.agent_collection[agents]))
-            
-            num_allies = len([0 for agents in cellmates if agents == agent])
-            num_enemies= len([0 for agents in cellmates if agents != agent])
-            for num_specie in num_total_species:
-                if num_specie==0:
-                    num_specie=epsilon
-            if agent.specie.type_animal==prey_type:
-                if(num_enemies>0):
-                    
-                    coeff_modifier_near_enemy=-num_enemies/num_total_species[1]
-                else:
-                    coeff_modifier_near_enemy=1
-
-                if(num_allies>0):
-                    coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
-                else:
-                    coeff_modifier_near_ally=-0.3
-            elif agent.specie.type_animal==predator_type:
-                if(num_enemies>0):
-                    coeff_modifier_near_enemy=num_enemies/num_total_species[0]
-                else:
-                    coeff_modifier_near_enemy=-1
-                if(num_allies>0):
-                    coeff_modifier_near_ally=num_allies/num_total_species[1] * 0.3
-                else:
-                    coeff_modifier_near_ally=-0.3
-            
-            if(agent.energy < agent.max_energy):
-                if(agent.energy< 20):
-                    coeff_modifier_energy=-4*agent.energy/100
-                else:
-                    coeff_modifier_energy=-agent.energy/100
-            else:
-                coeff_modifier_energy=agent.energy/100
-            reward = (coeff_modifier_near_ally+coeff_modifier_near_enemy+coeff_modifier_energy)/3
+        ##Strategy pattern
+        ##Este método tiene demasiados parámetros, futuro refactor (de momento no)
+        reward=agent.specie.get_reward(num_near_allies,num_near_preys,num_near_predators,num_total_species,agent)
         return reward
 
 
