@@ -320,17 +320,17 @@ class IntelligentBehaviour():
 
     def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
         if(num_near_predators>0):
-            coeff_modifier_near_predator=-num_near_predators/num_total_species[1]
+            coeff_modifier_near_predator=-num_near_predators/num_total_species
         else:
             coeff_modifier_near_predator=1
 
         if(num_near_preys>0):
-            coef_modifier_near_prey=num_near_preys/num_total_species[0]
+            coef_modifier_near_prey=(num_near_preys/num_total_species)*0.1
         else:
             coef_modifier_near_prey=-1
         
         if(num_allies>0):
-            coeff_modifier_near_ally=num_allies/num_total_species[0] * 0.3
+            coeff_modifier_near_ally=num_allies/num_total_species * 0.3
         else:
             coeff_modifier_near_ally=-0.3
 
@@ -347,31 +347,8 @@ class IntelligentBehaviour():
 
         return reward
 
-class WolfBehaviour(IntelligentBehaviour):
-    def __init__(self, type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q):
-        super().__init__(type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q)
 
-    def feedback(self, pos, features, reward):
-        super().feedback(pos, features, reward)
 
-    def make_choice(self, features, pos):
-        return super().make_choice(features, pos)    
-
-    def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
-        return super().get_reward(num_allies,num_near_preys,num_near_predators,num_total_species,agent)
-
-class SheepBehaviour(IntelligentBehaviour):
-    def __init__(self, type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q):
-        super().__init__(type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q)
-
-    def feedback(self, pos, features, reward):
-        super().feedback(pos, features, reward)
-
-    def make_choice(self, features, pos):
-        return super().make_choice(features, pos)    
-
-    def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
-        return super().get_reward(num_allies,num_near_preys,num_near_predators,num_total_species,agent)
 
 class DumbBehaviour():
     def __init__(self):
