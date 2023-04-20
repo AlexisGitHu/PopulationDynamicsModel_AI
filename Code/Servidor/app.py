@@ -237,20 +237,21 @@ def muestra_mesa(id):
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
-from scipy.optimize import minimize
+# from scipy.integrate import odeint
+# from scipy.optimize import minimize
 
 sol_lv = None
-lim_theoretical_step = 200
+lim_theoretical_step = 100
 params = []
+initial_state = True
+
 # Definición de la funcion de lotka volterra
 # def lotkavolterra(t, x, rl, alpha, rz, beta):
 #     return np.array([rl*x[0] - alpha*x[0]*x[1], -rz*x[1] + beta*x[0]*x[1]])
-def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
-    return np.array([rl*x[0] + alpha*x[0]*x[1], rz*x[1]+beta*x[0]*x[1]])
-
 
 
 def estimate(conejos, lobos):
+
     dif_conejos = [y - x for x,y in zip(conejos,conejos[1:])]
     dif_lobos = [y - x for x,y in zip(lobos,lobos[1:])]
 
@@ -266,16 +267,26 @@ def estimate(conejos, lobos):
     Y = np.matrix([sum_lobos, sum_mult])
     Y_t = Y
     Y = Y.transpose()
-    
-    print(X)
-    print(np.matmul(X_t, X))
-    print(np.matmul(Y_t, Y))
 
-    inversa_Xt_X = np.linalg.inv(np.matmul(X_t, X))
+    mult_Xt_X = np.matmul(X_t, X)
+    try:
+        inversa_Xt_X = np.linalg.inv(mult_Xt_X)
+    except np.linalg.LinAlgError as err:
+        vector_error = np.random.rand(1,mult_Xt_X.shape[0])
+
+        inversa_Xt_X = np.linalg.inv(mult_Xt_X+vector_error)
+
     tras_inv_conejos = np.matmul(inversa_Xt_X, X_t)
     A_conejos = np.matmul(tras_inv_conejos, np.array(dif_conejos))
 
-    inversa_Yt_Y = np.linalg.inv(np.matmul(Y_t, Y))
+    mult_Yt_Y = np.matmul(Y_t, Y)
+    try:
+        inversa_Yt_Y = np.linalg.inv(mult_Yt_Y)
+    except np.linalg.LinAlgError as err:
+        vector_error = np.random.rand(1,mult_Yt_Y.shape[0])
+
+        inversa_Yt_Y = np.linalg.inv(mult_Yt_Y+vector_error)
+
     tras_inv_lobos = np.matmul(inversa_Yt_Y, Y_t)
     A_lobos = np.matmul(tras_inv_lobos, np.array(dif_lobos))
     
@@ -287,37 +298,47 @@ def estimate(conejos, lobos):
     beta_practico = float(A_lobos[0][:,1])
     rz_practico = float(A_lobos[0][:,0])
 
+
+    print("estimate:")
+    print([rl_practico, alpha_practico, rz_practico, beta_practico])
     return [rl_practico, alpha_practico, rz_practico, beta_practico]
 
 
-# from scipy.optimize import curve_fit
-def reestimate(conejos, lobos, steps, params):
-    # # define the Lotka-Volterra model
-    # def lotka_volterra(t, y, a, b, c, d):
-    #     x, y = y
-    #     dx_dt = a*x + b*x*y
-    #     dy_dt = c*y + d*x*y
-    #     return [dx_dt, dy_dt]
-
-    def objective(params, t_span, y0, t_eval, y_obs):
-        sol = solve_ivp(lotkavolterra_sobreescrito, t_span, y0, t_eval=t_eval, args=tuple(params))
-    #     print(sol)
-        return np.sum((sol.y - y_obs)**10)
+def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
+    return np.array([rl*x[0] + alpha*x[0]*x[1], rz*x[1]+beta*x[0]*x[1]])
 
 
-    # load the data
-    t_span = (steps[0], steps[-1])
-    t_eval = np.linspace(t_span[0], t_span[1], t_span[1]-t_span[0])
-    data = np.array([conejos,lobos])
-    print(data)
 
 
-    # define the initial conditions and parameters
-    y0 = [conejos[0], lobos[0]]
-    parameters_guess = params  # initial guess for parameters a, b, c, and d
 
-    result = minimize(lambda f: objective(f, t_span, y0, t_eval, data), parameters_guess, method='Nelder-Mead')
-    return result.x
+# # from scipy.optimize import curve_fit
+# def reestimate(conejos, lobos, steps, params):
+#     # # define the Lotka-Volterra model
+#     # def lotka_volterra(t, y, a, b, c, d):
+#     #     x, y = y
+#     #     dx_dt = a*x + b*x*y
+#     #     dy_dt = c*y + d*x*y
+#     #     return [dx_dt, dy_dt]
+
+#     def objective(params, t_span, y0, t_eval, y_obs):
+#         sol = solve_ivp(lotkavolterra_sobreescrito, t_span, y0, t_eval=t_eval, args=tuple(params))
+#     #     print(sol)
+#         return np.sum((sol.y - y_obs)**10)
+
+
+#     # load the data
+#     t_span = (steps[0], steps[-1])
+#     t_eval = np.linspace(t_span[0], t_span[1], t_span[1]-t_span[0])
+#     data = np.array([conejos,lobos])
+#     print(data)
+
+
+#     # define the initial conditions and parameters
+#     y0 = [conejos[0], lobos[0]]
+#     parameters_guess = params  # initial guess for parameters a, b, c, and d
+
+#     result = minimize(lambda f: objective(f, t_span, y0, t_eval, data), parameters_guess, method='Nelder-Mead')
+#     return result.x
 
 
 
@@ -330,6 +351,7 @@ def data_loktavolterra(x_init, steps):
     t_span = (steps[0], steps[-1])
     t_eval = np.linspace(t_span[0], t_span[1], t_span[1] - t_span[0])
 
+    print(f"Voy a calcular lotkavolterra con x_init: {x_init} y con el tspan: {t_span} y un t_eval: {t_eval}")
 
     # Si se quiere ampliar el periodo (la frecuencia de las puntas del teorico) dividir entre numeros más grandes, si se quiere más frecuencia multiplicar o dividir entre menos (/2, /3)
     # Parametros para indicar tasa de crecimiento de los conejos, zorros y tasa de muertes de conejos por zorros
@@ -367,47 +389,49 @@ import math
 import random
 
 # Funcion para recoger datos de la solucion numerica de lotka volterra dados unos steps
-def get_loktavolterra_data(steps, contadores, initial_state):
+def get_loktavolterra_data(steps, contadores):
     global conejos
     global lobos
     global lim_theoretical_step
     global params
     global x_init
+    global initial_state
+    global sol_lv
 
-    # conejos = [i[1] for i in contadores]
-    # lobos = [i[0] for i in contadores]
-    for i in contadores:
-        num_random = random.random()*0.002-0.001
-        conejos.append(i[0]+num_random)
-        num_random = random.random()*0.002-0.001
-        lobos.append(i[1] + num_random)
-    # [conejos.append(i[1]) for i in contadores]
-    # [lobos.append(i[0]) for i in contadores]
-    
-    
-    # print("Linea 368")
-    # if initial_state:
-    #     # print("linea 370")
-    #     # params = estimate(conejos, lobos)
-    #     params = [1,1,1,1]
-    # else:
-    #     x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
-    #     params = reestimate(conejos, lobos,steps, params)
-    params = estimate(conejos, lobos)
-
-    # print("Linea 374")
-    data_loktavolterra(x_init, steps)
+    if initial_state:
+        for i in contadores:
+            conejos.append(i[0])
+            lobos.append(i[1])
+        params = estimate(conejos, lobos)
+            
+        data_loktavolterra(x_init, steps)
+        x_init = (conejos[-1], lobos[-1])
+        print(x_init)
     # Contadores para contar el numero de animales por cada especie
+    else:
+        for i in contadores:
+            conejos.append(i[0])
+            conejos.pop(0)
+            lobos.append(i[1])
+            lobos.pop(0)
+
     contadores_teoricos = []
 
     # Recorremos todos los steps
     for step in steps:
         # # En el caso de que se haya pasado el limite hasta el que se había resuelto numericamente las ecuaciones de lotka volterra, actualizamos los datos
-        # if step >= lim_theoretical_step:
-        #     lim_theoretical_step += 200
-        #     # Cogemos el actual numero de animales de cada especie y resolvemos de nuevo
-        #     x_init_nuevo = (sol_lv.y[0][-1], sol_lv.y[1][-1])
-        #     data_loktavolterra(x_init_nuevo)
+        if step > lim_theoretical_step:
+            
+            if initial_state == True:
+                conejos = conejos[-lim_theoretical_step:]
+                lobos = lobos[-lim_theoretical_step:]
+                data_loktavolterra(x_init, [steps[0],lim_theoretical_step])
+                initial_state = False
+            else:
+                params = estimate(conejos, lobos)
+                x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
+                data_loktavolterra(x_init, [lim_theoretical_step,lim_theoretical_step+lim_theoretical_step])
+                lim_theoretical_step += lim_theoretical_step
 
         # Cojemos el indice tal que se aproxime más a nuestro step, ya que en la resolucion se va de 0.0X en 0.0X
         t_idx = np.argmin(np.abs(sol_lv.t - step))
@@ -435,11 +459,16 @@ def get_graph_data():
     ### IMPORTANTE!!! En vez de mirar "1" in datosMesa, mirar si el id de la persona loggeada está en datosMesa (por si ha entrenado un modelo)
     if "1" in datosMesa:
         datos_nuevos = datosMesa["1"]
+        # Necesitamos como mínimo para poder estimar, 2 datos
+        print(datos_nuevos)
+        if len(datos_nuevos) < 2:
+            return datos_validos
         datosMesa["1"] = []
     else:
         datos_nuevos = []
     
-
+    print("He salido del if else, linea 487")
+    print()
     step = 0
     cont_lobos = 0
     cont_conejos = 0
@@ -463,11 +492,9 @@ def get_graph_data():
         cont_conejos = 0
     
     # En el caso de que se hayan recogido datos, poner los steps, los contadores actuales y los contadores teoricos
-    if len(steps) > 0:
-        initial_state = False
-        if 0 in steps:
-            initial_state = True
-        theorical_data = get_loktavolterra_data(steps, contadores, initial_state)
+    if len(steps) >= 2:
+        print("len(steps) >= 2")
+        theorical_data = get_loktavolterra_data(steps, contadores)
         datos_validos = [steps, contadores, theorical_data]
 
 
