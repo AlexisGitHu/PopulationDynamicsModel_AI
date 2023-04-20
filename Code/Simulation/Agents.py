@@ -98,7 +98,7 @@ class Agent(mesa.Agent):
         if len(enemies) >= 1:
             other_agent = self.random.choice(enemies)
             self.model.killed.append(other_agent)
-            self.energy = self.max_energy
+            self.energy +=40
 
     # TODO
     def reproduce(self):
@@ -142,7 +142,9 @@ class Agent(mesa.Agent):
         
 
 class IntelligentBehaviour():
-    def __init__(self, type_animal, grid, exploration_rate, discount_factor, learning_rate, s, q):
+    def __init__(self, type_animal, grid, exploration_rate, discount_factor, 
+                 learning_rate,near_predator_negative_reward,near_prey_negative_reward,near_allies_negative_reward,
+                 near_predator_positive_modifier, near_prey_positive_modifier,near_allies_positive_modifier,lowest_energy_modifier):
         '''
         Clase que modela el comportamiento inteligente de una especie mendiante aprendizaje por refuerzo.
 
@@ -150,26 +152,32 @@ class IntelligentBehaviour():
             -type_animal::int Atributo temporal por compatibilidad con la version anterior
             -grid::tuple(int,int) Dimensiones del entorno en el que actuan los agentes 
             -exploration_rate::float Probabilidad de elegir una acción aún no explorada. Valores entre [0,1]
-            -discount_factor:: ???
+            -discount_factor:: float Modifica el valor del algoritmo Q-Learning para hacer estrategias a corto o largo plazo.
             -learning_rate::float Tasa de aprendizaje
-            -s:: ???
-            -q:: ???
         Raises:
             -ValueError: la probabilidad de exploración debe estar contenida en el intervalo [0,1]
         '''
-
+        
         if exploration_rate < 0 or exploration_rate > 1:
             raise ValueError("La probabilidad de exploración debe estar contenida en el intervalo [0,1]")
         self.grid = grid
         self.type_animal = type_animal
         self.epsilon = exploration_rate
         self.weight_matrix = [[0 for i in range(grid[0])] for j in range(grid[1])]  # Posible mejora de arquitectura
-        self.s = s
-        self.q = q
         self.discount_factor = discount_factor
         self.learning_rate = learning_rate
         self.relative_positions = {0: (-1, 1), 1: (0, 1), 2: (1, 1), 3: (-1, 0), 4: (0, 0), 5: (1, 0), 6: (-1, -1),
                                    7: (0, -1), 8: (1, -1)}
+        
+        self.near_predator_negative_reward=near_predator_negative_reward
+        self.near_prey_negative_reward=near_prey_negative_reward
+        self.near_allies_negative_reward=near_allies_negative_reward
+
+        self.near_predator_positive_modifier=near_predator_positive_modifier
+        self.near_prey_positive_modifier=near_prey_positive_modifier
+        self.near_allies_positive_modifier=near_allies_positive_modifier
+        self.lowest_energy_modifier=lowest_energy_modifier
+
     ##private method
     def __change_position(self, x_position, y_position, perceive_features):
         '''
@@ -191,11 +199,9 @@ class IntelligentBehaviour():
             wanted_score = np.max(wanted_scores_array)
             x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
             x_move, y_move = x_move + x_position, y_move + y_position
-            self.s = wanted_score
         else:
             x_move = (x_position + np.random.randint(-1, 2))
             y_move = (y_position + np.random.randint(-1, 2))
-            # self.s = np.dot(self.perceive_features, self.weights)
         new_position = (x_move, y_move)
         return new_position
 
@@ -309,7 +315,7 @@ class IntelligentBehaviour():
 
         return list_weights
 
-    #Private Method
+    # PRIVATE METHOD
     def __get_QFunction(self, features, weights):
         # TODO Documentar
         Q = 0
@@ -317,33 +323,46 @@ class IntelligentBehaviour():
             Q = Q + weights[i] * features[i]
 
         return Q
+    
+    # PRIVATE METHOD
+    def __evaluate_energy_modifier(self,actual_energy,max_energy):
+
+        lowest_energy_high_bound=20
+        if(actual_energy < max_energy):
+            if(actual_energy < lowest_energy_high_bound):
+                coeff_modifier_energy=-self.lowest_energy_modifier*actual_energy/max_energy
+            else:
+                coeff_modifier_energy=-actual_energy/max_energy
+        else:
+            coeff_modifier_energy=actual_energy/max_energy
+        
+        return coeff_modifier_energy
 
     def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
+
+        
+        coefficient_normalization_value=4
+
         if(num_near_predators>0):
-            coeff_modifier_near_predator=-num_near_predators/num_total_species
+            coeff_modifier_near_predator=(-num_near_predators/num_total_species)*self.near_predator_positive_modifier
         else:
-            coeff_modifier_near_predator=1
+            coeff_modifier_near_predator=self.near_predator_negative_reward
 
         if(num_near_preys>0):
-            coef_modifier_near_prey=(num_near_preys/num_total_species)*0.1
+            coef_modifier_near_prey=(num_near_preys/num_total_species)*self.near_prey_positive_modifier
         else:
-            coef_modifier_near_prey=-1
+            coef_modifier_near_prey=self.near_prey_negative_reward
         
         if(num_allies>0):
-            coeff_modifier_near_ally=num_allies/num_total_species * 0.3
+            coeff_modifier_near_ally=num_allies/num_total_species * self.near_allies_positive_modifier
         else:
-            coeff_modifier_near_ally=-0.3
+            coeff_modifier_near_ally=self.near_allies_negative_reward
+        
 
-        actual_energy=agent.energy
-        if(actual_energy < agent.max_energy):
-            if(actual_energy < 20):
-                coeff_modifier_energy=-4*actual_energy/100
-            else:
-                coeff_modifier_energy=-actual_energy/100
-        else:
-            coeff_modifier_energy=actual_energy/100
+        coeff_modifier_energy=self.__evaluate_energy_modifier(agent.energy,agent.max_energy)
+        
 
-        reward = (coeff_modifier_near_ally+coeff_modifier_near_predator+coef_modifier_near_prey+coeff_modifier_energy)/4
+        reward = (coeff_modifier_near_ally+coeff_modifier_near_predator+coef_modifier_near_prey+coeff_modifier_energy)/coefficient_normalization_value
 
         return reward
 

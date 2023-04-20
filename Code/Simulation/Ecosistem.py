@@ -54,7 +54,7 @@ class Ecosistem(mesa.Model):
                 for i in range(self.agent_dict[agent]["amount"]):
                     self._copyAgent(self.agent_dict[agent]["basic_object"])
 
-        if not len(self.agent_collection[self.basic_food_info["agent"]])> 15:
+        if not len(self.agent_collection[self.basic_food_info["agent"]])> 7:
             self._create_basic_food()
     
     def _copyAgent(self,agent, pos = None):
