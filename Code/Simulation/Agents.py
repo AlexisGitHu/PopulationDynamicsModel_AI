@@ -143,8 +143,7 @@ class Agent(mesa.Agent):
 
 class IntelligentBehaviour():
     def __init__(self, type_animal, grid, exploration_rate, discount_factor, 
-                 learning_rate,near_predator_negative_reward,near_prey_negative_reward,near_allies_negative_reward,
-                 near_predator_positive_modifier, near_prey_positive_modifier,near_allies_positive_modifier,lowest_energy_modifier):
+                 learning_rate,reward_dict):
         '''
         Clase que modela el comportamiento inteligente de una especie mendiante aprendizaje por refuerzo.
 
@@ -169,14 +168,7 @@ class IntelligentBehaviour():
         self.relative_positions = {0: (-1, 1), 1: (0, 1), 2: (1, 1), 3: (-1, 0), 4: (0, 0), 5: (1, 0), 6: (-1, -1),
                                    7: (0, -1), 8: (1, -1)}
         
-        self.near_predator_negative_reward=near_predator_negative_reward
-        self.near_prey_negative_reward=near_prey_negative_reward
-        self.near_allies_negative_reward=near_allies_negative_reward
-
-        self.near_predator_positive_modifier=near_predator_positive_modifier
-        self.near_prey_positive_modifier=near_prey_positive_modifier
-        self.near_allies_positive_modifier=near_allies_positive_modifier
-        self.lowest_energy_modifier=lowest_energy_modifier
+        self.reward_dict=reward_dict
 
     ##private method
     def __change_position(self, x_position, y_position, perceive_features):
@@ -330,7 +322,7 @@ class IntelligentBehaviour():
         lowest_energy_high_bound=20
         if(actual_energy < max_energy):
             if(actual_energy < lowest_energy_high_bound):
-                coeff_modifier_energy=-self.lowest_energy_modifier*actual_energy/max_energy
+                coeff_modifier_energy=-self.reward_dict["lowest_energy_modifier"]*actual_energy/max_energy
             else:
                 coeff_modifier_energy=-actual_energy/max_energy
         else:
@@ -344,19 +336,19 @@ class IntelligentBehaviour():
         coefficient_normalization_value=4
 
         if(num_near_predators>0):
-            coeff_modifier_near_predator=(-num_near_predators/num_total_species)*self.near_predator_positive_modifier
+            coeff_modifier_near_predator=(-num_near_predators/num_total_species)*self.reward_dict["near_predator_positive_modifier"]
         else:
-            coeff_modifier_near_predator=self.near_predator_negative_reward
+            coeff_modifier_near_predator=self.reward_dict["near_predator_negative"]
 
         if(num_near_preys>0):
-            coef_modifier_near_prey=(num_near_preys/num_total_species)*self.near_prey_positive_modifier
+            coef_modifier_near_prey=(num_near_preys/num_total_species)*self.reward_dict["near_prey_positive_modifier"]
         else:
-            coef_modifier_near_prey=self.near_prey_negative_reward
+            coef_modifier_near_prey=self.reward_dict["near_prey_negative"]
         
         if(num_allies>0):
-            coeff_modifier_near_ally=num_allies/num_total_species * self.near_allies_positive_modifier
+            coeff_modifier_near_ally=num_allies/num_total_species * self.reward_dict["near_allies_positive_modifier"]
         else:
-            coeff_modifier_near_ally=self.near_allies_negative_reward
+            coeff_modifier_near_ally=self.reward_dict["near_allies_negative"]
         
 
         coeff_modifier_energy=self.__evaluate_energy_modifier(agent.energy,agent.max_energy)
