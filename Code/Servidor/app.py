@@ -244,6 +244,7 @@ sol_lv = None
 lim_theoretical_step = 100
 params = []
 initial_state = True
+ventana = 100
 
 # Definición de la funcion de lotka volterra
 # def lotkavolterra(t, x, rl, alpha, rz, beta):
@@ -397,6 +398,7 @@ def get_loktavolterra_data(steps, contadores):
     global x_init
     global initial_state
     global sol_lv
+    global ventana
 
     if initial_state:
         for i in contadores:
@@ -406,7 +408,7 @@ def get_loktavolterra_data(steps, contadores):
             
         data_loktavolterra(x_init, steps)
         x_init = (conejos[-1], lobos[-1])
-        print(x_init)
+        # print(x_init)
     # Contadores para contar el numero de animales por cada especie
     else:
         for i in contadores:
@@ -423,15 +425,16 @@ def get_loktavolterra_data(steps, contadores):
         if step > lim_theoretical_step:
             
             if initial_state == True:
-                conejos = conejos[-lim_theoretical_step:]
-                lobos = lobos[-lim_theoretical_step:]
-                data_loktavolterra(x_init, [steps[0],lim_theoretical_step])
+                conejos = conejos[-ventana:]
+                lobos = lobos[-ventana:]
+                data_loktavolterra(x_init, [steps[0],ventana])
                 initial_state = False
             else:
                 params = estimate(conejos, lobos)
                 x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
-                data_loktavolterra(x_init, [lim_theoretical_step,lim_theoretical_step+lim_theoretical_step])
-                lim_theoretical_step += lim_theoretical_step
+                # print(step)
+                data_loktavolterra(x_init, [lim_theoretical_step,lim_theoretical_step+ventana])
+                lim_theoretical_step += ventana
 
         # Cojemos el indice tal que se aproxime más a nuestro step, ya que en la resolucion se va de 0.0X en 0.0X
         t_idx = np.argmin(np.abs(sol_lv.t - step))
@@ -460,12 +463,14 @@ def get_graph_data():
     if "1" in datosMesa:
         datos_nuevos = datosMesa["1"]
         # Necesitamos como mínimo para poder estimar, 2 datos
-        print(datos_nuevos)
+        # print(datos_nuevos)
         if len(datos_nuevos) < 2:
             return datos_validos
         datosMesa["1"] = []
     else:
+        # Si no tiene datos
         datos_nuevos = []
+        # return datos_nuevos
     
     print("He salido del if else, linea 487")
     print()
@@ -508,6 +513,34 @@ def get_graph_data():
 @app.route("/graph_data")
 def graph_data():
     return render_template('grafica.html')
+
+
+# @app.route("/paint_data")
+# def paint_data():
+#     datos_validos = []
+#     datos_nuevos = []
+
+#     if "1" in datosMesa:
+#         datos_nuevos = datosMesa["1"]
+#         # Necesitamos como mínimo para poder estimar, 2 datos
+#         print(datos_nuevos)
+#         if len(datos_nuevos) < 2:
+#             return datos_validos
+#         datosMesa["1"] = []
+#     else:
+#         datos_nuevos = []
+
+#     if not datos_nuevos:
+#         return datos_nuevos
+    
+#     datos_validos = get_graph_data(datos_nuevos)
+
+#     response = make_response(json.dumps([datos_nuevos, datos_validos]))
+#     response.content_type = "application/json"
+#     # print(datos_validos)
+
+#     return response
+
 
 #################################################### PODEMOS ELIMINARLO ########################################################
 # @app.route("/datos_nuevos/<id>")
