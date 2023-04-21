@@ -241,10 +241,10 @@ from scipy.integrate import solve_ivp
 # from scipy.optimize import minimize
 
 sol_lv = None
-lim_theoretical_step = 100
 params = []
 initial_state = True
-ventana = 100
+ventana = 200
+lim_theoretical_step = ventana
 
 # Definición de la funcion de lotka volterra
 # def lotkavolterra(t, x, rl, alpha, rz, beta):
@@ -273,7 +273,8 @@ def estimate(conejos, lobos):
     try:
         inversa_Xt_X = np.linalg.inv(mult_Xt_X)
     except np.linalg.LinAlgError as err:
-        vector_error = np.random.rand(1,mult_Xt_X.shape[0])
+        print("error de inversa")
+        vector_error = np.random.normal(loc=0,scale=0.001,size=(mult_Xt_X.shape))
 
         inversa_Xt_X = np.linalg.inv(mult_Xt_X+vector_error)
 
@@ -284,7 +285,8 @@ def estimate(conejos, lobos):
     try:
         inversa_Yt_Y = np.linalg.inv(mult_Yt_Y)
     except np.linalg.LinAlgError as err:
-        vector_error = np.random.rand(1,mult_Yt_Y.shape[0])
+        # vector_error = np.random.rand(1,mult_Yt_Y.shape[0])
+        vector_error = np.random.normal(loc=0,scale=0.001,size=(mult_Yt_Y.shape))
 
         inversa_Yt_Y = np.linalg.inv(mult_Yt_Y+vector_error)
 
@@ -325,7 +327,6 @@ def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
 #         sol = solve_ivp(lotkavolterra_sobreescrito, t_span, y0, t_eval=t_eval, args=tuple(params))
 #     #     print(sol)
 #         return np.sum((sol.y - y_obs)**10)
-
 
 #     # load the data
 #     t_span = (steps[0], steps[-1])
@@ -407,7 +408,7 @@ def get_loktavolterra_data(steps, contadores):
         params = estimate(conejos, lobos)
             
         data_loktavolterra(x_init, steps)
-        x_init = (conejos[-1], lobos[-1])
+        # x_init = (conejos[-1], lobos[-1])
         # print(x_init)
     # Contadores para contar el numero de animales por cada especie
     else:
@@ -430,12 +431,22 @@ def get_loktavolterra_data(steps, contadores):
                 data_loktavolterra(x_init, [steps[0],ventana])
                 initial_state = False
             else:
+                print(f"Voy a estimar los parametros para: conejos: {conejos}, lobos: {lobos}")
                 params = estimate(conejos, lobos)
-                x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
+                # x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
                 # print(step)
-                data_loktavolterra(x_init, [lim_theoretical_step,lim_theoretical_step+ventana])
+
+
+                # data_loktavolterra(x_init, [lim_theoretical_step,lim_theoretical_step+ventana])
+                data_loktavolterra(x_init, [0,ventana])
                 lim_theoretical_step += ventana
 
+
+        if np.max(sol_lv.t) <= ventana:
+            step_adaptado = step
+            while step_adaptado > ventana:
+                step_adaptado -= ventana
+            step = step_adaptado
         # Cojemos el indice tal que se aproxime más a nuestro step, ya que en la resolucion se va de 0.0X en 0.0X
         t_idx = np.argmin(np.abs(sol_lv.t - step))
 
