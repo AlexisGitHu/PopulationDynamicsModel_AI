@@ -60,7 +60,9 @@ class Agent(mesa.Agent):
 
         except ZeroDivisionError as zd:
             evaluation = 0
-
+        
+        if(evaluation==0):
+            evaluation=np.random.random()*2-1
         return evaluation
 
     def perceive(self):
@@ -125,6 +127,7 @@ class Agent(mesa.Agent):
                 self.eat()
                 self.reproduce()
                 reward = self.model.give_reward(self)
+                features = self.perceive()
                 #reward = self.model.get_reward(self)  # Mover al entorno para distinguir entre especies?
                 self.specie.feedback(self.pos, features, reward)
             else:
@@ -187,7 +190,9 @@ class IntelligentBehaviour():
 
         if r < 1 - self.epsilon:
             list_weights = self.__convert_list_weights((x_position, y_position))
-            wanted_scores_array = list_weights #(np.multiply(np.array(perceive_features), list_weights)).tolist()
+
+            wanted_scores_array = (np.multiply(np.array(perceive_features), list_weights)).tolist()
+
             wanted_score = np.max(wanted_scores_array)
             x_move, y_move = self.relative_positions[wanted_scores_array.index(wanted_score)]
             x_move, y_move = x_move + x_position, y_move + y_position
@@ -287,9 +292,9 @@ class IntelligentBehaviour():
 
         # Compute the Q'-table:
         Q_prime = []
-
-        # features = self.perceive_features
-        Q_prime.append(self.__get_QFunction(features, list_weights))
+        Q_prime=(self.__get_QFunction(features,list_weights))
+ 
+        # features = self.perceive_features 
 
         # Update the weights:
         Q_prime_max = max(Q_prime)
@@ -310,9 +315,9 @@ class IntelligentBehaviour():
     # PRIVATE METHOD
     def __get_QFunction(self, features, weights):
         # TODO Documentar
-        Q = 0
+        Q = []
         for i in range(len(weights)):
-            Q = Q + weights[i] * features[i]
+            Q.append(weights[i] *features[i])
 
         return Q
     
