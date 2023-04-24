@@ -1,4 +1,4 @@
-
+{% extends 'base.html' %}
 {% if form %}
     {% import "bootstrap/wtf.html" as wtf %}
 {% endif %}
@@ -7,19 +7,36 @@
 
 
 {% block content %}
-
    {% if form %}
-   <form method = "POST" action="{{ url_for('modulo_login.login') }}">
-    <p>
-       {{ form.csrf_token }}
-       {{ wtf.form_field(form.username_or_email) }}
-       {{ wtf.form_field(form.password) }}
-       {{ wtf.form_field(form.remember) }}
-       <button class="btn btn-lg btn-primary btn-block" type="submit"> Search </button>
-   
-    </p>
+    <form class="form-signin text-center p-2 w-25 mx-auto mb-4 customBg border border-secondary rounded" method="POST" action="{{url_for('modulo_login.login', nextpath=nextpath)}}">
+        <h1 class="text-center p-3">Login</h1>
+       <input type="hidden" name="nextpath" value="{{nextpath}}">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ wtf.form_field(form.username_or_email) }}
+        </div>
+        <div class="mb-3">
+            {{ wtf.form_field(form.password) }}
+            {{ wtf.form_field(form.show_password) }}
+        </div>
+        {{ wtf.form_field(form.remember) }}
+        <div class="container d-flex justify-content-end">
+            {{ wtf.form_field(form.submit, class="btn customButton") }}
+        </div>
     </form>
     {% endif %}
 
+    <script>
+        $("#check").on("click",
+                function() {
+                    if($(this).is(':checked')) {
+                        $("#password").attr("type","text");
+                    }
+                    else {
+                        $("#password").attr("type","password");
+                    }
+                }
+            );
+    </script>
 
 {% endblock %}

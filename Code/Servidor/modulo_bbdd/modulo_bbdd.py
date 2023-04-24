@@ -1,121 +1,109 @@
-import os
-from flask import Blueprint, current_app, render_template
-from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint, current_app
 from flask_login import UserMixin
-# from sqlalchemy.orm import relationship
-from flask_migrate import Migrate
-# from app import create_app
-# from Server.app import create_app
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import backref
+from werkzeug.security import generate_password_hash, check_password_hash
+import uuid
+
+db = SQLAlchemy(current_app)
+
+modulo_bbdd = Blueprint("modulo_bbdd", __name__, static_folder="static", template_folder="templates")
 
 
-modulo_bbdd = Blueprint("modulo_bbdd", __name__,static_folder="static",template_folder="templates")
+class User(db.Model, UserMixin):
+    __tablename__ = 'usuarios'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique=True)
+    email = db.Column(db.String(60), unique=True)
+    password_hash = db.Column(db.String(256))
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+        }
+
+
+db.create_all()
+
+
+class Modelo(db.Model):
+    __tablename__ = 'modelos'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100))
+    url = db.Column(db.String(100), unique=True)
+    creador = db.Column(db.String(100))
+    fecha_creacion = db.Column(db.String(100))
+    compartir = db.Column(db.String(100), unique=True)
+    publico = db.Column(db.Boolean)
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'nombre': self.nombre,
+            'url': self.url,
+            'creador': self.creador,
+            'fecha_creacion': self.fecha_creacion,
+            'compartir': self.compartir,
+            'publico': self.publico
+        }
+
+
+db.create_all()
+
+
+class Permisos(db.Model):
+    __tablename__ = 'permisos'
+    id_modelo = db.Column(db.Integer, db.ForeignKey('modelos.id'))
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
+
+    modelo = db.relationship("Modelo", backref=backref("modelos", uselist=False))
+    usuario = db.relationship("User", backref=backref("usuarios", uselist=False))
+
+    __table_args__ = (
+        db.PrimaryKeyConstraint(
+            id_modelo, id_usuario,
+        ),
+    )
+
+    @property
+    def serialize(self):
+        return {
+            'id_modelo': self.id_modelo,
+            'id_usuario': self.id_usuario,
+        }
+
+
+db.create_all()
+
 
 @modulo_bbdd.route('/modulo_bbdd/test')
 def modulo_bbdd_test():
-    return 'OK'
+    db.create_all()
 
-# db = create_app()
-db = SQLAlchemy(current_app)
-db.init_app(current_app)
+    '''
+    user = User(username="prueba", email="prueba@prueba.es")
+    user.set_password("test")
+    modelo = Modelo(nombre="prueba", url="prueba", creador="prueba" ,fecha_creacion="prueba", compartir=str(uuid.uuid4()))
+    permiso = Permisos(id_modelo=1, id_usuario=1)
 
-# migrate = Migrate(current_app, db)
-
-
-# class Migracion(db.Model):
-#     __tablename__='migracion'
-#     id = db.Column(db.Integer, primary_key=True)
-    
-#     def as_dict(self):
-#         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
-# LOGIN
-class User(db.Model, UserMixin):
-    __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(15), unique=True)
-    email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(200))
-    confirmed = db.Column(db.Integer, default=0)
-    userhash = db.Column(db.String(50))
-    type_user = db.Column(db.Integer, default=1) # 0 es admin, 1 es usuario
-
-
-    # alumno = db.relationship('User_Group_Class', backref='user')
-
-
-    def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
-
-################################################################################
-# db.create_all tiene que ir debajo de todas las tablas
-db.create_all()
-################################################################################
-
-# Para ver cómo se hacían las FK
-
-# class User_Group_Class(db.Model):
-#     __tablename__='grupos_clase'
-#     id = db.Column(db.Integer, primary_key=True)
-#     # ALVARO O JORGE: LA TUPLA DE ESTUDIANTE Y FILENAME DEBE SER ÚNICA
-#     # (En la inserción de datos os debeís de asegurar de que esta tupla es única (en el caso de que te vayan a meter algún dato donde esta condición falle, sobreescribir la tupla anterior))
-#     encuesta = db.Column(db.String(20), db.ForeignKey('clases.name'))
-#     email = db.Column(db.String(50), db.ForeignKey('user.email'))
-#     student_group = db.Column(db.String(80))
-
-#     #id_ref_1 = db.relationship('GroupGrading', backref='grupos_clase')
-#     #id_ref_2 = db.relationship('PeerGrading', backref='grupos_clase')
-#     # clases = db.relationship('Classes', backref='grupos_clase')
-
-#     def as_dict(self):
-#         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
-
-
-def create_user():
     try:
-        new_user = User (
-            # username=form.username.data,
-            username="SUUUUUUUUUUUUUUUUU",
-            # email = form.email.data,
-            email = "nide@gmail.com",
-            # password = password_hashed,
-            password = "password_hashed",
-            # userhash = userhash,
-            userhash = "",
-            # type_user = form.type_user.data
-            type_user = 1
-        )
-
-        db.session.add(new_user)
+        db.session.add(user)
+        db.session.add(modelo)
+        db.session.add(permiso)
         db.session.commit()
-
-        return 'Usuario creado con éxito!'
-
     except:
         db.session.rollback()
-        
-        return 'Este nombre de usuario o correo ya existe, introduce otro'
+        return 'ERROR'
+    '''
 
-@modulo_bbdd.route('/modulo_bbdd/create_user')
-def modulo_bbdd_create_user():
-
-    prueba = create_user()
-
-    return prueba
-
-@modulo_bbdd.route('/modulo_bbdd/template')
-def modulo_bbdd_template():
-
-    return render_template("index.html")
-
-@modulo_bbdd.route('/mostrar_user')
-def mostrar_user():
-    user = User.query.filter(User.email=="nide@gmail.com").first()  
-    #,username = user.username, password = user. esto iria en la linea 59
-    #user = None #borrar al descomentar la query
-    if user:
-        return render_template("mostrar_user.html", username = user.username, password = user.password, email = user.email) #quiza falta añadir user hash y user type
-
-    return render_template("mostrar_user.html")
-
+    return 'OK'

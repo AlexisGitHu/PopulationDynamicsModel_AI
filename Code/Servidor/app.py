@@ -1,17 +1,12 @@
-from flask import Flask, render_template, make_response
-import os
-import subprocess
-import asyncio
-import threading
-from queue import Queue
 import json
-import re
+import subprocess
+import threading
+
+from flask import Flask
 from flask import jsonify
-from flask_cors import CORS, cross_origin
 from flask_bootstrap import Bootstrap
+from flask_cors import CORS, cross_origin
 
-
-import mpld3
 # loop = asyncio.get_event_loop()
 # db = SQLAlchemy()
 
@@ -27,12 +22,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Imports para registrar los modulos
 with app.app_context():
-    from Servidor.modulo_bbdd.modulo_bbdd import *
-    from Servidor.modulo_login.modulo_login import *
+    from modulo_funcionesAux.modulo_funcionesAux import *
+    from modulo_bbdd.modulo_bbdd import *
+    from modulo_login.modulo_login import *
+    from modulo_forms.modulo_forms import *
+    from modulo_modelos.modulo_modelos import *
 
+app.register_blueprint(modulo_funcionesAux)
+app.register_blueprint(modulo_forms)
 app.register_blueprint(modulo_bbdd)
 app.register_blueprint(modulo_login)
-
+app.register_blueprint(modulo_modelos)
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}?auth_plugin=mysql_native_password".format(
 #   username=get_configuration()["MYSQL_USERNAME"],
@@ -41,6 +41,25 @@ app.register_blueprint(modulo_login)
 #   databasename=get_configuration()["MYSQL_DATABASENAME"]
 #   )
 
+@app.route('/')
+def index():
+    return render_template("index.html")
+
+
+@app.route('/pagina_claudia')
+def pagina_claudia():
+    # if request.method == "POST":
+    #     return redirect(url_for("modulo_bbdd.mostrar_user"))
+
+    return render_template("pagina_claudia.html")
+
+@app.route('/mostrar_parametrizacion', methods = ["GET", "POST"])
+def mostrar_parametrizacion():
+    # if request.method == "POST":
+
+        #return redirect(url_for("modulo_bbdd.mostrar_user"))
+
+    return render_template("mostrar_parametrizacion.html")
 
 
 # datos = {}
@@ -53,12 +72,12 @@ datosMesa = {}
 #     # Validar que el id es válido para no meter basura por si acaso
 
 #     while True:   # Could be more pythonic with := in Python3.8+        
-        
+
 #         line = process.stdout.readline()
 #         # line2 = process.stdout.read().splitlines()
 #         if not line and process.poll() is not None:
 #             break
-        
+
 #         linea_sucia = line.decode()
 #         linea_limpia = linea_sucia.replace("\r\n", "").replace("\\\"", "\'")
 
@@ -77,13 +96,13 @@ def lectura_datos_mesa(process, id):
     global datosMesa
     #### IMPORTANTE!! Validar que el id es válido para no meter basura por si acaso
 
-    while True:      
-        
+    while True:
+
         line = process.stdout.readline()
 
         if not line and process.poll() is not None:
             break
-        
+
         linea_sucia = line.decode('latin-1')
         linea_limpia = linea_sucia.replace("\r\n", "").replace("\\\"", "\'")
 
@@ -93,9 +112,9 @@ def lectura_datos_mesa(process, id):
             continue
         if not linea_limpia:
             continue
-        
+
         ## Quitamos la última coma del último elemento para poder parsear el string a json con json.loads
-        linea_limpia = linea_limpia[::-1].replace(",","",1)[::-1]
+        linea_limpia = linea_limpia[::-1].replace(",", "", 1)[::-1]
         # print(linea_limpia)
 
         # Insertar en la lista si no está vacía y si no existen datos meterlos
@@ -119,7 +138,7 @@ def lectura_datos_mesa(process, id):
 #         stdout=subprocess.PIPE,
 #         stderr=subprocess.STDOUT
 #     )
-    
+
 #     thread = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process, id])
 #     # thread2 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
 #     # thread3 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
@@ -127,7 +146,7 @@ def lectura_datos_mesa(process, id):
 #     # thread5 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
 #     # thread6 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
 #     # thread7 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
-    
+
 
 #     # thread.setDaemon(True)
 #     thread.start()
@@ -147,7 +166,7 @@ def lectura_datos_mesa(process, id):
 @cross_origin()
 @app.route("/ejecuta/mesa/<id>")
 def ejecuta_mesa(id):
-        # global process
+    # global process
 
     ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
     ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
@@ -159,11 +178,10 @@ def ejecuta_mesa(id):
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT
     )
-    
-    thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, id])
-    
-    thread.start()
 
+    thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, id])
+
+    thread.start()
 
     return "Entrenando modelo"
 
@@ -184,7 +202,7 @@ def ejecuta_mesa(id):
 #         datos_grafica = get_graph_data(datos_nuevos) <- Tratar los datos con esta funcion en base a los datos pasados y que me devuelva los steps y los contadores
 
 #         ret_datos = [datos_visualizar, datos_grafica]
-    
+
 #     return ret_datos
 ################################################################################################################################
 
@@ -199,7 +217,6 @@ def muestra_mesa(id):
         datos_nuevos = []
 
     return jsonify(datos_nuevos)
-    
 
 
 #################################################### PODEMOS ELIMINARLO ########################################################
@@ -231,12 +248,10 @@ def muestra_mesa(id):
 ################################################################################################################################
 
 
-
-
 # Imports necesarios para calcular las ecuaciones teoricas para el modelo de poblaciones
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
+
 # from scipy.integrate import odeint
 # from scipy.optimize import minimize
 
@@ -246,21 +261,21 @@ initial_state = True
 ventana = 200
 lim_theoretical_step = ventana
 
+
 # Definición de la funcion de lotka volterra
 # def lotkavolterra(t, x, rl, alpha, rz, beta):
 #     return np.array([rl*x[0] - alpha*x[0]*x[1], -rz*x[1] + beta*x[0]*x[1]])
 
 
 def estimate(conejos, lobos):
+    dif_conejos = [y - x for x, y in zip(conejos, conejos[1:])]
+    dif_lobos = [y - x for x, y in zip(lobos, lobos[1:])]
 
-    dif_conejos = [y - x for x,y in zip(conejos,conejos[1:])]
-    dif_lobos = [y - x for x,y in zip(lobos,lobos[1:])]
+    sum_conejos = [(y + x) / 2 for x, y in zip(conejos, conejos[1:])]
+    sum_lobos = [(y + x) / 2 for x, y in zip(lobos, lobos[1:])]
 
-    sum_conejos = [(y + x)/2 for x,y in zip(conejos,conejos[1:])]
-    sum_lobos = [(y + x)/2 for x,y in zip(lobos,lobos[1:])]
+    sum_mult = [(x_2 * y_2 + x_1 * y_1) / 2 for x_1, y_1, x_2, y_2 in zip(conejos, lobos, conejos[1:], lobos[1:])]
 
-    sum_mult = [(x_2 * y_2 + x_1 * y_1)/2 for x_1,y_1, x_2,y_2 in zip(conejos,lobos,conejos[1:],lobos[1:])]
-    
     X = np.matrix([sum_conejos, sum_mult])
     X_t = X
     X = X.transpose()
@@ -274,9 +289,9 @@ def estimate(conejos, lobos):
         inversa_Xt_X = np.linalg.inv(mult_Xt_X)
     except np.linalg.LinAlgError as err:
         print("error de inversa")
-        vector_error = np.random.normal(loc=0,scale=0.001,size=(mult_Xt_X.shape))
+        vector_error = np.random.normal(loc=0, scale=0.001, size=(mult_Xt_X.shape))
 
-        inversa_Xt_X = np.linalg.inv(mult_Xt_X+vector_error)
+        inversa_Xt_X = np.linalg.inv(mult_Xt_X + vector_error)
 
     tras_inv_conejos = np.matmul(inversa_Xt_X, X_t)
     A_conejos = np.matmul(tras_inv_conejos, np.array(dif_conejos))
@@ -286,21 +301,20 @@ def estimate(conejos, lobos):
         inversa_Yt_Y = np.linalg.inv(mult_Yt_Y)
     except np.linalg.LinAlgError as err:
         # vector_error = np.random.rand(1,mult_Yt_Y.shape[0])
-        vector_error = np.random.normal(loc=0,scale=0.001,size=(mult_Yt_Y.shape))
+        vector_error = np.random.normal(loc=0, scale=0.001, size=(mult_Yt_Y.shape))
 
-        inversa_Yt_Y = np.linalg.inv(mult_Yt_Y+vector_error)
+        inversa_Yt_Y = np.linalg.inv(mult_Yt_Y + vector_error)
 
     tras_inv_lobos = np.matmul(inversa_Yt_Y, Y_t)
     A_lobos = np.matmul(tras_inv_lobos, np.array(dif_lobos))
-    
+
     # print(A_conejos)
     # print(A_lobos)
-    
-    rl_practico = float(A_conejos[0][:,0])
-    alpha_practico = float(A_conejos[0][:,1])
-    beta_practico = float(A_lobos[0][:,1])
-    rz_practico = float(A_lobos[0][:,0])
 
+    rl_practico = float(A_conejos[0][:, 0])
+    alpha_practico = float(A_conejos[0][:, 1])
+    beta_practico = float(A_lobos[0][:, 1])
+    rz_practico = float(A_lobos[0][:, 0])
 
     print("estimate:")
     print([rl_practico, alpha_practico, rz_practico, beta_practico])
@@ -308,10 +322,7 @@ def estimate(conejos, lobos):
 
 
 def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
-    return np.array([rl*x[0] + alpha*x[0]*x[1], rz*x[1]+beta*x[0]*x[1]])
-
-
-
+    return np.array([rl * x[0] + alpha * x[0] * x[1], rz * x[1] + beta * x[0] * x[1]])
 
 
 # # from scipy.optimize import curve_fit
@@ -343,7 +354,6 @@ def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
 #     return result.x
 
 
-
 # Funcion para actualizar datos de la funcion de lotka volterra teorica (dependientes del numero de especies que haya en un momento)
 def data_loktavolterra(x_init, steps):
     # Linea para poder actualizar el valor de la variable global sol_lv
@@ -366,8 +376,9 @@ def data_loktavolterra(x_init, steps):
 
     # t_span = (0,400)
     # t_eval = np.linspace(t_span[0], t_span[1], t_span[1] - t_span[0])
-    
+
     sol_lv = solve_ivp(lotkavolterra_sobreescrito, t_span, x_init, args=tuple(params), t_eval=t_eval)
+
 
 ### Hay un error que salta al final de la ejecución cuando tiramos el servidor con crtl + c que scipy da un error en esta url está la solución pero no sé si merece la pena
 # forrtl: error (200): program aborting due to control-C event
@@ -379,16 +390,14 @@ def data_loktavolterra(x_init, steps):
 ###################### https://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats ##########################
 
 
-
-
 # Initialize the data of loktavolterra equations
-x_init = (5,5)
+x_init = (5, 5)
 # data_loktavolterra(x_init)
 conejos = []
 lobos = []
 
 import math
-import random
+
 
 # Funcion para recoger datos de la solucion numerica de lotka volterra dados unos steps
 def get_loktavolterra_data(steps, contadores):
@@ -406,7 +415,7 @@ def get_loktavolterra_data(steps, contadores):
             conejos.append(i[0])
             lobos.append(i[1])
         params = estimate(conejos, lobos)
-            
+
         data_loktavolterra(x_init, steps)
         # x_init = (conejos[-1], lobos[-1])
         # print(x_init)
@@ -424,11 +433,11 @@ def get_loktavolterra_data(steps, contadores):
     for step in steps:
         # # En el caso de que se haya pasado el limite hasta el que se había resuelto numericamente las ecuaciones de lotka volterra, actualizamos los datos
         if step > lim_theoretical_step:
-            
+
             if initial_state == True:
                 conejos = conejos[-ventana:]
                 lobos = lobos[-ventana:]
-                data_loktavolterra(x_init, [steps[0],ventana])
+                data_loktavolterra(x_init, [steps[0], ventana])
                 initial_state = False
             else:
                 print(f"Voy a estimar los parametros para: conejos: {conejos}, lobos: {lobos}")
@@ -436,11 +445,9 @@ def get_loktavolterra_data(steps, contadores):
                 # x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
                 # print(step)
 
-
                 # data_loktavolterra(x_init, [lim_theoretical_step,lim_theoretical_step+ventana])
-                data_loktavolterra(x_init, [0,ventana])
+                data_loktavolterra(x_init, [0, ventana])
                 lim_theoretical_step += ventana
-
 
         if np.max(sol_lv.t) <= ventana:
             step_adaptado = step
@@ -453,18 +460,17 @@ def get_loktavolterra_data(steps, contadores):
         # Cojemos los valores de 'conejos' y 'lobos' en t=step
         num_conejos = sol_lv.y[0][t_idx]
         num_lobos = sol_lv.y[1][t_idx]
-        
+
         contadores_teoricos.append((math.ceil(num_lobos), math.ceil(num_conejos)))
 
     # Devolvemos esos contadores
     return contadores_teoricos
 
+
 # Ruta para devolver datos de cuantos animales de cada tipo hay
 @app.route("/get_graph_data")
 def get_graph_data():
-
     ### IMPORTANTE!!! Hacer que esto de datos nuevos sean temporales para que distintas rutas puedan devolver distinta informacion de esos mismos datos
-
 
     datos_nuevos = None
     datos_validos = []
@@ -482,7 +488,7 @@ def get_graph_data():
         # Si no tiene datos
         datos_nuevos = []
         # return datos_nuevos
-    
+
     print("He salido del if else, linea 487")
     print()
     step = 0
@@ -502,17 +508,16 @@ def get_graph_data():
                 cont_lobos += 1
             elif "conejo.png" in j.values():
                 cont_conejos += 1
-        
+
         contadores.append((cont_lobos, cont_conejos))
         cont_lobos = 0
         cont_conejos = 0
-    
+
     # En el caso de que se hayan recogido datos, poner los steps, los contadores actuales y los contadores teoricos
     if len(steps) >= 2:
         print("len(steps) >= 2")
         theorical_data = get_loktavolterra_data(steps, contadores)
         datos_validos = [steps, contadores, theorical_data]
-
 
     response = make_response(json.dumps(datos_validos))
 
@@ -520,6 +525,7 @@ def get_graph_data():
     # print(datos_validos)
 
     return response
+
 
 @app.route("/graph_data")
 def graph_data():
@@ -543,7 +549,7 @@ def graph_data():
 
 #     if not datos_nuevos:
 #         return datos_nuevos
-    
+
 #     datos_validos = get_graph_data(datos_nuevos)
 
 #     response = make_response(json.dumps([datos_nuevos, datos_validos]))
@@ -565,7 +571,7 @@ def graph_data():
 #     return jsonify(datos_nuevos)
 ################################################################################################################################
 
-    
+
 ####################################### PODEMOS ELIMINARLO O CAMBIAR LO QUE SE DEVUELVE ########################################
 # @app.route("/", defaults={"id":None})
 # @app.route("/<id>")
