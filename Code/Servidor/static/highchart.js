@@ -490,3 +490,137 @@ $(document).ready(function() {
 //     // redraw();
 // }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+var chart;
+
+//  * Request data from the server, add it to the graph and set a timeout
+//  * to request again
+function requestData() {
+    $.ajax({
+        url: 'http://localhost:5000/get_graph_data',
+        dataType:'json',
+        success: function(datos) {
+            if(datos.length > 0)
+            {
+                for(var i = 0; i < datos[0].length; i++)
+                {
+                    x_step = datos[0][i];
+                    y_lobo = datos[1][i][0];
+                    y_conejo = datos[1][i][1];
+                    
+                    
+                    y_lobo_teorico = datos[2][i][0];
+                    y_conejo_teorico = datos[2][i][1];
+
+                    if(!(x_step==0 && y_lobo==0 && y_conejo==0))
+                    {
+                        point_lobo = [x_step, y_lobo];
+                        point_conejo = [x_step, y_conejo];
+                        point_lobo_teorico = [x_step, y_lobo_teorico];
+                        point_conejo_teorico = [x_step, y_conejo_teorico];
+                        
+                        // add the point
+                        chart.series[0].addPoint(point_lobo, true);
+                        chart.series[1].addPoint(point_conejo, true);
+                        chart.series[2].addPoint(point_lobo_teorico, true);
+                        chart.series[3].addPoint(point_conejo_teorico, true);
+                    }
+                }
+            }
+            // call it again after one second
+            setTimeout(requestData, 1000);
+            },
+        cache: false
+    });
+}
+
+$(document).ready(function() {
+    chart = new Highcharts.Chart({
+        // Definimos el estilo de grafica que será y de donde se cogen los datos
+        chart: {
+            renderTo: 'fig02',
+            events: {
+                load: requestData,
+            },
+            type: "line",
+            animation: false,
+            zoomType: 'x',
+            panning: {
+                enabled: true
+            },
+            panKey: 'shift',
+        },
+        // Configuramos los plotOtions para mostrar checkboxes en la leyenda
+        plotOptions: {
+            series: {
+                showCheckbox: true,
+                selected: true,
+                events: {
+                    checkboxClick: function () {
+                        this.setVisible(!this.visible);
+                    },
+                },
+                // showInNavigator: true,
+            }
+        },
+        // Definimos el titulo del gráfico
+        title: {
+            text: 'Live data'
+        },
+        // Definimos el estilo del eje x
+        xAxis: {
+            type: 'linear',
+            allowDecimals: false,
+            min: 0
+        },
+        // Definimos el estilo del eje y
+        yAxis: {
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            title: {
+                text: 'Value',
+                margin: 80
+            }
+        },
+        // Definimos cómo queremos la leyenda
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            itemStyle: {
+                fontSize:'17px',
+                // font: '20pt Trebuchet MS, Verdana, sans-serif',
+                color: '#000'
+             },
+             itemCheckboxStyle: {
+                cursor: "pointer",
+                border: "1px solid #62737a",
+            },
+        },
+        // Definimos que queremos un ToolTip para ver los distintos valores que toman las graficas en cierto punto
+        tooltip: {
+            crosshairs: [true, true],
+            shared: true
+        },
+        // Definimos las series distintas que vamos a tener
+        series: [
+        {
+            name: '# lobos',
+            data: []
+        },
+        {
+            name: '# conejos',
+            data: []
+        },
+        {
+            name: '# lobos teoricos',
+            data: []
+        },
+        {
+            name: '# conejos teoricos',
+            data: []
+        }]
+    });
+});

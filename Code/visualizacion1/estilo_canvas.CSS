@@ -134,8 +134,6 @@ canvas[resize] {
     height: 80%;
     border: outset;
     margin-left:100px;
-<<<<<<< Updated upstream:Code/visualizacion1/estilo_canvas.CSS
-=======
 }
 
 h2 {
@@ -157,5 +155,4 @@ h3 {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     font-weight: bold;
->>>>>>> Stashed changes:Code/visualizacion1/html_js_css_visualizacion/estilo_canvas.CSS
 }

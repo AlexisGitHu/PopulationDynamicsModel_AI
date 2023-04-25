@@ -207,6 +207,7 @@ def ejecuta_mesa(id):
 ################################################################################################################################
 
 
+######################################################### RUTA PARA COMPROBAR QUE CIERTO USUARIO TIENE DATOS ##############################################################
 # Ruta para ver datos nuevos del modelo
 @app.route("/muestra/mesa/<id>")
 def muestra_mesa(id):
@@ -288,7 +289,7 @@ def estimate(conejos, lobos):
     try:
         inversa_Xt_X = np.linalg.inv(mult_Xt_X)
     except np.linalg.LinAlgError as err:
-        print("error de inversa")
+        # print("error de inversa")
         vector_error = np.random.normal(loc=0, scale=0.001, size=(mult_Xt_X.shape))
 
         inversa_Xt_X = np.linalg.inv(mult_Xt_X + vector_error)
@@ -316,8 +317,8 @@ def estimate(conejos, lobos):
     beta_practico = float(A_lobos[0][:, 1])
     rz_practico = float(A_lobos[0][:, 0])
 
-    print("estimate:")
-    print([rl_practico, alpha_practico, rz_practico, beta_practico])
+    # print("estimate:")
+    # print([rl_practico, alpha_practico, rz_practico, beta_practico])
     return [rl_practico, alpha_practico, rz_practico, beta_practico]
 
 
@@ -363,7 +364,7 @@ def data_loktavolterra(x_init, steps):
     t_span = (steps[0], steps[-1])
     t_eval = np.linspace(t_span[0], t_span[1], t_span[1] - t_span[0])
 
-    print(f"Voy a calcular lotkavolterra con x_init: {x_init} y con el tspan: {t_span} y un t_eval: {t_eval}")
+    # print(f"Voy a calcular lotkavolterra con x_init: {x_init} y con el tspan: {t_span} y un t_eval: {t_eval}")
 
     # Si se quiere ampliar el periodo (la frecuencia de las puntas del teorico) dividir entre numeros más grandes, si se quiere más frecuencia multiplicar o dividir entre menos (/2, /3)
     # Parametros para indicar tasa de crecimiento de los conejos, zorros y tasa de muertes de conejos por zorros
@@ -440,7 +441,7 @@ def get_loktavolterra_data(steps, contadores):
                 data_loktavolterra(x_init, [steps[0], ventana])
                 initial_state = False
             else:
-                print(f"Voy a estimar los parametros para: conejos: {conejos}, lobos: {lobos}")
+                # print(f"Voy a estimar los parametros para: conejos: {conejos}, lobos: {lobos}")
                 params = estimate(conejos, lobos)
                 # x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
                 # print(step)
@@ -467,30 +468,77 @@ def get_loktavolterra_data(steps, contadores):
     return contadores_teoricos
 
 
+#################################################### PODEMOS ELIMINARLO ########################################################
 # Ruta para devolver datos de cuantos animales de cada tipo hay
-@app.route("/get_graph_data")
-def get_graph_data():
+# @app.route("/get_graph_data")
+# def get_graph_data():
+#     ### IMPORTANTE!!! Hacer que esto de datos nuevos sean temporales para que distintas rutas puedan devolver distinta informacion de esos mismos datos
+
+#     datos_nuevos = None
+#     datos_validos = []
+#     # print(datosMesa)
+
+#     ### IMPORTANTE!!! En vez de mirar "1" in datosMesa, mirar si el id de la persona loggeada está en datosMesa (por si ha entrenado un modelo)
+#     if "1" in datosMesa:
+#         datos_nuevos = datosMesa["1"]
+#         # Necesitamos como mínimo para poder estimar, 2 datos
+#         # print(datos_nuevos)
+#         if len(datos_nuevos) < 2:
+#             return datos_validos
+#         datosMesa["1"] = []
+#     else:
+#         # Si no tiene datos
+#         datos_nuevos = []
+#         # return datos_nuevos
+
+#     step = 0
+#     cont_lobos = 0
+#     cont_conejos = 0
+#     steps = []
+#     contadores = []
+
+#     # print(datos_nuevos)
+
+#     for i in datos_nuevos:
+#         step = i["Step"]
+#         info = i["info"]
+
+#         steps.append(step)
+
+#         for j in info:
+#             if "lobo.png" in j.values():
+#                 cont_lobos += 1
+#             elif "conejo.png" in j.values():
+#                 cont_conejos += 1
+
+#         contadores.append((cont_lobos, cont_conejos))
+#         cont_lobos = 0
+#         cont_conejos = 0
+
+#     # En el caso de que se hayan recogido datos, poner los steps, los contadores actuales y los contadores teoricos
+#     if len(steps) >= 2:
+#         # print("len(steps) >= 2")
+#         theorical_data = get_loktavolterra_data(steps, contadores)
+#         datos_validos = [steps, contadores, theorical_data]
+
+#     response = make_response(json.dumps(datos_validos))
+
+#     response.content_type = "application/json"
+#     # print(datos_validos)
+
+#     return response
+################################################################################################################################
+
+#################################################### PODEMOS ELIMINARLO ########################################################
+# @app.route("/graph_data")
+# def graph_data():
+#     return render_template('grafica.html')
+################################################################################################################################
+
+def get_graph_data_dup(datos_nuevos):
     ### IMPORTANTE!!! Hacer que esto de datos nuevos sean temporales para que distintas rutas puedan devolver distinta informacion de esos mismos datos
-
-    datos_nuevos = None
     datos_validos = []
-    # print(datosMesa)
 
-    ### IMPORTANTE!!! En vez de mirar "1" in datosMesa, mirar si el id de la persona loggeada está en datosMesa (por si ha entrenado un modelo)
-    if "1" in datosMesa:
-        datos_nuevos = datosMesa["1"]
-        # Necesitamos como mínimo para poder estimar, 2 datos
-        # print(datos_nuevos)
-        if len(datos_nuevos) < 2:
-            return datos_validos
-        datosMesa["1"] = []
-    else:
-        # Si no tiene datos
-        datos_nuevos = []
-        # return datos_nuevos
-
-    print("He salido del if else, linea 487")
-    print()
     step = 0
     cont_lobos = 0
     cont_conejos = 0
@@ -515,48 +563,40 @@ def get_graph_data():
 
     # En el caso de que se hayan recogido datos, poner los steps, los contadores actuales y los contadores teoricos
     if len(steps) >= 2:
-        print("len(steps) >= 2")
+        # print("len(steps) >= 2")
         theorical_data = get_loktavolterra_data(steps, contadores)
         datos_validos = [steps, contadores, theorical_data]
 
-    response = make_response(json.dumps(datos_validos))
+    datos_validos = [i for i in zip(steps, contadores, theorical_data)]
 
+    return datos_validos
+
+@app.route("/paint_data")
+def paint_data():
+    datos_validos = []
+    datos_nuevos = []
+
+    if "1" in datosMesa:
+        datos_nuevos = datosMesa["1"]
+        # Necesitamos como mínimo para poder estimar, 2 datos
+        # print(datos_nuevos)
+        if len(datos_nuevos) < 2:
+            return datos_validos
+        datosMesa["1"] = []
+    else:
+        datos_nuevos = []
+
+    if not datos_nuevos:
+        return datos_nuevos
+
+    datos_validos = get_graph_data_dup(datos_nuevos)
+
+    response = make_response(json.dumps([datos_nuevos, datos_validos]))
     response.content_type = "application/json"
-    # print(datos_validos)
+
+    # print(f"/paint_data: datos_grafico{response}")
 
     return response
-
-
-@app.route("/graph_data")
-def graph_data():
-    return render_template('grafica.html')
-
-
-# @app.route("/paint_data")
-# def paint_data():
-#     datos_validos = []
-#     datos_nuevos = []
-
-#     if "1" in datosMesa:
-#         datos_nuevos = datosMesa["1"]
-#         # Necesitamos como mínimo para poder estimar, 2 datos
-#         print(datos_nuevos)
-#         if len(datos_nuevos) < 2:
-#             return datos_validos
-#         datosMesa["1"] = []
-#     else:
-#         datos_nuevos = []
-
-#     if not datos_nuevos:
-#         return datos_nuevos
-
-#     datos_validos = get_graph_data(datos_nuevos)
-
-#     response = make_response(json.dumps([datos_nuevos, datos_validos]))
-#     response.content_type = "application/json"
-#     # print(datos_validos)
-
-#     return response
 
 
 #################################################### PODEMOS ELIMINARLO ########################################################
