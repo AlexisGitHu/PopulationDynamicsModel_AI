@@ -91,7 +91,7 @@ body {
 }
 
 #n_agentes{
-	margin-right: 7%;
+	margin-right: 9%;
 }
 
 .container_op_avanzadas{
@@ -134,4 +134,28 @@ canvas[resize] {
     height: 80%;
     border: outset;
     margin-left:100px;
+<<<<<<< Updated upstream:Code/visualizacion1/estilo_canvas.CSS
+=======
+}
+
+h2 {
+    all:initial;
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+h3 {
+    all:initial;
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+>>>>>>> Stashed changes:Code/visualizacion1/html_js_css_visualizacion/estilo_canvas.CSS
 }
