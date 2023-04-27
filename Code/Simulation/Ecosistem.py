@@ -35,7 +35,7 @@ class Ecosistem(mesa.Model):
     def step(self):
         print('{"Step": ' + str(self.schedule.steps) + ', "info":[', end="")
         self.schedule.step()
-        print("]}\n")
+        
 
         for parent in self.reproduce:
             self._copyAgent(parent, pos = parent.pos)
@@ -43,6 +43,7 @@ class Ecosistem(mesa.Model):
 
         for dead_agent in self.killed:
             try:
+                dead_agent.print_log()
                 self.agent_collection[dead_agent.specie].remove(dead_agent)
                 self.grid.remove_agent(dead_agent)
                 self.schedule.remove(dead_agent)
@@ -56,6 +57,7 @@ class Ecosistem(mesa.Model):
 
         if not len(self.agent_collection[self.basic_food_info["agent"]])> 7:
             self._create_basic_food()
+        print("]}\n")
     
     def _copyAgent(self,agent, pos = None):
         new_agent = Agents.Agent(self.next_agent_id, self, agent.specie, agent.preys, agent.predators,

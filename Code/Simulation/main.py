@@ -79,7 +79,7 @@ grid = mesa.visualization.CanvasGrid(agent_portrayal, SIZE, SIZE, 500, 500)
 server = mesa.visualization.ModularServer(
     Ecosistem, [grid], "Ecosistem", {"agent_dict":agent_dict, "size": SIZE,"basic_food_info":basic_food_info}
 )
-server.port = 8525  # The default
+server.port = 8526  # The default
 server.verbose = False
 server.launch()
 

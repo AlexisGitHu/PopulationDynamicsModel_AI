@@ -116,12 +116,15 @@ def lectura_datos_mesa(process, id):
         ## Quitamos la última coma del último elemento para poder parsear el string a json con json.loads
         linea_limpia = linea_limpia[::-1].replace(",", "", 1)[::-1]
         # print(linea_limpia)
-
-        # Insertar en la lista si no está vacía y si no existen datos meterlos
         try:
-            datosMesa[id].append(json.loads(linea_limpia))
-        except:
-            datosMesa[id] = [json.loads(linea_limpia)]
+            # Insertar en la lista si no está vacía y si no existen datos meterlos
+            try:
+                datosMesa[id].append(json.loads(linea_limpia))
+            except:
+                datosMesa[id] = [json.loads(linea_limpia)]
+        except Exception as e:
+            print(type(e))
+            print(e)
 
 
 #################################################### PODEMOS ELIMINARLO ########################################################

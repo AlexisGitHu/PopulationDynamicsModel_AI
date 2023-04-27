@@ -40,6 +40,7 @@ class Agent(mesa.Agent):
         self.sprite = sprite
         self.isBasic = isBasic
         self.pos_matriz_pesos = []
+        self.alive = True
 
     def individual_cell_evaluation(self, x, y):
         '''
@@ -101,6 +102,7 @@ class Agent(mesa.Agent):
             other_agent = self.random.choice(enemies)
             self.model.killed.append(other_agent)
             self.energy +=40
+            other_agent.alive = False
 
     # TODO
     def reproduce(self):
@@ -119,7 +121,6 @@ class Agent(mesa.Agent):
             Cada agente percibe su entorno, se mueve, come, se reproduce y aprende.
         Imprime un log con el estado del agente tras hacer sus acciones.
         '''
-        alive = True
         if not self.isBasic:
             if self.energy > 0:
                 features = self.perceive()
@@ -132,13 +133,16 @@ class Agent(mesa.Agent):
                 self.specie.feedback(self.pos, features, reward)
             else:
                 self.model.killed.append(self)
-                alive = False
+                self.alive = False
 
+        self.print_log()
+
+    def print_log(self):
         log = {"ID": int(self.unique_id),
                "Position": tuple(self.pos),
                "Direction": self.direction,
                "Sprite": self.sprite,
-               "Alive": str(alive)}
+               "Alive": str(self.alive)}
         print(json.dumps(log), end=", ")
 
 
