@@ -7,6 +7,11 @@ from flask import jsonify
 from flask_bootstrap import Bootstrap
 from flask_cors import CORS, cross_origin
 
+# Imports necesarios para calcular las ecuaciones teoricas para el modelo de poblaciones
+import math
+import numpy as np
+from scipy.integrate import solve_ivp
+
 # loop = asyncio.get_event_loop()
 # db = SQLAlchemy()
 
@@ -40,6 +45,19 @@ app.register_blueprint(modulo_modelos)
 #   hostname=get_configuration()["MYSQL_HOSTNAME"],
 #   databasename=get_configuration()["MYSQL_DATABASENAME"]
 #   )
+
+
+# Initialize the data of loktavolterra equations
+x_init = (5, 5)
+conejos = []
+lobos = []
+
+sol_lv = None
+params = []
+initial_state = True
+ventana = 200
+lim_theoretical_step = ventana
+
 
 @app.route('/')
 def index():
@@ -93,6 +111,14 @@ datosMesa = {}
 
 # Función que lee de un stdout los logs del modelo de entrenamiento
 def lectura_datos_mesa(process, id):
+    '''
+    Funcion que almacena los logs del modelo de entrenamiento leídos a través de un stdout
+
+    Params:
+        -process::subprocess Subproceso creado para ejecutar el modelo
+        -id::int Identificador del usuario para almacenar los datos para ese usuario
+    '''
+
     global datosMesa
     #### IMPORTANTE!! Validar que el id es válido para no meter basura por si acaso
 
@@ -116,15 +142,12 @@ def lectura_datos_mesa(process, id):
         ## Quitamos la última coma del último elemento para poder parsear el string a json con json.loads
         linea_limpia = linea_limpia[::-1].replace(",", "", 1)[::-1]
         # print(linea_limpia)
+
+        # Insertar en la lista si no está vacía y si no existen datos meterlos
         try:
-            # Insertar en la lista si no está vacía y si no existen datos meterlos
-            try:
-                datosMesa[id].append(json.loads(linea_limpia))
-            except:
-                datosMesa[id] = [json.loads(linea_limpia)]
-        except Exception as e:
-            print(type(e))
-            print(e)
+            datosMesa[id].append(json.loads(linea_limpia))
+        except:
+            datosMesa[id] = [json.loads(linea_limpia)]
 
 
 #################################################### PODEMOS ELIMINARLO ########################################################
@@ -169,6 +192,12 @@ def lectura_datos_mesa(process, id):
 @cross_origin()
 @app.route("/ejecuta/mesa/<id>")
 def ejecuta_mesa(id):
+    '''
+    Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
+
+    Params:
+        -id::int Identificador del usuario que va a entrenar el modelo
+    '''
     # global process
 
     ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
@@ -214,6 +243,12 @@ def ejecuta_mesa(id):
 # Ruta para ver datos nuevos del modelo
 @app.route("/muestra/mesa/<id>")
 def muestra_mesa(id):
+    '''
+    Ruta para debuggear y comprobar que hay datos nuevos
+
+    Params:
+        -id::int Identificador del usuario para almacenar los datos para ese usuario
+    '''
     if id in datosMesa:
         datos_nuevos = datosMesa[id]
         datosMesa[id] = []
@@ -252,18 +287,6 @@ def muestra_mesa(id):
 ################################################################################################################################
 
 
-# Imports necesarios para calcular las ecuaciones teoricas para el modelo de poblaciones
-import numpy as np
-from scipy.integrate import solve_ivp
-
-# from scipy.integrate import odeint
-# from scipy.optimize import minimize
-
-sol_lv = None
-params = []
-initial_state = True
-ventana = 200
-lim_theoretical_step = ventana
 
 
 # Definición de la funcion de lotka volterra
@@ -272,6 +295,17 @@ lim_theoretical_step = ventana
 
 
 def estimate(conejos, lobos):
+    '''
+    Algoritmo para hacer una estimación de parametros para las ecuaciones de lotka-volterra en base a los datos recogidos
+
+    Params:
+        -conjeos::list Lista de datos de número de conejos por cada iteración
+        -lobos::list Lista de datos de número de lobos por cada iteración
+
+    Errores posibles:
+        - np.linalg.LinAlgError en el caso de que una matriz no sea invertible, se trata añadiendo a través de la distribución normal con media 0 ruido a las filas
+    '''
+
     dif_conejos = [y - x for x, y in zip(conejos, conejos[1:])]
     dif_lobos = [y - x for x, y in zip(lobos, lobos[1:])]
 
@@ -326,6 +360,20 @@ def estimate(conejos, lobos):
 
 
 def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
+    '''
+    Función de lotka volterra
+
+    Params:
+        -t::float Necesario para resolver númericamente las ecuaciones diferenciales a través de solve_ivp
+        -x::list Tupla donde el primer elemento tiene el número de liebres y el segundo el numero de lobos
+        -rl::float Parametro que describe la tasa de crecimiento de las liebres
+        -alpha::float Parametro que describe que por cada tantos zorros mueren alpha liebres
+        -rz::float Parametro que describe la tasa de decrecimiento de los lobos
+        -beta::float Parametro que describe que por cada tantas liebres crecen beta lobos
+
+    Errores posibles:
+        - np.linalg.LinAlgError en el caso de que una matriz no sea invertible, se trata añadiendo a través de la distribución normal con media 0 ruido a las filas
+    '''
     return np.array([rl * x[0] + alpha * x[0] * x[1], rz * x[1] + beta * x[0] * x[1]])
 
 
@@ -360,6 +408,18 @@ def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
 
 # Funcion para actualizar datos de la funcion de lotka volterra teorica (dependientes del numero de especies que haya en un momento)
 def data_loktavolterra(x_init, steps):
+    '''
+    Función que devuelve los datos de la resolución de las ecuaciones de lotka volterra
+
+    Params:
+        -x_init::tuple Tupla con el número inicial de lobos y liebres
+        -steps::list Lista con todos los steps que ha hecho el modelo y por tanto los steps sobre los que queremos evaluar las ecuaciones de lotka-volterra
+
+    Errores posibles:
+        - forrtl: error (200): program aborting due to control-C event:
+            Ocurre cuando se hace crtl+c cuando el servidor está arrancado, solución: https://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats
+    '''
+    
     # Linea para poder actualizar el valor de la variable global sol_lv
     global sol_lv
     global params
@@ -367,19 +427,6 @@ def data_loktavolterra(x_init, steps):
     t_span = (steps[0], steps[-1])
     t_eval = np.linspace(t_span[0], t_span[1], t_span[1] - t_span[0])
 
-    # print(f"Voy a calcular lotkavolterra con x_init: {x_init} y con el tspan: {t_span} y un t_eval: {t_eval}")
-
-    # Si se quiere ampliar el periodo (la frecuencia de las puntas del teorico) dividir entre numeros más grandes, si se quiere más frecuencia multiplicar o dividir entre menos (/2, /3)
-    # Parametros para indicar tasa de crecimiento de los conejos, zorros y tasa de muertes de conejos por zorros
-    # rl = 1.2/8
-    # alpha = 0.25/8
-    # rz = 2/8
-    # beta = 0.5/8
-
-    # sol_lv = solve_ivp(lotkavolterra, t_span, x_init, args=(rl, alpha, rz, beta), t_eval=t_eval)
-
-    # t_span = (0,400)
-    # t_eval = np.linspace(t_span[0], t_span[1], t_span[1] - t_span[0])
 
     sol_lv = solve_ivp(lotkavolterra_sobreescrito, t_span, x_init, args=tuple(params), t_eval=t_eval)
 
@@ -394,17 +441,18 @@ def data_loktavolterra(x_init, steps):
 ###################### https://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats ##########################
 
 
-# Initialize the data of loktavolterra equations
-x_init = (5, 5)
-# data_loktavolterra(x_init)
-conejos = []
-lobos = []
 
-import math
 
 
 # Funcion para recoger datos de la solucion numerica de lotka volterra dados unos steps
 def get_loktavolterra_data(steps, contadores):
+    '''
+    Funcion para recoger datos de la solucion numerica de lotka volterra dados unos steps y devolver una lista con la estimación teórica de número de población (presa, depredador)
+
+    Params:
+        -steps::list Lista con todos los steps que ha hecho el modelo
+        -contadores::list Lista de tuplas, donde por cada elemento representa la cantidad de (presas:conejos,depredador:lobo) por step
+    '''
     global conejos
     global lobos
     global lim_theoretical_step
@@ -414,6 +462,7 @@ def get_loktavolterra_data(steps, contadores):
     global sol_lv
     global ventana
 
+    # Condiciones para almacenar o bien todos los datos o si no estamos en el estado inicial, actuar como una pila y mantener el número de datos sobre los que operamos
     if initial_state:
         for i in contadores:
             conejos.append(i[0])
@@ -421,8 +470,6 @@ def get_loktavolterra_data(steps, contadores):
         params = estimate(conejos, lobos)
 
         data_loktavolterra(x_init, steps)
-        # x_init = (conejos[-1], lobos[-1])
-        # print(x_init)
     # Contadores para contar el numero de animales por cada especie
     else:
         for i in contadores:
@@ -435,7 +482,7 @@ def get_loktavolterra_data(steps, contadores):
 
     # Recorremos todos los steps
     for step in steps:
-        # # En el caso de que se haya pasado el limite hasta el que se había resuelto numericamente las ecuaciones de lotka volterra, actualizamos los datos
+        # En el caso de que se haya pasado el limite hasta el que se había resuelto numericamente las ecuaciones de lotka volterra, actualizamos los datos
         if step > lim_theoretical_step:
 
             if initial_state == True:
@@ -444,10 +491,7 @@ def get_loktavolterra_data(steps, contadores):
                 data_loktavolterra(x_init, [steps[0], ventana])
                 initial_state = False
             else:
-                # print(f"Voy a estimar los parametros para: conejos: {conejos}, lobos: {lobos}")
                 params = estimate(conejos, lobos)
-                # x_init = (sol_lv.y[0][-1], sol_lv.y[1][-1])
-                # print(step)
 
                 # data_loktavolterra(x_init, [lim_theoretical_step,lim_theoretical_step+ventana])
                 data_loktavolterra(x_init, [0, ventana])
@@ -539,6 +583,12 @@ def get_loktavolterra_data(steps, contadores):
 ################################################################################################################################
 
 def get_graph_data_dup(datos_nuevos):
+    '''
+    Funcion que devuelve una lista con elementos de la forma (step, (presa, depredador), (prediccion_presa, prediccion_depredador)) 
+
+    Params:
+        -datos_nuevos::list Lista de jsons con los logs del modelo
+    '''
     ### IMPORTANTE!!! Hacer que esto de datos nuevos sean temporales para que distintas rutas puedan devolver distinta informacion de esos mismos datos
     datos_validos = []
 
@@ -574,15 +624,23 @@ def get_graph_data_dup(datos_nuevos):
 
     return datos_validos
 
+
 @app.route("/paint_data")
+@login_required
 def paint_data():
+    '''
+    Ruta que devuelve los datos necesarios para la representación de la simulación y para la gráfica
+        La simulación usa todos los datos/logs del modelo
+        La gráfica solo usa el step y, mediante el tratamiento de los datos, contadores de la población teorica y simulada
+    '''
+
     datos_validos = []
     datos_nuevos = []
 
+    ############################################## CAMBIAR EL "1" POR EL IDENTIFICADOR DEL USUARIO QUE ESTÉ LOGEADO ##############################################
     if "1" in datosMesa:
         datos_nuevos = datosMesa["1"]
         # Necesitamos como mínimo para poder estimar, 2 datos
-        # print(datos_nuevos)
         if len(datos_nuevos) < 2:
             return datos_validos
         datosMesa["1"] = []
@@ -596,8 +654,6 @@ def paint_data():
 
     response = make_response(json.dumps([datos_nuevos, datos_validos]))
     response.content_type = "application/json"
-
-    # print(f"/paint_data: datos_grafico{response}")
 
     return response
 
