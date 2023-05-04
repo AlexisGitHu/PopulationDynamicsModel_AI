@@ -677,6 +677,15 @@ def paint_data():
 # def prueba(id):
 #     return datos
 ################################################################################################################################
+@app.route("/prueba1" ,methods=['GET', 'POST'])
+def prueba1():
+    if request.method == 'POST':
+        print(request.form.get("claveA"))
+    return "http://localhost:5000/login"
+
+@app.route("/prueba2")
+def prueba2():
+    return "Llegó"
 
 if __name__ == "__main__":
     app.run(debug=True)
