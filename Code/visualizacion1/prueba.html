@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Navbar, Canvas and Container with Sliders</title>
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        
+        <!-- Bootsrtrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/bootstrap-icons.min.css" integrity="sha512-yGw4jDv0eDU1TQPx7Z2kzDz8rB0cDhQelOTWqht0Gq1s3JwVJc9LH8/VJ4pL7QI+sBnIcQZS4hzRQGWKk59fCg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+        
+        <link rel="stylesheet" href="estilo_prueba.css">
+    </head>
+    
+    <body>
+        <!-- Navbar -->
+        <div class="navbar">
+            <!-- Profile icon -->
+            <svg width="65" height="65" class="bi bi-person-circle" style="position:absolute" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32.5 0C14.56 0 0 14.56 0 32.5C0 50.44 14.56 65 32.5 65C50.44 65 65 50.44 65 32.5C65 14.56 50.44 0 32.5 0ZM32.5 9.75C37.895 9.75 42.25 14.105 42.25 19.5C42.25 24.895 37.895 29.25 32.5 29.25C27.105 29.25 22.75 24.895 22.75 19.5C22.75 14.105 27.105 9.75 32.5 9.75ZM32.5 55.9C24.375 55.9 17.1925 51.74 13 45.435C13.0975 38.9675 26 35.425 32.5 35.425C38.9675 35.425 51.9025 38.9675 52 45.435C47.8075 51.74 40.625 55.9 32.5 55.9Z" fill="#1B1C1E"/>
+            </svg>
+            
+            <div class="navegacion">
+                
+                <span class="apartado">
+                    <svg class="icono_apartado" width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block">
+                        <path d="M36.5 4H20.5L16.5 0H4.5C2.3 0 0.52 1.8 0.52 4L0.5 28C0.5 30.2 2.3 32 4.5 32H36.5C38.7 32 40.5 30.2 40.5 28V8C40.5 5.8 38.7 4 36.5 4ZM26.5 10C28.7 10 30.5 11.8 30.5 14C30.5 16.2 28.7 18 26.5 18C24.3 18 22.5 16.2 22.5 14C22.5 11.8 24.3 10 26.5 10ZM34.5 26H18.5V24C18.5 21.34 23.84 20 26.5 20C29.16 20 34.5 21.34 34.5 24V26Z" fill="#1B1C1E"/>
+                    </svg>
+                    <p class="texto_apartado">MI UNIDAD</p>
+                </span>
+
+                <span class="apartado apartado_active">
+                    <svg class="icono_apartado" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.99984 17.6667C5.08317 17.6667 4.33317 18.4167 4.33317 19.3333C4.33317 20.25 5.08317 21 5.99984 21C6.9165 21 7.6665 20.25 7.6665 19.3333C7.6665 18.4167 6.9165 17.6667 5.99984 17.6667ZM0.999837 11.8333C0.533171 11.8333 0.166504 12.2 0.166504 12.6667C0.166504 13.1333 0.533171 13.5 0.999837 13.5C1.4665 13.5 1.83317 13.1333 1.83317 12.6667C1.83317 12.2 1.4665 11.8333 0.999837 11.8333ZM5.99984 4.33333C5.08317 4.33333 4.33317 5.08333 4.33317 6C4.33317 6.91666 5.08317 7.66666 5.99984 7.66666C6.9165 7.66666 7.6665 6.91666 7.6665 6C7.6665 5.08333 6.9165 4.33333 5.99984 4.33333ZM19.3332 7.66666C20.2498 7.66666 20.9998 6.91666 20.9998 6C20.9998 5.08333 20.2498 4.33333 19.3332 4.33333C18.4165 4.33333 17.6665 5.08333 17.6665 6C17.6665 6.91666 18.4165 7.66666 19.3332 7.66666ZM12.6665 1.83333C13.1332 1.83333 13.4998 1.46666 13.4998 0.999997C13.4998 0.533331 13.1332 0.166664 12.6665 0.166664C12.1998 0.166664 11.8332 0.533331 11.8332 0.999997C11.8332 1.46666 12.1998 1.83333 12.6665 1.83333ZM25.9998 24.3333C25.0832 24.3333 24.3332 25.0833 24.3332 26C24.3332 26.9167 25.0832 27.6667 25.9998 27.6667C26.9165 27.6667 27.6665 26.9167 27.6665 26C27.6665 25.0833 26.9165 24.3333 25.9998 24.3333ZM25.9998 11C25.0832 11 24.3332 11.75 24.3332 12.6667C24.3332 13.5833 25.0832 14.3333 25.9998 14.3333C26.9165 14.3333 27.6665 13.5833 27.6665 12.6667C27.6665 11.75 26.9165 11 25.9998 11ZM30.9998 18.5C30.5332 18.5 30.1665 18.8667 30.1665 19.3333C30.1665 19.8 30.5332 20.1667 30.9998 20.1667C31.4665 20.1667 31.8332 19.8 31.8332 19.3333C31.8332 18.8667 31.4665 18.5 30.9998 18.5ZM19.3332 30.1667C18.8665 30.1667 18.4998 30.5333 18.4998 31C18.4998 31.4667 18.8665 31.8333 19.3332 31.8333C19.7998 31.8333 20.1665 31.4667 20.1665 31C20.1665 30.5333 19.7998 30.1667 19.3332 30.1667ZM12.6665 10.1667C11.2832 10.1667 10.1665 11.2833 10.1665 12.6667C10.1665 14.05 11.2832 15.1667 12.6665 15.1667C14.0498 15.1667 15.1665 14.05 15.1665 12.6667C15.1665 11.2833 14.0498 10.1667 12.6665 10.1667ZM12.6665 24.3333C11.7498 24.3333 10.9998 25.0833 10.9998 26C10.9998 26.9167 11.7498 27.6667 12.6665 27.6667C13.5832 27.6667 14.3332 26.9167 14.3332 26C14.3332 25.0833 13.5832 24.3333 12.6665 24.3333ZM19.3332 16.8333C17.9498 16.8333 16.8332 17.95 16.8332 19.3333C16.8332 20.7167 17.9498 21.8333 19.3332 21.8333C20.7165 21.8333 21.8332 20.7167 21.8332 19.3333C21.8332 17.95 20.7165 16.8333 19.3332 16.8333Z" fill="#2F8DAB"/>
+                        <path d="M4.33317 26C4.33317 25.0833 5.08317 24.3333 5.99984 24.3333C6.9165 24.3333 7.6665 25.0833 7.6665 26C7.6665 26.9167 6.9165 27.6667 5.99984 27.6667C5.08317 27.6667 4.33317 26.9167 4.33317 26Z" fill="#2F8DAB"/>
+                        <path d="M4.33317 12.6667C4.33317 11.75 5.08317 11 5.99984 11C6.9165 11 7.6665 11.75 7.6665 12.6667C7.6665 13.5833 6.9165 14.3333 5.99984 14.3333C5.08317 14.3333 4.33317 13.5833 4.33317 12.6667Z" fill="#2F8DAB"/>
+                        <path d="M31.8332 12.6667C31.8332 13.1333 31.4665 13.5 30.9998 13.5C30.5332 13.5 30.1665 13.1333 30.1665 12.6667C30.1665 12.2 30.5332 11.8333 30.9998 11.8333C31.4665 11.8333 31.8332 12.2 31.8332 12.6667Z" fill="#2F8DAB"/>
+                        <path d="M20.1665 0.999997C20.1665 1.46666 19.7998 1.83333 19.3332 1.83333C18.8665 1.83333 18.4998 1.46666 18.4998 0.999997C18.4998 0.533331 18.8665 0.166664 19.3332 0.166664C19.7998 0.166664 20.1665 0.533331 20.1665 0.999997Z" fill="#2F8DAB"/>
+                        <path d="M0.166504 19.3333C0.166504 18.8667 0.533171 18.5 0.999837 18.5C1.4665 18.5 1.83317 18.8667 1.83317 19.3333C1.83317 19.8 1.4665 20.1667 0.999837 20.1667C0.533171 20.1667 0.166504 19.8 0.166504 19.3333Z" fill="#2F8DAB"/>
+                        <path d="M11.8332 31C11.8332 30.5333 12.1998 30.1667 12.6665 30.1667C13.1332 30.1667 13.4998 30.5333 13.4998 31C13.4998 31.4667 13.1332 31.8333 12.6665 31.8333C12.1998 31.8333 11.8332 31.4667 11.8332 31Z" fill="#2F8DAB"/>
+                        <path d="M14.3332 6C14.3332 6.91666 13.5832 7.66666 12.6665 7.66666C11.7498 7.66666 10.9998 6.91666 10.9998 6C10.9998 5.08333 11.7498 4.33333 12.6665 4.33333C13.5832 4.33333 14.3332 5.08333 14.3332 6Z" fill="#2F8DAB"/>
+                        <path d="M10.1665 19.3333C10.1665 17.95 11.2832 16.8333 12.6665 16.8333C14.0498 16.8333 15.1665 17.95 15.1665 19.3333C15.1665 20.7167 14.0498 21.8333 12.6665 21.8333C11.2832 21.8333 10.1665 20.7167 10.1665 19.3333Z" fill="#2F8DAB"/>
+                        <path d="M24.3332 19.3333C24.3332 18.4167 25.0832 17.6667 25.9998 17.6667C26.9165 17.6667 27.6665 18.4167 27.6665 19.3333C27.6665 20.25 26.9165 21 25.9998 21C25.0832 21 24.3332 20.25 24.3332 19.3333Z" fill="#2F8DAB"/>
+                        <path d="M24.3332 6C24.3332 5.08333 25.0832 4.33333 25.9998 4.33333C26.9165 4.33333 27.6665 5.08333 27.6665 6C27.6665 6.91666 26.9165 7.66666 25.9998 7.66666C25.0832 7.66666 24.3332 6.91666 24.3332 6Z" fill="#2F8DAB"/>
+                        <path d="M17.6665 26C17.6665 25.0833 18.4165 24.3333 19.3332 24.3333C20.2498 24.3333 20.9998 25.0833 20.9998 26C20.9998 26.9167 20.2498 27.6667 19.3332 27.6667C18.4165 27.6667 17.6665 26.9167 17.6665 26Z" fill="#2F8DAB"/>
+                        <path d="M16.8332 12.6667C16.8332 11.2833 17.9498 10.1667 19.3332 10.1667C20.7165 10.1667 21.8332 11.2833 21.8332 12.6667C21.8332 14.05 20.7165 15.1667 19.3332 15.1667C17.9498 15.1667 16.8332 14.05 16.8332 12.6667Z" fill="#2F8DAB"/>
+                    </svg>
+                    <p class="texto_apartado">SIMULACIÓN</p>
+                </span>
+
+                <span class="apartado">
+                    <svg class="icono_apartado" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.3335 8.66668H18.6668V12H15.3335V8.66668ZM15.3335 15.3333H18.6668V25.3333H15.3335V15.3333ZM17.0002 0.333344C7.80016 0.333344 0.333496 7.80001 0.333496 17C0.333496 26.2 7.80016 33.6667 17.0002 33.6667C26.2002 33.6667 33.6668 26.2 33.6668 17C33.6668 7.80001 26.2002 0.333344 17.0002 0.333344ZM17.0002 30.3333C9.65016 30.3333 3.66683 24.35 3.66683 17C3.66683 9.65001 9.65016 3.66668 17.0002 3.66668C24.3502 3.66668 30.3335 9.65001 30.3335 17C30.3335 24.35 24.3502 30.3333 17.0002 30.3333Z" fill="#1B1C1E"/>
+                    </svg>
+                    <p class="texto_apartado">INFORMACIÓN</p>
+                </span>
+
+            </div>
+
+            <svg id="Layer_1" class="bi bi-logotipo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 286.78 265.38" fill="#2F8DAB">
+                <path d="m233,195.7H53.55L143.28,40.3l89.72,155.4Zm-168.32-6.42h157.2L143.28,53.14l-78.6,136.14Z"/>
+                <rect x="141.4" y="129.21" width="6.42" height="64.15"/>
+                <path d="m143.7,134.47c0-27.18,20.09-49.21,44.87-49.21h26.52c0,27.18-20.09,49.21-44.87,49.21h-26.52Z"/>
+                <path d="m145.27,134.47c0-27.18-20.09-49.21-44.87-49.21h-26.52c0,27.18,20.09,49.21,44.87,49.21h26.52Z"/>
+            </svg>
+            
+        </div>
+        
+        <!-- Canvas -->
+        <p id="titulo_estudio">ESTUDIO DE CAMPO</p>
+        <div id="contenedor_canvas">
+            <canvas id="myCanvas" resize="true" style="position:absolute;"></canvas>
+
+            <div class="overlay" id="overlay">
+                <div class="overlay_under">
+
+                    <div class="overlay-title">
+                        <div>#01</div>
+                        <div>
+                            PROYECTO CAMPO CAMPO
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="overlay-play-button__overlay">
+                        <div class="overlay-play-button__play">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="white" class="bi bi-play-circle-fill" viewBox="0 0 16 16" >
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    
+        <!-- Container with sliders -->
+        <div class="container_inputs_overall">
+            <div class="encabezado_inputs">
+                <div id="btn_inputs_entorno" active="true"><p id="texto_btn_inputs_entorno">ENTORNO</p></div>
+                <div id="btn_inputs_especie" active="false" onclick="toggleInputs('especie')"><p id="texto_btn_inputs_especie">ESPECIE</p></div>
+            </div>
+            <div class="inputs_entorno">
+                <div class="container_input_entorno_basico">
+                    <div class = "titulo_clase_entorno">
+                        <svg class="cuadrado" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="cuadrado" fill="#2F8DAB"/>
+                        </svg>
+                        <p class="texto_titulo_entorno" id="entorno_titulo_basicos">BÁSICOS</p>
+                    </div>
+                    <div id="container_inputs_basicos">
+                        <div id="container_input1" class="container_inputs">
+                            <div class="container_input_basico" style="order:0">
+                                <div class="container_titulo_input" id="container_depredador">
+                                    <p class="titulo_categoria_input_basico" id="titulo_depredador_categoria_input">
+                                        DEPREDADORES
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <p class="descripcion_input">Nº de Depredadores iniciales</p>
+                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                </div>
+                            </div>
+                            <div class="container_input_basico" style="order:1">
+                                <div class="container_titulo_input" id="container_presa">
+                                    <p class="titulo_categoria_input_basico" id="titulo_presa_categoria_input">
+                                        PRESAS
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <p class="descripcion_input">Nº de Presas iniciales</p>
+                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="container_input2" class="container_inputs">
+                            <div class="container_input_basico" style="order:0">
+                                <div class="container_titulo_input" id="container_planta">
+                                    <p class="titulo_categoria_input_basico" id="titulo_planta_categoria_input">
+                                        PLANTAS
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <p class="descripcion_input">Nº de Depredadores iniciales</p>
+                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                </div>
+                            </div>
+                            <div class="container_input_basico" style="order:1">
+                                <div class="container_titulo_input" id="container_cuadricula">
+                                    <p class="titulo_categoria_input_basico" id="titulo_cuadricula_categoria_input">
+                                        CUADRÍCULA
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <p class="descripcion_input">Tamaño de la cuadrícula</p>
+                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_entorno_biologico">
+                    <div id="textBiologicos">
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12.5" cy="12.5" r="12.5" fill="#2F8DAB"/>
+                        </svg>
+                        <p class="texto_titulo_entorno" id="entorno_titulo_biologicos"> BIOLÓGICOS </p>
+                    </div>
+                    <div id="container_input3" class="container_inputs">
+                        <div class="container_input_basico" style="order:0">
+                            <div class="input_basico">
+                                <p class="descripcion_input">Tasa de Regeneración del Alimento básico</p>
+                                <input type="number" onKeyDown="return false" class="seleccion_input">
+                            </div>
+                        </div>
+                        <div class="container_input_basico" style="order:1">
+                            <div class="input_basico">
+                                <p class="descripcion_input">Tasa de Agrupamiento del Alimento básico</p>
+                                <input type="number" onKeyDown="return false" class="seleccion_input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="filtrosEspecie" style="visibility: hidden;">
+            <div id = "frame42">
+                <div id = "buttonEntorno" active="false" onclick="toggleInputs('entorno')"><p id="pEntorno">ENTORNO</p></div>
+                <div id = "buttonEspecies" active="true"><p id="pEspecie">ESPECIE</p></div>
+            </div>
+            <div id="frame14">
+                <div id = "basicos">
+                    <div id="frame18">
+                        <svg class = "cuadrado" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="25" height="25" class="cuadrado" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BÁSICOS </h2>
+                    </div>
+                    <div id = "frame46">
+                        <div id = "frame43">
+                            <div class="divsBasicos" id="divsBasicosDepredadores">
+                                <p class = "textoFrame46">Depredadores</p>
+                            </div>
+                        </div>
+                        <div id="frame44">
+                            <div class="divsBasicos">
+                                <p class = "textoFrame46">Presas</p>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div id ="Biologicos">
+                    <div id="textBiologicos">
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12.5" cy="12.5" r="12.5" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BIOLÓGICOS </h2>
+                    </div>
+                    <div id="contentBiologicos">
+                        <div id="energiaMaxima1">
+                            <div id="energiaMaxima2">
+                                <p class="textContent">Energía Máxima</p>
+                                <div id="sliderEnergiaMaxima">
+                                    <input id="inputSlider" type="range" min="0" value="0" max="20" step="1"  onchange="cambiar_valor('pNumSlider', this.value)">
+                                </div>
+                                <div id ="numeroSlider">
+                                    <p id="pNumSlider">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="subContentBiologicos">
+                            <div id="izqContentBiologicos">
+                                <div class = "content1">
+                                    <p class="textContent"> Coste de Mantenimiento</p>
+                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                </div>
+                                <div class = "content2">
+                                    <p class="textContent"> Coste de Reproduccion</p>
+                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                </div>
+                            </div>
+                            <div id="dchaContentBiologicos">
+                                <div class = "content1">
+                                    <p class="textContent"> Recuperacion al comer</p>
+                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                </div>
+                                <div id ="contentEspecial">
+                                    <p class="textContent"> Energia mínima de reproduccion</p>
+                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div id = "informaticos">
+                    <div id="textInformaticos">
+                        <svg width="29" height="25" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.4338 0L28.8675 25H0L14.4338 0Z" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> INFORMÁTICOS </h2>
+                    </div>
+                    <div id="contentInformaticos">
+                        <div id ="izqContentInformaticos">
+                            <div class = "content1">
+                                <p class="textContent"> Indice de Exploración</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content2">
+                                <p class="textContent"> Learning Rate</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content3">
+                                <p class="textContent"> Discount Factor</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content4">
+                                <p class="textContent"> Índice de Cobardía</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content5">
+                                <p class="textContent"> Índice de Miedo</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                        </div>
+                        <div id ="dchaContentInformaticos">
+                            <div class = "content1">
+                                <p class="textContent"> Indice de Avaricia</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content2">
+                                <p class="textContent"> Indice de Ignorancia</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content3">
+                                <p class="textContent"> Índice de Agrupación</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content4">
+                                <p class="textContent"> Índice de Cobardía</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                            <div class = "content5">
+                                <p class="textContent"> Índice de Hambre</p>
+                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+    <script>
+        var my_width = $(document).width();
+        var my_height = $(document).height();
+
+        var rel_prop_width = my_width/1440;
+        var rel_prop_height = my_height/800;
+
+        // set CSS variable
+        document.documentElement.style.setProperty(`--rel_prop_width`, `${rel_prop_width}`);
+        document.documentElement.style.setProperty(`--rel_prop_height`, `${rel_prop_height}`);
+
+
+        $(".apartado path").attr("fill", "#1B1C1E");
+        $(".apartado_active path").attr("fill", "#2F8DAB");
+        
+        $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
+
+        function toggleInputs(destination)
+        {
+            if(destination == "especie")
+            {
+                $(".container_inputs_overall").css("visibility", "hidden");
+                $("#filtrosEspecie").css("visibility", "visible");
+            }
+            else
+            {
+                $("#filtrosEspecie").css("visibility", "hidden");
+                $(".container_inputs_overall").css("visibility", "visible");
+            }
+        }
+
+        function cambiar_valor(id, valor)
+        {
+            document.getElementById(id).innerHTML = 5*(parseInt(valor));
+        }
+
+
+    </script>
+</html>

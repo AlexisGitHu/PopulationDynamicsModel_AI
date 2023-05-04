@@ -115,7 +115,7 @@ def lectura_datos_mesa(process, id):
     Funcion que almacena los logs del modelo de entrenamiento leídos a través de un stdout
 
     Params:
-        -process::subprocess Subproceso creado para ejecutar el modelo
+        -process::subprocess.Popen Subproceso creado para ejecutar el modelo
         -id::int Identificador del usuario para almacenar los datos para ese usuario
     '''
 
@@ -372,7 +372,7 @@ def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
         -beta::float Parametro que describe que por cada tantas liebres crecen beta lobos
 
     Errores posibles:
-        - np.linalg.LinAlgError en el caso de que una matriz no sea invertible, se trata añadiendo a través de la distribución normal con media 0 ruido a las filas
+        - np.linalg.LinAlgError en el caso de que una matriz no sea invertible, se trata añadiendo a través de la distribución normal con media 0, ruido a las filas
     '''
     return np.array([rl * x[0] + alpha * x[0] * x[1], rz * x[1] + beta * x[0] * x[1]])
 
@@ -431,7 +431,7 @@ def data_loktavolterra(x_init, steps):
     sol_lv = solve_ivp(lotkavolterra_sobreescrito, t_span, x_init, args=tuple(params), t_eval=t_eval)
 
 
-### Hay un error que salta al final de la ejecución cuando tiramos el servidor con crtl + c que scipy da un error en esta url está la solución pero no sé si merece la pena
+### Hay un error que salta al final de la ejecución cuando tiramos el servidor con crtl + c que scipy da un error, en esta url está la solución pero no sé si merece la pena
 # forrtl: error (200): program aborting due to control-C event
 # Image              PC                Routine            Line        Source
 # libifcoremd.dll    00007FFE6FFA3B58  Unknown               Unknown  Unknown
@@ -626,7 +626,7 @@ def get_graph_data_dup(datos_nuevos):
 
 
 @app.route("/paint_data")
-@login_required
+# @login_required
 def paint_data():
     '''
     Ruta que devuelve los datos necesarios para la representación de la simulación y para la gráfica

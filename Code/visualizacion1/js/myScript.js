@@ -109,16 +109,16 @@ window.onload = function() {
                             id.push(data[j].info[i].ID);
                         }
                     }
-                    if(step == 0)
-                    {
+                    // if(step == 0)
+                    // {
                         let inicio = document.getElementById("btn_siguiente");
                         inicio.onclick = iniciar;
-                    }
-                    else
-                    {
+                    // }
+                    // else
+                    // {
                         // Podríamos hacer que se ejecute también desde el step 0
                         $('#btn_siguiente').trigger('click');
-                    }
+                    // }
                     
                     function iniciar(evento,) {
                         j++;
@@ -166,10 +166,7 @@ window.onload = function() {
                             var vuelta = 0;
                             view.onFrame = function(event){
                                 console.log("view");
-                                // console.log("***");
-                                // console.log(j);
-                                // console.log(data.length);
-                                // console.log("***");
+                                
                                 if(j >= data.length){
                                     return;
                                 }
@@ -311,12 +308,7 @@ window.onload = function() {
 function setTrainingMode()
 {
     $(".overlay-play-button__overlay").css("visibility", "hidden");
-    // $("#overlay").css(
-    //     {"-webkit-transition":".4s ease-in-out opacity",
-    //     "-moz-transition": ".4s ease-in-out opacity",
-    //     "-o-transition": ".4s ease-in-out opacity",
-    //     "transition": ".4s ease-in-out opacity"
-    //     });
+    
     $("#contenedor_canvas").hover(
         function(){
             $("#overlay").fadeIn();
@@ -358,7 +350,8 @@ function createOverlay()
     $("#opciones").css("margin-left", "5%");
 
     $("#contendeor_canvas_opciones").height(height+margin_bottom+margin_top);
-    $("#btn_siguiente").css("margin-left", margin_left+border);
+    // $("#btn_siguiente").css("margin-left", margin_left+border);
+    $("#btn_grafica").css("margin-left", margin_left+border);
 
 }
 
@@ -370,11 +363,14 @@ var horas = 0;
 
 
 function init() {
-    let l, m, n, control
 
-    l = setInterval(change_value("1"), 500);
-    m = setInterval(change_value("2"), 500);
-    n = setInterval(change_value("3"), 500);
+    for(let i = 1; i < 4; i++)
+    {
+        var input = document.getElementById("input"+String(i));
+        var valor_actual = input.value;
+        cambiar_valor(i, valor_actual);
+    }
+    
     control = setInterval(cronometro,10);
 }
 
@@ -404,15 +400,7 @@ function cronometro () {
     }
 }
 
-function change_value(id)
+function cambiar_valor(id, valor)
 {
-    let input = parseInt(document.getElementById('input'+id).value);
-    if (input >= 0 && input <= 4)
-    {
-        document.getElementById(id).innerHTML = (input+1)*5;
-    }
-    else
-    {
-        document.getElementById(id).innerHTML = 30;
-    }
+    document.getElementById(id).innerHTML = 5*(1+parseInt(valor));
 }

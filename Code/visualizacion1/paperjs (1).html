@@ -105,40 +105,40 @@
                     </div>
                     <div>
                         <div style="position: realtive; display: block;">
+
                             <div class="contendor_slider">
                                 <div class = "agente">
                                     <p>Numero de plantas iniciales:</p>
                                 </div>
-                                <div id ="n_agentes">
+                                <div class ="n_agentes">
                                     <p id = "1"> 0</p>
                                 </div>
-                                <div id="i_agentes">
-                                    <div id="i_plantas_hijo"><input id="input1" type="range" min="0" value="0" max="5" step="1"></div>
+                                <div class="i_agentes">
+                                    <div id="i_plantas_hijo"><input id="input1" type="range" min="0" value="0" max="5" step="1" onchange="cambiar_valor('1', this.value)"></div>
                                 </div>
                             </div>
-                        
                         
                             <div class="contendor_slider">
                                 <div class = "agente">
                                     <p>Numero de presas iniciales:</p>
                                 </div>
-                                <div id ="n_agentes">
-                                    <p id = "2"> 0</p>
+                                <div class="n_agentes">
+                                    <p id="2"> 0</p>
                                 </div>
-                                <div id="i_agentes">
-                                    <div id="i_presas_hijo"><input id="input2" type="range" min="0" value="0" max="5" step="1"></div>
+                                <div class="i_agentes">
+                                    <div id="i_presas_hijo"><input id="input2" type="range" min="0" value="2" max="5" step="1" onchange="cambiar_valor('2', this.value)"></div>
                                 </div>
                             </div>
                             
                             <div class="contendor_slider">
-                                <div id = "agente">
+                                <div class = "agente">
                                     <p>Numero de depredadores iniciales:</p>
                                 </div>
-                                <div id ="n_agentes">
+                                <div class ="n_agentes">
                                     <p id = "3"> 0</p>
                                 </div>
-                                <div id="i_agentes">
-                                    <div id="i_depredadores_hijo"><input id="input3" type="range" min="0" value="0" max="5" step="1"></div>
+                                <div class="i_agentes">
+                                    <div id="i_depredadores_hijo"><input id="input3" type="range" min="0" value="0" max="5" step="1" onchange="cambiar_valor('3', this.value)"></div>
                                 </div>    
                             </div>
                         
@@ -180,8 +180,8 @@
             
         </div>
     </div>
-    <button id="btn_siguiente" class="btn btn-secondary" style="display: inline;">Siguiente step</button>
     <button id="btn_grafica" type="button" style="display: inline;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Mostrar gráfica</button>
+    <button id="btn_siguiente" class="btn btn-secondary" style="display: inline; visibility: hidden;">Siguiente step</button>
     
   <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
