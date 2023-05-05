@@ -10,7 +10,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/bootstrap-icons.min.css" integrity="sha512-yGw4jDv0eDU1TQPx7Z2kzDz8rB0cDhQelOTWqht0Gq1s3JwVJc9LH8/VJ4pL7QI+sBnIcQZS4hzRQGWKk59fCg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-        
+  
+        <!-- Highcharts -->
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/highcharts-more.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+        <!-- PaperJS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-core.min.js"></script>
+
         <link rel="stylesheet" href="estilo_prueba.css">
     </head>
     
@@ -122,7 +130,7 @@
                                 </div>
                                 <div class="input_basico">
                                     <p class="descripcion_input">Nº de Depredadores iniciales</p>
-                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                    <input type="number" class="seleccion_input" json_name="n_preds" min="0" max="1" step="0.01">
                                 </div>
                             </div>
                             <div class="container_input_basico" style="order:1">
@@ -133,7 +141,7 @@
                                 </div>
                                 <div class="input_basico">
                                     <p class="descripcion_input">Nº de Presas iniciales</p>
-                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                    <input type="number" class="seleccion_input" json_name="n_preys" min="0" max="1" step="0.01">
                                 </div>
                             </div>
                         </div>
@@ -145,8 +153,8 @@
                                     </p>
                                 </div>
                                 <div class="input_basico">
-                                    <p class="descripcion_input">Nº de Depredadores iniciales</p>
-                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                    <p class="descripcion_input">Nº de Plantas iniciales</p>
+                                    <input type="number" class="seleccion_input" json_name="n_grass" min="0" max="1" step="0.01">
                                 </div>
                             </div>
                             <div class="container_input_basico" style="order:1">
@@ -157,7 +165,7 @@
                                 </div>
                                 <div class="input_basico">
                                     <p class="descripcion_input">Tamaño de la cuadrícula</p>
-                                    <input type="number" onKeyDown="return false" class="seleccion_input">
+                                    <input type="number" class="seleccion_input" json_name="size" min="0" max="1" step="0.01">
                                 </div>
                             </div>
                         </div>
@@ -174,13 +182,13 @@
                         <div class="container_input_basico" style="order:0">
                             <div class="input_basico">
                                 <p class="descripcion_input">Tasa de Regeneración del Alimento básico</p>
-                                <input type="number" onKeyDown="return false" class="seleccion_input">
+                                <input type="number" class="seleccion_input" json_name="food_regen" min="0" max="1" step="0.01">
                             </div>
                         </div>
                         <div class="container_input_basico" style="order:1">
                             <div class="input_basico">
                                 <p class="descripcion_input">Tasa de Agrupamiento del Alimento básico</p>
-                                <input type="number" onKeyDown="return false" class="seleccion_input">
+                                <input type="number" class="seleccion_input" json_name="cluster_prob" min="0" max="1" step="0.01">
                             </div>
                         </div>
                     </div>
@@ -192,7 +200,7 @@
                 <div id = "buttonEntorno" active="false" onclick="toggleInputs('entorno')"><p id="pEntorno">ENTORNO</p></div>
                 <div id = "buttonEspecies" active="true"><p id="pEspecie">ESPECIE</p></div>
             </div>
-            <div id="frame14">
+            <div id="frame14" class="inputs_depredadores">
                 <div id = "basicos">
                     <div id="frame18">
                         <svg class = "cuadrado" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -202,12 +210,12 @@
                     </div>
                     <div id = "frame46">
                         <div id = "frame43">
-                            <div class="divsBasicos" id="divsBasicosDepredadores">
+                            <div class="divsBasicos activo" id="divsBasicosDepredadores">
                                 <p class = "textoFrame46">Depredadores</p>
                             </div>
                         </div>
                         <div id="frame44">
-                            <div class="divsBasicos">
+                            <div class="divsBasicos" id="divsBasicosPresas" onclick="toggleInputsAgentes('presas')">
                                 <p class = "textoFrame46">Presas</p>
                             </div>
                         </div>
@@ -226,10 +234,10 @@
                             <div id="energiaMaxima2">
                                 <p class="textContent">Energía Máxima</p>
                                 <div id="sliderEnergiaMaxima">
-                                    <input id="inputSlider" type="range" min="0" value="0" max="20" step="1"  onchange="cambiar_valor('pNumSlider', this.value)">
+                                    <input id="inputSlider" type="range" min="0" value="0" max="20" step="1" onchange="cambiar_valor('pNumSlider1', this.value)" json_name="energia_depredador">
                                 </div>
                                 <div id ="numeroSlider">
-                                    <p id="pNumSlider">0</p>
+                                    <p id="pNumSlider" class="pNumSlider1">0</p>
                                 </div>
                             </div>
                         </div>
@@ -237,21 +245,21 @@
                             <div id="izqContentBiologicos">
                                 <div class = "content1">
                                     <p class="textContent"> Coste de Mantenimiento</p>
-                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                    <input json_name="coste_mantenimiento_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                                 <div class = "content2">
                                     <p class="textContent"> Coste de Reproduccion</p>
-                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                    <input json_name="coste_reproduccion_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                             </div>
                             <div id="dchaContentBiologicos">
                                 <div class = "content1">
                                     <p class="textContent"> Recuperacion al comer</p>
-                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                    <input json_name="recuperacion_comer_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                                 <div id ="contentEspecial">
                                     <p class="textContent"> Energia mínima de reproduccion</p>
-                                    <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                    <input json_name="energia_min_reproduccion_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                             </div>
                         </div>
@@ -269,88 +277,272 @@
                         <div id ="izqContentInformaticos">
                             <div class = "content1">
                                 <p class="textContent"> Indice de Exploración</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="exploration_rate_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content2">
                                 <p class="textContent"> Learning Rate</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="learning_rate_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content3">
                                 <p class="textContent"> Discount Factor</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="discount_factor_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content4">
                                 <p class="textContent"> Índice de Cobardía</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="cobardia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content5">
                                 <p class="textContent"> Índice de Miedo</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="miedo_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                         </div>
                         <div id ="dchaContentInformaticos">
                             <div class = "content1">
                                 <p class="textContent"> Indice de Avaricia</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="avaricia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content2">
                                 <p class="textContent"> Indice de Ignorancia</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="ignorancia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content3">
-                                <p class="textContent"> Índice de Agrupación</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <p class="textContent"> Índice de Colonialismo</p>
+                                <input json_name="colonialismo_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content4">
-                                <p class="textContent"> Índice de Cobardía</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <p class="textContent"> Índice de Independencia</p>
+                                <input json_name="independencia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content5">
                                 <p class="textContent"> Índice de Hambre</p>
-                                <input class ="input" type="number" onKeyDown="return false" min = 0 max = 100>
+                                <input json_name="hambre_depredador" class ="input" type="number" min=0 max=1 step="any">
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="frame14" style="visibility: hidden;" class="inputs_presas">
+                <div id = "basicos">
+                    <div id="frame18">
+                        <svg class = "cuadrado" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="25" height="25" class="cuadrado" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BÁSICOS </h2>
+                    </div>
+                    <div id = "frame46">
+                        <div id = "frame43">
+                            <div class="divsBasicos" id="divsBasicosDepredadores" onclick="toggleInputsAgentes('depredadores')">
+                                <p class = "textoFrame46">Depredadores</p>
+                            </div>
+                        </div>
+                        <div id="frame44">
+                            <div class="divsBasicos activo" id="divsBasicosPresas">
+                                <p class = "textoFrame46">Presas</p>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div id ="Biologicos">
+                    <div id="textBiologicos">
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12.5" cy="12.5" r="12.5" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BIOLÓGICOS </h2>
+                    </div>
+                    <div id="contentBiologicos">
+                        <div id="energiaMaxima1">
+                            <div id="energiaMaxima2">
+                                <p class="textContent">Energía Máxima</p>
+                                <div id="sliderEnergiaMaxima">
+                                    <input id="inputSlider" type="range" min="0" value="0" max="20" step="1" onchange="cambiar_valor('pNumSlider2', this.value)" json_name="energia_presa">
+                                </div>
+                                <div id ="numeroSlider">
+                                    <p id="pNumSlider" class="pNumSlider2">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="subContentBiologicos">
+                            <div id="izqContentBiologicos">
+                                <div class = "content1">
+                                    <p class="textContent"> Coste de Mantenimiento</p>
+                                    <input json_name="coste_mantenimiento_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                </div>
+                                <div class = "content2">
+                                    <p class="textContent"> Coste de Reproduccion</p>
+                                    <input json_name="coste_reproduccion_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                </div>
+                            </div>
+                            <div id="dchaContentBiologicos">
+                                <div class = "content1">
+                                    <p class="textContent"> Recuperacion al comer</p>
+                                    <input json_name="recuperacion_comer_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                </div>
+                                <div id ="contentEspecial">
+                                    <p class="textContent"> Energia mínima de reproduccion</p>
+                                    <input json_name="energia_min_reproduccion_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div id = "informaticos">
+                    <div id="textInformaticos">
+                        <svg width="29" height="25" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.4338 0L28.8675 25H0L14.4338 0Z" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> INFORMÁTICOS </h2>
+                    </div>
+                    <div id="contentInformaticos">
+                        <div id ="izqContentInformaticos">
+                            <div class = "content1">
+                                <p class="textContent"> Indice de Exploración</p>
+                                <input json_name="exploration_rate_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content2">
+                                <p class="textContent"> Learning Rate</p>
+                                <input json_name="learning_rate_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content3">
+                                <p class="textContent"> Discount Factor</p>
+                                <input json_name="discount_factor_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content4">
+                                <p class="textContent"> Índice de Cobardía</p>
+                                <input json_name="cobardia_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content5">
+                                <p class="textContent"> Índice de Miedo</p>
+                                <input json_name="miedo_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                        </div>
+                        <div id ="dchaContentInformaticos">
+                            <div class = "content1">
+                                <p class="textContent"> Indice de Avaricia</p>
+                                <input json_name="avaricia_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content2">
+                                <p class="textContent"> Indice de Ignorancia</p>
+                                <input json_name="ignorancia_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content3">
+                                <p class="textContent"> Índice de Colonialismo</p>
+                                <input json_name="colonialismo_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content4">
+                                <p class="textContent"> Índice de Independencia</p>
+                                <input json_name="independencia_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                            <div class = "content5">
+                                <p class="textContent"> Índice de Hambre</p>
+                                <input json_name="hambre_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button id="crearModelo" onclick="crearModelo()">Crear modelo</button>
+        <button id="btn_grafica" type="button" style="display: inline;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Mostrar gráfica</button>
+        <button id="btn_siguiente" class="btn btn-secondary" style="visibility: hidden;">Siguiente step</button>
+    
+    <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="fig02"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
-
     </body>
+    <script type="text/javascript" src = "prueba_js.js" canvas = "myCanvas">
+        // expose paperjs classes into global scope
+    </script>
+
     <script>
-        var my_width = $(document).width();
-        var my_height = $(document).height();
-
-        var rel_prop_width = my_width/1440;
-        var rel_prop_height = my_height/800;
-
-        // set CSS variable
-        document.documentElement.style.setProperty(`--rel_prop_width`, `${rel_prop_width}`);
-        document.documentElement.style.setProperty(`--rel_prop_height`, `${rel_prop_height}`);
-
-
-        $(".apartado path").attr("fill", "#1B1C1E");
-        $(".apartado_active path").attr("fill", "#2F8DAB");
         
-        $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
+        // var my_width = $(document).width();
+        // var my_height = $(document).height();
 
-        function toggleInputs(destination)
-        {
-            if(destination == "especie")
-            {
-                $(".container_inputs_overall").css("visibility", "hidden");
-                $("#filtrosEspecie").css("visibility", "visible");
-            }
-            else
-            {
-                $("#filtrosEspecie").css("visibility", "hidden");
-                $(".container_inputs_overall").css("visibility", "visible");
-            }
-        }
+        // var rel_prop_width = my_width/1440;
+        // var rel_prop_height = my_height/800;
 
-        function cambiar_valor(id, valor)
-        {
-            document.getElementById(id).innerHTML = 5*(parseInt(valor));
-        }
+        // // set CSS variable
+        // document.documentElement.style.setProperty(`--rel_prop_width`, `${rel_prop_width}`);
+        // document.documentElement.style.setProperty(`--rel_prop_height`, `${rel_prop_height}`);
 
+
+        // $(".apartado path").attr("fill", "#1B1C1E");
+        // $(".apartado_active path").attr("fill", "#2F8DAB");
+        // $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
+
+        // $("#crearModelo").css({"position": "absolute", "right":"10%", "bottom":"2%"})
+
+        // document.querySelectorAll("input").forEach(function(item) {
+        //     item.addEventListener("keypress", function (evt) {
+        //         if (evt.which < 48 || evt.which > 57)
+        //         {
+        //             evt.preventDefault();
+        //         }
+        //     });
+        // });
+
+        // function crearModelo()
+        // {
+        //     json_inputs = {};
+
+        //     $("input").each(function(iter, item) 
+        //     {
+        //         json_inputs[item.id] = item.value;
+        //     })
+            
+        //     var request = $.ajax({
+
+        //         type: 'POST',
+        //         data: JSON.stringify(json_inputs),
+        //         contentType: 'application/json;charset=UTF-8',
+        //         url: "http://localhost:5000/crearModelo",
+
+        //         success: function(data) 
+        //         {
+        //             console.log(data);
+        //         }
+        //     });
+        // }
+
+        // function toggleInputs(destination)
+        // {
+        //     if(destination == "especie")
+        //     {
+        //         $(".container_inputs_overall").css("visibility", "hidden");
+        //         $("#filtrosEspecie").css("visibility", "visible");
+        //     }
+        //     else
+        //     {
+        //         $("#filtrosEspecie").css("visibility", "hidden");
+        //         $(".container_inputs_overall").css("visibility", "visible");
+        //     }
+        // }
+
+        // function cambiar_valor(id, valor)
+        // {
+        //     document.getElementById(id).innerHTML = 5*(parseInt(valor));
+        // }
+        // // onKeyPress="if(this.value.length==10) return false;
 
     </script>
 </html>

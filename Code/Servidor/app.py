@@ -683,6 +683,16 @@ def prueba1():
         print(request.form.get("claveA"))
     return "http://localhost:5000/login"
 
+@app.route("/crearModelo" ,methods=['GET', 'POST'])
+def crearModelo():
+    if request.method == 'POST':
+        data = json.loads(request.data)
+        print(data)
+        
+        # print(request.get_json())
+        # print(request.get_data())
+    return "hola"
+
 @app.route("/prueba2")
 def prueba2():
     return "Llegó"
