@@ -90,14 +90,6 @@ function cambiar_valor(id, valor)
 {
     document.getElementsByClassName(id)[0].innerHTML = 5*(parseInt(valor));
 }
-// onKeyPress="if(this.value.length==10) return false;
-
-
-
-
-
-
-
 
 
 
