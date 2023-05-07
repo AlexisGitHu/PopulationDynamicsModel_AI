@@ -56,19 +56,28 @@ function crearModelo()
 
 function toggleInputs(destination)
 {
+    $(".container_inputs_overall").css("visibility", "visible");
+    $(".inputs_presas").css("visibility", "visible");
+    $("#filtrosEspecie").css("visibility", "visible");
+    $(".inputs_depredadores").css("visibility", "visible");
+
     if(destination == "especie")
     {
-        $(".container_inputs_overall").css("visibility", "hidden");
-        $("#filtrosEspecie").css("visibility", "visible");
-        $(".inputs_depredadores").css("visibility", "visible");
-        $(".inputs_presas").css("visibility", "hidden");
+        $(".container_inputs_overall").fadeOut();
+        $(".inputs_presas").fadeOut();
+        
+        $("#filtrosEspecie").fadeIn();
+        $(".inputs_depredadores").fadeIn();
+        
     }
     else
     {
-        $("#filtrosEspecie").css("visibility", "hidden");
-        $(".inputs_presas").css("visibility", "hidden");
-        $(".inputs_depredadores").css("visibility", "hidden");
-        $(".container_inputs_overall").css("visibility", "visible");
+        
+        $("#filtrosEspecie").fadeOut();
+        $(".inputs_depredadores").fadeOut();
+        $(".inputs_presas").fadeOut();
+
+        $(".container_inputs_overall").fadeIn();
     }
 }
 
@@ -76,13 +85,13 @@ function toggleInputsAgentes(destination)
 {
     if(destination == "depredadores")
     {
-        $(".inputs_presas").css("visibility", "hidden");
-        $(".inputs_depredadores").css("visibility", "visible");
+        $(".inputs_presas").fadeOut();
+        $(".inputs_depredadores").fadeIn();
     }
     else
     {
-        $(".inputs_depredadores").css("visibility", "hidden");
-        $(".inputs_presas").css("visibility", "visible");
+        $(".inputs_depredadores").fadeOut();
+        $(".inputs_presas").fadeIn();
     }
 }
 
@@ -324,7 +333,7 @@ window.onload = function() {
         this.scale(width / this.width, height / this.height);
     };
 
-    $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
+    // $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
 
     chart = new Highcharts.Chart({
         // Definimos el estilo de grafica que será y de donde se cogen los datos
@@ -409,7 +418,11 @@ window.onload = function() {
 
 function setTrainingMode()
 {
-    $(".overlay-play-button__overlay").css("visibility", "hidden");
+    $(".overlay-play-button__overlay").fadeOut();
+    const yourFunction = async () => {
+        await delay(400);
+        $(".overlay-play-button__overlay").css("visibility", "hidden");
+    };
     
     $("#contenedor_canvas").hover(
         function(){
