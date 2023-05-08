@@ -1,0 +1,37 @@
+{
+  "size": 10,
+  "iters": 70,
+  "ecosistem":{
+    "n_preys":5,
+    "n_preds":5,
+    "n_grass":5,
+    "food_regen":1,
+    "cluster_prob":0.8
+  },
+  "prey":{
+    "energia":0.5,
+    "miedo":0.5,
+    "ignorancia":0.5,
+    "independencia":0.5,
+    "cobardia":0.5,
+    "avaricia":0.5,
+    "colonialismo":0.5,
+    "hambre": 0.5,
+    "discount_factor":0.8,
+    "exploration_rate":0.15,
+    "learning_rate": 0.01
+  },
+  "predator":{
+    "energia":0.5,
+    "miedo":0.5,
+    "ignorancia":0.5,
+    "independencia":0.5,
+    "cobardia":0.5,
+    "avaricia":0.5,
+    "colonialismo":0.5,
+    "hambre": 0.5,
+    "discount_factor":0.8,
+    "exploration_rate":0.15,
+    "learning_rate": 0.01
+  }
+}
