@@ -211,7 +211,7 @@ window.onload = function() {
                             x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                             y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
                             
-                            destination = new Point(x_relativa,y_relativa);             
+                            destination = new Point(x_relativa,y_relativa);
                             eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: '+ destination +'});');
                             dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
