@@ -52,7 +52,7 @@ def login():
                 flash('Invalid username or password')
                 return redirect(url_for('modulo_login.login'))
 
-            login_user(user, remember=form.remember.data)
+            login_user(user)
             next_page = request.form.get('nextpath')
 
             print("El next_page en el POST es {}".format(next_page))

@@ -8,21 +8,20 @@ from wtforms.validators import EqualTo, DataRequired
 
 
 class LoginForm(FlaskForm):
-    username_or_email = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', id='password')
-    show_password = BooleanField('Show password', id='check')
-    submit = SubmitField('Submit')
-    remember = BooleanField('Remember Me / Recuérdame')
+    username_or_email = StringField('Nombre de Usuario', validators=[DataRequired()])
+    password = PasswordField('Contraseña', id='password')
+    show_password = BooleanField('Mostrar Contraseña', id='check')
+    submit = SubmitField('Log in')
 
 
 class SignUpForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Nombre de Usuario', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
     confirm_password = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    user_agreement = BooleanField('I accept all user license agreements')
-    submit = SubmitField('Submit')
+        'Repetir Contraseña', validators=[DataRequired(), EqualTo('password')])
+    user_agreement = BooleanField('Acepto todos los acuerdos de licencia de usuario')
+    submit = SubmitField('Sign up')
 
 
 class CrearModeloForm(FlaskForm):

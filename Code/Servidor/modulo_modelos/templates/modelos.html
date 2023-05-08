@@ -1,33 +1,41 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% if formCrearModelo or formAnadirModelo %}
     {% import "bootstrap/wtf.html" as wtf %}
 {% endif %}
-{% block content %}
 
-<body>
-    <h1 class="text-center m-4">Mis Modelos</h1>
-    <div class="container d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary mx-4" data-bs-toggle="modal" data-bs-target="#crearModeloModal">Crear Modelo</button>
-        <button type="button" class="btn btn-secondary mx-4" data-bs-toggle="modal" data-bs-target="#añadirModeloModal">Añadir Modelo Compartido</button>
+{% block content %}
+<body class="modelos-body">
+
+    <div class="añadir-modelo">
+        <div class="añadir-barra">
+            <img src="../static/assets/Lupa.png" class="lupa-imagen">
+            <p>Añadir proyexto con código...</p>
+        </div>
+
+        <button class="añadir-boton" data-bs-toggle="modal" data-bs-target="#añadirModeloModal">Añadir</button>
     </div>
 
-<div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+    <h1 class="titulo1">MI UNIDAD</h1>
+    <h2 class="titulo2">Proyectos</h2>
+
+    <div class="tarjetas">
+        <img src="../static/assets/nuevoProyecto.png" class="nuevoProyecto" data-bs-toggle="modal" data-bs-target="#crearModeloModal">
+
         {% for modelo in modelos %}
-            <div class="col">
-                <div class="card h-100">
-                    <img class="card-img-top" src="../static/assets/campo.jpg" alt="imagen" />
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <h4 class="fw-bolder">{{modelo.nombre}}</h4>
-                            <p>Creador: {{modelo.creador}}</p>
-                            <p>Fecha de Creación: {{modelo.fecha_creacion}}</p>
-                            <div class="container d-flex justify-content-center">
-                                <button type="button" class="btn btn-secondary mx-4">Abrir</button>
-                                <button type="button" class="btn btn-secondary mx-4" data-bs-toggle="modal" data-bs-target={{modelo.modalId}}>Compartir</button>
-                            </div>
-                        </div>
+            <div class="proyecto-tarjeta">
+                <div class="tarjeta-imagen">
+                    <img src="../static/assets/usuario.png" class="usuario-imagen">
+                    <img src="../static/assets/imagen.png" class="imagen-imagen">
+                    <p class="nombre-proyecto">{{modelo.nombre}}</p>
+                </div>
+
+                <div  class="tarjeta-info">
+                    <p class="creador-proyecto">{{modelo.creador}}</p>
+                    <div class="fecha-proyecto">
+                        <img src="../static/assets/calendario.png" class="fecha-imagen">
+                        <p class="fecha-texto">{{modelo.fecha_creacion}}</p>
                     </div>
+                    <button class="compartir" data-bs-toggle="modal" data-bs-target={{modelo.modalId}}>Compartir</button>
                 </div>
             </div>
 
@@ -48,60 +56,60 @@
               </div>
             </div>
         {% endfor %}
+    </div>
+
+    <div class="modal fade" id="crearModeloModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Crear Modelo</h4>
+          </div>
+          <div class="modal-body">
+                {% if formCrearModelo %}
+                    <form class="form-signin text-center p-2 w-100 mx-auto mb-4 customBg"  method="POST" action="{{url_for('modulo_modelos.modelos')}}">
+                        {{ formCrearModelo.hidden_tag() }}
+                        <div class="mb-3 text-center">
+                            {{ wtf.form_field(formCrearModelo.nombre) }}
+                        </div>
+                        <div class="mb-3 text-center">
+                            {{ wtf.form_field(formCrearModelo.url) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ wtf.form_field(formCrearModelo.publico) }}
+                        </div>
+                        <div class="container d-flex justify-content-end">
+                            <button type="button" class="btn btn-default mx-3" data-bs-dismiss="modal">Cerrar</button>
+                            {{ wtf.form_field(formCrearModelo.submit, class="btn btn-primary" ) }}
+                        </div>
+                    </form>
+                {% endif %}
+          </div>
         </div>
+      </div>
     </div>
 
-<div class="modal fade" id="crearModeloModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Crear Modelo</h4>
-      </div>
-      <div class="modal-body">
-            {% if formCrearModelo %}
-                <form class="form-signin text-center p-2 w-100 mx-auto mb-4 customBg"  method="POST" action="{{url_for('modulo_modelos.modelos')}}">
-                    {{ formCrearModelo.hidden_tag() }}
-                    <div class="mb-3 text-center">
-                        {{ wtf.form_field(formCrearModelo.nombre) }}
-                    </div>
-                    <div class="mb-3 text-center">
-                        {{ wtf.form_field(formCrearModelo.url) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ wtf.form_field(formCrearModelo.publico) }}
-                    </div>
-                    <div class="container d-flex justify-content-end">
-                        <button type="button" class="btn btn-default mx-3" data-bs-dismiss="modal">Cerrar</button>
-                        {{ wtf.form_field(formCrearModelo.submit, class="btn btn-primary" ) }}
-                    </div>
-                </form>
-            {% endif %}
+    <div class="modal fade" id="añadirModeloModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Añadir Modelo Compartido</h4>
+          </div>
+          <div class="modal-body">
+                {% if formAnadirModelo %}
+                    <form class="form-signin text-center p-2 w-100 mx-auto mb-4 customBg"  method="POST" action="{{url_for('modulo_modelos.modelos')}}">
+                        {{ formAnadirModelo.hidden_tag() }}
+                        <div class="mb-3 text-center">
+                            {{ wtf.form_field(formAnadirModelo.codigo) }}
+                        </div>
+                        <div class="container d-flex justify-content-end">
+                            <button type="button" class="btn btn-default mx-3" data-bs-dismiss="modal">Cerrar</button>
+                            {{ wtf.form_field(formAnadirModelo.submit, class="btn btn-primary" ) }}
+                        </div>
+                    </form>
+                {% endif %}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="modal fade" id="añadirModeloModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Añadir Modelo Compartido</h4>
-      </div>
-      <div class="modal-body">
-            {% if formAnadirModelo %}
-                <form class="form-signin text-center p-2 w-100 mx-auto mb-4 customBg"  method="POST" action="{{url_for('modulo_modelos.modelos')}}">
-                    {{ formAnadirModelo.hidden_tag() }}
-                    <div class="mb-3 text-center">
-                        {{ wtf.form_field(formAnadirModelo.codigo) }}
-                    </div>
-                    <div class="container d-flex justify-content-end">
-                        <button type="button" class="btn btn-default mx-3" data-bs-dismiss="modal">Cerrar</button>
-                        {{ wtf.form_field(formAnadirModelo.submit, class="btn btn-primary" ) }}
-                    </div>
-                </form>
-            {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
+</body>
 {% endblock %}

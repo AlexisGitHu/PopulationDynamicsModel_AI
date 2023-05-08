@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Jura&display=swap');
+
+:root {
+    --rel_prop_width: 0;
+    --rel_prop_height: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+    opacity: 1;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.elemento-navbar {
+    height: calc(var(--rel_prop_height)*24px);
+
+    font-family: 'Jura', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+    text-underline-offset: 16px;
+    margin-left: 35px;
+}
+
+.login-body{
+    background-image: url('../assets/Login.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.signup-body{
+    background-image: url('../assets/SignUp.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.titulo {
+    font-family: 'Jura', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #1B1C1E;
+}
+
+.banner {
+    width: calc(var(--rel_prop_width)*192px);
+    display: block;
+    margin: 20px auto 60px;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 42px 60px;
+    gap: 10px;
+
+    width: calc(var(--rel_prop_width)*475px);
+    height: calc(var(--rel_prop_height)*312px);
+
+    background: #5F9EA7;
+    border-radius: 20px;
+}
+
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 42px 60px;
+    gap: 10px;
+
+    width: calc(var(--rel_prop_width)*475px);
+    height: calc(var(--rel_prop_height)*560px);
+
+    background: #5F9EA7;
+    border-radius: 20px;
+}
+
+.elemento-form{
+
+    width: calc(var(--rel_prop_width)*350px);
+
+    font-family: 'Jura', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    align-items: center;
+
+    text-align: center;
+
+    background: #5F9EA7;
+    border-radius: 20px;
+
+    color: #FFFFFF;
+}
+
+.boton-login {
+    justify-content: center;
+    align-items: center;
+
+    width: calc(var(--rel_prop_width)*189px);
+    height: calc(var(--rel_prop_height)*64px);
+
+    background: #F2F2F2;
+    border-radius: 20px;
+    font-family: 'Jura', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    color: #1B1C1E;
+    margin-top: 70px;
+}
