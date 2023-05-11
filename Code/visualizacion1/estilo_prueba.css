@@ -1512,3 +1512,40 @@ input[type="range"]::-webkit-slider-thumb {
     flex-grow: 0;
 }
 /********** End BASICO BIOLOGICO E INFORMATICO ******** */
+
+/********** AÑADIDO DE LOS TOOLIPS ***********/
+
+.cssToolTip {
+    position: relative; /* Esta clase tiene que tener posicion relativa */
+    font-family: 'Jura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 75%;
+}
+
+/* El tooltip */
+
+.cssToolTip span {
+    background: rgba(246,242,242) center left 5px no-repeat; 
+    border-radius: 5px;
+    display: none; /* El tooltip por defecto estara oculto */
+
+    font-size: 1em;
+    padding: 5px 5px 5px 10px;
+    max-width: 6000px;
+    position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
+
+    bottom: 30px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
+
+    left: 10px;  /*Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
+
+    z-index: 100; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
+
+}
+
+/* El tooltip cuando se muestra */
+
+.cssToolTip:hover span {
+    display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
+
+}

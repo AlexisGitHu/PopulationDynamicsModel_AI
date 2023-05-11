@@ -216,7 +216,10 @@
                                     </p>
                                 </div>
                                 <div class="input_basico">
-                                    <p class="descripcion_input">Nº de Depredadores iniciales</p>
+                                    <div class="cssToolTip">
+                                        <p  class="descripcion_input">Nº de Depredadores iniciales </p>
+                                        <span> Número de Depredadores iniciales </span> 
+                                    </div>
                                     <input type="number" class="seleccion_input" json_name="n_preds" min="0" max="1" step="0.01">
                                 </div>
                             </div>
@@ -228,7 +231,10 @@
                                     </p>
                                 </div>
                                 <div class="input_basico">
-                                    <p class="descripcion_input">Nº de Presas iniciales</p>
+                                    <div class="cssToolTip">
+                                        <p  class="descripcion_input"> Nº de Presas iniciales</p>
+                                        <span> Número de presas iniciales </span> 
+                                    </div>
                                     <input type="number" class="seleccion_input" json_name="n_preys" min="0" max="1" step="0.01">
                                 </div>
                             </div>
@@ -242,7 +248,10 @@
                                     </p>
                                 </div>
                                 <div class="input_basico">
-                                    <p class="descripcion_input">Nº de Plantas iniciales</p>
+                                    <div class="cssToolTip">
+                                        <p class="descripcion_input"> Nº de Plantas iniciales </p>
+                                        <span> Número de plantas iniciales </span> 
+                                    </div>
                                     <input type="number" class="seleccion_input" json_name="n_grass" min="0" max="1" step="0.01">
                                 </div>
                             </div>
@@ -254,7 +263,10 @@
                                     </p>
                                 </div>
                                 <div class="input_basico">
-                                    <p class="descripcion_input">Tamaño de la cuadrícula</p>
+                                    <div class="cssToolTip">
+                                        <p class="descripcion_input"> Tamaño de la cuadrícula </p>
+                                        <span> Tamaño de la cuadrícula </span> 
+                                    </div>
                                     <input type="number" class="seleccion_input" json_name="size" min="0" max="1" step="0.01">
                                 </div>
                             </div>
@@ -275,14 +287,20 @@
                     <div id="container_input3" class="container_inputs">
                         <div class="container_input_basico" style="order:0">
                             <div class="input_basico">
-                                <p class="descripcion_input">Tasa de Regeneración del Alimento básico</p>
+                                <div class="cssToolTip">
+                                    <p class="descripcion_input">Tasa de Regeneración del Alimento básico</p>
+                                    <span> Número de hierbas nuevas cada turno </span> 
+                                </div>
                                 <input type="number" class="seleccion_input" json_name="food_regen" min="0" max="1" step="0.01">
                             </div>
                         </div>
                         <!-- Inout de agrupamiento de alimento -->
                         <div class="container_input_basico" style="order:1">
                             <div class="input_basico">
-                                <p class="descripcion_input">Tasa de Agrupamiento del Alimento básico</p>
+                                <div class="cssToolTip">
+                                    <p class="descripcion_input">Tasa de Agrupamiento del Alimento básico</p>
+                                    <span> No se que va aquí </span> 
+                                </div>
                                 <input type="number" class="seleccion_input" json_name="cluster_prob" min="0" max="1" step="0.01">
                             </div>
                         </div>
@@ -340,7 +358,10 @@
                         <!-- Slider de energia maxima -->
                         <div class="energiaMaxima1">
                             <div class="energiaMaxima2">
-                                <p class="textContent">Energía Máxima</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Energía Máxima</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <div class="sliderEnergiaMaxima">
                                     <input class="inputSlider" type="range" min="0" value="0" max="20" step="1" onchange="cambiar_valor('pNumSlider1', this.value)" json_name="energia_depredador">
                                 </div>
@@ -355,11 +376,17 @@
                             <div id="izqContentBiologicos">
                                 <!-- Inputs de la izquierda -->
                                 <div class = "content_">
-                                    <p class="textContent"> Coste de Movimiento</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Movimiento</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="coste_movimiento_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                                 <div class = "content_">
-                                    <p class="textContent"> Coste de Reproduccion</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Reproduccion</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="coste_reproduccion_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                             </div>
@@ -367,11 +394,17 @@
                             <div id="dchaContentBiologicos">
                                 <!-- Inputs de la derecha -->
                                 <div class = "content_">
-                                    <p class="textContent"> Recuperacion al comer</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Recuperacion al comer</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="recuperacion_comer_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                                 <div class = "content_">
-                                    <p class="textContent"> Energia mínima de reproduccion</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Energia mínima de reproduccion</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="energia_min_reproduccion_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                             </div>
@@ -395,23 +428,38 @@
                         <div id ="izqContentInformaticos">
                             <!-- Inputs de la izquierda -->
                             <div class = "content_">
-                                <p class="textContent"> Indice de Exploración</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Exploración</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <input json_name="exploration_rate_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Learning Rate</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Learning Rate</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <input json_name="learning_rate_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Discount Factor</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Discount Factor</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <input json_name="discount_factor_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Cobardía</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Cobardía</p>
+                                    <span> Recompensa por huir de los depredadores</span> 
+                                </div>
                                 <input json_name="cobardia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Miedo</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Miedo</p>
+                                    <span> Castigo por aproximarse a depredadores</span> 
+                                </div>
                                 <input json_name="miedo_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                         </div>
@@ -419,23 +467,38 @@
                         <div id ="dchaContentInformaticos">
                             <!-- Inputs de la derecha -->
                             <div class = "content_">
-                                <p class="textContent"> Indice de Avaricia</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Avaricia</p>
+                                    <span> Recompensa por aproximarse a las presas</span> 
+                                </div>
                                 <input json_name="avaricia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Indice de Ignorancia</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Ignorancia</p>
+                                    <span> Castigo por huir de las presas</span> 
+                                </div>
                                 <input json_name="ignorancia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Colonialismo</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Colonialismo</p>
+                                    <span> Recompensa por aproximarse a otros individuos de mi especie</span> 
+                                </div>
                                 <input json_name="colonialismo_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Independencia</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Independencia</p>
+                                    <span> Castigo por huir de individuos de mi especie</span> 
+                                </div>
                                 <input json_name="independencia_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Hambre</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Hambre</p>
+                                    <span> No sé que va aquí</span> 
+                                </div>
                                 <input json_name="hambre_depredador" class ="input" type="number" min=0 max=1 step="any">
                             </div>
                         </div>
@@ -486,7 +549,10 @@
                         <!-- Slider de energia maxima -->
                         <div class="energiaMaxima1">
                             <div class="energiaMaxima2">
-                                <p class="textContent">Energía Máxima</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Energía Máxima</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <div class="sliderEnergiaMaxima">
                                     <input class="inputSlider" type="range" min="0" value="0" max="20" step="1" onchange="cambiar_valor('pNumSlider2', this.value)" json_name="energia_presa">
                                 </div>
@@ -501,11 +567,17 @@
                             <div id="izqContentBiologicos">
                                 <!-- Inputs de la izquierda -->
                                 <div class = "content_">
-                                    <p class="textContent"> Coste de Movimiento</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Movimiento</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="coste_movimiento_presa" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                                 <div class = "content_">
-                                    <p class="textContent"> Coste de Reproduccion</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Reproduccion</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="coste_reproduccion_presa" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                             </div>
@@ -513,11 +585,17 @@
                             <div id="dchaContentBiologicos">
                                 <!-- Inputs de la derecha -->
                                 <div class = "content_">
-                                    <p class="textContent"> Recuperacion al comer</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Recuperacion al comer</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="recuperacion_comer_presa" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                                 <div class = "content_">
-                                    <p class="textContent"> Energia mínima de reproduccion</p>
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Energia mínima de reproduccion</p>
+                                        <span> No se que va aqui </span> 
+                                    </div>
                                     <input json_name="energia_min_reproduccion_presa" class ="input" type="number" min=0 max=1 step="0.01">
                                 </div>
                             </div>
@@ -541,23 +619,38 @@
                         <div id ="izqContentInformaticos">
                             <!-- Inputs de la izquierda -->
                             <div class = "content_">
-                                <p class="textContent"> Indice de Exploración</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Exploración</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <input json_name="exploration_rate_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Learning Rate</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Learning Rate</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <input json_name="learning_rate_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Discount Factor</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Discount Factor</p>
+                                    <span> No se que va aqui </span> 
+                                </div>
                                 <input json_name="discount_factor_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Cobardía</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Cobardía</p>
+                                    <span> Recompensa por huir de los depredadores</span> 
+                                </div>
                                 <input json_name="cobardia_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Miedo</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Miedo</p>
+                                    <span> Castigo por aproximarse a depredadores</span> 
+                                </div>
                                 <input json_name="miedo_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                         </div>
@@ -565,23 +658,38 @@
                         <div id ="dchaContentInformaticos">
                             <!-- Inputs de la derecha -->
                             <div class = "content_">
-                                <p class="textContent"> Indice de Avaricia</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Avaricia</p>
+                                    <span> Recompensa por aproximarse a las presas</span> 
+                                </div>
                                 <input json_name="avaricia_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Indice de Ignorancia</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Ignorancia</p>
+                                    <span> Castigo por huir de las presas</span> 
+                                </div>
                                 <input json_name="ignorancia_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Colonialismo</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Colonialismo</p>
+                                    <span> Recompensa por aproximarse a otros individuos de mi especie</span> 
+                                </div>
                                 <input json_name="colonialismo_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Independencia</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Independencia</p>
+                                    <span> Castigo por huir de individuos de mi especie</span> 
+                                </div>
                                 <input json_name="independencia_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                             <div class = "content_">
-                                <p class="textContent"> Índice de Hambre</p>
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Hambre</p>
+                                    <span> No sé que va aquí</span> 
+                                </div>
                                 <input json_name="hambre_presa" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                         </div>

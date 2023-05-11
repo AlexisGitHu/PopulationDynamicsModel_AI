@@ -9,7 +9,7 @@
     "cluster_prob":0.8
   },
   "prey":{
-    "energia":0.5,
+    "energia":100,
     "miedo":0.5,
     "ignorancia":0.5,
     "independencia":0.5,
@@ -27,7 +27,7 @@
 	
   },
   "predator":{
-    "energia":0.5,
+    "energia":100,
     "miedo":0.5,
     "ignorancia":0.5,
     "independencia":0.5,
