@@ -31,8 +31,12 @@ prey_behaviour = Agents.IntelligentBehaviour(1, (data["size"], data["size"]), da
 predator_behaviour = Agents.IntelligentBehaviour(0, (data["size"], data["size"]), data["predator"]["exploration_rate"], data["predator"]["discount_factor"], data["predator"]["learning_rate"],predator_reward_dict)
 grass_behaviour = Agents.DumbBehaviour()
 
-basic_predator_agent = Agents.Agent(None, None, predator_behaviour, [prey_behaviour], [], (1,0), "red","lobo.png", data["predator"]["energia"])
-basic_prey_agent = Agents.Agent(None, None, prey_behaviour, [grass_behaviour], [predator_behaviour], (1,0), "green", "conejo.png", data["prey"]["energia"])
+basic_predator_agent = Agents.Agent(None, None, predator_behaviour, [prey_behaviour], [], (1,0), "red","lobo.png", data["predator"]["energia"],
+                                     repro_min_energy= data["predator"]["energia_min_reproduccion"], repro_cost=data["predator"]["coste_reproduccion"],
+                                     move_cost=data["predator"]["coste_movimiento"], eat_recover=data["predator"]["recuperacion_comer"])
+basic_prey_agent = Agents.Agent(None, None, prey_behaviour, [grass_behaviour], [predator_behaviour], (1,0), "green", "conejo.png", data["prey"]["energia"],
+                                     repro_min_energy= data["prey"]["energia_min_reproduccion"], repro_cost=data["prey"]["coste_reproduccion"],
+                                     move_cost=data["prey"]["coste_movimiento"], eat_recover=data["prey"]["recuperacion_comer"])
 basic_grass_agent =  Agents.Agent(None, None, grass_behaviour, [], [prey_behaviour], (1,0), "grey","cesped.png", 200, isBasic=True)
 
 agent_dict = {

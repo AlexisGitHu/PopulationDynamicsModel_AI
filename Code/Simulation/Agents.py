@@ -15,7 +15,7 @@ RELATIVE_POSITIONS = [(-1, 1), (0, 1), (1, 1), (-1, 0), (0, 0), (1, 0), (-1, -1)
 
 class Agent(mesa.Agent):
 
-    def __init__(self, unique_id, model, specie, preys, predators, direction, color, sprite, energy, repro_min_energy, repro_cost, move_cost, eat_recover, isBasic = False):
+    def __init__(self, unique_id, model, specie, preys, predators, direction, color, sprite, energy, repro_min_energy=50, repro_cost=50, move_cost=1, eat_recover=30, isBasic = False):
         super().__init__(unique_id, model)
         self.max_energy = energy
         self.energy = energy/2
@@ -40,7 +40,6 @@ class Agent(mesa.Agent):
             Cada agente percibe su entorno, se mueve, come, se reproduce y aprende.
         Imprime un log con el estado del agente tras hacer sus acciones.
         '''
-        alive = True
         if not self.isBasic:
             if self.energy > 0:
                 features = self.perceive() # ????????? Que pasa con la primera iteración??????
@@ -51,14 +50,14 @@ class Agent(mesa.Agent):
                 features = self.perceive()
                 self.specie.feedback(self.pos, features, reward)
             else:
-                alive = False
+                self.alive = False
                 self.model.killed.append(self)
 
         log = {"ID": int(self.unique_id),
                "Position": tuple(self.pos),
                "Direction": self.direction,
                "Sprite": self.sprite,
-               "Alive": str(alive)}
+               "Alive": str(self.alive)}
         print(json.dumps(log), end=", ")
     
     def perceive(self):
@@ -112,11 +111,12 @@ class Agent(mesa.Agent):
         Si es posible, alimenta al agente con alguna presa que haya en esa misma casilla. Recupera su energía a 100
         '''
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
-        enemies = [agent for agent in cellmates if agent.specie in self.preys]
+        enemies = [agent for agent in cellmates if agent.specie in self.preys and agent.alive]
         if len(enemies) >= 1:
             other_agent = self.random.choice(enemies)
             self.model.killed.append(other_agent)
             self.energy +=self.eat_recover
+            other_agent.alive = False
 
     def reproduce(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])

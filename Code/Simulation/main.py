@@ -57,8 +57,9 @@ prey_behaviour = Agents.IntelligentBehaviour(1, (SIZE, SIZE), 0.08, DISCOUNT_FAC
 predator_behaviour = Agents.IntelligentBehaviour(0, (SIZE, SIZE), 0.08, DISCOUNT_FACTOR, LEARNING_RATE,predator_reward_dict)
 grass_behaviour = Agents.DumbBehaviour()
 
-basic_predator_agent = Agents.Agent(None, None, predator_behaviour, [prey_behaviour], [], "N", "red","lobo.png", 100)
-basic_prey_agent = Agents.Agent(None, None, prey_behaviour, [grass_behaviour], [predator_behaviour], "N", "green", "conejo.png", 100)
+basic_predator_agent = Agents.Agent(None, None, predator_behaviour, [prey_behaviour], [], (1,0), "red","lobo.png", 100, repro_min_energy= 70, repro_cost=50,
+                                    move_cost=2, eat_recover=40)
+basic_prey_agent = Agents.Agent(None, None, prey_behaviour, [grass_behaviour], [predator_behaviour], (1,0), "green", "conejo.png", 100)
 basic_grass_agent =  Agents.Agent(None, None, grass_behaviour, [], [prey_behaviour], [], "grey","cesped.png", 200, isBasic=True)
 
 agent_dict = {

@@ -61,7 +61,8 @@ class Ecosistem(mesa.Model):
     
     def _copyAgent(self,agent, pos = None):
         new_agent = Agents.Agent(self.next_agent_id, self, agent.specie, agent.preys, agent.predators,
-                                  agent.direction, agent.color, agent.sprite, agent.max_energy, isBasic = agent.isBasic)
+                                  agent.direction, agent.color, agent.sprite, agent.max_energy, repro_min_energy= agent.repro_min_energy, repro_cost=agent.repro_cost,
+                                    move_cost=agent.move_cost, eat_recover=agent.eat_recover, isBasic = agent.isBasic)
         self.agent_collection[agent.specie].append(new_agent)
         self.schedule.add(new_agent)
         if not pos:
