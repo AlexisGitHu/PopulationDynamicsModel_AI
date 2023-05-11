@@ -141,7 +141,9 @@ def lectura_datos_mesa(process, id):
 
         ## Quitamos la última coma del último elemento para poder parsear el string a json con json.loads
         linea_limpia = linea_limpia[::-1].replace(",", "", 1)[::-1]
-        # print(linea_limpia)
+        print("***********")
+        print(linea_limpia)
+        print("***********")
 
         # Insertar en la lista si no está vacía y si no existen datos meterlos
         try:
@@ -202,7 +204,7 @@ def ejecuta_mesa(id):
 
     ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
     ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
-    command = ['python', '-u', '..\\Simulation\\main.py']
+    command = ['python', '-u', '..\\Simulation\\simulation.py', "simul_example"]
 
     # """Run a command while printing the live output"""
     process = subprocess.Popen(
@@ -689,9 +691,30 @@ def crearModelo():
         data = json.loads(request.data)
         print(data)
         
-        # print(request.get_json())
-        # print(request.get_data())
-    return "hola"
+        '''
+        Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
+
+        Params:
+            -id::int Identificador del usuario que va a entrenar el modelo
+        '''
+        # global process
+
+        ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
+        ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
+        command = ['python', '-u', '..\\Simulation\\simulation.py', "..\\Simulation\\simul_example"]
+
+        # """Run a command while printing the live output"""
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT
+        )
+
+        thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, "1"])
+
+        thread.start()
+
+        return "Entrenando modelo"
 
 @app.route("/prueba2")
 def prueba2():

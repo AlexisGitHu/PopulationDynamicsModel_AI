@@ -36,6 +36,7 @@ function crearModelo()
         {
             json_inputs[id] = item.value;
         }
+        json_inputs["nombre"] = $("#nombre_proyecto").text().trim()
     })
 
     console.log(json_inputs);
