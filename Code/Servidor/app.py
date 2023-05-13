@@ -607,9 +607,9 @@ def get_graph_data_dup(datos_nuevos):
         steps.append(step)
 
         for j in info:
-            if "lobo.png" in j.values():
+            if "lobo.png" in j.values() and "True" in j.values():
                 cont_lobos += 1
-            elif "conejo.png" in j.values():
+            elif "conejo.png" in j.values() and "True" in j.values():
                 cont_conejos += 1
 
         contadores.append((cont_lobos, cont_conejos))
@@ -655,6 +655,7 @@ def paint_data():
     datos_validos = get_graph_data_dup(datos_nuevos)
 
     response = make_response(json.dumps([datos_nuevos, datos_validos]))
+    # print(response)
     response.content_type = "application/json"
 
     return response
