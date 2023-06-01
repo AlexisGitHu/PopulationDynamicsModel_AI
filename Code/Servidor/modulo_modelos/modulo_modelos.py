@@ -87,9 +87,6 @@ def cargar_modelo(id):
     configuration_url = "../user_models/"+str(current_user.id)+"/"+id+"/config.json"
     configuration = json.load(open(configuration_url))
 
-
-    print(configuration)
-
     return render_template("prueba.html", modelo=obj_modelo, pretrained=True)
 
 @modulo_modelos.route('/comunidad')
