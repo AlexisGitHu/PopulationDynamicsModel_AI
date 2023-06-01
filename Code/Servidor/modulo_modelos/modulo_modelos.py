@@ -1,4 +1,4 @@
-from flask import flash, render_template
+from flask import flash, render_template, session
 from flask import request
 from flask_login import LoginManager, login_required, login_user, logout_user
 from wtforms import ValidationError
@@ -20,7 +20,9 @@ def modelos():
 
     formCrearModelo = CrearModeloForm()
     formAnadirModelo = AnadirModeloForm()
+
     if request.method == 'POST':
+
         if formCrearModelo.validate_on_submit():
             modelo = Modelo(nombre=formCrearModelo.nombre.data, url=formCrearModelo.url.data,
                             creador=current_user.username, fecha_creacion=datetime.date.today(),
