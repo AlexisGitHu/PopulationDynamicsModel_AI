@@ -1,3 +1,20 @@
+function rellenarInputs()
+{
+    var modelo_importado = true;
+    if (! modelo_importado){return}
+    else
+    {
+        $("input").each(function(iter, item)
+        {
+            $(item).attr("value", 1);
+            $(item).attr("disabled", true);
+            $(item).addClass('disabled_class');
+            // $(item).css("opacity", 0.4);
+            // $("input[type=number]::-webkit-inner-spin-button").css("opacity", 1);
+        })
+    }
+}
+
 function crearModelo()
 {
     var json_inputs = {};

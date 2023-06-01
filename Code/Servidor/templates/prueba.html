@@ -88,7 +88,7 @@
                     <div class="overlay-title">
                         <div>#01</div>
                         <div id="nombre_proyecto">
-                            PROYECTO CAMPO CAMPO
+                            <p contenteditable style="width: max-content; display: inline-block;">PROYECTO CAMPO CAMPO</p>
                             <!-- Lapiz -->
                             <svg width="19" height="19" viewBox="0 0 19 19" fill="none" class="bi bi-pencil" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.125 14.9687V18.8749H4.03125L15.5521 7.35408L11.6458 3.44783L0.125 14.9687ZM18.5729 4.33325C18.9792 3.927 18.9792 3.27075 18.5729 2.8645L16.1354 0.427002C15.7292 0.020752 15.0729 0.020752 14.6667 0.427002L12.7604 2.33325L16.6667 6.2395L18.5729 4.33325Z" fill="#1B1C1E"/>
@@ -268,6 +268,27 @@
                                     </div>
                                     <input type="number" class="seleccion_input" json_name="size" min="3" >
                                 </div>
+                            </div>
+                        </div>
+                        <div id="container_input_basico_3" class="container_inputs">
+                            <!-- Inputs de plantas -->
+                            <div class="container_input_basico" style="order:0">
+                                <div class="container_titulo_input" id="container_planta">
+                                    <p class="titulo_categoria_input_basico" id="num_iteraciones_input">
+                                        ITERACIONES
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <div class="cssToolTip">
+                                        <p class="descripcion_input"> Nº de Iteraciones </p>
+                                        <span> Número de iteraciones </span> 
+                                    </div>
+                                    <input type="number" class="seleccion_input" json_name="n_grass" min="0" value="10" disabled>
+                                </div>
+                            </div>
+                            <!-- Input de cuadricula -->
+                            <div class="container_input_basico" style="order:1">
+                                
                             </div>
                         </div>
                     </div>
@@ -708,7 +729,22 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <div style="align-items: center; margin-right: 2%;">
+                                <svg class="btn_svg" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_207_2219)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.33301 10.4062H6.24967V17.6979H8.33301V10.4062ZM16.6663 13.5312H14.583V17.6979H16.6663V13.5312ZM12.4997 7.28125H10.4163V17.6979H12.4997V7.28125ZM4.16634 19.7917H18.7497V14.5833H20.833V19.7917C20.833 20.9375 19.8955 21.875 18.7497 21.875H4.16634C3.02051 21.875 2.08301 20.9375 2.08301 19.7917V5.20833C2.08301 4.0625 3.02051 3.125 4.16634 3.125H16.6663V5.20833H4.16634V19.7917ZM14.9998 9C15.7075 7.244 17.4543 6 19.4998 6C21.5452 6 23.292 7.244 23.9998 9C23.292 10.756 21.5452 12 19.4998 12C17.4543 12 15.7075 10.756 14.9998 9ZM17.4543 9C17.4543 10.104 18.3707 11 19.4998 11C20.6288 11 21.5452 10.104 21.5452 9C21.5452 7.896 20.6288 7 19.4998 7C18.3707 7 17.4543 7.896 17.4543 9ZM18.2725 9C18.2725 8.336 18.8207 7.8 19.4998 7.8C20.1788 7.8 20.727 8.336 20.727 9C20.727 9.664 20.1788 10.2 19.4998 10.2C18.8207 10.2 18.2725 9.664 18.2725 9Z" fill="black"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_207_2219">
+                                            <rect width="25" height="25" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                        </div>
+                        <div>
+                            <h5 class="modal-title" id="exampleModalLabel" style="font-family: 'Jura';">GRÁFICA DE LA SIMULACIÓN</h5>
+                        </div>
+                        
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
