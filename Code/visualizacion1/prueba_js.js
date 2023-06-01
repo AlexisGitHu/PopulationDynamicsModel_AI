@@ -4,7 +4,7 @@ function rellenarInputs()
     if (! modelo_importado){return}
     else
     {
-        $("input").each(function(iter, item)
+        $("input").each(function(iter, item) 
         {
             $(item).attr("value", 1);
             $(item).attr("disabled", true);
@@ -18,9 +18,8 @@ function rellenarInputs()
 function crearModelo()
 {
     var json_inputs = {};
-    json_inputs["prey"] = {};
-    json_inputs["predator"] = {};
-    json_inputs["ecosistem"]={};
+    json_inputs["presa"] = {};
+    json_inputs["depredador"] = {};
 
     $("input").each(function(iter, item) 
     {
@@ -42,32 +41,23 @@ function crearModelo()
         if(id.includes("presa") || id.includes("depredador"))
         {
             var agente = id.split("_").pop();
-            if(agente=="presa")
-            {
-                agente="prey";
-            }
-            else
-            {
-                agente="predator";
-            }
             id = id.slice(0,index_referencia_agente);
 
-            var valor = parseFloat(item.value);
+            var valor = item.value;
 
-            if(id == "energia"){valor = parseInt(item.value) * 5}
+            if(id == "energia"){valor = String(parseInt(item.value) * 5)}
 
             json_inputs[agente][id] = valor;
         }
         else
         {
-            json_inputs["ecosistem"][id] = parseFloat(item.value);
+            json_inputs[id] = item.value;
         }
-        json_inputs["ecosistem"]["nombre"] = $("#nombre_proyecto").text().trim()
+        json_inputs["nombre"] = $("#nombre_proyecto").text().trim()
     })
 
     console.log(json_inputs);
-    model_id_parameter=$("#modelo_id").attr("modelo_id");
-    json_inputs["modelo_id"]=model_id_parameter;
+    
     var request = $.ajax({
 
         type: 'POST',
@@ -81,7 +71,6 @@ function crearModelo()
         }
     });
 }
-
 
 function toggleInputs(destination)
 {
@@ -161,11 +150,6 @@ function add_data_graph(datos)
 
 paper.install(window);
 window.onload = function() {
-    var loc = window.location.pathname;
-    var dir = loc.substring(0, loc.lastIndexOf('/'));
-    console.log(loc);
-    console.log(dir);
-
 
     var my_width = $(document).width();
     var my_height = $(document).height();
@@ -246,18 +230,10 @@ window.onload = function() {
                             y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
                             
                             destination = new Point(x_relativa,y_relativa);
-                            console.log(data[j].info[i].Sprite);
-
-                            var string_url = "/static/assets/"+String(data[j].info[i].Sprite);
-
-                            eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+string_url+'", position: '+ destination +'});');
-
+                            eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: '+ destination +'});');
                             dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
                             var scale = 1/5;
-
-                            console.log(dict[animal + data[j].info[i].ID]);
-
                             dict[animal + data[j].info[i].ID].scale(scale);
                             dict[animal + data[j].info[i].ID].visible = true;
 
@@ -297,11 +273,8 @@ window.onload = function() {
                                     y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
 
                                     destination = new Point(x_relativa,y_relativa);
-                                    console.log(data[j].info[i].Sprite);
 
-                                    var string_url = "/static/assets/"+String(data[j].info[i].Sprite);
-                                    eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+string_url+'", position: '+ destination +'});');
-                                                                
+                                    eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: ' + destination + '});');                                
                                     dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
                                     var scale = 1/5;
