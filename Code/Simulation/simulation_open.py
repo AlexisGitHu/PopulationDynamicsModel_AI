@@ -5,8 +5,9 @@ from Ecosistem import Ecosistem
 import Agents
 import pickle
 
+JSON_NAME_CONFIG="config.json"
 if len(sys.argv) > 1:
-    with open(sys.argv[1]+"simul_example.json") as f:
+    with open(sys.argv[1]+JSON_NAME_CONFIG) as f:
         data = json.load(f)
     
 
@@ -35,7 +36,7 @@ def guardar_modelo(modelo,ruta):
 
 ############################ SERVIDOR PROPIO #########################
 model=cargar_modelo(sys.argv[1])
-for i in range(data["iters"]):
+for i in range(data["ecosistem"]["iters"]):
     model.step()
 guardar_modelo(model,sys.argv[1])
 

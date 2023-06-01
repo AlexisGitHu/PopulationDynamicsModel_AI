@@ -5,8 +5,10 @@ from Ecosistem import Ecosistem
 import Agents
 import pickle
 
+JSON_NAME_CONFIG="config.json"
+
 if len(sys.argv) > 1:
-    with open(sys.argv[1]+"simul_example.json") as f:
+    with open(sys.argv[1]+JSON_NAME_CONFIG) as f:
         data = json.load(f)
     
 
@@ -27,8 +29,8 @@ predator_reward_dict = {"near_predator_negative":data["predator"]["miedo"],
                     "lowest_energy_modifier":data["predator"]["hambre"]}
 
 
-prey_behaviour = Agents.IntelligentBehaviour(1, (data["size"], data["size"]), data["prey"]["exploration_rate"], data["prey"]["discount_factor"], data["prey"]["learning_rate"],prey_reward_dict)
-predator_behaviour = Agents.IntelligentBehaviour(0, (data["size"], data["size"]), data["predator"]["exploration_rate"], data["predator"]["discount_factor"], data["predator"]["learning_rate"],predator_reward_dict)
+prey_behaviour = Agents.IntelligentBehaviour(1, (data["ecosistem"]["size"], data["ecosistem"]["size"]), data["prey"]["exploration_rate"], data["prey"]["discount_factor"], data["prey"]["learning_rate"],prey_reward_dict)
+predator_behaviour = Agents.IntelligentBehaviour(0, (data["ecosistem"]["size"], data["ecosistem"]["size"]), data["predator"]["exploration_rate"], data["predator"]["discount_factor"], data["predator"]["learning_rate"],predator_reward_dict)
 grass_behaviour = Agents.DumbBehaviour()
 
 basic_predator_agent = Agents.Agent(None, None, predator_behaviour, [prey_behaviour], [], (1,0), "red","lobo.png", data["predator"]["energia"],
@@ -71,8 +73,8 @@ def guardar_modelo(modelo,ruta):
 
 
 ############################ SERVIDOR PROPIO #########################
-model = Ecosistem(agent_dict, data["size"], basic_food_info, verbose=True)
-for i in range(data["iters"]):
+model = Ecosistem(agent_dict, data["ecosistem"]["size"], basic_food_info, verbose=True)
+for i in range(data["ecosistem"]["iters"]):
     model.step()
 guardar_modelo(model,sys.argv[1])
 

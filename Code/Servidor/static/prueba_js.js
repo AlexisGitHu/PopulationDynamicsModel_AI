@@ -18,8 +18,9 @@ function rellenarInputs()
 function crearModelo()
 {
     var json_inputs = {};
-    json_inputs["presa"] = {};
-    json_inputs["depredador"] = {};
+    json_inputs["prey"] = {};
+    json_inputs["predator"] = {};
+    json_inputs["ecosistem"]={};
 
     $("input").each(function(iter, item) 
     {
@@ -41,19 +42,27 @@ function crearModelo()
         if(id.includes("presa") || id.includes("depredador"))
         {
             var agente = id.split("_").pop();
+            if(agente=="presa")
+            {
+                agente="prey";
+            }
+            else
+            {
+                agente="predator";
+            }
             id = id.slice(0,index_referencia_agente);
 
-            var valor = item.value;
+            var valor = parseFloat(item.value);
 
-            if(id == "energia"){valor = String(parseInt(item.value) * 5)}
+            if(id == "energia"){valor = parseInt(item.value) * 5}
 
             json_inputs[agente][id] = valor;
         }
         else
         {
-            json_inputs[id] = item.value;
+            json_inputs["ecosistem"][id] = parseFloat(item.value);
         }
-        json_inputs["nombre"] = $("#nombre_proyecto").text().trim()
+        json_inputs["ecosistem"]["nombre"] = $("#nombre_proyecto").text().trim()
     })
 
     console.log(json_inputs);
