@@ -2,8 +2,6 @@ from flask import flash, render_template, session
 from flask import request
 from flask_login import LoginManager, login_required, login_user, logout_user
 from wtforms import ValidationError
-import requests
-import webbrowser
 from modulo_funcionesAux.modulo_funcionesAux import *
 from modulo_bbdd.modulo_bbdd import *
 from modulo_login.modulo_login import *
@@ -13,7 +11,9 @@ import datetime
 
 modulo_modelos = Blueprint("modulo_modelos", __name__, static_folder="static", template_folder="templates")
 
-RUTA_MODELO="/../users_models/"
+RUTA_MODELO = "/../users_models/"
+
+
 @modulo_modelos.route('/modelos', methods=['GET', 'POST'])
 @login_required
 def modelos():
@@ -31,21 +31,19 @@ def modelos():
 
             db.session.add(modelo)
             db.session.commit()
-            current_directory =  os.path.dirname(os.path.abspath(__file__))
-            ruta=current_directory+RUTA_MODELO+str(current_user.id)+"/proyecto"+str(modelo.id)
+            current_directory = os.path.dirname(os.path.abspath(__file__))
+            ruta = current_directory + RUTA_MODELO + str(current_user.id) + "/proyecto" + str(modelo.id)
             os.makedirs(ruta)
 
- 
             # headers={'modelo':str(modelo.id)}
-            
+
             modelo = Modelo.query.filter_by(compartir=modelo.compartir).first()
             permisos = Permisos(id_usuario=current_user.id, id_modelo=modelo.id)
             db.session.add(permisos)
             db.session.commit()
 
-           
-            return render_template("prueba.html",modelo=modelo.id)
-            
+            return render_template("prueba.html", modelo=modelo.id)
+
 
         elif formAnadirModelo.validate_on_submit():
             modelo = Modelo.query.filter_by(compartir=formAnadirModelo.codigo.data).first()
