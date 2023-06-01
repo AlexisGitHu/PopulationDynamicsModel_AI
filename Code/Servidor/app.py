@@ -731,4 +731,8 @@ def prueba2():
     return "Llegó"
 
 if __name__ == "__main__":
+    try:
+        os.mkdir("users_models")
+    except:
+        pass
     app.run(debug=True)
