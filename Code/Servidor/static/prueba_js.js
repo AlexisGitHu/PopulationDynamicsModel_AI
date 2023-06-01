@@ -36,10 +36,12 @@ function crearModelo()
         {
             json_inputs[id] = item.value;
         }
+        json_inputs["nombre"] = $("#nombre_proyecto").text().trim()
     })
 
     console.log(json_inputs);
-    
+    model_id_parameter=$("#modelo_id").attr("modelo_id");
+    json_inputs["modelo_id"]=model_id_parameter;
     var request = $.ajax({
 
         type: 'POST',
@@ -53,6 +55,7 @@ function crearModelo()
         }
     });
 }
+
 
 function toggleInputs(destination)
 {
@@ -200,18 +203,18 @@ window.onload = function() {
                     console.log("Hay este numero de elementos");
                     console.log(data[j].info.length);
                     for(var i=0;i<data[j].info.length;i++){
-                        if(data[j].info[i].Sprite == "lobo.png"){
+                        if(data[j].info[i].Sprite == "/assets/lobo.png"){
                             var animal = "lobo";
-                        }else if(data[j].info[i].Sprite == "conejo.png"){
+                        }else if(data[j].info[i].Sprite == "/assets/conejo.png"){
                             var animal = "conejo";
-                        }else if(data[j].info[i].Sprite == "cesped.png"){
+                        }else if(data[j].info[i].Sprite == "/assets/cesped.png"){
                             var animal = "cesped";
                         }
                         if(!id.includes(data[j].info[i].ID)){
                             x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                             y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
                             
-                            destination = new Point(x_relativa,y_relativa);             
+                            destination = new Point(x_relativa,y_relativa);
                             eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: '+ destination +'});');
                             dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
@@ -243,11 +246,11 @@ window.onload = function() {
                             add_data_graph(datos_grafica[j]);
                             // add_data_graph(datos[1][j]);
                             for(var i=0;i<data[j].info.length;i++){
-                                if(data[j].info[i].Sprite == "lobo.png"){
+                                if(data[j].info[i].Sprite == "/assets/lobo.png"){
                                     var animal = "lobo";
-                                }else if(data[j].info[i].Sprite == "conejo.png"){
+                                }else if(data[j].info[i].Sprite == "/assets/conejo.png"){
                                     var animal = "conejo";
-                                }else if(data[j].info[i].Sprite == "cesped.png"){
+                                }else if(data[j].info[i].Sprite == "/assets/cesped.png"){
                                     var animal = "cesped";
                                 }
                                 if(!id.includes(data[j].info[i].ID)){
@@ -285,11 +288,11 @@ window.onload = function() {
                                 }
                                 for(var i=0;i<data[j].info.length;i++){
 
-                                    if(data[j].info[i].Sprite == "lobo.png"){
+                                    if(data[j].info[i].Sprite == "/assets/lobo.png"){
                                         var animal = "lobo";
-                                    }else if(data[j].info[i].Sprite == "conejo.png"){
+                                    }else if(data[j].info[i].Sprite == "/assets/conejo.png"){
                                         var animal = "conejo";
-                                    }else if(data[j].info[i].Sprite == "cesped.png"){
+                                    }else if(data[j].info[i].Sprite == "/assets/cesped.png"){
                                         var animal = "cesped";
                                     }
                                     

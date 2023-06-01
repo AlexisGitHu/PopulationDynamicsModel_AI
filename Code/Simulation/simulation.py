@@ -3,12 +3,12 @@ import sys
 import json
 from Ecosistem import Ecosistem
 import Agents
+import pickle
 
 if len(sys.argv) > 1:
-    with open(sys.argv[1]) as f:
+    with open(sys.argv[1]+"simul_example.json") as f:
         data = json.load(f)
     
-
 
 prey_reward_dict = {"near_predator_negative":data["prey"]["miedo"],
                     "near_prey_negative":data["prey"]["ignorancia"],
@@ -62,7 +62,17 @@ basic_food_info = {
 # server.launch()
 
 
+
+## Supongo que la carpeta está creada
+def guardar_modelo(modelo,ruta):
+    file = open(ruta+"model.pickle", 'wb')
+    pickle.dump(modelo,file)
+    file.close()
+
+
 ############################ SERVIDOR PROPIO #########################
 model = Ecosistem(agent_dict, data["size"], basic_food_info, verbose=True)
 for i in range(data["iters"]):
     model.step()
+guardar_modelo(model,sys.argv[1])
+

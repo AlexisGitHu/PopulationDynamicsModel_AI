@@ -19,7 +19,7 @@
         <!-- PaperJS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-core.min.js"></script>
 
-        <link rel="stylesheet" href="estilo_prueba.css">
+        <link rel="stylesheet" href="../static/css/estilo_prueba.css">
     </head>
     
     <body>
@@ -220,7 +220,7 @@
                                         <p  class="descripcion_input">Nº de Depredadores iniciales </p>
                                         <span> Número de Depredadores iniciales </span> 
                                     </div>
-                                    <input type="number" class="seleccion_input" json_name="n_preds" min="0" max="1" step="0.01">
+                                    <input type="number" class="seleccion_input" json_name="n_preds" min="1">
                                 </div>
                             </div>
                             <!-- Input de presas -->
@@ -235,7 +235,7 @@
                                         <p  class="descripcion_input"> Nº de Presas iniciales</p>
                                         <span> Número de presas iniciales </span> 
                                     </div>
-                                    <input type="number" class="seleccion_input" json_name="n_preys" min="0" max="1" step="0.01">
+                                    <input type="number" class="seleccion_input" json_name="n_preys" min="1">
                                 </div>
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                                         <p class="descripcion_input"> Nº de Plantas iniciales </p>
                                         <span> Número de plantas iniciales </span> 
                                     </div>
-                                    <input type="number" class="seleccion_input" json_name="n_grass" min="0" max="1" step="0.01">
+                                    <input type="number" class="seleccion_input" json_name="n_grass" min="1" >
                                 </div>
                             </div>
                             <!-- Input de cuadricula -->
@@ -267,7 +267,7 @@
                                         <p class="descripcion_input"> Tamaño de la cuadrícula </p>
                                         <span> Tamaño de la cuadrícula </span> 
                                     </div>
-                                    <input type="number" class="seleccion_input" json_name="size" min="0" max="1" step="0.01">
+                                    <input type="number" class="seleccion_input" json_name="size" min="3" >
                                 </div>
                             </div>
                         </div>
@@ -721,8 +721,11 @@
                 </div>
             </div>
         </div>
+        <div id="modelo_id" modelo_id="{{modelo}}" style="visibility:hidden">
+
+        </div>
     </body>
-    <script type="text/javascript" src = "prueba_js.js" canvas = "myCanvas">
+    <script type="text/javascript" src = "../static/prueba_js.js" canvas = "myCanvas">
         // expose paperjs classes into global scope
     </script>
 

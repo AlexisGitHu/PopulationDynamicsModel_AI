@@ -690,7 +690,16 @@ def prueba1():
 def crearModelo():
     if request.method == 'POST':
         data = json.loads(request.data)
+        modelo_id=data['modelo_id']
+        user_id_actual=current_user.id
+        print("ESTO ES CURRENT",os.path.dirname(__file__))
+        print("ESTO ES CWD",os.getcwd())
+        final_directory=os.getcwd()+"\\users_models\\"+str(user_id_actual)+"\\proyecto"+str(modelo_id)+"\\"
+        print(final_directory)
+        with open(final_directory+"config.json","w") as file:
+            json.dump(data,file)
         print(data)
+      
         
         '''
         Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
@@ -702,7 +711,7 @@ def crearModelo():
 
         ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
         ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
-        command = ['python', '-u', '..\\Simulation\\simulation.py', "..\\Simulation\\simul_example"]
+        command = ['python', '-u', '..\\Simulation\\simulation.py', final_directory]
 
         # """Run a command while printing the live output"""
         process = subprocess.Popen(

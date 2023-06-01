@@ -1,8 +1,8 @@
 from flask import flash, render_template
 from flask import request
-from flask_login import LoginManager, login_required, login_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from wtforms import ValidationError
-
+import os
 from modulo_bbdd.modulo_bbdd import *
 from modulo_forms.modulo_forms import *
 from modulo_funcionesAux.modulo_funcionesAux import *
@@ -68,6 +68,12 @@ def login():
         print("El next_page en el GET es {}".format(next_page))
         return render_template('login.html', form=form, module="login", nextpath=next_page)
 
+RUTA="/../users_models/"
+def crear_carpeta_usuario(usuario):
+    current_directory =  os.path.dirname(os.path.abspath(__file__))
+    ruta_final=current_directory+RUTA+str(usuario.id)
+    os.mkdir(ruta_final)
+    return 
 
 @modulo_login.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -87,6 +93,7 @@ def signup():
             flash('Usuario creado con éxito!')
             db.session.add(nuevoUser)
             db.session.commit()
+            crear_carpeta_usuario(nuevoUser)
             return redirect(url_for('modulo_login.login'))
     else:
         print("El formulario no es válido")
