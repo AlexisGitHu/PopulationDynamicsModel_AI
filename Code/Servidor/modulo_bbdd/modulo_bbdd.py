@@ -39,7 +39,6 @@ class Modelo(db.Model):
     __tablename__ = 'modelos'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100))
-    url = db.Column(db.String(100), unique=True)
     creador = db.Column(db.String(100))
     fecha_creacion = db.Column(db.String(100))
     compartir = db.Column(db.String(100), unique=True)
@@ -50,7 +49,6 @@ class Modelo(db.Model):
         return {
             'id': self.id,
             'nombre': self.nombre,
-            'url': self.url,
             'creador': self.creador,
             'fecha_creacion': self.fecha_creacion,
             'compartir': self.compartir,

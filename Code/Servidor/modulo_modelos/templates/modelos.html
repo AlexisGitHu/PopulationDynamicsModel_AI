@@ -12,7 +12,7 @@
     <button class="añadir-boton" data-toggle="modal" data-target="#añadirModeloModal">Añadir Modelo Compartido</button>
 
     {% for message in get_flashed_messages() %}
-    <div class="alert alert-primary" style="margin-right: 30px">
+    <div class="alert alert-primary" style="margin-right: calc(var(--rel_prop_width)*30px)">
         {{message}}
     </div>
     {% endfor %}
@@ -71,9 +71,6 @@
                         {{ formCrearModelo.hidden_tag() }}
                         <div class="mb-3 text-center">
                             {{ wtf.form_field(formCrearModelo.nombre) }}
-                        </div>
-                        <div class="mb-3 text-center">
-                            {{ wtf.form_field(formCrearModelo.url) }}
                         </div>
                         <div class="mb-3">
                             {{ wtf.form_field(formCrearModelo.publico) }}

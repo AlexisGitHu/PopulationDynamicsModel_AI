@@ -26,7 +26,6 @@ class SignUpForm(FlaskForm):
 
 class CrearModeloForm(FlaskForm):
     nombre = StringField('Nombre', validators=[DataRequired()])
-    url = StringField('URL', validators=[DataRequired()])
     publico = BooleanField('Hacer Público el Modelo')
     submit = SubmitField('Crear')
 

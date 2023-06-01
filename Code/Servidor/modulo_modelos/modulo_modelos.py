@@ -25,9 +25,9 @@ def modelos():
     if request.method == 'POST':
 
         if formCrearModelo.validate_on_submit():
-            modelo = Modelo(nombre=formCrearModelo.nombre.data, url=formCrearModelo.url.data,
-                            creador=current_user.username, fecha_creacion=datetime.date.today(),
-                            compartir=str(uuid.uuid4()), publico=formCrearModelo.publico.data)
+            modelo = Modelo(nombre=formCrearModelo.nombre.data, creador=current_user.username,
+                            fecha_creacion=datetime.date.today(), compartir=str(uuid.uuid4()),
+                            publico=formCrearModelo.publico.data)
 
             db.session.add(modelo)
             db.session.commit()

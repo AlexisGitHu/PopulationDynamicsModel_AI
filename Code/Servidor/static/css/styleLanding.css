@@ -22,15 +22,32 @@ p {
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: calc(var(--rel_prop_width)*20px);
+    line-height: calc(var(--rel_prop_width)*24px);
     /* identical to box height */
 
     display: flex;
     align-items: center;
     text-decoration: underline;
-    text-underline-offset: 16px;
-    margin-left: 35px;
+    text-underline-offset: calc(var(--rel_prop_width)*16px);
+    margin-left: calc(var(--rel_prop_width)*35px);
+}
+
+.tituloIndex {
+    font-family: 'Jura', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(var(--rel_prop_width)*45px);
+    line-height: calc(var(--rel_prop_width)*40px);
+    margin-top: calc(var(--rel_prop_width)*175px);
+
+    color: #1B1C1E;
+}
+
+.bannerIndex {
+    width: calc(var(--rel_prop_width)*600px);
+    display: block;
+    margin: calc(var(--rel_prop_width)*30px) auto 0;
 }
 
 .login-body{
@@ -51,16 +68,16 @@ p {
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
-    line-height: 18px;
+    font-size: calc(var(--rel_prop_width)*15px);
+    line-height: calc(var(--rel_prop_width)*18px);
 
     color: #1B1C1E;
 }
 
 .banner {
-    width: 192px;
+    width: calc(var(--rel_prop_width)*192px);
     display: block;
-    margin: 20px auto 60px;
+    margin: calc(var(--rel_prop_width)*20px) auto calc(var(--rel_prop_width)*60px);
 }
 
 .login-form{
@@ -68,14 +85,14 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 42px 60px;
-    gap: 10px;
+    padding: calc(var(--rel_prop_width)*42px) calc(var(--rel_prop_width)*60px);
+    gap: calc(var(--rel_prop_width)*10px);
 
-    width: 475px;
-    height: 312px;
+    width: calc(var(--rel_prop_width)*475px);
+    height: calc(var(--rel_prop_height)*312px);
 
     background: #5F9EA7;
-    border-radius: 20px;
+    border-radius: calc(var(--rel_prop_width)*20px);
 }
 
 .signup-form{
@@ -83,14 +100,14 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 42px 60px;
-    gap: 10px;
+    padding: calc(var(--rel_prop_width)*42px) calc(var(--rel_prop_width)*60px);
+    gap: calc(var(--rel_prop_width)*10px);
 
-    width: 475px;
-    height: 560px;
+    width: calc(var(--rel_prop_width)*475px);
+    height: calc(var(--rel_prop_height)*560px);
 
     background: #5F9EA7;
-    border-radius: 20px;
+    border-radius: calc(var(--rel_prop_width)*20px);
 }
 
 .elemento-form{
@@ -98,15 +115,15 @@ p {
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: calc(var(--rel_prop_width)*20px);
+    line-height: calc(var(--rel_prop_width)*24px);
     align-items: center;
-    width: 350px;
+    width: calc(var(--rel_prop_width)*350px);
 
     text-align: center;
 
     background: #5F9EA7;
-    border-radius: 20px;
+    border-radius: calc(var(--rel_prop_width)*20px);
 
     color: #FFFFFF;
 }
@@ -115,16 +132,16 @@ p {
     justify-content: center;
     align-items: center;
 
-    width: 189px;
-    height: 64px;
+    width: calc(var(--rel_prop_width)*189px);
+    height: calc(var(--rel_prop_height)*64px);
 
     background: #F2F2F2;
-    border-radius: 20px;
+    border-radius: calc(var(--rel_prop_width)*20px);
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: calc(var(--rel_prop_width)*20px);
     text-align: center;
     color: #1B1C1E;
-    margin-top: 70px;
+    margin-top: calc(var(--rel_prop_width)*70px);
 }
