@@ -11,7 +11,7 @@
     <div class="tarjetas">
         {% for modelo in modelos %}
             <div class="proyecto-tarjeta">
-                <div class="tarjeta-imagen">
+                <div class="tarjeta-imagen" onclick="window.location.href = `{{url_for('modulo_modelos.cargar_modelo', id=modelo.id)}}`" style="cursor:pointer">
                     <img src="../static/assets/usuario.png" class="usuario-imagen">
                     <img src="../static/assets/imagen.png" class="imagen-imagen">
                     <p class="nombre-proyecto">{{modelo.nombre}}</p>
