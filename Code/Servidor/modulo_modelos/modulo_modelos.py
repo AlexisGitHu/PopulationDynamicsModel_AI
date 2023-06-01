@@ -16,6 +16,8 @@ modulo_modelos = Blueprint("modulo_modelos", __name__, static_folder="static", t
 @modulo_modelos.route('/modelos', methods=['GET', 'POST'])
 @login_required
 def modelos():
+    set_current_tab("modelos")
+
     formCrearModelo = CrearModeloForm()
     formAnadirModelo = AnadirModeloForm()
     if request.method == 'POST':
@@ -70,7 +72,17 @@ def modelos():
 @modulo_modelos.route('/comunidad')
 @login_required
 def comunidad():
+    set_current_tab("comunidad")
+
     listaModelos = Modelo.query.filter_by(publico=True).all()
 
     modelos = [x.serialize for x in listaModelos]
     return render_template('comunidad.html', modelos=modelos)
+
+
+@modulo_modelos.route('/informacion')
+@login_required
+def informacion():
+    set_current_tab("informacion")
+
+    return render_template('informacion.html', modelos=modelos)

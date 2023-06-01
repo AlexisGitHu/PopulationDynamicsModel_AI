@@ -18,59 +18,9 @@
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
         <!-- PaperJS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-core.min.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="../static/css/style1.css">
-
-        <script>
-
-
-            var actual = [];
-            var anterior = [];
-
-            function ajaxCall() {
-
-
-                var request = $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:5000/datos_nuevos/{{user_id}}',
-                    success: function(data) {
-                        // console.log(data);
-                        // var info = {};
-                        var hacer_abort = false;
-                        try
-                        {
-                            // anterior = actual;
-
-                            // actual = data;
-
-                            // var new_numJSON = actual.length - anterior.length;
-
-                            // var difference = actual.slice(-new_numJSON);
-                            // console.log(difference);
-                            console.log(data);
-                            console.log(data[data.length - 1]["Iteration"] +  " vs {{iters}}");
-                            hacer_abort = (data[data.length - 1]["Iteration"] == "{{iters}}");
-                        }
-                        catch(error)
-                        {
-                            console.log("Todavía no hay nada");
-                        }
-
-                        if (hacer_abort == true)
-                        {
-                            request.abort();
-                        }
-                        else
-                        {
-                            setTimeout(function(){ajaxCall(); /*send_data(difference)*/}, 1000);
-                        }
-                    }
-                });
-
-            }
-        </script>
+        <link rel="stylesheet" href="../static/css/styleLanding.css">
     </head>
 
     <body onload=ajaxCall()>
@@ -82,8 +32,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul class="navbar-nav d-flex justify-content-end">
                         {% block navbarli %}
-                            <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="">Sobre</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="">Blog</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="{{url_for('index')}}">Sobre</a></li>
                             <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="{{url_for('modulo_login.login')}}">Log in</a></li>
                             <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="{{url_for('modulo_login.signup')}}" style="margin-right: 80px">Sign up</a></li>
                         {% endblock %}
@@ -99,9 +48,8 @@
             </div>
         {% endfor %}
         </div>
+
         {% block content %}{% endblock %}
     </body>
-    <script type="text/javascript" src = "../static/prueba_js.js" canvas = "myCanvas">
-        // expose paperjs classes into global scope
-    </script>
+
 </html>
