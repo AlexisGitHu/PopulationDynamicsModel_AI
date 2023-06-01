@@ -42,7 +42,7 @@ def modelos():
             db.session.add(permisos)
             db.session.commit()
 
-            return render_template("prueba.html", modelo=modelo.id)
+            return render_template("prueba.html", modelo=modelo.id,pretrained=False)
 
         elif formAnadirModelo.validate_on_submit():
             modelo = Modelo.query.filter_by(compartir=formAnadirModelo.codigo.data).first()
@@ -84,10 +84,10 @@ def cargar_modelo(id):
 
     id = id.replace("modal","")
 
-    configuration_url = "../user_models/"+str(current_user.id)+"/"+id+"/config.json"
-    # configuration = json.load(open(configuration_url))
+    configuration_url = "users_models/"+str(current_user.id)+"/proyecto"+id+"/config.json"
+    configuration = json.load(open(configuration_url))
 
-    return render_template("prueba.html", modelo=1, pretrained=True)
+    return render_template("prueba.html", modelo=1,configuration=configuration, pretrained=True)
 
 @modulo_modelos.route('/comunidad')
 @login_required

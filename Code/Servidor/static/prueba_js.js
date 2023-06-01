@@ -40,7 +40,7 @@ function guardarModelo()
 
 }
 
-function crearModelo()
+function crearModelo(pretrained)
 {
     var json_inputs = {};
     json_inputs["prey"] = {};
@@ -98,7 +98,7 @@ function crearModelo()
         type: 'POST',
         data: JSON.stringify(json_inputs),
         contentType: 'application/json;charset=UTF-8',
-        url: "http://localhost:5000/crearModelo",
+        url: "http://localhost:5000/crearModelo/"+String(pretrained),
 
         success: function(data) 
         {

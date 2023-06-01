@@ -219,7 +219,33 @@ def ejecuta_mesa(id):
 
     return "Entrenando modelo"
 
+@cross_origin()
+@app.route("/ejecuta_pretrained/mesa/<id>/<ruta>")
+def ejecuta_pretrained_mesa(id,ruta):
+    '''
+    Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
 
+    Params:
+        -id::int Identificador del usuario que va a entrenar el modelo
+    '''
+    # global process
+
+    ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
+    ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
+    command = ['python', '-u', '..\\Simulation\\simulation.py', ruta]
+
+    # """Run a command while printing the live output"""
+    process = subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT
+    )
+
+    thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, id])
+
+    thread.start()
+
+    return "Entrenando modelo"
 ################################### POSIBLE FUNCION CONJUNTA PARA LA GRAFICA Y VISUALIZACIÓN ###################################
 # @app.route("/get_data/<id>")
 # def get_data(id):
@@ -686,33 +712,39 @@ def prueba1():
         print(request.form.get("claveA"))
     return "http://localhost:5000/login"
 
-@app.route("/crearModelo" ,methods=['GET', 'POST'])
-def crearModelo():
+
+##EJECUTAR MESAAAAAAAAAAAAAAAAAA
+@app.route("/crearModelo/<pretrained>" ,methods=['GET', 'POST'])
+def crearModelo(pretrained):
     if request.method == 'POST':
-        data = json.loads(request.data)
-        modelo_id=data['modelo_id']
-        user_id_actual=current_user.id
-        print("ESTO ES CURRENT",os.path.dirname(__file__))
-        print("ESTO ES CWD",os.getcwd())
-        final_directory=os.getcwd()+"\\users_models\\"+str(user_id_actual)+"\\proyecto"+str(modelo_id)+"\\"
-        print(final_directory)
-        with open(final_directory+"config.json","w") as file:
-            json.dump(data,file)
-        print(data)
-      
-        
+        if(pretrained=="False"):
+            pretrained=False
+        else:
+            pretrained=True
+        print("ESTO ES LO QUE ME LLEGA: ", pretrained)
         '''
         Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
 
         Params:
             -id::int Identificador del usuario que va a entrenar el modelo
         '''
-        # global process
-
-        ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
-        ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
-        command = ['python', '-u', '..\\Simulation\\simulation.py', final_directory]
-
+        data = json.loads(request.data)
+        modelo_id=data['modelo_id']
+        user_id_actual=current_user.id
+        print("ESTO ES CURRENT",os.path.dirname(__file__))
+        print("ESTO ES CWD",os.getcwd())
+        
+        final_directory=os.getcwd()+"\\users_models\\"+str(user_id_actual)+"\\proyecto"+str(modelo_id)+"\\"
+        if(not pretrained):
+            print(final_directory)
+            with open(final_directory+"config.json","w") as file:
+                json.dump(data,file)
+            print(data)
+    
+            
+            command = ['python', '-u', '..\\Simulation\\simulation.py', final_directory]
+        else:
+            command = ['python', '-u', '..\\Simulation\\simulation_open.py', final_directory]
         # """Run a command while printing the live output"""
         process = subprocess.Popen(
             command,
