@@ -21,7 +21,8 @@
         <img src="../static/assets/nuevoProyecto.png" class="nuevoProyecto" data-toggle="modal" data-target="#crearModeloModal">
 
         {% for modelo in modelos %}
-            <div class="proyecto-tarjeta">
+            <!-- <a></a> -->
+            <div class="proyecto-tarjeta" onclick="window.location={{url_for('modulo_modelos.cargar_modelo', id='{{modelo.id}}') }}" style="cursor:pointer">
                 <div class="tarjeta-imagen">
                     <img src="../static/assets/usuario.png" class="usuario-imagen">
                     <img src="../static/assets/imagen.png" class="imagen-imagen">

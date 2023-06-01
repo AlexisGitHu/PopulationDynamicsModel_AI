@@ -75,6 +75,16 @@ def modelos():
         return render_template('modelos.html', modelos=modelos, formCrearModelo=formCrearModelo,
                                formAnadirModelo=formAnadirModelo)
 
+@modulo_modelos.route('/cargar_modelo/<id>', methods=['GET', 'POST'])
+def cargar_modelo(id):
+    if request.method == 'POST':
+        print("POST")
+        print(id)
+        return render_template("prueba.html", modelo=id)
+    else:
+        print("GET")
+        print(id)
+        return render_template("prueba.html", modelo=id)
 
 @modulo_modelos.route('/comunidad')
 @login_required

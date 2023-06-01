@@ -15,6 +15,11 @@ function rellenarInputs()
     }
 }
 
+function guardarModelo()
+{
+    
+}
+
 function crearModelo()
 {
     var json_inputs = {};
@@ -301,7 +306,7 @@ window.onload = function() {
 
                                     var string_url = "/static/assets/"+String(data[j].info[i].Sprite);
                                     eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+string_url+'", position: '+ destination +'});');
-                                                                
+
                                     dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
                                     var scale = 1/5;
