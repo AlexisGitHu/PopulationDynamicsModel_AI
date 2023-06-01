@@ -1,23 +1,43 @@
-function rellenarInputs()
+function rellenarInputs(modelo_importado, json_config)
 {
-    var modelo_importado = true;
+    // var modelo_importado = true;
     if (! modelo_importado){return}
     else
     {
-        $("input").each(function(iter, item)
+        for (var key in json_config)
         {
-            $(item).attr("value", 1);
-            $(item).attr("disabled", true);
-            $(item).addClass('disabled_class');
-            // $(item).css("opacity", 0.4);
-            // $("input[type=number]::-webkit-inner-spin-button").css("opacity", 1);
-        })
+            if(typeof(json_config[key]) == 'object')
+            {
+                for (var key2 in json_config[key])
+                {
+                    if(key == "predator" || key == "prey")
+                    {
+                        agente = key=="predator" ? "depredador" : "presa";
+                        $("[json_name="+ key2 +"_"+agente+"]").attr("value", json_config[key][key2]);
+                        $("[json_name="+ key2 +"_"+agente+"]").attr("disabled", true);
+                        $("[json_name="+ key2 +"_"+agente+"]").addClass('disabled_class');
+                    }
+                    else
+                    {
+                        $("[json_name="+ key2 +"]").attr("value", json_config[key][key2]);
+                        $("[json_name="+ key2 +"]").attr("disabled", true);
+                        $("[json_name="+ key2 +"]").addClass('disabled_class');
+                    }
+                }
+            }
+            else
+            {
+                $("[json_name="+ key +"]").attr("value", json_config[key]);
+                $("[json_name="+ key +"]").attr("disabled", true);
+                $("[json_name="+ key +"]").addClass('disabled_class');
+            }
+        }
     }
 }
 
 function guardarModelo()
 {
-    
+
 }
 
 function crearModelo()
