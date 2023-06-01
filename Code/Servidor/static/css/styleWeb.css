@@ -312,7 +312,7 @@ p {
     font-family: 'Karla';
     font-style: normal;
     font-weight: 500;
-    font-size: 100%;
+    font-size: calc(var(--rel_prop_height)*(20px));
     line-height: calc(var(--rel_prop_height)*(23px));
     display: flex;
     align-items: center;

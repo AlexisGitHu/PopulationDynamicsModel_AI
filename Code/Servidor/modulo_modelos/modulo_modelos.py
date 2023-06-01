@@ -44,7 +44,6 @@ def modelos():
 
             return render_template("prueba.html", modelo=modelo.id)
 
-
         elif formAnadirModelo.validate_on_submit():
             modelo = Modelo.query.filter_by(compartir=formAnadirModelo.codigo.data).first()
             if modelo is None:
