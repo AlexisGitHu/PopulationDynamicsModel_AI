@@ -16,6 +16,8 @@
         <script src="http://code.highcharts.com/highcharts-more.js"></script>
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
+        <!-- PaperJS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-core.min.js"></script>
         <link rel="stylesheet" href="../static/css/estilo_prueba.css">
     </head>
 
@@ -285,10 +287,10 @@
                         <div class="container_input_basico" style="order:0">
                             <div class="input_basico">
                                 <div class="cssToolTip">
-                                    <p class="descripcion_input">Tasa de Regeneración del Alimento básico</p>
+                                    <p class="descripcion_input">Regeneración del Alimento básico</p>
                                     <span> Número de hierbas nuevas cada turno </span>
                                 </div>
-                                <input type="number" class="seleccion_input" json_name="food_regen" min="0" max="1" step="0.01">
+                                <input type="number" class="seleccion_input" json_name="food_regen" min="0" max="100" >
                             </div>
                         </div>
                         <!-- Inout de agrupamiento de alimento -->
@@ -377,14 +379,14 @@
                                         <p class="textContent">Coste de Movimiento</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="coste_movimiento_depredador" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="coste_movimiento_depredador" class ="input" type="number" min=0 max=100>
                                 </div>
                                 <div class = "content_">
                                     <div class="cssToolTip">
                                         <p class="textContent">Coste de Reproduccion</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="coste_reproduccion_depredador" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="coste_reproduccion_depredador" class ="input" type="number" min=0 max=100 >
                                 </div>
                             </div>
                             <!-- Contenedor de inputs de la derecha -->
@@ -395,14 +397,14 @@
                                         <p class="textContent">Recuperacion al comer</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="recuperacion_comer_depredador" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="recuperacion_comer_depredador" class ="input" type="number" min=0 max=100>
                                 </div>
                                 <div class = "content_">
                                     <div class="cssToolTip">
                                         <p class="textContent">Energia mínima de reproduccion</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="energia_min_reproduccion_depredador" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="energia_min_reproduccion_depredador" class ="input" type="number" min=0 max=100>
                                 </div>
                             </div>
                         </div>
@@ -496,7 +498,7 @@
                                     <p class="textContent">Indice de Hambre</p>
                                     <span> No sé que va aquí</span>
                                 </div>
-                                <input json_name="hambre_depredador" class ="input" type="number" min=0 max=1 step="any">
+                                <input json_name="hambre_depredador" class ="input" type="number" min=0 max=1 step="0.01">
                             </div>
                         </div>
                     </div>
@@ -568,14 +570,14 @@
                                         <p class="textContent">Coste de Movimiento</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="coste_movimiento_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="coste_movimiento_presa" class ="input" type="number" min=0 max=100>
                                 </div>
                                 <div class = "content_">
                                     <div class="cssToolTip">
                                         <p class="textContent">Coste de Reproduccion</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="coste_reproduccion_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="coste_reproduccion_presa" class ="input" type="number" min=0 max=100>
                                 </div>
                             </div>
                             <!-- Contenedor de inputs de la derecha -->
@@ -586,14 +588,14 @@
                                         <p class="textContent">Recuperacion al comer</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="recuperacion_comer_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="recuperacion_comer_presa" class ="input" type="number" min=0 max=100>
                                 </div>
                                 <div class = "content_">
                                     <div class="cssToolTip">
                                         <p class="textContent">Energia mínima de reproduccion</p>
                                         <span> No se que va aqui </span>
                                     </div>
-                                    <input json_name="energia_min_reproduccion_presa" class ="input" type="number" min=0 max=1 step="0.01">
+                                    <input json_name="energia_min_reproduccion_presa" class ="input" type="number" min=0 max=100>
                                 </div>
                             </div>
                         </div>
@@ -723,7 +725,7 @@
         </div>
     </body>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var my_width = $(document).width();
         var my_height = $(document).height();
 
@@ -741,6 +743,9 @@
 
         $("#crearModelo").css({"position": "absolute", "right":"10%", "bottom":"2%"})
         $("#btn_grafica").css({"position": "absolute", "right":"30%", "bottom":"2%"})
+    </script> -->
+    <script type="text/javascript" src = "../static/prueba_js.js" canvas = "myCanvas">
+        // expose paperjs classes into global scope
     </script>
 
 </html>
