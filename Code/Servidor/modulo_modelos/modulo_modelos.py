@@ -75,16 +75,22 @@ def modelos():
         return render_template('modelos.html', modelos=modelos, formCrearModelo=formCrearModelo,
                                formAnadirModelo=formAnadirModelo)
 
+
+import json
 @modulo_modelos.route('/cargar_modelo/<id>', methods=['GET', 'POST'])
 def cargar_modelo(id):
-    if request.method == 'POST':
-        print("POST")
-        print(id)
-        return render_template("prueba.html", modelo=id)
-    else:
-        print("GET")
-        print(id)
-        return render_template("prueba.html", modelo=id)
+    print("SE HA CARGADO UN MODELO")
+    print(id)
+
+    id = id.replace("modal","")
+
+    configuration_url = "../user_models/"+str(current_user.id)+"/"+id+"/config.json"
+    configuration = json.load(open(configuration_url))
+
+
+    print(configuration)
+
+    return render_template("prueba.html", modelo=obj_modelo, pretrained=True)
 
 @modulo_modelos.route('/comunidad')
 @login_required
