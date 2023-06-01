@@ -219,33 +219,7 @@ def ejecuta_mesa(id):
 
     return "Entrenando modelo"
 
-@cross_origin()
-@app.route("/ejecuta_pretrained/mesa/<id>/<ruta>")
-def ejecuta_pretrained_mesa(id,ruta):
-    '''
-    Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
 
-    Params:
-        -id::int Identificador del usuario que va a entrenar el modelo
-    '''
-    # global process
-
-    ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
-    ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
-    command = ['python', '-u', '..\\Simulation\\simulation.py', ruta]
-
-    # """Run a command while printing the live output"""
-    process = subprocess.Popen(
-        command,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT
-    )
-
-    thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, id])
-
-    thread.start()
-
-    return "Entrenando modelo"
 ################################### POSIBLE FUNCION CONJUNTA PARA LA GRAFICA Y VISUALIZACIÓN ###################################
 # @app.route("/get_data/<id>")
 # def get_data(id):
@@ -269,6 +243,7 @@ def ejecuta_pretrained_mesa(id,ruta):
 
 ######################################################### RUTA PARA COMPROBAR QUE CIERTO USUARIO TIENE DATOS ##############################################################
 # Ruta para ver datos nuevos del modelo
+@cross_origin()
 @app.route("/muestra/mesa/<id>")
 def muestra_mesa(id):
     '''
@@ -652,7 +627,7 @@ def get_graph_data_dup(datos_nuevos):
 
     return datos_validos
 
-
+@cross_origin()
 @app.route("/paint_data")
 # @login_required
 def paint_data():
@@ -706,6 +681,7 @@ def paint_data():
 # def prueba(id):
 #     return datos
 ################################################################################################################################
+@cross_origin()
 @app.route("/prueba1" ,methods=['GET', 'POST'])
 def prueba1():
     if request.method == 'POST':
@@ -714,6 +690,7 @@ def prueba1():
 
 
 ##EJECUTAR MESAAAAAAAAAAAAAAAAAA
+@cross_origin()
 @app.route("/crearModelo/<pretrained>" ,methods=['GET', 'POST'])
 def crearModelo(pretrained):
     if request.method == 'POST':
@@ -744,6 +721,7 @@ def crearModelo(pretrained):
             
             command = ['python', '-u', '..\\Simulation\\simulation.py', final_directory]
         else:
+            print(final_directory)
             command = ['python', '-u', '..\\Simulation\\simulation_open.py', final_directory]
         # """Run a command while printing the live output"""
         process = subprocess.Popen(
@@ -759,6 +737,7 @@ def crearModelo(pretrained):
         return "Entrenando modelo"
 
 @app.route("/prueba2")
+@cross_origin()
 def prueba2():
     return "Llegó"
 

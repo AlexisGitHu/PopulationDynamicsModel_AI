@@ -53,6 +53,15 @@ class Agent(mesa.Agent):
                 self.alive = False
                 self.model.killed.append(self)
 
+        self.print_log()
+        # log = {"ID": int(self.unique_id),
+        #        "Position": tuple(self.pos),
+        #        "Direction": self.direction,
+        #        "Sprite": self.sprite,
+        #        "Alive": str(self.alive)}
+        # print(json.dumps(log), end=", ")
+    
+    def print_log(self):
         log = {"ID": int(self.unique_id),
                "Position": tuple(self.pos),
                "Direction": self.direction,

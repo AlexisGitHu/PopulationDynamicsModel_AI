@@ -8,6 +8,7 @@ function rellenarInputs(modelo_importado, json_config)
         {
             if(typeof(json_config[key]) == 'object')
             {
+                
                 for (var key2 in json_config[key])
                 {
                     if(key == "predator" || key == "prey")
@@ -190,7 +191,13 @@ window.onload = function() {
     var dir = loc.substring(0, loc.lastIndexOf('/'));
     console.log(loc);
     console.log(dir);
-
+    var jsParam1 = $("#pretrained").attr('pretrained');
+    console.log(jsParam1)
+    if(jsParam1=="True"){
+        var jsParam2 = $("#configuration").attr('configuration');
+        console.log("RELLENO INPUTS")
+        rellenarInputs(true,jsParam2)
+    }
 
     var my_width = $(document).width();
     var my_height = $(document).height();

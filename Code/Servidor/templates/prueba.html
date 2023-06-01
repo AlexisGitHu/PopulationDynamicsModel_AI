@@ -22,7 +22,6 @@
     </head>
 
     <body>
-
         <!-- Navbar -->
         <div class="navbar">
             <!-- Profile icon -->
@@ -344,7 +343,7 @@
                                         <p class="descripcion_input"> Nº de Iteraciones </p>
                                         <span> Número de iteraciones </span> 
                                     </div>
-                                    <input type="number" class="seleccion_input" json_name="iters" min="0" max=10000 value="100" step="100">
+                                    <input type="number" class="seleccion_input" json_name="iters" min="0" max=10000 value=20 step="10">
                                 </div>
                             </div>
                             <!-- Input de cuadricula -->
@@ -820,6 +819,12 @@
         <div id="modelo_id" modelo_id="{{modelo}}" style="visibility:hidden">
 
         </div>
+        <div id="pretrained" pretrained="{{pretrained}}" style="visibility:hidden">
+
+        </div>
+        <div id="configuration" configuration="{{configuration}}" style="visibility:hidden">
+
+        </div>
     </body>
 
     <!-- <script type="text/javascript">
@@ -842,6 +847,8 @@
         $("#btn_grafica").css({"position": "absolute", "right":"30%", "bottom":"2%"})
     </script> -->
     <script type="text/javascript" src = "../static/prueba_js.js" canvas = "myCanvas">
+        
+        
         // expose paperjs classes into global scope
     </script>
 

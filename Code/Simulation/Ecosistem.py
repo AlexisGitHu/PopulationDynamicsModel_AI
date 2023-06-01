@@ -47,7 +47,8 @@ class Ecosistem(mesa.Model):
                 self.agent_collection[dead_agent.specie].remove(dead_agent)
                 self.grid.remove_agent(dead_agent)
                 self.schedule.remove(dead_agent)
-            except:
+            except Exception as e:
+                # print(e)
                 pass
         self.killed = []
         for agent in self.agent_dict:
