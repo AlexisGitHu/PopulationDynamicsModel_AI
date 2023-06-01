@@ -30,35 +30,35 @@ p {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 35px;
-    margin-top: 20px;
+    margin-bottom: calc(var(--rel_prop_width)*35px);
+    margin-top: calc(var(--rel_prop_width)*20px);
 }
 
 .añadir-barra {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 10px;
-    margin-right: 20px;
+    padding-left: calc(var(--rel_prop_width)*10px);
+    margin-right: calc(var(--rel_prop_width)*20px);
     width: calc(var(--rel_prop_width)*600px);
     height: calc(var(--rel_prop_height)*40px);
     background: #2F8DAB;
     opacity: 0.8;
-    border-radius: 85px;
+    border-radius: calc(var(--rel_prop_width)*85px);
 
 
     font-family: 'Karla', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
-    line-height: 18px;
+    font-size: calc(var(--rel_prop_width)*15px);
+    line-height: calc(var(--rel_prop_width)*18px);
 
     color: #FCFCFC;
 }
 
 .lupa-imagen {
     width: calc(var(--rel_prop_width)*20px);
-    margin-right: 10px;
+    margin-right: calc(var(--rel_prop_width)*10px);
 }
 
 .añadir-boton {
@@ -68,25 +68,24 @@ p {
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
-    padding: 0 15px;
-    height: calc(var(--rel_prop_height)*40px);
+    font-size: calc(var(--rel_prop_width)*18px);
+    padding: 0 calc(var(--rel_prop_width)*15px);
+    height: calc(var(--rel_prop_height)*45px);
     border: none;
     background: #2F8DAB;
     color: #FCFCFC;
-    border-radius: 17px;
-    opacity: 0.9;
-    margin-bottom: 15px;
+    border-radius: calc(var(--rel_prop_width)*20px);
+    margin-bottom: calc(var(--rel_prop_width)*20px);
 }
 
 .titulo1{
     font-family: 'Karla', serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 35px;
-    line-height: 41px;
+    font-size: calc(var(--rel_prop_width)*35px);
+    line-height: calc(var(--rel_prop_width)*41px);
     letter-spacing: 0.03em;
-    margin-top: 20px;
+    margin-top: calc(var(--rel_prop_width)*20px);
 
     color: #1B1C1E;
 }
@@ -95,9 +94,9 @@ p {
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    margin-bottom: 20px;
+    font-size: calc(var(--rel_prop_width)*20px);
+    line-height: calc(var(--rel_prop_width)*24px);
+    margin-bottom: calc(var(--rel_prop_width)*20px);
 
     color: #2F8DAB;
 }
@@ -105,7 +104,7 @@ p {
 .nuevoProyecto {
     width: calc(var(--rel_prop_width)*260px);
     height: calc(var(--rel_prop_height)*180px);
-    margin-right: 20px;
+    margin-right: calc(var(--rel_prop_width)*20px);
     cursor: pointer;
 }
 
@@ -117,21 +116,21 @@ p {
 
 .proyecto-tarjeta {
     width: calc(var(--rel_prop_width)*260px);
-    margin-bottom: 40px;
-    margin-right: 20px;
+    margin-bottom: calc(var(--rel_prop_width)*40px);
+    margin-right: calc(var(--rel_prop_width)*20px);
 }
 
 .tarjeta-imagen {
     height: calc(var(--rel_prop_height)*180px);
     background: #F2F2F2;
-    border-radius: 10px 10px 0 0;
+    border-radius: calc(var(--rel_prop_width)*10px) calc(var(--rel_prop_width)*10px) 0 0;
 }
 
 .usuario-imagen {
     vertical-align: top;
     text-align: left;
-    margin-left: 5px;
-    margin-top: 5px;
+    margin-left: calc(var(--rel_prop_width)*5px);
+    margin-top: calc(var(--rel_prop_width)*5px);
     width: calc(var(--rel_prop_width)*25px);
 }
 
@@ -147,67 +146,67 @@ p {
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: calc(var(--rel_prop_width)*20px);
+    line-height: calc(var(--rel_prop_width)*24px);
     color: #1B1C1E;
 
     vertical-align: bottom;
     text-align: center;
-    margin-top: calc(var(--rel_prop_width)*25px);
+    margin-top: calc(var(--rel_prop_width)*23px);
 }
 
 .tarjeta-info {
-    height: calc(var(--rel_prop_height)*120px);
+    height: calc(var(--rel_prop_height)*128px);
     background: #FFFFFF;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
+    box-shadow: 0 calc(var(--rel_prop_width)*4px) calc(var(--rel_prop_width)*4px) rgba(0, 0, 0, 0.15);
+    border-radius: calc(var(--rel_prop_width)*10px);
 }
 
 .tarjeta-info-comunidad {
     height: calc(var(--rel_prop_height)*80px);
     background: #FFFFFF;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
+    box-shadow: 0 calc(var(--rel_prop_width)*4px) calc(var(--rel_prop_width)*4px) rgba(0, 0, 0, 0.15);
+    border-radius: calc(var(--rel_prop_width)*10px);
 }
 
 .creador-proyecto {
-    margin-top: 10px;
-    margin-left: 20px;
+    margin-top: calc(var(--rel_prop_width)*10px);
+    margin-left: calc(var(--rel_prop_width)*14px);
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: calc(var(--rel_prop_width)*16px);
+    line-height: calc(var(--rel_prop_width)*19px);
     color: #2F8DAB;
 }
 
 .fecha-proyecto {
-    margin-top: 10px;
-    margin-left: 20px;
+    margin-top: calc(var(--rel_prop_width)*10px);
+    margin-left: calc(var(--rel_prop_width)*14px);
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    padding: 5px 10px;
+    padding: calc(var(--rel_prop_width)*5px) calc(var(--rel_prop_width)*10px);
 
-    width: 140px;
-    height: 29px;
+    width: calc(var(--rel_prop_width)*130px);
+    height: calc(var(--rel_prop_width)*29px);
     background: #F2F2F2;
-    border-radius: 17px;
+    border-radius: calc(var(--rel_prop_width)*17px);
 }
 
 .fecha-imagen {
-    margin-left: 5px;
+    margin-left: calc(var(--rel_prop_width)*3px);
     width: calc(var(--rel_prop_width)*12px);
 }
 
 .fecha-texto {
-    margin-left: 10px;
+    margin-left: calc(var(--rel_prop_width)*8px);
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: calc(var(--rel_prop_width)*16px);
+    line-height: calc(var(--rel_prop_width)*19px);
     color: #2F8DAB;
 }
 
@@ -216,20 +215,20 @@ p {
     flex-direction: row;
     align-items: center;
 
-    margin-top: 10px;
-    margin-left: 20px;
+    margin-top: calc(var(--rel_prop_width)*10px);
+    margin-left: calc(var(--rel_prop_width)*14px);
 
     font-family: 'Jura', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    height: 29px;
+    font-size: calc(var(--rel_prop_width)*16px);
+    height: calc(var(--rel_prop_width)*29px);
 
-    padding: 0 10px;
+    padding: 0 calc(var(--rel_prop_width)*10px);
     border: none;
     background: #2F8DAB;
     color: #F2F2F2;
-    border-radius: 17px;
+    border-radius: calc(var(--rel_prop_width)*17px);
 }
 
 /* Style for the navbar */

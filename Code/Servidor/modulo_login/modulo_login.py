@@ -96,7 +96,6 @@ def signup():
 @modulo_login.route('/logout', methods=['GET'])
 @login_required
 def logout():
-    flash('Has cerrado la sesión!')
     logout_user()
     set_authenticated(False)
     return redirect(url_for('index'))
