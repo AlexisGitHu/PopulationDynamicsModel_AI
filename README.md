@@ -38,7 +38,7 @@ Descripción de un escenario típico de uso del producto
 3. Pinchar en el "+" para crear un nuevo modelo.
 4. Introducir el nombre del modelo y darle a crear (se puede elegir la opción de que el modelo sea público), esto lleva a la simulación.
 5. Rellenar los parámetros del modelo.
-6. Pinchar en crear modelo en el botón de abajo a la izquierda en el recuadro azul debajo de la representación.
+6. Pinchar en crear modelo en el botón de abajo a la izquierda en el recuadro azul debajo de la representación. (esperar unos 2-3 segundos antes de darle al play pata que se carge adecuadamente el modelo)
 7. Darle al play para ver la simulación representada.
 8. Pinchar en mostrar gráficas para ver las gráficas del modelo dándole al botón central del recuadro azul debajo de la representación.
 9. Pinchar en guardar modelo dándole al botón derecho del recuadro azul debajo de la representación. El modelo no se guardará hasta que no se hayan terminado de ejecutar los cálculos.
