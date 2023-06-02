@@ -4,28 +4,32 @@ import Agents
 import numpy as np
 import random
 
-learning_rate = 0.05
-
 
 class Ecosistem(mesa.Model):
-    """A model with some number of agents."""
-    learning_rate = 0.1
 
     def __init__(self, agent_dict, size, basic_food_info, verbose = False):
-        # type_animal, grid, exploration_rate, discount_factor, learning_rate,s,q
+        '''
+        Clase que modela el ecosistema. Entorno en el que se desarrollan los agentes.
 
-        self.size = size
-        self.verbose = verbose
+        Params:
+            -agent_dict::dict información formateada con los parámetros de cada especie
+            -size::int tamaño de la cuadricula
+            -basic_food_info::dict información formateada con los parámetros del alimento base
+            -verbose::bool habilita opciones de debug
+        '''
+
+        self.size = size 
+        self.verbose = verbose 
         self.agent_collection = {}
         self.basic_food_info = basic_food_info
         self.grid = mesa.space.MultiGrid(size, size, True)
         self.schedule = mesa.time.RandomActivation(self)
-        self.killed = []
-        self.mating = []
-        self.reproduce = []
-        self.next_agent_id = 0
-        self.agent_dict=agent_dict
-        self.agentList = []
+        self.killed = [] # Lista de agentes que morirán en la próxima ronda
+        self.mating = [] # Lista de agentes padres reproduciendose
+        self.reproduce = [] # Lista de agentes que nacerán en la próxima ronda
+        self.next_agent_id = 0 # Contador del id único que necesitan los nuevos agentes
+        self.agent_dict=agent_dict 
+        self.agentList = [] # Lista completa de agentes 
 
         for agent in agent_dict:
             self.agent_collection[agent] = []
@@ -33,6 +37,9 @@ class Ecosistem(mesa.Model):
                 self._copyAgent(agent_dict[agent]["basic_object"])
 
     def step(self):
+        '''
+        Ejecuta todas las acciones necesarias para una iteración. Imprime por salida estandar los resultados.
+        '''
         print('{"Step": ' + str(self.schedule.steps) + ', "info":[', end="")
         self.schedule.step()
         
@@ -47,8 +54,7 @@ class Ecosistem(mesa.Model):
                 self.agent_collection[dead_agent.specie].remove(dead_agent)
                 self.grid.remove_agent(dead_agent)
                 self.schedule.remove(dead_agent)
-            except Exception as e:
-                # print(e)
+            except:
                 pass
         self.killed = []
         for agent in self.agent_dict:
@@ -61,6 +67,15 @@ class Ecosistem(mesa.Model):
         print("]}\n")
     
     def _copyAgent(self,agent, pos = None):
+        '''
+        Crea una copia de un agente basado en un padre existente. Lo añade al scheduler
+
+        Params:
+            -agent::Agent Agente padre
+            -pos::tuple tupla con la posición del agente en la cuadrícula
+        
+        Return: Agents.Agent Agente hijo con los parámetros del padre
+        '''
         new_agent = Agents.Agent(self.next_agent_id, self, agent.specie, agent.preys, agent.predators,
                                   agent.direction, agent.color, agent.sprite, agent.max_energy, repro_min_energy= agent.repro_min_energy, repro_cost=agent.repro_cost,
                                     move_cost=agent.move_cost, eat_recover=agent.eat_recover, isBasic = agent.isBasic)
@@ -71,30 +86,14 @@ class Ecosistem(mesa.Model):
         self.grid.place_agent(new_agent, pos)
         self.next_agent_id += 1
         return new_agent
-        
-    # def createGrass(self):
-    #     preyAgents = [x for x in self.agentList if x[2] == 1]
-    #     grassAgents = [x for x in self.agentList if x[2] == 2]
 
-    #     while grassAgents:
-    #         randomGrass = random.choice(grassAgents)
-    #         grassAgents.remove(randomGrass)
-
-    #         neighbors = self.grid.get_neighborhood(randomGrass[1], False)
-
-    #         while neighbors:
-    #             cell = random.choice(neighbors)
-    #             neighbors.remove(cell)
-    #             if not self.grid.get_cell_list_contents(cell):
-    #                 a = Agents.Agent(self.next_agent_id, self, self.grass_behaviour, [], [self.prey_behaviour], [],
-    #                                     "grey", "cesped.png", 20, 2)
-    #                 self.schedule.add(a)
-    #                 self.grid.place_agent(a, cell)
-    #                 self.agentList.append([self.next_agent_id, cell, 2])
-    #                 self.next_agent_id += 1
-    #                 return
                 
     def _create_basic_food(self):
+        '''
+        Genera agentes de comida básica. Los añade a la cuadrícula. La lógica de generación crea 
+        clusters de comida básica en la cuadrícula con probabilidad "cluster_prob" hasta un máximo de
+        "regen" agentes.
+        '''
         for i in range(self.basic_food_info["regen"]):
             agent = random.choice(self.agent_collection[self.basic_food_info["agent"]])
             new_pos = None
@@ -110,7 +109,7 @@ class Ecosistem(mesa.Model):
         Función de recompensa del modelo. El modelo otorga la recompensa a los agentes.
 
         Params:
-            -agent::Agents.Agent() objeto agente 
+            -agent::Agents.Agent objeto agente 
         '''
         cellmates=self.grid.get_cell_list_contents([agent.pos])
         num_total_species=0
@@ -121,8 +120,7 @@ class Ecosistem(mesa.Model):
         num_near_predators = len([0 for agents in cellmates if agents.specie in agent.predators])
         num_near_allies=len([0 for agents in cellmates if agents.specie==agent.specie])
 
-        ##Strategy pattern
-        ##Este método tiene demasiados parámetros, futuro refactor (de momento no)
+
         reward=agent.specie.get_reward(num_near_allies,num_near_preys,num_near_predators,num_total_species,agent)
         return reward
 
