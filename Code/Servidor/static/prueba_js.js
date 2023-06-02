@@ -162,8 +162,8 @@ function cambiar_valor(id, valor)
 
 var var_ajaxCall = null;
 var chart = null;
-var num_cols_repartir = 10;
-var num_filas_repartir = 10;
+var num_cols_repartir = parseInt($("[json_name=size]").val());
+var num_filas_repartir = parseInt($("[json_name=size]").val());
 var step = 0;
 var j = 0;
 
@@ -202,6 +202,7 @@ window.onload = function() {
         rellenarInputs(true,jsParam2)
     }
 
+
     var my_width = $(document).width();
     var my_height = $(document).height();
 
@@ -239,13 +240,21 @@ window.onload = function() {
     var width = $("#myCanvas").width();
     var height = $("#myCanvas").height();
     
+    // Seteamos un offset para ver bien todos los agentes
+    // paper.view.translate(new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2)));
+
     // Seteamos el size que queremos para el canvas
     paper.view.viewSize = new Size(width,height);
     
-    // Seteamos un offset para ver bien todos los agentes
-    paper.view.translate(new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2)));
-
     var_ajaxCall = function ajaxCall() {
+        
+
+        num_cols_repartir = parseInt($("[json_name=size]").val());
+        num_filas_repartir = parseInt($("[json_name=size]").val());
+    
+        console.log(num_cols_repartir);
+        console.log(num_filas_repartir);
+
         // console.log("hola");
         var request = $.ajax({
             type: 'GET',
@@ -280,8 +289,11 @@ window.onload = function() {
                             x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                             y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
                             
+
+                            offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                             destination = new Point(x_relativa,y_relativa);
-                            console.log(data[j].info[i].Sprite);
+                            destination = destination.add(offset);
+                            // console.log(data[j].info[i].Sprite);
 
                             var string_url = "/static/assets/"+String(data[j].info[i].Sprite);
 
@@ -289,9 +301,9 @@ window.onload = function() {
 
                             dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
-                            var scale = 1/5;
+                            var scale = 2/num_cols_repartir;
 
-                            console.log(dict[animal + data[j].info[i].ID]);
+                            // console.log(dict[animal + data[j].info[i].ID]);
 
                             dict[animal + data[j].info[i].ID].scale(scale);
                             dict[animal + data[j].info[i].ID].visible = true;
@@ -331,15 +343,16 @@ window.onload = function() {
                                     x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                                     y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
 
+                                    offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                                     destination = new Point(x_relativa,y_relativa);
-                                    console.log(data[j].info[i].Sprite);
+                                    destination = destination.add(offset);
 
                                     var string_url = "/static/assets/"+String(data[j].info[i].Sprite);
                                     eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+string_url+'", position: '+ destination +'});');
 
                                     dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
-                                    var scale = 1/5;
+                                    var scale = 2/num_cols_repartir;
                                     dict[animal + data[j].info[i].ID].scale(scale);
                                     dict[animal + data[j].info[i].ID].visible = true;
 
@@ -376,7 +389,9 @@ window.onload = function() {
                                     if(id.includes(data[j].info[i].ID)){ 
                                         x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                                         y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
+                                        offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                                         destination = new Point(x_relativa,y_relativa);
+                                        destination = destination.add(offset);
                                         vector = destination.subtract(dict[animal + data[j].info[i].ID].position);
 
                                         vectores[i] = vector.length;
