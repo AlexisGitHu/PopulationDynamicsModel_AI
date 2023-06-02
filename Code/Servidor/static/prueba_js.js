@@ -4,8 +4,11 @@ function rellenarInputs(modelo_importado, json_config)
     if (! modelo_importado){return}
     else
     {
+        json_config=json_config.replace(/'/g, '"');
+        json_config=JSON.parse(String(json_config))
         for (var key in json_config)
         {
+            
             if(typeof(json_config[key]) == 'object')
             {
                 
