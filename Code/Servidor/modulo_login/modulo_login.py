@@ -18,17 +18,29 @@ user_id_actual = None
 
 @login_manager.user_loader
 def load_user(user_id):
+    '''
+    Descripción: Método que permite recoger el usuario de la base de datos 
+    Parámetros de entrada: id del usuario loggeado
+    Returns: Recoge el usuario correspondiente 
+    '''
     return User.query.get(int(user_id))
 
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():
+    '''
+    Descripción: Método que comprueba que la página a la que es redirigido el usuario es válida (es válida si el usuario está loggeado)
+    Parámetros de entrada: ninguno
+    Returns: redirige a la página correspondiente si es válida
+    '''
     return redirect('/login?nextpath=' + request.full_path.replace("&", "___and___"))
 
 
 def validate_username(self, username):
     '''
-    Comprueba si el nombre de usuario ya existe en la base de datos.
+    Descripción: Método que valida que el nombre del usuario introducido al loggearse es válido
+    Parámetros de entrada: nombre del usuario a comprobar formato XXXX
+    Returns: devuelve true si es válido o lanza un error de lo contrario
     '''
     user = User.query.filter_by(username=username.data).first()
     if user is not None:
@@ -38,7 +50,9 @@ def validate_username(self, username):
 
 def validate_email(self, email):
     '''
-    Comprueba si el email ya existe en la base de datos.
+    Descripción: Método que permite comprobar que el email del usuario es válido
+    Parámetros de entrada: email a comprobar formato XXXX@XXXX.XXXX
+    Returns: devuelve true si es válido o lanza un error de lo contrario
     '''
     user = User.query.filter_by(email=email.data).first()
     if user is not None:
@@ -49,9 +63,9 @@ def validate_email(self, email):
 @modulo_login.route('/login', methods=['GET', 'POST'])
 def login():
     '''
-    Página para iniciar sesión:
-        Cuando se han realizado las comprobaciones y el usuario está logueado,
-        se redirige a la página de modelos.
+    Descripción: Función que permite devolver la página de login si se accede por GET o permite loggear al usuario si se recibe por POST
+    Parámetros de entrada: Ninguno
+    Returns: Renderiza el template de login.html por GET o redirecciona a la página desde donde se pidió el login por POST
     '''
     global user_id_actual
     form = LoginForm()
@@ -80,10 +94,15 @@ def login():
         return render_template('login.html', form=form, module="login", nextpath=next_page)
 
 
-RUTA = "/../users_models/"
+RUTA = "/../users_models/" ## Ruta base del fichero que almacena todos los usuarios y sus proyectos
 
 
 def crear_carpeta_usuario(usuario):
+    '''
+    Descripción: Función que permite crear la carpeta para los proyectos del usuario en la web
+    Parámetros de entrada: el usuario del que se quiere crear la carpeta
+    Returns: Nada
+    '''
     current_directory = os.path.dirname(os.path.abspath(__file__))
     ruta_final = current_directory + RUTA + str(usuario.id)
     os.mkdir(ruta_final)
@@ -93,8 +112,9 @@ def crear_carpeta_usuario(usuario):
 @modulo_login.route('/signup', methods=['GET', 'POST'])
 def signup():
     '''
-    Página para registrarse
-        Al rellenar el formulario de registro se crea un nuevo usuario en la base de datos.
+    Descripción: Función que permite registrar un usuario en la base de datos
+    Parámetros de entrada: ninguno
+    Returns: redirecciona a la página de login con un método GET
     '''
     form = SignUpForm()
     if request.method == 'POST':
@@ -122,11 +142,21 @@ def signup():
 @modulo_login.route('/logout', methods=['GET'])
 @login_required
 def logout():
+    '''
+    Descripción: Función que permite abandonar la sesión actual del usuario en la plataforma
+    Parámetros de entrada: ninguno
+    Returns: dirección a la página principal pre-login
+    '''
     logout_user()
     set_authenticated(False)
     return redirect(url_for('index'))
 
 
 def getCurrentUserEmailLogin():
+    '''
+    Descripción: Función que permite obtener el email del usuario
+    Parámetros de entrada: ninguno
+    Returns: email del usuario asociada al usuario de la sesión actual
+    '''
     user_email = User.query.filter(User.id == current_user.id).first().email
     return user_email
