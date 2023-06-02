@@ -1,7 +1,164 @@
+function rellenarInputs(modelo_importado, json_config)
+{
+    // var modelo_importado = true;
+    if (! modelo_importado){return}
+    else
+    {
+        json_config=json_config.replace(/'/g, '"');
+        json_config=JSON.parse(String(json_config))
+        for (var key in json_config)
+        {
+            
+            if(typeof(json_config[key]) == 'object')
+            {
+                
+                for (var key2 in json_config[key])
+                {
+                    if(key == "predator" || key == "prey")
+                    {
+                        agente = key=="predator" ? "depredador" : "presa";
+                        $("[json_name="+ key2 +"_"+agente+"]").attr("value", json_config[key][key2]);
+                        $("[json_name="+ key2 +"_"+agente+"]").attr("disabled", true);
+                        $("[json_name="+ key2 +"_"+agente+"]").addClass('disabled_class');
+                    }
+                    else
+                    {
+                        $("[json_name="+ key2 +"]").attr("value", json_config[key][key2]);
+                        $("[json_name="+ key2 +"]").attr("disabled", true);
+                        $("[json_name="+ key2 +"]").addClass('disabled_class');
+                    }
+                }
+            }
+            else
+            {
+                $("[json_name="+ key +"]").attr("value", json_config[key]);
+                $("[json_name="+ key +"]").attr("disabled", true);
+                $("[json_name="+ key +"]").addClass('disabled_class');
+            }
+        }
+    }
+}
+
+function crearModelo(pretrained)
+{
+    var json_inputs = {};
+    json_inputs["prey"] = {};
+    json_inputs["predator"] = {};
+    json_inputs["ecosistem"]={};
+
+    $("input").each(function(iter, item) 
+    {
+        console.log(item.getAttribute("type"));
+        if(item.getAttribute("type") != "number" && item.getAttribute("type") != "range")
+        {
+            return;
+        }
+        
+        var id = item.getAttribute("json_name");
+
+        if(!id){return;}
+
+        var index_referencia_agente = id.lastIndexOf("_");
+
+
+        console.log(id);
+
+        if(id.includes("presa") || id.includes("depredador"))
+        {
+            var agente = id.split("_").pop();
+            if(agente=="presa")
+            {
+                agente="prey";
+            }
+            else
+            {
+                agente="predator";
+            }
+            id = id.slice(0,index_referencia_agente);
+
+            var valor = parseFloat(item.value);
+
+            if(id == "energia"){valor = parseInt(item.value) * 5}
+
+            json_inputs[agente][id] = valor;
+        }
+        else
+        {
+            json_inputs["ecosistem"][id] = parseFloat(item.value);
+        }
+        json_inputs["ecosistem"]["nombre"] = $("#nombre_proyecto").text().trim()
+    })
+
+    console.log(json_inputs);
+    model_id_parameter=$("#modelo_id").attr("modelo_id");
+    json_inputs["modelo_id"]=model_id_parameter;
+    var request = $.ajax({
+
+        type: 'POST',
+        data: JSON.stringify(json_inputs),
+        contentType: 'application/json;charset=UTF-8',
+        url: "http://localhost:5000/crearModelo/"+String(pretrained),
+
+        success: function(data) 
+        {
+            console.log(data);
+        }
+    });
+}
+
+
+function toggleInputs(destination)
+{
+    $(".container_inputs_overall").css("visibility", "visible");
+    $(".inputs_presas").css("visibility", "visible");
+    $("#filtrosEspecie").css("visibility", "visible");
+    $(".inputs_depredadores").css("visibility", "visible");
+
+    if(destination == "especie")
+    {
+        $(".container_inputs_overall").fadeOut();
+        $(".inputs_presas").fadeOut();
+        
+        $("#filtrosEspecie").fadeIn();
+        $(".inputs_depredadores").fadeIn();
+        
+    }
+    else
+    {
+        
+        $("#filtrosEspecie").fadeOut();
+        $(".inputs_depredadores").fadeOut();
+        $(".inputs_presas").fadeOut();
+
+        $(".container_inputs_overall").fadeIn();
+    }
+}
+
+function toggleInputsAgentes(destination)
+{
+    if(destination == "depredadores")
+    {
+        $(".inputs_presas").fadeOut();
+        $(".inputs_depredadores").fadeIn();
+    }
+    else
+    {
+        $(".inputs_depredadores").fadeOut();
+        $(".inputs_presas").fadeIn();
+    }
+}
+
+function cambiar_valor(id, valor)
+{
+    document.getElementsByClassName(id)[0].innerHTML = 5*(parseInt(valor));
+}
+
+
+
 var var_ajaxCall = null;
 var chart = null;
-var num_cols_repartir = 10;
-var num_filas_repartir = 10;
+var num_cols_repartir = parseInt($("[json_name=size]").val());
+var num_filas_repartir = parseInt($("[json_name=size]").val());
 var step = 0;
 var j = 0;
 
@@ -28,6 +185,43 @@ function add_data_graph(datos)
 
 paper.install(window);
 window.onload = function() {
+    var loc = window.location.pathname;
+    var dir = loc.substring(0, loc.lastIndexOf('/'));
+    console.log(loc);
+    console.log(dir);
+    var jsParam1 = $("#pretrained").attr('pretrained');
+    console.log(jsParam1)
+    if(jsParam1=="True"){
+        var jsParam2 = $("#configuration").attr('configuration');
+        console.log("RELLENO INPUTS")
+        rellenarInputs(true,jsParam2)
+    }
+
+
+    var my_width = $(document).width();
+    var my_height = $(document).height();
+
+    var rel_prop_width = my_width/1440;
+    var rel_prop_height = my_height/800;
+
+    // set CSS variable
+    document.documentElement.style.setProperty(`--rel_prop_width`, `${rel_prop_width}`);
+    document.documentElement.style.setProperty(`--rel_prop_height`, `${rel_prop_height}`);
+
+
+    $(".apartado path").attr("fill", "#1B1C1E");
+    $(".apartado_active path").attr("fill", "#2F8DAB");
+    $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
+
+    $("#crearModelo").css({"position": "absolute", "right":"10%", "bottom":"2%"})
+    $("#btn_grafica").css({"position": "absolute", "right":"30%", "bottom":"2%"})
+
+    document.querySelectorAll("input").forEach(function(item) {
+        item.addEventListener("keypress", function (evt) {
+            evt.preventDefault();
+        });
+    });
+
     mi_canvas = $("#myCanvas");
     paper.setup('myCanvas');
 
@@ -38,33 +232,21 @@ window.onload = function() {
     var x_relativa;
     var y_relativa;
 
-    var margin_left_deseado = $(window).width()/20;
-    var margin_top_deseado = $(window).height()/11;
-    var margin_bottom_deseado = $(window).height()/11;
-
-    var height_deseado = $(window).height()*8/11;
-    var width_deseado = height_deseado*3/2;
-    
-    $("#myCanvas").width(width_deseado);
-    $("#myCanvas").height(height_deseado);
-
-    // Seteamos el size que queremos para el canvas
-    paper.view.viewSize = new Size(width_deseado,height_deseado);
-    
-    // Seteamos un offset para ver bien todos los agentes
-    paper.view.translate(new Point(width_deseado/(num_cols_repartir*2),height_deseado/(num_filas_repartir*2)));
-    
-
-    $("#myCanvas").css("margin-left", margin_left_deseado);
-    $("#myCanvas").css("margin-top", margin_top_deseado);
-    $("#myCanvas").css("margin-bottom", margin_bottom_deseado);
-    
     var width = $("#myCanvas").width();
     var height = $("#myCanvas").height();
 
-
+    // Seteamos el size que queremos para el canvas
+    paper.view.viewSize = new Size(width,height);
+    
     var_ajaxCall = function ajaxCall() {
-        // console.log("hola");
+        
+
+        num_cols_repartir = parseInt($("[json_name=size]").val());
+        num_filas_repartir = parseInt($("[json_name=size]").val());
+    
+        console.log(num_cols_repartir);
+        console.log(num_filas_repartir);
+
         var request = $.ajax({
             type: 'GET',
             url: 'http://localhost:5000/paint_data',
@@ -98,11 +280,23 @@ window.onload = function() {
                             x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                             y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
                             
-                            destination = new Point(x_relativa,y_relativa);             
-                            eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: '+ destination +'});');
+
+                            // Seteamos un offset para ver bien todos los agentes
+                            offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
+                            destination = new Point(x_relativa,y_relativa);
+                            destination = destination.add(offset);
+                            // console.log(data[j].info[i].Sprite);
+
+                            var string_url = "/static/assets/"+String(data[j].info[i].Sprite);
+
+                            eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+string_url+'", position: '+ destination +'});');
+
                             dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
-                            var scale = 1/5;
+                            var scale = 2/num_cols_repartir;
+
+                            // console.log(dict[animal + data[j].info[i].ID]);
+
                             dict[animal + data[j].info[i].ID].scale(scale);
                             dict[animal + data[j].info[i].ID].visible = true;
 
@@ -141,12 +335,17 @@ window.onload = function() {
                                     x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                                     y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
 
+                                    // Seteamos un offset para ver bien todos los agentes
+                                    offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                                     destination = new Point(x_relativa,y_relativa);
+                                    destination = destination.add(offset);
 
-                                    eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+ data[j].info[i].Sprite +'", position: ' + destination + '});');                                
+                                    var string_url = "/static/assets/"+String(data[j].info[i].Sprite);
+                                    eval('var ' + animal + data[j].info[i].ID + '= new Raster({ source: "'+string_url+'", position: '+ destination +'});');
+
                                     dict[animal + data[j].info[i].ID] = eval(animal + data[j].info[i].ID);
 
-                                    var scale = 1/5;
+                                    var scale = 2/num_cols_repartir;
                                     dict[animal + data[j].info[i].ID].scale(scale);
                                     dict[animal + data[j].info[i].ID].visible = true;
 
@@ -183,13 +382,15 @@ window.onload = function() {
                                     if(id.includes(data[j].info[i].ID)){ 
                                         x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                                         y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
+
+                                        // Seteamos un offset para ver bien todos los agentes
+                                        offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                                         destination = new Point(x_relativa,y_relativa);
+                                        destination = destination.add(offset);
                                         vector = destination.subtract(dict[animal + data[j].info[i].ID].position);
 
                                         vectores[i] = vector.length;
                                         vector_max = Math.max(...vectores);
-                                        // console.log(vector_max)
-                                        // console.log(vuelta);
                                         
                                         dict[animal + data[j].info[i].ID].position = dict[animal + data[j].info[i].ID].position.add(vector.divide(velocidad)); //vector.divide(velocidad) 
                                         
@@ -209,25 +410,21 @@ window.onload = function() {
                         }//fin del else
                     }//fin del iniciar
                 }//fin del if data > 0
+                // setTimeout(function(){var_ajaxCall();}, 2000);
                 console.log("ha salido del if");
             }//fin del success
         })
     }
 
+
     Raster.prototype.rescale = function(width, height) {
         this.scale(width / this.width, height / this.height);
     };
-
-    createOverlay();
-    init();
 
     chart = new Highcharts.Chart({
         // Definimos el estilo de grafica que será y de donde se cogen los datos
         chart: {
             renderTo: 'fig02',
-            // events: {
-            //     load: requestData,
-            // },
             type: "line",
             animation: false,
             zoomType: 'x',
@@ -307,7 +504,11 @@ window.onload = function() {
 
 function setTrainingMode()
 {
-    $(".overlay-play-button__overlay").css("visibility", "hidden");
+    $(".overlay-play-button__overlay").fadeOut();
+    const yourFunction = async () => {
+        await delay(400);
+        $(".overlay-play-button__overlay").css("visibility", "hidden");
+    };
     
     $("#contenedor_canvas").hover(
         function(){
@@ -318,89 +519,4 @@ function setTrainingMode()
         }
     );
       
-}
-
-function createOverlay()
-{
-    var width = $("#myCanvas").width();
-    var height = $("#myCanvas").height();
-    var margin_left = parseInt($("#myCanvas").css("margin-left").replace("px",""));
-    var margin_top = parseInt($("#myCanvas").css("margin-top"));
-    var margin_bottom = parseInt($("#myCanvas").css("margin-bottom"));
-    var border = parseInt($("#myCanvas").css("border-left-width").replace("px",""));
-
-    $("#overlay").css("margin-left", margin_left+border);
-    $("#overlay").css("margin-top", margin_top+border);
-    $("#overlay").css("margin-bottom", margin_bottom);
-    // $("#overlay").css("postion", "absolute");
-    $("#overlay").css("z-index", 10);
-    $("#overlay").width(width);
-    $("#overlay").height(height);
-
-    $(".overlay_under").width(width);
-    $(".overlay_under").height(height);
-    $(".overlay_under").css({"display": "flex", "align-items": "baseline"});
-
-    
-    $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
-    // $(".overlay-play-button__overlay").attr("onclick","setTrainingMode();");
-
-    $("#opciones").css("margin-top", margin_top);
-    $("#opciones").css("left", width+margin_left+2*border);
-    $("#opciones").css("margin-left", "5%");
-
-    $("#contendeor_canvas_opciones").height(height+margin_bottom+margin_top);
-    // $("#btn_siguiente").css("margin-left", margin_left+border);
-    $("#btn_grafica").css("margin-left", margin_left+border);
-
-}
-
-
-var centesimas = 0;
-var segundos = 0;
-var minutos = 0;
-var horas = 0;
-
-
-function init() {
-
-    for(let i = 1; i < 4; i++)
-    {
-        var input = document.getElementById("input"+String(i));
-        var valor_actual = input.value;
-        cambiar_valor(i, valor_actual);
-    }
-    
-    control = setInterval(cronometro,10);
-}
-
-function cronometro () {
-    centesimas = parseInt(centesimas);
-    segundos = parseInt(segundos);
-    minutos = parseInt(minutos);
-    horas = parseInt(horas);
-
-    centesimas = (centesimas+1)%100;
-    if (centesimas < 10) { centesimas = "0"+centesimas }
-
-    if (centesimas == 0) {
-        segundos = (segundos+1)%60;
-        if (segundos < 10) { segundos = "0"+segundos }
-        Segundos.innerHTML = ":"+segundos;
-    }
-    if ( (centesimas == 0)&&(segundos == 0) ) {
-        minutos = (minutos +1)%60;
-        if (minutos < 10) { minutos = "0"+minutos }
-        Minutos.innerHTML = ":"+minutos;
-    }
-    if ( (centesimas == 0)&&(segundos == 0)&&(minutos == 0) ) {
-        horas ++;
-        if (horas < 10) { horas = "0"+horas }
-        Horas.innerHTML = horas;
-    }
-}
-
-function cambiar_valor(id, valor)
-{
-    document.getElementById(id).innerHTML = 5*(1+parseInt(valor));
 }

@@ -22,57 +22,10 @@
         <!-- CSS -->
         <link rel="stylesheet" href="../static/css/styleLanding.css">
 
-        <script>
-
-
-            var actual = [];
-            var anterior = [];
-
-            function ajaxCall() {
-
-
-                var request = $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:5000/datos_nuevos/{{user_id}}',
-                    success: function(data) {
-                        // console.log(data);
-                        // var info = {};
-                        var hacer_abort = false;
-                        try
-                        {
-                            // anterior = actual;
-
-                            // actual = data;
-
-                            // var new_numJSON = actual.length - anterior.length;
-
-                            // var difference = actual.slice(-new_numJSON);
-                            // console.log(difference);
-                            console.log(data);
-                            console.log(data[data.length - 1]["Iteration"] +  " vs {{iters}}");
-                            hacer_abort = (data[data.length - 1]["Iteration"] == "{{iters}}");
-                        }
-                        catch(error)
-                        {
-                            console.log("Todavía no hay nada");
-                        }
-
-                        if (hacer_abort == true)
-                        {
-                            request.abort();
-                        }
-                        else
-                        {
-                            setTimeout(function(){ajaxCall(); /*send_data(difference)*/}, 1000);
-                        }
-                    }
-                });
-
-            }
-        </script>
+        
     </head>
 
-    <body onload=ajaxCall()>
+    <body>
 
         <nav class="navbar navbar-expand-xl navbar-dark">
             <div class="container-fluid">
@@ -101,7 +54,7 @@
         {% block content %}{% endblock %}
     </body>
 
-    <script type="text/javascript" src = "../static/prueba_js.js" canvas = "myCanvas">
-        // expose paperjs classes into global scope
+    <!-- Este script tiene estilos, pero hay funcionalidades que no están importadas debidamente. Esto causará un error en la consola que no afectará en nada al uso de la aplicacion -->
+    <script type="text/javascript" src = "../static/simulacion_js.js" canvas = "myCanvas">
     </script>
 </html>
