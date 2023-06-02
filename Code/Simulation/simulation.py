@@ -1,3 +1,17 @@
+''''
+Interfaz de comunicación entre el servidor y la simulación. 
+
+RECIBE POR PARÁMETROS LA RUTA AL ARCHIVO DE CONFIGURACIÓN
+
+Instancia los objetos necesarios: Agentes, Inteligencias y Ecosistema. 
+Para ello se basa en los datos presentes en config.json que se encuentre en la ruta que recibe
+por parámetros argv.
+
+Ejecuta la simulación un número determinado de steps.
+
+Guarda el estado del modelo en la misma ruta que estuviera su archivo de configuración
+'''
+
 import mesa
 import sys
 import json
@@ -54,25 +68,12 @@ basic_food_info = {
 }
 
 
-############################# VISUALIZACIÓN CON EL SERVIDOR DE MESA#############################
-# grid = mesa.visualization.CanvasGrid(agent_portrayal, SIZE, SIZE, 500, 500)
-# server = mesa.visualization.ModularServer(
-#     Ecosistem, [grid], "Ecosistem", {"agent_dict":agent_dict, "size": SIZE,"basic_food_info":basic_food_info}
-# )
-# server.port = 8525  # The default
-# server.verbose = False
-# server.launch()
-
-
-
-## Supongo que la carpeta está creada
 def guardar_modelo(modelo,ruta):
+    '''Serializa el modelo en formato pickle'''
     file = open(ruta+"model.pickle", 'wb')
     pickle.dump(modelo,file)
     file.close()
 
-
-############################ SERVIDOR PROPIO #########################
 model = Ecosistem(agent_dict, data["ecosistem"]["size"], basic_food_info, verbose=True)
 for i in range(data["ecosistem"]["iters"]):
     model.step()
