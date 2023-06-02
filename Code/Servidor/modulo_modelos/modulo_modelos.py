@@ -8,7 +8,8 @@ from modulo_login.modulo_login import *
 from modulo_forms.modulo_forms import *
 
 import datetime
-
+import shutil
+import filecmp
 modulo_modelos = Blueprint("modulo_modelos", __name__, static_folder="static", template_folder="templates")
 
 RUTA_MODELO = "/../users_models/"
@@ -84,6 +85,19 @@ def cargar_modelo(id):
 
     id = id.replace("modal","")
 
+    allowance=Permisos.query.filter_by(id_modelo=id).first()
+    if(allowance.id_usuario!=current_user.id):
+        configuration_url = "users_models/"+str(allowance.id_usuario)+"/proyecto"+id
+        current_user_url= "users_models/"+str(current_user.id)+"/proyecto"+id
+        is_copied=os.path.exists(current_user_url)
+        print("AQUÍIIIII",is_copied)
+        if(is_copied):
+            shutil.rmtree(current_user_url, ignore_errors=True)
+
+            # Copy the contents from the source folder to the destination folder
+            shutil.copytree(configuration_url, current_user_url)
+        else:
+            shutil.copytree(configuration_url,current_user_url)
     configuration_url = "users_models/"+str(current_user.id)+"/proyecto"+id+"/config.json"
     configuration = json.load(open(configuration_url))
     print(configuration)
