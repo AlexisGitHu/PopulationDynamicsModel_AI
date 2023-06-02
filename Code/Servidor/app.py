@@ -71,11 +71,12 @@ def pagina_claudia():
 
     return render_template("pagina_claudia.html")
 
-@app.route('/mostrar_parametrizacion', methods = ["GET", "POST"])
+
+@app.route('/mostrar_parametrizacion', methods=["GET", "POST"])
 def mostrar_parametrizacion():
     # if request.method == "POST":
 
-        #return redirect(url_for("modulo_bbdd.mostrar_user"))
+    # return redirect(url_for("modulo_bbdd.mostrar_user"))
 
     return render_template("mostrar_parametrizacion.html")
 
@@ -290,8 +291,6 @@ def muestra_mesa(id):
 ################################################################################################################################
 
 
-
-
 # Definición de la funcion de lotka volterra
 # def lotkavolterra(t, x, rl, alpha, rz, beta):
 #     return np.array([rl*x[0] - alpha*x[0]*x[1], -rz*x[1] + beta*x[0]*x[1]])
@@ -422,14 +421,13 @@ def data_loktavolterra(x_init, steps):
         - forrtl: error (200): program aborting due to control-C event:
             Ocurre cuando se hace crtl+c cuando el servidor está arrancado, solución: https://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats
     '''
-    
+
     # Linea para poder actualizar el valor de la variable global sol_lv
     global sol_lv
     global params
 
     t_span = (steps[0], steps[-1])
     t_eval = np.linspace(t_span[0], t_span[1], t_span[1] - t_span[0])
-
 
     sol_lv = solve_ivp(lotkavolterra_sobreescrito, t_span, x_init, args=tuple(params), t_eval=t_eval)
 
@@ -442,9 +440,6 @@ def data_loktavolterra(x_init, steps):
 # KERNEL32.DLL       00007FFF08E37604  Unknown               Unknown  Unknown
 # ntdll.dll          00007FFF092426A1  Unknown               Unknown  Unknown
 ###################### https://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats ##########################
-
-
-
 
 
 # Funcion para recoger datos de la solucion numerica de lotka volterra dados unos steps
@@ -627,6 +622,7 @@ def get_graph_data_dup(datos_nuevos):
 
     return datos_validos
 
+
 @cross_origin()
 @app.route("/paint_data")
 # @login_required
@@ -682,7 +678,7 @@ def paint_data():
 #     return datos
 ################################################################################################################################
 @cross_origin()
-@app.route("/prueba1" ,methods=['GET', 'POST'])
+@app.route("/prueba1", methods=['GET', 'POST'])
 def prueba1():
     if request.method == 'POST':
         print(request.form.get("claveA"))
@@ -691,13 +687,13 @@ def prueba1():
 
 ##EJECUTAR MESAAAAAAAAAAAAAAAAAA
 @cross_origin()
-@app.route("/crearModelo/<pretrained>" ,methods=['GET', 'POST'])
+@app.route("/crearModelo/<pretrained>", methods=['GET', 'POST'])
 def crearModelo(pretrained):
     if request.method == 'POST':
-        if(pretrained=="False"):
-            pretrained=False
+        if (pretrained == "False"):
+            pretrained = False
         else:
-            pretrained=True
+            pretrained = True
         print("ESTO ES LO QUE ME LLEGA: ", pretrained)
         '''
         Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
@@ -706,19 +702,18 @@ def crearModelo(pretrained):
             -id::int Identificador del usuario que va a entrenar el modelo
         '''
         data = json.loads(request.data)
-        modelo_id=data['modelo_id']
-        user_id_actual=current_user.id
-        print("ESTO ES CURRENT",os.path.dirname(__file__))
-        print("ESTO ES CWD",os.getcwd())
-        
-        final_directory=os.getcwd()+"\\users_models\\"+str(user_id_actual)+"\\proyecto"+str(modelo_id)+"\\"
-        if(not pretrained):
+        modelo_id = data['modelo_id']
+        user_id_actual = current_user.id
+        print("ESTO ES CURRENT", os.path.dirname(__file__))
+        print("ESTO ES CWD", os.getcwd())
+
+        final_directory = os.getcwd() + "\\users_models\\" + str(user_id_actual) + "\\proyecto" + str(modelo_id) + "\\"
+        if (not pretrained):
             print(final_directory)
-            with open(final_directory+"config.json","w") as file:
-                json.dump(data,file)
+            with open(final_directory + "config.json", "w") as file:
+                json.dump(data, file)
             print(data)
-    
-            
+
             command = ['python', '-u', '..\\Simulation\\simulation.py', final_directory]
         else:
             print(final_directory)
@@ -736,10 +731,12 @@ def crearModelo(pretrained):
 
         return "Entrenando modelo"
 
+
 @app.route("/prueba2")
 @cross_origin()
 def prueba2():
     return "Llegó"
+
 
 if __name__ == "__main__":
     try:

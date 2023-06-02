@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/bootstrap-icons.min.css" integrity="sha512-yGw4jDv0eDU1TQPx7Z2kzDz8rB0cDhQelOTWqht0Gq1s3JwVJc9LH8/VJ4pL7QI+sBnIcQZS4hzRQGWKk59fCg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
         <!-- Highcharts -->
         <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -145,28 +144,6 @@
                     </span>
                 </a>
                 {% endif %}
-
-                <!--
-                {%  if get_current_tab() == 'informacion' %}
-                <a href="{{url_for('modulo_modelos.informacion')}}">
-                    <span id="informacion" class="apartado apartado_active">
-                        <svg class="icono_apartado" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.3335 8.66668H18.6668V12H15.3335V8.66668ZM15.3335 15.3333H18.6668V25.3333H15.3335V15.3333ZM17.0002 0.333344C7.80016 0.333344 0.333496 7.80001 0.333496 17C0.333496 26.2 7.80016 33.6667 17.0002 33.6667C26.2002 33.6667 33.6668 26.2 33.6668 17C33.6668 7.80001 26.2002 0.333344 17.0002 0.333344ZM17.0002 30.3333C9.65016 30.3333 3.66683 24.35 3.66683 17C3.66683 9.65001 9.65016 3.66668 17.0002 3.66668C24.3502 3.66668 30.3335 9.65001 30.3335 17C30.3335 24.35 24.3502 30.3333 17.0002 30.3333Z" fill="#1B1C1E"/>
-                        </svg>
-                        <p class="texto_apartado">INFORMACIÓN</p>
-                    </span>
-                </a>
-                {% else %}
-                <a href="{{url_for('modulo_modelos.informacion')}}">
-                    <span id="informacion" class="apartado">
-                        <svg class="icono_apartado" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.3335 8.66668H18.6668V12H15.3335V8.66668ZM15.3335 15.3333H18.6668V25.3333H15.3335V15.3333ZM17.0002 0.333344C7.80016 0.333344 0.333496 7.80001 0.333496 17C0.333496 26.2 7.80016 33.6667 17.0002 33.6667C26.2002 33.6667 33.6668 26.2 33.6668 17C33.6668 7.80001 26.2002 0.333344 17.0002 0.333344ZM17.0002 30.3333C9.65016 30.3333 3.66683 24.35 3.66683 17C3.66683 9.65001 9.65016 3.66668 17.0002 3.66668C24.3502 3.66668 30.3335 9.65001 30.3335 17C30.3335 24.35 24.3502 30.3333 17.0002 30.3333Z" fill="#1B1C1E"/>
-                        </svg>
-                        <p class="texto_apartado">INFORMACIÓN</p>
-                    </span>
-                </a>
-                {% endif %}
-                -->
 
                 <a href="{{url_for('modulo_login.logout')}}">
                     <span class="apartado">

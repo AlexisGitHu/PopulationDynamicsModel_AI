@@ -11,6 +11,13 @@ modulo_bbdd = Blueprint("modulo_bbdd", __name__, static_folder="static", templat
 
 
 class User(db.Model, UserMixin):
+    '''
+    Tabla de usuarios de la base de datos:
+        - id: Identificador único del usuario
+        - username: Nombre de usuario
+        - email: Correo electrónico del usuario
+        - password_hash: Hash de la contraseña del usuario
+    '''
     __tablename__ = 'usuarios'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True)
@@ -36,6 +43,15 @@ db.create_all()
 
 
 class Modelo(db.Model):
+    '''
+    Tabla de modelos de la base de datos:
+        - id: Identificador único del modelo
+        - nombre: Nombre del modelo
+        - creador: Nombre del usuario que ha creado el modelo
+        - fecha_creacion: Fecha de creación del modelo
+        - compartir: Código para compartir el modelo
+        - publico: Indica si el modelo es público o no
+    '''
     __tablename__ = 'modelos'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100))
@@ -60,6 +76,11 @@ db.create_all()
 
 
 class Permisos(db.Model):
+    '''
+    Tabla de permisos de acceso a los modelos de la base de datos:
+        - id_modelo: Identificador único del modelo
+        - id_usuario: Identificador único del usuario
+    '''
     __tablename__ = 'permisos'
     id_modelo = db.Column(db.Integer, db.ForeignKey('modelos.id'))
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
@@ -87,21 +108,5 @@ db.create_all()
 @modulo_bbdd.route('/modulo_bbdd/test')
 def modulo_bbdd_test():
     db.create_all()
-
-    '''
-    user = User(username="prueba", email="prueba@prueba.es")
-    user.set_password("test")
-    modelo = Modelo(nombre="prueba", url="prueba", creador="prueba" ,fecha_creacion="prueba", compartir=str(uuid.uuid4()))
-    permiso = Permisos(id_modelo=1, id_usuario=1)
-
-    try:
-        db.session.add(user)
-        db.session.add(modelo)
-        db.session.add(permiso)
-        db.session.commit()
-    except:
-        db.session.rollback()
-        return 'ERROR'
-    '''
 
     return 'OK'

@@ -27,6 +27,9 @@ def unauthorized_callback():
 
 
 def validate_username(self, username):
+    '''
+    Comprueba si el nombre de usuario ya existe en la base de datos.
+    '''
     user = User.query.filter_by(username=username.data).first()
     if user is not None:
         raise ValidationError('Please use a different username.')
@@ -34,6 +37,9 @@ def validate_username(self, username):
 
 
 def validate_email(self, email):
+    '''
+    Comprueba si el email ya existe en la base de datos.
+    '''
     user = User.query.filter_by(email=email.data).first()
     if user is not None:
         raise ValidationError('Please use a different email address.')
@@ -42,6 +48,11 @@ def validate_email(self, email):
 
 @modulo_login.route('/login', methods=['GET', 'POST'])
 def login():
+    '''
+    Página para iniciar sesión:
+        Cuando se han realizado las comprobaciones y el usuario está logueado,
+        se redirige a la página de modelos.
+    '''
     global user_id_actual
     form = LoginForm()
     if request.method == 'POST':
@@ -68,15 +79,23 @@ def login():
         print("El next_page en el GET es {}".format(next_page))
         return render_template('login.html', form=form, module="login", nextpath=next_page)
 
-RUTA="/../users_models/"
+
+RUTA = "/../users_models/"
+
+
 def crear_carpeta_usuario(usuario):
-    current_directory =  os.path.dirname(os.path.abspath(__file__))
-    ruta_final=current_directory+RUTA+str(usuario.id)
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    ruta_final = current_directory + RUTA + str(usuario.id)
     os.mkdir(ruta_final)
-    return 
+    return
+
 
 @modulo_login.route('/signup', methods=['GET', 'POST'])
 def signup():
+    '''
+    Página para registrarse
+        Al rellenar el formulario de registro se crea un nuevo usuario en la base de datos.
+    '''
     form = SignUpForm()
     if request.method == 'POST':
         if form.validate_on_submit():

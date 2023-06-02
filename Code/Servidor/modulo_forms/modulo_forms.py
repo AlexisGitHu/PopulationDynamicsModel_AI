@@ -1,13 +1,15 @@
 from flask import Blueprint
-
-modulo_forms = Blueprint("modulo_forms", __name__, static_folder="static", template_folder="templates")
-
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import EqualTo, DataRequired
 
+modulo_forms = Blueprint("modulo_forms", __name__, static_folder="static", template_folder="templates")
+
 
 class LoginForm(FlaskForm):
+    '''
+    Formulario de login.
+    '''
     username_or_email = StringField('Nombre de Usuario', validators=[DataRequired()])
     password = PasswordField('Contraseña', id='password')
     show_password = BooleanField('Mostrar Contraseña', id='check')
@@ -15,6 +17,9 @@ class LoginForm(FlaskForm):
 
 
 class SignUpForm(FlaskForm):
+    '''
+    Formulario de registro.
+    '''
     username = StringField('Nombre de Usuario', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Contraseña', validators=[DataRequired()])
@@ -25,12 +30,18 @@ class SignUpForm(FlaskForm):
 
 
 class CrearModeloForm(FlaskForm):
+    '''
+    Formulario para crear un nuevo modelo.
+    '''
     nombre = StringField('Nombre', validators=[DataRequired()])
     publico = BooleanField('Hacer Público el Modelo')
     submit = SubmitField('Crear')
 
 
 class AnadirModeloForm(FlaskForm):
+    '''
+    Formulario para añadir un modelo compartido.
+    '''
     codigo = StringField('Código', validators=[DataRequired()])
     submit = SubmitField('Añadir')
 

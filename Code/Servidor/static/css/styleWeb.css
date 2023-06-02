@@ -189,7 +189,7 @@ p {
 
     padding: calc(var(--rel_prop_width)*5px) calc(var(--rel_prop_width)*10px);
 
-    width: calc(var(--rel_prop_width)*130px);
+    width: calc(var(--rel_prop_width)*140px);
     height: calc(var(--rel_prop_width)*29px);
     background: #F2F2F2;
     border-radius: calc(var(--rel_prop_width)*17px);
@@ -309,7 +309,7 @@ p {
     width: calc(var(--rel_prop_width)*(143px));
     height: calc(var(--rel_prop_height)*(40px));
     margin-bottom: 0;
-    font-family: 'Karla';
+    font-family: 'Karla', serif;
     font-style: normal;
     font-weight: 500;
     font-size: calc(var(--rel_prop_height)*(20px));
