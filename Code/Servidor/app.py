@@ -12,9 +12,6 @@ import math
 import numpy as np
 from scipy.integrate import solve_ivp
 
-# loop = asyncio.get_event_loop()
-# db = SQLAlchemy()
-
 # Iniciamos la app y distintas aplicaciones
 app = Flask(__name__)
 CORS(app)
@@ -39,13 +36,6 @@ app.register_blueprint(modulo_bbdd)
 app.register_blueprint(modulo_login)
 app.register_blueprint(modulo_modelos)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}?auth_plugin=mysql_native_password".format(
-#   username=get_configuration()["MYSQL_USERNAME"],
-#   password=get_configuration()["MYSQL_PASSWORD"],
-#   hostname=get_configuration()["MYSQL_HOSTNAME"],
-#   databasename=get_configuration()["MYSQL_DATABASENAME"]
-#   )
-
 
 # Initialize the data of loktavolterra equations
 x_init = (5, 5)
@@ -63,52 +53,7 @@ lim_theoretical_step = ventana
 def index():
     return render_template("index.html")
 
-
-@app.route('/pagina_claudia')
-def pagina_claudia():
-    # if request.method == "POST":
-    #     return redirect(url_for("modulo_bbdd.mostrar_user"))
-
-    return render_template("pagina_claudia.html")
-
-
-@app.route('/mostrar_parametrizacion', methods=["GET", "POST"])
-def mostrar_parametrizacion():
-    # if request.method == "POST":
-
-    # return redirect(url_for("modulo_bbdd.mostrar_user"))
-
-    return render_template("mostrar_parametrizacion.html")
-
-
-# datos = {}
 datosMesa = {}
-
-
-#################################################### PODEMOS ELIMINARLO ########################################################
-# def lectura_datos(process, id):
-#     global datos
-#     # Validar que el id es válido para no meter basura por si acaso
-
-#     while True:   # Could be more pythonic with := in Python3.8+        
-
-#         line = process.stdout.readline()
-#         # line2 = process.stdout.read().splitlines()
-#         if not line and process.poll() is not None:
-#             break
-
-#         linea_sucia = line.decode()
-#         linea_limpia = linea_sucia.replace("\r\n", "").replace("\\\"", "\'")
-
-#         if not linea_limpia:
-#             break
-
-#         try:
-#             datos[id].append(json.loads(linea_limpia))
-#         except:
-#             datos[id] = [json.loads(linea_limpia)]
-################################################################################################################################
-
 
 # Función que lee de un stdout los logs del modelo de entrenamiento
 def lectura_datos_mesa(process, id):
@@ -121,7 +66,6 @@ def lectura_datos_mesa(process, id):
     '''
 
     global datosMesa
-    #### IMPORTANTE!! Validar que el id es válido para no meter basura por si acaso
 
     while True:
 
@@ -142,9 +86,6 @@ def lectura_datos_mesa(process, id):
 
         ## Quitamos la última coma del último elemento para poder parsear el string a json con json.loads
         linea_limpia = linea_limpia[::-1].replace(",", "", 1)[::-1]
-        print("***********")
-        print(linea_limpia)
-        print("***********")
 
         # Insertar en la lista si no está vacía y si no existen datos meterlos
         try:
@@ -153,94 +94,48 @@ def lectura_datos_mesa(process, id):
             datosMesa[id] = [json.loads(linea_limpia)]
 
 
-#################################################### PODEMOS ELIMINARLO ########################################################
-# @app.route('/modelo/<iter>/<id>')
-# def run_command(iter, id):
-#     # global process
-
-#     command = ['python', '-u', 'Main.py', '--numLearningIterations', '20', '--totalNumIterations', str(iter)]
-#     # command = ['python', 'Mesa_trial.py']
-
-#     # """Run a command while printing the live output"""
-#     process = subprocess.Popen(
-#         command,
-#         stdout=subprocess.PIPE,
-#         stderr=subprocess.STDOUT
-#     )
-
-#     thread = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process, id])
-#     # thread2 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
-#     # thread3 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
-#     # thread4 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
-#     # thread5 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
-#     # thread6 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
-#     # thread7 = threading.Thread(name='lectura_datos', target=lectura_datos, args=[process])
-
-
-#     # thread.setDaemon(True)
-#     thread.start()
-#     # thread2.start()
-#     # thread3.start()
-#     # thread4.start()
-#     # thread5.start()
-#     # thread6.start()
-#     # thread7.start()
-
-
-#     return "Entrenando modelo"
-################################################################################################################################
-
-
-# Ruta para ejecutar un modelo
 @cross_origin()
-@app.route("/ejecuta/mesa/<id>")
-def ejecuta_mesa(id):
-    '''
-    Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
+@app.route("/crearModelo/<pretrained>", methods=['GET', 'POST'])
+def crearModelo(pretrained):
+    if request.method == 'POST':
+        if (pretrained == "False"):
+            pretrained = False
+        else:
+            pretrained = True
 
-    Params:
-        -id::int Identificador del usuario que va a entrenar el modelo
-    '''
-    # global process
+        '''
+        Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
 
-    ### IMPORTANTE !!! Decidir cómo hacer que seleccione un modelo para q pueda seguir entrenandolo o simplemente ejecutarlo
-    ### Es decir, ver si pasar como parametros un posible modelo tras haber rellenado un formulario
-    command = ['python', '-u', '..\\Simulation\\simulation.py', "simul_example"]
+        Params:
+            -pretrained::String Identificador booleano de si el usuario ha elegido un modelo preentrenado
+        '''
+        data = json.loads(request.data)
+        modelo_id = data['modelo_id']
+        user_id_actual = current_user.id
 
-    # """Run a command while printing the live output"""
-    process = subprocess.Popen(
-        command,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT
-    )
+        final_directory = os.getcwd() + "\\users_models\\" + str(user_id_actual) + "\\proyecto" + str(modelo_id) + "\\"
+        if (not pretrained):
+            print(final_directory)
+            with open(final_directory + "config.json", "w") as file:
+                json.dump(data, file)
+            print(data)
 
-    thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, id])
+            command = ['python', '-u', '..\\Simulation\\simulation.py', final_directory]
+        else:
+            print(final_directory)
+            command = ['python', '-u', '..\\Simulation\\simulation_open.py', final_directory]
+        # """Run a command while printing the live output"""
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT
+        )
 
-    thread.start()
+        thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, "1"])
 
-    return "Entrenando modelo"
+        thread.start()
 
-
-################################### POSIBLE FUNCION CONJUNTA PARA LA GRAFICA Y VISUALIZACIÓN ###################################
-# @app.route("/get_data/<id>")
-# def get_data(id):
-#     if id in datosMesa:
-#         datos_nuevos = datosMesa[id]
-#         datosMesa[id] = []
-#     else:
-#         datos_nuevos = []
-
-#     ret_datos = []
-
-#     if len(datos_nuevos) > 0:
-#         datos_visualizar = datos_nuevos
-#         datos_grafica = get_graph_data(datos_nuevos) <- Tratar los datos con esta funcion en base a los datos pasados y que me devuelva los steps y los contadores
-
-#         ret_datos = [datos_visualizar, datos_grafica]
-
-#     return ret_datos
-################################################################################################################################
-
+        return "Entrenando modelo"
 
 ######################################################### RUTA PARA COMPROBAR QUE CIERTO USUARIO TIENE DATOS ##############################################################
 # Ruta para ver datos nuevos del modelo
@@ -260,40 +155,7 @@ def muestra_mesa(id):
         datos_nuevos = []
 
     return jsonify(datos_nuevos)
-
-
-#################################################### PODEMOS ELIMINARLO ########################################################
-# @app.route("/inicio/<iter>/<id>")
-# def inicio(iter, id):
-#     return render_template('index.html', user_id=id, iters=iter)
-################################################################################################################################
-
-
-#################################################### PODEMOS ELIMINARLO ########################################################
-# @app.route('/prueba/<id>')
-# def prueba_json(id):
-#     # datos_bien = list(filter(lambda a: a != "", datos[id]))
-#     # datos_bien2 = list(filter(lambda a: a != "", datos2[id]))
-#     # s = '\n'.join(datos)
-#     # print(type(datos_bien))
-#     # print(datos_bien)
-#     # print(datos_bien2)
-#     # print(datos[id])
-#     # datos_nuevos = datos[id]
-#     # for i in datos_nuevos:
-#     #     datos[id].remove(i)
-
-#     # return datos_nuevos
-#     if id in datos:
-#         return jsonify(datos[id])
-#     else:
-#         return jsonify([])
-################################################################################################################################
-
-
-# Definición de la funcion de lotka volterra
-# def lotkavolterra(t, x, rl, alpha, rz, beta):
-#     return np.array([rl*x[0] - alpha*x[0]*x[1], -rz*x[1] + beta*x[0]*x[1]])
+############################################################################################################################################################################
 
 
 def estimate(conejos, lobos):
@@ -328,7 +190,7 @@ def estimate(conejos, lobos):
     try:
         inversa_Xt_X = np.linalg.inv(mult_Xt_X)
     except np.linalg.LinAlgError as err:
-        # print("error de inversa")
+        
         vector_error = np.random.normal(loc=0, scale=0.001, size=(mult_Xt_X.shape))
 
         inversa_Xt_X = np.linalg.inv(mult_Xt_X + vector_error)
@@ -340,7 +202,7 @@ def estimate(conejos, lobos):
     try:
         inversa_Yt_Y = np.linalg.inv(mult_Yt_Y)
     except np.linalg.LinAlgError as err:
-        # vector_error = np.random.rand(1,mult_Yt_Y.shape[0])
+        
         vector_error = np.random.normal(loc=0, scale=0.001, size=(mult_Yt_Y.shape))
 
         inversa_Yt_Y = np.linalg.inv(mult_Yt_Y + vector_error)
@@ -348,16 +210,11 @@ def estimate(conejos, lobos):
     tras_inv_lobos = np.matmul(inversa_Yt_Y, Y_t)
     A_lobos = np.matmul(tras_inv_lobos, np.array(dif_lobos))
 
-    # print(A_conejos)
-    # print(A_lobos)
-
     rl_practico = float(A_conejos[0][:, 0])
     alpha_practico = float(A_conejos[0][:, 1])
     beta_practico = float(A_lobos[0][:, 1])
     rz_practico = float(A_lobos[0][:, 0])
 
-    # print("estimate:")
-    # print([rl_practico, alpha_practico, rz_practico, beta_practico])
     return [rl_practico, alpha_practico, rz_practico, beta_practico]
 
 
@@ -377,35 +234,6 @@ def lotkavolterra_sobreescrito(t, x, rl, alpha, rz, beta):
         - np.linalg.LinAlgError en el caso de que una matriz no sea invertible, se trata añadiendo a través de la distribución normal con media 0, ruido a las filas
     '''
     return np.array([rl * x[0] + alpha * x[0] * x[1], rz * x[1] + beta * x[0] * x[1]])
-
-
-# # from scipy.optimize import curve_fit
-# def reestimate(conejos, lobos, steps, params):
-#     # # define the Lotka-Volterra model
-#     # def lotka_volterra(t, y, a, b, c, d):
-#     #     x, y = y
-#     #     dx_dt = a*x + b*x*y
-#     #     dy_dt = c*y + d*x*y
-#     #     return [dx_dt, dy_dt]
-
-#     def objective(params, t_span, y0, t_eval, y_obs):
-#         sol = solve_ivp(lotkavolterra_sobreescrito, t_span, y0, t_eval=t_eval, args=tuple(params))
-#     #     print(sol)
-#         return np.sum((sol.y - y_obs)**10)
-
-#     # load the data
-#     t_span = (steps[0], steps[-1])
-#     t_eval = np.linspace(t_span[0], t_span[1], t_span[1]-t_span[0])
-#     data = np.array([conejos,lobos])
-#     print(data)
-
-
-#     # define the initial conditions and parameters
-#     y0 = [conejos[0], lobos[0]]
-#     parameters_guess = params  # initial guess for parameters a, b, c, and d
-
-#     result = minimize(lambda f: objective(f, t_span, y0, t_eval, data), parameters_guess, method='Nelder-Mead')
-#     return result.x
 
 
 # Funcion para actualizar datos de la funcion de lotka volterra teorica (dependientes del numero de especies que haya en un momento)
@@ -512,74 +340,6 @@ def get_loktavolterra_data(steps, contadores):
     # Devolvemos esos contadores
     return contadores_teoricos
 
-
-#################################################### PODEMOS ELIMINARLO ########################################################
-# Ruta para devolver datos de cuantos animales de cada tipo hay
-# @app.route("/get_graph_data")
-# def get_graph_data():
-#     ### IMPORTANTE!!! Hacer que esto de datos nuevos sean temporales para que distintas rutas puedan devolver distinta informacion de esos mismos datos
-
-#     datos_nuevos = None
-#     datos_validos = []
-#     # print(datosMesa)
-
-#     ### IMPORTANTE!!! En vez de mirar "1" in datosMesa, mirar si el id de la persona loggeada está en datosMesa (por si ha entrenado un modelo)
-#     if "1" in datosMesa:
-#         datos_nuevos = datosMesa["1"]
-#         # Necesitamos como mínimo para poder estimar, 2 datos
-#         # print(datos_nuevos)
-#         if len(datos_nuevos) < 2:
-#             return datos_validos
-#         datosMesa["1"] = []
-#     else:
-#         # Si no tiene datos
-#         datos_nuevos = []
-#         # return datos_nuevos
-
-#     step = 0
-#     cont_lobos = 0
-#     cont_conejos = 0
-#     steps = []
-#     contadores = []
-
-#     # print(datos_nuevos)
-
-#     for i in datos_nuevos:
-#         step = i["Step"]
-#         info = i["info"]
-
-#         steps.append(step)
-
-#         for j in info:
-#             if "lobo.png" in j.values():
-#                 cont_lobos += 1
-#             elif "conejo.png" in j.values():
-#                 cont_conejos += 1
-
-#         contadores.append((cont_lobos, cont_conejos))
-#         cont_lobos = 0
-#         cont_conejos = 0
-
-#     # En el caso de que se hayan recogido datos, poner los steps, los contadores actuales y los contadores teoricos
-#     if len(steps) >= 2:
-#         # print("len(steps) >= 2")
-#         theorical_data = get_loktavolterra_data(steps, contadores)
-#         datos_validos = [steps, contadores, theorical_data]
-
-#     response = make_response(json.dumps(datos_validos))
-
-#     response.content_type = "application/json"
-#     # print(datos_validos)
-
-#     return response
-################################################################################################################################
-
-#################################################### PODEMOS ELIMINARLO ########################################################
-# @app.route("/graph_data")
-# def graph_data():
-#     return render_template('grafica.html')
-################################################################################################################################
-
 def get_graph_data_dup(datos_nuevos):
     '''
     Funcion que devuelve una lista con elementos de la forma (step, (presa, depredador), (prediccion_presa, prediccion_depredador)) 
@@ -587,7 +347,7 @@ def get_graph_data_dup(datos_nuevos):
     Params:
         -datos_nuevos::list Lista de jsons con los logs del modelo
     '''
-    ### IMPORTANTE!!! Hacer que esto de datos nuevos sean temporales para que distintas rutas puedan devolver distinta informacion de esos mismos datos
+    
     datos_validos = []
 
     step = 0
@@ -625,10 +385,9 @@ def get_graph_data_dup(datos_nuevos):
 
 @cross_origin()
 @app.route("/paint_data")
-# @login_required
 def paint_data():
     '''
-    Ruta que devuelve los datos necesarios para la representación de la simulación y para la gráfica
+        Ruta que devuelve los datos necesarios para la representación de la simulación y para la gráfica
         La simulación usa todos los datos/logs del modelo
         La gráfica solo usa el step y, mediante el tratamiento de los datos, contadores de la población teorica y simulada
     '''
@@ -636,7 +395,6 @@ def paint_data():
     datos_validos = []
     datos_nuevos = []
 
-    ############################################## CAMBIAR EL "1" POR EL IDENTIFICADOR DEL USUARIO QUE ESTÉ LOGEADO ##############################################
     if "1" in datosMesa:
         datos_nuevos = datosMesa["1"]
         # Necesitamos como mínimo para poder estimar, 2 datos
@@ -649,93 +407,14 @@ def paint_data():
     if not datos_nuevos:
         return datos_nuevos
 
+    # Recogemos los datos para la grafica
     datos_validos = get_graph_data_dup(datos_nuevos)
 
     response = make_response(json.dumps([datos_nuevos, datos_validos]))
-    # print(response)
+    
     response.content_type = "application/json"
 
     return response
-
-
-#################################################### PODEMOS ELIMINARLO ########################################################
-# @app.route("/datos_nuevos/<id>")
-# def f_datos_nuevos(id):
-#     if id in datos:
-#         datos_nuevos = datos[id]
-#         datos[id] = []
-#     else:
-#         datos_nuevos = []
-
-#     return jsonify(datos_nuevos)
-################################################################################################################################
-
-
-####################################### PODEMOS ELIMINARLO O CAMBIAR LO QUE SE DEVUELVE ########################################
-# @app.route("/", defaults={"id":None})
-# @app.route("/<id>")
-# def prueba(id):
-#     return datos
-################################################################################################################################
-@cross_origin()
-@app.route("/prueba1", methods=['GET', 'POST'])
-def prueba1():
-    if request.method == 'POST':
-        print(request.form.get("claveA"))
-    return "http://localhost:5000/login"
-
-
-##EJECUTAR MESAAAAAAAAAAAAAAAAAA
-@cross_origin()
-@app.route("/crearModelo/<pretrained>", methods=['GET', 'POST'])
-def crearModelo(pretrained):
-    if request.method == 'POST':
-        if (pretrained == "False"):
-            pretrained = False
-        else:
-            pretrained = True
-        print("ESTO ES LO QUE ME LLEGA: ", pretrained)
-        '''
-        Ruta que ejecuta el modelo de apredizaje por refuerzo a través de crear un subproceso y ejecutarlo en un thread
-
-        Params:
-            -id::int Identificador del usuario que va a entrenar el modelo
-        '''
-        data = json.loads(request.data)
-        modelo_id = data['modelo_id']
-        user_id_actual = current_user.id
-        print("ESTO ES CURRENT", os.path.dirname(__file__))
-        print("ESTO ES CWD", os.getcwd())
-
-        final_directory = os.getcwd() + "\\users_models\\" + str(user_id_actual) + "\\proyecto" + str(modelo_id) + "\\"
-        if (not pretrained):
-            print(final_directory)
-            with open(final_directory + "config.json", "w") as file:
-                json.dump(data, file)
-            print(data)
-
-            command = ['python', '-u', '..\\Simulation\\simulation.py', final_directory]
-        else:
-            print(final_directory)
-            command = ['python', '-u', '..\\Simulation\\simulation_open.py', final_directory]
-        # """Run a command while printing the live output"""
-        process = subprocess.Popen(
-            command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT
-        )
-
-        thread = threading.Thread(name='lectura_datos', target=lectura_datos_mesa, args=[process, "1"])
-
-        thread.start()
-
-        return "Entrenando modelo"
-
-
-@app.route("/prueba2")
-@cross_origin()
-def prueba2():
-    return "Llegó"
 
 
 if __name__ == "__main__":

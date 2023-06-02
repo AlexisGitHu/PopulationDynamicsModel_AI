@@ -239,9 +239,6 @@ window.onload = function() {
 
     var width = $("#myCanvas").width();
     var height = $("#myCanvas").height();
-    
-    // Seteamos un offset para ver bien todos los agentes
-    // paper.view.translate(new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2)));
 
     // Seteamos el size que queremos para el canvas
     paper.view.viewSize = new Size(width,height);
@@ -255,7 +252,6 @@ window.onload = function() {
         console.log(num_cols_repartir);
         console.log(num_filas_repartir);
 
-        // console.log("hola");
         var request = $.ajax({
             type: 'GET',
             url: 'http://localhost:5000/paint_data',
@@ -290,6 +286,7 @@ window.onload = function() {
                             y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
                             
 
+                            // Seteamos un offset para ver bien todos los agentes
                             offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                             destination = new Point(x_relativa,y_relativa);
                             destination = destination.add(offset);
@@ -343,6 +340,7 @@ window.onload = function() {
                                     x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                                     y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
 
+                                    // Seteamos un offset para ver bien todos los agentes
                                     offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                                     destination = new Point(x_relativa,y_relativa);
                                     destination = destination.add(offset);
@@ -389,6 +387,8 @@ window.onload = function() {
                                     if(id.includes(data[j].info[i].ID)){ 
                                         x_relativa = data[j].info[i].Position[0]*(width/num_cols_repartir);
                                         y_relativa = data[j].info[i].Position[1]*(height/num_filas_repartir);
+
+                                        // Seteamos un offset para ver bien todos los agentes
                                         offset = new Point(width/(num_cols_repartir*2),height/(num_filas_repartir*2))
                                         destination = new Point(x_relativa,y_relativa);
                                         destination = destination.add(offset);
@@ -396,8 +396,6 @@ window.onload = function() {
 
                                         vectores[i] = vector.length;
                                         vector_max = Math.max(...vectores);
-                                        // console.log(vector_max)
-                                        // console.log(vuelta);
                                         
                                         dict[animal + data[j].info[i].ID].position = dict[animal + data[j].info[i].ID].position.add(vector.divide(velocidad)); //vector.divide(velocidad) 
                                         
@@ -427,8 +425,6 @@ window.onload = function() {
     Raster.prototype.rescale = function(width, height) {
         this.scale(width / this.width, height / this.height);
     };
-
-    // $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
 
     chart = new Highcharts.Chart({
         // Definimos el estilo de grafica que será y de donde se cogen los datos
