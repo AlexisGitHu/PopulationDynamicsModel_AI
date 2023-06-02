@@ -4,34 +4,28 @@ import json
 import operator
 import numpy as np
 
-#Parametros a abstraer
-REPRODUCE_PROBABILTY = 70
-REPRODUCE_COST = 50
-MOVE_COST = 2
-EAT_RECOVER = 40
-
 RELATIVE_POSITIONS = [(-1, 1), (0, 1), (1, 1), (-1, 0), (0, 0), (1, 0), (-1, -1),
                               (0, -1), (1, -1)]
 
 class Agent(mesa.Agent):
-
+    '''Clase agente genérico'''
     def __init__(self, unique_id, model, specie, preys, predators, direction, color, sprite, energy, repro_min_energy=50, repro_cost=50, move_cost=1, eat_recover=30, isBasic = False):
         super().__init__(unique_id, model)
-        self.max_energy = energy
-        self.energy = energy/2
-        self.specie = specie
-        self.preys = preys
-        self.predators = predators
-        self.direction = direction
-        self.color = color
-        self.sprite = sprite
-        self.repro_min_energy = repro_min_energy
-        self.repro_cost = repro_cost
-        self.move_cost = move_cost
-        self.eat_recover = eat_recover
-        self.isBasic = isBasic
-        self.pos_matriz_pesos = []
-        self.alive = True
+        self.max_energy = energy # Energía máxima de la que dispone
+        self.energy = energy/2 # Energía actual del agente
+        self.specie = specie # Objeto de la clase
+        self.preys = preys # Lista de objetos de comportamiento (inteligencias) que tienen sus presas
+        self.predators = predators # Lista de objetos de comportamiento (inteligencias) que tienen sus depredadores
+        self.direction = direction # Tupla, dirección relativa al agente que indica hacia donde mira. Valores posibles: RELATIVE_POSITIONS
+        self.color = color # Valor del color necesario para la visualización del objeto en un servidor de mesa
+        self.sprite = sprite # Imagen del agente en la visualización de front
+        self.repro_min_energy = repro_min_energy # Energía mínima que necesita un agente para reproducirse
+        self.repro_cost = repro_cost # Coste de energía asocidado a reproducir al agente
+        self.move_cost = move_cost # Coste de energía asociado al movimiento del agente
+        self.eat_recover = eat_recover # Cantidad de energía que recupera el agente al comer
+        self.isBasic = isBasic # Booleano que determina si es alimento basico o especie inteligente
+        self.pos_matriz_pesos = [] # Posiciones de la matriz de pesos
+        self.alive = True # Booleano que indica si el agente ha muerto o sigue vivo
     
     def step(self):
         '''
@@ -42,26 +36,21 @@ class Agent(mesa.Agent):
         '''
         if not self.isBasic:
             if self.energy > 0:
-                features = self.perceive() # ????????? Que pasa con la primera iteración??????
+                features = self.perceive() 
                 self.move(features)
                 self.eat()
                 self.reproduce()
                 reward = self.model.give_reward(self)
-                features = self.perceive()
+                features = self.perceive() # Necesario para el feedback
                 self.specie.feedback(self.pos, features, reward)
             else:
                 self.alive = False
                 self.model.killed.append(self)
 
         self.print_log()
-        # log = {"ID": int(self.unique_id),
-        #        "Position": tuple(self.pos),
-        #        "Direction": self.direction,
-        #        "Sprite": self.sprite,
-        #        "Alive": str(self.alive)}
-        # print(json.dumps(log), end=", ")
     
     def print_log(self):
+        '''Imprime la información del estado actual de un agente'''
         log = {"ID": int(self.unique_id),
                "Position": tuple(self.pos),
                "Direction": self.direction,
@@ -72,6 +61,9 @@ class Agent(mesa.Agent):
     def perceive(self):
         '''
         Evalua todas las celdas a su alrededor y le asigna una puntuación de riesgo a cada una.
+        Combina las evaluaciones individuales de las celdas adyacentes con la ponderación de la visión.
+
+        Return: lista de riesgos asociados a las 8 celdas adyacentes a una dada (laterales y diagonales)
         '''
         cells_number = 9
         features = []
@@ -105,7 +97,8 @@ class Agent(mesa.Agent):
 
     def move(self, features):
         '''
-        Mueve al agente a una nueva posición. Delega la elección de la celda a la que moverse a su objecto specie.
+        Mueve al agente a una nueva posición. Delega la elección de la celda a la que moverse a su 
+        objecto specie.
 
         Params:
             -features::float[][] matriz de riesgos
@@ -117,7 +110,8 @@ class Agent(mesa.Agent):
 
     def eat(self):
         '''
-        Si es posible, alimenta al agente con alguna presa que haya en esa misma casilla. Recupera su energía a 100
+        Si es posible, alimenta al agente con alguna presa que haya en esa misma casilla. Recupera su
+        energía en base al parámetro eat_recover
         '''
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         enemies = [agent for agent in cellmates if agent.specie in self.preys and agent.alive]
@@ -128,6 +122,10 @@ class Agent(mesa.Agent):
             other_agent.alive = False
 
     def reproduce(self):
+        '''
+        Si es posible, el agente se reproduce. Informa al ecosistema del naciemiento de un nuevo agente.
+        Retira la energía del coste de reproducción agente al padre.
+        '''
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         allies = [agent for agent in cellmates if agent.specie == self.specie]
         if  self.energy > self.repro_min_energy: #and len(allies) > 1:
@@ -143,6 +141,8 @@ class Agent(mesa.Agent):
         Params:
             -x::int Coordenada horizontal a evaluar
             -y::int Coordenada vertical a evaluar
+        
+        Return: float valor del riesgo
         '''
         content = self.model.grid.get_cell_list_contents((x, y))
         try:
@@ -161,6 +161,11 @@ class Agent(mesa.Agent):
         return evaluation
     
     def __vision_evaluation(self):
+        '''
+        Evalúa el conjunto de celdas en el triángulo de visión de un agente.
+
+        Return: float valor agregado de las celdas visibles
+        '''
         vision = self.__get_vision(2)
         result = 0
         for i in range(len(vision)):
@@ -173,6 +178,15 @@ class Agent(mesa.Agent):
         return result*2/len(vision)
     
     def __get_vision(self, dist):
+        '''
+        Obtiene las celdas en el triángulo de visión de un agente. 
+        
+        Params:
+            -dist::int Distancia de visión del agente en número de casillas
+        
+        Return: lista de tuplas ((i,j),d) con (i,j) coordenadas cartesianas de
+                la celda visible y d la distancia a la celda
+        '''
         fov = []
         dif = tuple(map(operator.sub, self.direction, self.pos))
         rev = dif[::-1]
@@ -196,6 +210,9 @@ class IntelligentBehaviour():
                  learning_rate,reward_dict):
         '''
         Clase que modela el comportamiento inteligente de una especie mendiante aprendizaje por refuerzo.
+        Generalmente existirá una sola clase comportamiento para toda una especie. Es decir, modelan el instinto 
+        de dicha especie. Adquirirá el conocimiento colectivo de todos sus individuos y todos estos harán acciones
+        en base a esto.
 
         Params:
             -type_animal::int Atributo temporal por compatibilidad con la version anterior
@@ -220,7 +237,6 @@ class IntelligentBehaviour():
         
         self.reward_dict=reward_dict
 
-    ##private method
     def __change_position(self, x_position, y_position, perceive_features):
         '''
         Elige la posición del próximo movimiento. Realiza una nueva acción aleatoria con probabilidad
@@ -251,7 +267,7 @@ class IntelligentBehaviour():
 
     def make_choice(self, features, pos):
         '''
-        Elige el próximo movimiento y dirección de vision. 
+        Elige el próximo movimiento. 
 
         Params:
             -features::float[][] matriz de percepcion
@@ -282,7 +298,14 @@ class IntelligentBehaviour():
             contador += 1
 
     def __convert_list_weights(self, pos):
-        # TODO Documentar
+        '''
+        Obtiene la lista de pesos asociada a una posición
+        
+        Params:
+            -pos::tuple (i,j) coordenadas cartesianas de la posición del agente
+        
+        Return: list Lista de pesos
+        '''
         cells_number = 9
         lista_pos = []
         lista_weights = []
@@ -299,51 +322,55 @@ class IntelligentBehaviour():
 
         return lista_weights
     
-    #Private method
     def __update_weight(self, reward, list_weights, features):
-        # TODO Documentar
-        # con la coordenadas que voy a pasarle, necesito coger la submatriz de self.weights
-        # hacer producto escalar entre features y self.weights.
-        # height = len(self.weight_matrix)
-        # width = len(self.weight_matrix[0])
+        '''
+        Actualiza la matriz de pesos del agente.
+
+        Params:
+            -reward::float recompensa asociada a una acción
+            -list_weights::list lista de pesos
+            -features::list lista de riesgos de las celdas adyacentes al agente
+        '''
         learning_rate = self.learning_rate
         discount_factor = self.discount_factor
 
         # Compute the Q'-table:
         Q_prime = []
-        Q_prime=(self.__get_QFunction(features,list_weights))
- 
-        # features = self.perceive_features 
+        Q_prime=(self.__get_QFunction(features,list_weights)) 
 
         # Update the weights:
         Q_prime_max = max(Q_prime)
         for i in range(0, len(list_weights)):
-            # if i < 3:
-            #     c = 9 / (height * width)
-            # else:
-            #     c = 1 / 9
-
             w = list_weights[i]
             f = features[i]
-            # f = np.exp(-0.5 * (f - c) ** 2)
-
             list_weights[i] = w + learning_rate * (reward + discount_factor * Q_prime_max - w) 
 
         return list_weights
 
-    # PRIVATE METHOD
     def __get_QFunction(self, features, weights):
-        # TODO Documentar
+        '''
+        Computa la QFunction necesaria para el aprendizaje por refuerzo
+        
+        Params:
+            -features::list lista de riesgos de las celdas adyacentes al agente
+            -weights::list lista de pesos
+        '''
         Q = []
         for i in range(len(weights)):
             Q.append(weights[i] *features[i])
 
         return Q
     
-    # PRIVATE METHOD
-    def __evaluate_energy_modifier(self,actual_energy,max_energy):
 
-        lowest_energy_high_bound=20 ############# PARAMETRIZAR
+    def __evaluate_energy_modifier(self,actual_energy,max_energy):
+        '''
+        Devuelve el coeficiente de recompensa/castigo asociado al nivel de energía
+
+        Params:
+            -actual_energy::int energía del agente
+            -max_energy::int energía máxima
+        '''
+        lowest_energy_high_bound=20 
         if(actual_energy < max_energy):
             if(actual_energy < lowest_energy_high_bound):
                 coeff_modifier_energy=-self.reward_dict["lowest_energy_modifier"]*actual_energy/max_energy
@@ -355,8 +382,17 @@ class IntelligentBehaviour():
         return coeff_modifier_energy
 
     def get_reward(self,num_allies,num_near_preys,num_near_predators,num_total_species,agent):
+        '''
+        Obtiene la recompensa asociada a una acción según la lógica definida por los parámetros de comportamiento.
 
-        
+        Params:
+            -num_allies::int número de agentes de la misma especie que self
+            -num_near_preys::int número de presas en las casillas adyacentes
+            -num_near_predators::int número de depredadores en las casillas adyacentes
+            -num_total_species::int número total de agentes en las casillas adyacentes
+            -agent::agente que recibe la recompensa 
+
+        '''
         coefficient_normalization_value=4
 
         if(num_near_predators>0):
@@ -393,19 +429,16 @@ class DumbBehaviour():
         '''
         Decide no hacer acción, ignora la información del ecosistema
         '''
-
-        return pos#,None
+        return pos
 
     def get_reward(num_allies,num_near_preys,num_near_predators,total_species,energy,max_energy):
         """
         No utiliza las recompensas
         """
-
         return 0
 
     def feedback(self, pos, features, reward):
         '''
         No aprende
         '''
-
         return None
