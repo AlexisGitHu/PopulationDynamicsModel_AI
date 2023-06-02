@@ -29,7 +29,7 @@ git clone https://github.com/AlexisGitHu/PopulationDynamicsModel_AI.git
 
 ## Consideraciones adicionales
 1. Si existen discrepancias entre los modelos almacenados en la bases de datos y los proyectos almacenados en las carpetas de los usuarios dentro de la carpeta user_model, es posible que la aplicación no funcione. Esto es completamente normal. Por tanto, para hacer el arranque limpio y desde cero, comprobar que las tablas de la base de datos: permisos y modelos, estén vacías:
-	- Utilizar una herramienta como DB Browser SQLite. Esto asegura que se lanza la aplicación desde cero sin tener en cuenta los posibles modelos añadidos que crean estas discrepancias.
+	- Utilizar una herramienta como DB Browser SQLite para acceder al fichero en la carpeta "Code/Servidor/database". Esto asegura que se lanza la aplicación desde cero sin tener en cuenta los posibles modelos añadidos que crean estas discrepancias.
 2. Es posible que el servidor de Flask por cuestiones ajenas al proyecto (relativas a la implementación de Flask server) a veces se quede parado. Cuando ocurra esto basta con pulsar enter en el intérprete de comandos que se utilice (donde se esté ejecutando el servidor). 
 3. Es posible que por cuestiones de archivos en caché se produzca un error relativo a "linea_limpia". Este fallo no se debe a un problema en la parte de simulación. En caso de que aparezca, se recomienda realizar los pasos de la consideración 1 con el servidor parado. Después reiniciar el ordenador para borrar las cachés. 
 
